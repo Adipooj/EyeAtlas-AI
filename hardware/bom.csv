@@ -1,0 +1,13 @@
+id,part,qty,rating,status
+HW-01,Patient Android phone,1,TBD,TBD
+HW-02,Doctor Android phone,1,TBD,TBD
+HW-03,VR chassis,1,to phone CAD,DESIGN
+HW-04,Wide field lenses,2,TBD after ray tracing,TBD
+HW-05,High PPD insert,2,conditional optical gate,TBD
+HW-06,IPD adjust,1,48-74mm target,DESIGN
+HW-08,BLE remote 5-key,1,integrated certified product,TBD
+HW-12,External eye LED ring,1,5V via USB power bank,BENCH_ONLY
+HW-13,8 LED and 8 resistors,8,330ohm 0.25W per LED,BENCH_ONLY
+HW-15,Fuse switch enclosure,1,polyfuse 0.25A hold,BENCH_ONLY
+HW-16,Placido target,1,passive,DESIGN
+HW-17,Retina module,1,verified integrated light only,HOLD_SAFETY

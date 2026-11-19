@@ -1,0 +1,23 @@
+id,requirement,acceptance_phase,state
+REQ-000,Repository lock and runnable baseline,P00,NOT_STARTED
+REQ-001,Data contracts and clinical semantics,P01,NOT_STARTED
+REQ-002,Two-phone encrypted sessions,P02,NOT_STARTED
+REQ-003,Dataset and dependency provenance,P03,NOT_STARTED
+REQ-004,Instrument profile and physics simulator,P04,NOT_STARTED
+REQ-005,Patient and clinician UX complete skeleton,P05,NOT_STARTED
+REQ-006,Broad acuity and optical focus,P06,NOT_STARTED
+REQ-007,"Colour, contrast, central macular",P07,NOT_STARTED
+REQ-008,Wide-field and binocular function,P08,NOT_STARTED
+REQ-009,Install software-first on real Android phones,P09,NOT_STARTED
+REQ-010,External-eye image acquisition,P10,NOT_STARTED
+REQ-011,Dry eye and cataract/pterygium/red-eye algorithms,P11,NOT_STARTED
+REQ-012,Retina optical interface and acquisition,P12,NOT_STARTED
+REQ-013,Retina disease model development,P13,NOT_STARTED
+REQ-014,Strabismus and amblyopia risk,P14,NOT_STARTED
+REQ-015,Multi-label AI and probability calibration,P15,NOT_STARTED
+REQ-016,Adaptive test selection and guided recovery,P16,NOT_STARTED
+REQ-017,Optical/mechanical bench integration,P17,NOT_STARTED
+REQ-018,External lighting and tear optics hardware,P18,NOT_STARTED
+REQ-019,Certified retinal hardware interface,P19,NOT_STARTED
+REQ-020,Integrated patient-usability and clinical pilot,P20,NOT_STARTED
+REQ-021,External validation and release decision,P21,NOT_STARTED

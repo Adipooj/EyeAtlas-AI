@@ -1,0 +1,10 @@
+source,license_evidence,status,url,use
+RFMiD,publisher CC BY 4.0,REVIEW_DOWNLOAD,https://riadd.grand-challenge.org/download-all-classes/,retina multi-label
+IDRiD,official CC BY 4.0,REVIEW_DOWNLOAD,https://idrid.grand-challenge.org/Data/,DR
+Conjunctivitis Recognition,Mendeley CC BY 4.0,REVIEW_DOWNLOAD,https://data.mendeley.com/datasets/vhy5mjb6wg/1,pilot red eye
+Eye Conjunctiva,Mendeley CC BY 4.0,REVIEW_DOWNLOAD,https://data.mendeley.com/datasets/yxwjgcndg2/1,segmentation
+Dry eye NIKBUT,RepOD CC BY 4.0 per files,REVIEW_DOWNLOAD,https://repod.icm.edu.pl/dataset.xhtml?persistentId=doi:10.18150/TT8JVD,dry-eye NIBUT
+SLID,paper CC BY only; verify files,HOLD_LICENSE,https://github.com/xumingyu-hub/SLID,anterior lesions
+PAPILA,figshare GPL3 vs paper CC BY,HOLD_LICENSE,https://figshare.com/articles/dataset/PAPILA/14798004,glaucoma
+CSDI,paper CC BY vs host CC BY NC,HOLD_LICENSE,https://www.nature.com/articles/s41597-026-06684-8,cataract
+APTOS,competition noncommercial,EXCLUDE,https://www.kaggle.com/c/aptos2019-blindness-detection/data,DR

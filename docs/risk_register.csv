@@ -1,0 +1,13 @@
+id,risk,severity,occurrence,detectability,mitigation,verification_phase,status
+R-H01,Retinal optical overexposure,TBD,TBD,TBD,see master,P19,OPEN
+R-H02,VR insufficient angular resolution,TBD,TBD,TBD,see master,P17,OPEN
+R-H03,Gaze tracking unreliable,TBD,TBD,TBD,see master,P17,OPEN
+R-H04,Optical position shifted,TBD,TBD,TBD,see master,P17,OPEN
+R-S01,Cross-patient and eye contamination,TBD,TBD,TBD,see master,P01,OPEN
+R-S02,Multi-disease false exclusivity,TBD,TBD,TBD,see master,P15,OPEN
+R-S03,Retinal image falsely negative when ungradable,TBD,TBD,TBD,see master,P12,OPEN
+R-S04,Dataset license mismatch,TBD,TBD,TBD,see master,P03,OPEN
+R-S05,False probability calibration,TBD,TBD,TBD,see master,P15,OPEN
+R-S06,Time/BLE replay wrong trial,TBD,TBD,TBD,see master,P02,OPEN
+R-S07,Adaptive shortcut missing asymptomatic DR,TBD,TBD,TBD,see master,P16,OPEN
+R-S08,Unreported dangerous red eye,TBD,TBD,TBD,see master,P01,OPEN

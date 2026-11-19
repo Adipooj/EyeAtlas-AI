@@ -1,0 +1,10 @@
+{
+  "schema": "v1",
+  "patient_phone": "TBD",
+  "doctor_phone": "TBD",
+  "display_profile": "TBD",
+  "design_reference_fov_deg": 80,
+  "measured_fov_deg": null,
+  "optics_measurement_required": true,
+  "retina_module": "TBD; requires approved safety evidence"
+}
