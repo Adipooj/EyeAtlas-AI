@@ -79,4 +79,48 @@ class ProtocolTests {
         assertTrue(invalidResult.isFailure)
         assertEquals(SessionState.INTAKE, sm.getState())
     }
+
+    @Test
+    fun clockSynchronizationPingPongProtocolTest() {
+        val syncEngine = org.eyeatlas.net.ClockSyncEngine(maxAllowedUncertaintyNs = 20_000_000L)
+        assertFalse(syncEngine.isSynchronized)
+
+        // Sample 1: t0=100ms, t1=120ms, t2=125ms, t3=150ms
+        // RTT = (150-100) - (125-120) = 45ms. Offset = ((120-100) + (125-150))/2 = (20 - 25)/2 = -2.5ms. Uncertainty = 22.5ms
+        val sample1 = org.eyeatlas.net.ClockSyncSample("S-1", 100_000_000L, 120_000_000L, 125_000_000L, 150_000_000L)
+        syncEngine.addSample(sample1)
+        assertTrue(syncEngine.isSynchronized)
+        assertEquals(45_000_000L, sample1.roundTripDelayNs)
+        assertEquals(22_500_000L, sample1.uncertaintyNs)
+
+        // Sample 2 (lower jitter): t0=200ms, t1=210ms, t2=212ms, t3=224ms
+        // RTT = (224-200) - (212-210) = 22ms. Uncertainty = 11ms
+        val sample2 = org.eyeatlas.net.ClockSyncSample("S-2", 200_000_000L, 210_000_000L, 212_000_000L, 224_000_000L)
+        syncEngine.addSample(sample2)
+
+        // Engine must select lowest RTT
+        assertEquals(11_000_000L, syncEngine.currentUncertaintyNs)
+        assertTrue(syncEngine.isUncertaintyAcceptable())
+    }
+
+    @Test
+    fun qrPairingPayloadSerializationTest() {
+        val payload = org.eyeatlas.net.PairingPayload(
+            sessionId = "SESSION-101",
+            patientPhoneId = "PHONE-PATIENT-VR",
+            authPin = "8833",
+            wifiEndpoint = "192.168.4.1:8080",
+            cryptoKeyHash = "a1b2c3d4e5f67890"
+        )
+        val qr = payload.toQrString()
+        assertEquals("EYEATLAS://SESSION-101/PHONE-PATIENT-VR/8833/192.168.4.1:8080/a1b2c3d4e5f67890", qr)
+
+        val deserialized = org.eyeatlas.net.PairingPayload.fromQrString(qr)
+        assertNotNull(deserialized)
+        assertEquals(payload.sessionId, deserialized!!.sessionId)
+        assertEquals(payload.patientPhoneId, deserialized.patientPhoneId)
+        assertEquals(payload.authPin, deserialized.authPin)
+        assertEquals(payload.wifiEndpoint, deserialized.wifiEndpoint)
+        assertEquals(payload.cryptoKeyHash, deserialized.cryptoKeyHash)
+    }
 }

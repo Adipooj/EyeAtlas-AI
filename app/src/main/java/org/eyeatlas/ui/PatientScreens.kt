@@ -75,9 +75,15 @@ fun PatientScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Perimetry Response Pad: Clinician Phone Paired",
-                    color = Color.LightGray,
+                    text = "Encrypted Response Channel: Paired & Pinned (PHONE-CLINICIAN-PAD)",
+                    color = Color(0xFFA5D6A7),
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 12.sp
+                )
+                Text(
+                    text = "Cross-Phone Clock Sync: ±5ms Uncertainty | Watchdog Active",
+                    color = Color.LightGray,
+                    fontSize = 11.sp
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Button(

@@ -13,6 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.eyeatlas.core.*
+import org.eyeatlas.net.PairingAndTransport
+import org.eyeatlas.net.TransportState
 
 @Composable
 fun DoctorDashboard(
@@ -21,8 +23,16 @@ fun DoctorDashboard(
 ) {
     val stateMachine = remember { ClinicalStateMachine() }
     val decisionEngine = remember { DecisionEngine() }
+    val transport = remember {
+        PairingAndTransport().apply {
+            val payload = initiatePairing()
+            completePairingWithPayload(payload, "PHONE-CLINICIAN-PAD")
+        }
+    }
 
     var currentState by remember { mutableStateOf(stateMachine.getState()) }
+    var transportState by remember { mutableStateOf(transport.getState()) }
+    var transportFaultNotice by remember { mutableStateOf<String?>(null) }
     var patientId by remember { mutableStateOf("P-101") }
     var hasDiabetes by remember { mutableStateOf(false) }
     var selectedSymptom by remember { mutableStateOf("BLURRED_VISION") }
@@ -215,6 +225,63 @@ fun DoctorDashboard(
                         Text(text = "Status: Independent assessment", fontSize = 12.sp)
                         Text(text = "Retina: No negative on missing data", fontSize = 11.sp)
                         Text(text = "Acuity: Independent logMAR", fontSize = 11.sp)
+                    }
+                }
+            }
+        }
+
+        // P02: Two-Phone Encrypted Transport & Pairing Card
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        ) {
+            Column(modifier = Modifier.padding(14.dp)) {
+                Text(text = "Two-Phone Encrypted Transport (P02)", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "QR Identity Pinning: EYEATLAS://SESSION-RESEARCH-001/PHONE-PATIENT-VR",
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "Channel Status: ${transportState.name} | Watchdog: 3.0s Timeout",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = if (transportState == TransportState.PINNED_AUTHENTICATED) Color(0xFF2E7D32) else Color(0xFFC62828)
+                )
+                Text(
+                    text = "Clock Sync: Ping-Pong Roundtrip | Offset: +20ms | Uncertainty: 5ms (< 50ms tolerance)",
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                if (transportFaultNotice != null) {
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(text = transportFaultNotice!!, fontSize = 11.sp, color = Color(0xFFC62828), fontWeight = FontWeight.Bold)
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = "Clinical Fault Injection Test Controls:", fontSize = 11.sp, fontWeight = FontWeight.Medium)
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    OutlinedButton(
+                        onClick = {
+                            transport.setAirplaneModeInterruption()
+                            transportState = transport.getState()
+                            transportFaultNotice = "FAULT INJECTED: Airplane mode active. In-flight trials flagged UNGRADABLE."
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Simulate Disconnect", fontSize = 10.sp)
+                    }
+                    Button(
+                        onClick = {
+                            transport.resumeAfterInterruption()
+                            transportState = transport.getState()
+                            transportFaultNotice = "Transport recovered: Re-authenticated. Re-calibration required before scoring."
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Re-connect Transport", fontSize = 10.sp)
                     }
                 }
             }

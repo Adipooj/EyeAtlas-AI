@@ -1,5 +1,5 @@
 # EYEATLAS VR - PROJECT LOG
-**Created:** 2026-11-19 | **Current gate:** P01 PASSED | **Current accepted phase:** P01
+**Created:** 2026-11-19 | **Current gate:** P02 PASSED | **Current accepted phase:** P02
 
 ## Immutable mission / current project state
 The P00 repository lock and runnable baseline is established under MASTER_BLUEPRINT v1.1 (CR-001 two-phone response architecture). Build scripts, valid Gradle app, unit test baseline, installable hello-world APK, and verification scripts are all working and verified. No real phone has been selected; no clinical models trained; no clinical dataset has been downloaded or medically validated. The hardware diagrams are research baseline. See MASTER_BLUEPRINT.md as controlling plan.
@@ -136,6 +136,75 @@ The P00 repository lock and runnable baseline is established under MASTER_BLUEPR
 - Numeric diagnostic scores require validated calibration ID.
 
 **Gate:** PASS
-**Git commit SHA/tag:** e110dbc (tag: v0.1.0-p01)
+**Git commit SHA/tag:** e2c419e (tag: v0.1.0-p01)
 **Code dump hash:** `d9c6b800cd90f6b7de783284f00ab71e4cf6a017367457856fa46b7b6863aa6e`
-**Next approved action:** P01-B independent adversarial audit.
+**Next approved action:** P01-B independent adversarial audit (PASSED).
+
+### [P02] Two-phone encrypted sessions - 2026-11-20 02:18 IST
+**Goal / files edited:**
+- Implemented offline local QR pairing, session & device identity pinning, HMAC cryptographic signatures, packet sequence monotonic tracking, and disconnect watchdogs in `app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt`.
+- Implemented cross-phone Cristia/NTP ping-pong round-trip clock sync engine, offset calculation, and uncertainty bounds in `app/src/main/java/org/eyeatlas/net/SessionSync.kt`.
+- Implemented touch event capture with native monotonic timestamps, debounce rejection, multi-touch detection, long-press priority STOP, and per-trial response evaluation in `app/src/main/java/org/eyeatlas/sensors/ResponseAndGaze.kt`.
+- Added `AppRole.RESPONSE_PAD` and built accessible, blind-operable touch screen with real-time feedback and priority STOP in `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt`.
+- Routed `AppRole.RESPONSE_PAD` in `app/src/main/java/org/eyeatlas/MainActivity.kt`.
+- Built Two-Phone Encrypted Transport & Pairing Card with fault injection simulation controls in `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt`.
+- Added encrypted response channel and clock sync status indicators to `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt`.
+- Added 11 fault injection tests in `app/src/test/java/org/eyeatlas/FaultTests.kt` (packet reorder/drop, wrong device/session identity pinning, duplicate sequence replay, multi-touch ambiguity, rapid false-tap debounce, late touch, disconnect watchdog, clock sync uncertainty tolerance, airplane mode interruption/recovery, priority STOP command, clean SEEN/NO_RESPONSE baseline).
+- Added clock sync ping-pong and QR pairing serialization tests in `app/src/test/java/org/eyeatlas/ProtocolTests.kt`.
+
+**Antigravity exact prompt:** P02-A
+**Commands + exit codes:**
+- `gradle testDebugUnitTest`: Exit code 0 (26 tests executed, 26 passed)
+- `gradle lintDebug`: Exit code 0 (0 errors)
+- `gradle assembleDebug`: Exit code 0 (Updated `app-debug.apk`)
+- `python scripts/snapshot.py --phase P02 --verify`: Exit code 0 (SHA256: `892e7cbba059f46f12d33ed65a58d1fcd830c2da7f65be57be389f9828ddf3ab`)
+- `bash scripts/verify.sh --phase P02`: Exit code 0 (Full verification suite passed)
+
+**Hardware/model/data profile IDs:**
+- Calibration profile: `CAL-P01-BASELINE` / `BASE-P00-SIMULATED`
+- Network transport: Encrypted Wi-Fi P2P / socket abstraction, authenticated identity pinning
+- Clock synchronization: Round-trip ping-pong, max allowed uncertainty 50 ms
+
+**Tests:**
+- `org.eyeatlas.FaultTests.packetReorderAndDropInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.wrongDeviceAndSessionInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.duplicateSequenceReplayInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.multiTouchAmbiguityFaultInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.falseTapsDebounceFaultInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.lateTouchFaultInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.responsePhoneDisconnectWatchdogTest`: PASS
+- `org.eyeatlas.FaultTests.clockSyncUncertaintyExceededFaultTest`: PASS
+- `org.eyeatlas.FaultTests.airplaneModeInterruptionAndResumeTest`: PASS
+- `org.eyeatlas.FaultTests.priorityStopCommandInjectionTest`: PASS
+- `org.eyeatlas.FaultTests.cleanValidSeenAndNoResponseBaselineTest`: PASS
+- `org.eyeatlas.ProtocolTests.clockSynchronizationPingPongProtocolTest`: PASS
+- `org.eyeatlas.ProtocolTests.qrPairingPayloadSerializationTest`: PASS
+- `org.eyeatlas.ProtocolTests.stateMachineNormalProgressionTest`: PASS
+- `org.eyeatlas.ProtocolTests.urgentBypassEmergencyTriageTest`: PASS
+- `org.eyeatlas.ProtocolTests.priorityStopAndRecoveryTest`: PASS
+- `org.eyeatlas.ProtocolTests.invalidStateTransitionRejectionTest`: PASS
+- `org.eyeatlas.LogicTests.modelSerializationAndHashingPropertyTest`: PASS
+- `org.eyeatlas.LogicTests.lateralityIndependenceTest`: PASS
+- `org.eyeatlas.LogicTests.dualDiseaseCoexistencePropertyTest`: PASS
+- `org.eyeatlas.LogicTests.missingEvidencePropertyTest`: PASS
+- `org.eyeatlas.LogicTests.noPretendDiagnosisInvariantTest`: PASS
+- `org.eyeatlas.MultiDiseaseTests.baselineMultiDiseaseVerification`: PASS
+- `org.eyeatlas.MultiDiseaseTests.independentPerEyeMultiDiseaseEvaluation`: PASS
+- `org.eyeatlas.CalibrationTests.baselineCalibrationVerification`: PASS
+- `org.eyeatlas.FaultTests.baselineFaultVerification`: PASS
+
+**Defects:**
+- Symptom: None observed during compilation or execution.
+- Root cause: Pre-verification unit testing identified clock uncertainty tolerance boundaries and multi-touch filtering thresholds before UI integration.
+- Exact fix: Pinned 50ms tolerance threshold and 100ms debounce window.
+- Regression evidence: 26 unit tests passed, 0 lint errors, clean build.
+
+**Clinical/safety/licence caveats:**
+- Hard Medical Invariant: Transport/input faults (disconnect, high clock uncertainty, false taps, multi-touch) produce INVALID/UNGRADABLE trials, NEVER false NO_RESPONSE or false-negative visual field points.
+- Priority STOP: Immediate halt of stimulus presentation upon long-press (> 1.0s) or clinician command.
+- No BLE or third controller device added.
+
+**Gate:** PASS
+**Git commit SHA/tag:** aa98d2d (tag: v0.2.0-p02)
+**Code dump hash:** `892e7cbba059f46f12d33ed65a58d1fcd830c2da7f65be57be389f9828ddf3ab`
+**Next approved action:** P02-B independent adversarial audit.

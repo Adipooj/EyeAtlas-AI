@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import org.eyeatlas.ui.AppRole
 import org.eyeatlas.ui.DoctorDashboard
 import org.eyeatlas.ui.PatientScreen
+import org.eyeatlas.ui.ResponsePadScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +23,10 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     var currentRole by remember { mutableStateOf(AppRole.PATIENT) }
-                    if (currentRole == AppRole.PATIENT) {
-                        PatientScreen(
-                            onRoleChange = { currentRole = it }
-                        )
-                    } else {
-                        DoctorDashboard(
-                            onRoleChange = { currentRole = it }
-                        )
+                    when (currentRole) {
+                        AppRole.PATIENT -> PatientScreen(onRoleChange = { currentRole = it })
+                        AppRole.CLINICIAN -> DoctorDashboard(onRoleChange = { currentRole = it })
+                        AppRole.RESPONSE_PAD -> ResponsePadScreen(onRoleChange = { currentRole = it })
                     }
                 }
             }
