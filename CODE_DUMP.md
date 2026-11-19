@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** P00 | **Essential files:** 60 | **Manifest SHA256:** `eaf20b4b1a8ad272d6cc369b1d4f990194eff0d8e722ebff7995324ed1681c88`
+**Phase:** P01 | **Essential files:** 60 | **Manifest SHA256:** `982ab5cc6f244289dd5383b87c06797acd1f5b0e7699f570b01264eca42113fd`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -15,30 +15,30 @@ app/src/main/java/org/eyeatlas/App.kt	145	fc796baa9afb716758e5dee3e97017a3aaf879
 app/src/main/java/org/eyeatlas/MainActivity.kt	1348	9fd823a848084f7b63e3d12253d0f60a49557d892afc859e7a90d27de8f0309b
 app/src/main/java/org/eyeatlas/ai/Inference.kt	116	fd839d39ee2d3f5801c320d779e433e649bb0207755446e364222a50c93cd3f2
 app/src/main/java/org/eyeatlas/ai/QualityAndRanker.kt	137	5b655b4d80361424ceab9faeffde28209bb11b12c3f5734ed9eeaed76fb4c63e
-app/src/main/java/org/eyeatlas/core/DecisionEngine.kt	124	fdf90e15456f10f800ac889e063a7ca550cf2947192dee9f28136e6e8c81724d
-app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt	127	364d5a4336dc3cc1db88f16699c490505988edcb618f02fa1eab235dac6d8b87
-app/src/main/java/org/eyeatlas/core/Models.kt	317	0dca44424abace43c1424f56116a8721cdf1d9aa698c6e1f775c30e25e0493f6
-app/src/main/java/org/eyeatlas/core/Protocols.kt	111	92dfb9564aa3512935e1986767d4077842a7ef455ef8cfd47377ce694a79b0c5
+app/src/main/java/org/eyeatlas/core/DecisionEngine.kt	3319	77cc6d972b109524226e67f0a2f9ae42f2585499287966a31c3665ffde22e3f5
+app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt	837	65e064d9da51572686cdb407cdecee02854de8505305b3c20e22cc2d5fa09371
+app/src/main/java/org/eyeatlas/core/Models.kt	4981	31cee2f6b30af7567c73014e35e8fc862b6d9f8ed2e0aeed7a2daa67011da316
+app/src/main/java/org/eyeatlas/core/Protocols.kt	3548	17e6452e69d164bca236541099d1c7c984cdd9cdf987b1542608c6cb4e3c06aa
 app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt	108	5c38b3288bf2650fee7da1153d6c124ec552de6a7ceb192ab325ce3bf910dd2c
 app/src/main/java/org/eyeatlas/net/SessionSync.kt	84	19c468027201f62a2f1abd871ea3ad7c1b239ec0aadc7289d473cc16ca62cd35
 app/src/main/java/org/eyeatlas/sensors/Calibration.kt	107	9dcc1cdb7b8c0636981fc5950434f70aa24ff9083217d30bccaeed7e8f5bc363
 app/src/main/java/org/eyeatlas/sensors/CameraPipeline.kt	92	92412a9562860261f6c9a98ff68e3d390fa6b1cbe4198afc27a926139757774d
 app/src/main/java/org/eyeatlas/sensors/ResponseAndGaze.kt	131	cc79ff8a59455bc1640eee7d440d7098efc42674337ca314214a12c46a62a2d3
 app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt	111	061e691b6e8335cb608377a3c019b41dd04e451b44e47940207df97ca3b5856d
-app/src/main/java/org/eyeatlas/store/PatientStore.kt	184	56529fab7a3f4be1aa92ee4e90b9ae316dbb866e46dac8d4f8a842f1b141892d
+app/src/main/java/org/eyeatlas/store/PatientStore.kt	309	7aa7a18614ed846c7c84f60f79a3e927aa0e69ae38a18dc847ef45c3fec68f57
 app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt	127	31eb6c3c450d1a87ead4dbcb0d4ef1c4a2fdc08b2483d449b9c72dc296ed5130
-app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt	2942	409c49776ce4d6ea19d4f75d416f2e17a1cdbca99661609b494f60abe3f24841
-app/src/main/java/org/eyeatlas/ui/PatientScreens.kt	2285	3159cee979b48e7a8db27f93574b6f6ca14f6b97afc483cc6deaa2e5ad32248a
-app/src/main/java/org/eyeatlas/ui/SharedComponents.kt	2398	d31e0b1c551549fb1f56f21f239e0f29e38444cc3e9a3bd0a55eda61b82ed813
+app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt	9541	2ec5ea0079ad1e019b53fc963bce95bf6cc56b4ed0ce1909d2eddbf94b576fbc
+app/src/main/java/org/eyeatlas/ui/PatientScreens.kt	3169	d45ede7561a9f789d84c9cf80fe13a36543c813450a2e1d0f54228be70bd6d9d
+app/src/main/java/org/eyeatlas/ui/SharedComponents.kt	4482	9ae9fa06594c5ee25887ed1ccada39bbd37c28ea977015c05668c09a7c316968
 app/src/main/java/org/eyeatlas/vision/AnteriorTests.kt	95	4795270f7111c96c23db64990b4162dd2e5d082c39db9b6d212de02ee434a345
 app/src/main/java/org/eyeatlas/vision/BinocularTests.kt	97	62159317575d02fa8b6e43b101969c7212ac66dff58351e5cca3c478b8bb9980
 app/src/main/java/org/eyeatlas/vision/FunctionalTests.kt	97	0a166919a8b3d6cd2e5e39cd47474e4b75f17a0979635cf85a9fe62553a5de59
 app/src/main/java/org/eyeatlas/vision/RetinalTests.kt	92	4207edcb87a8a76b94319acfe3f278b32660c5942c53ed76670b72c562ce224d
 app/src/test/java/org/eyeatlas/CalibrationTests.kt	285	2e72b9a454b48eb192bdac7f02559958611d97882c81670dda7364700c61b61f
 app/src/test/java/org/eyeatlas/FaultTests.kt	180	8b585d537f2f8836f0e4bdde2c5bf2f339292996b674d1a44dea0ba20455c2b6
-app/src/test/java/org/eyeatlas/LogicTests.kt	562	c3f64fa5067fcc7679976a1cfff0790ce9eeb42599d4ead8abcd85f791be4c7d
-app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt	376	6c79bb2eb7b819bf9e0ea3e0d0eb74422afbeef630e907840dc6cb4705f4b727
-app/src/test/java/org/eyeatlas/ProtocolTests.kt	282	737f58b26cf13c1c78df7549cac9f7e9c0f4df5c91ccea8d576eea5316e7d967
+app/src/test/java/org/eyeatlas/LogicTests.kt	5167	3ef3047ba557c2e4c99d0cc43ab3b32d2cc633acf1d3003bc6ba81a428b39b9d
+app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt	1063	5d28bf7479e08d0c0c794495ad35598ddc1c3d9fb181cbea70830d5b7260dbaf
+app/src/test/java/org/eyeatlas/ProtocolTests.kt	3298	fe406c9db9d5687b406f85eae9ace907727411b35045c2e270b75042c2d8bc91
 build.gradle.kts	170	7af865aea3e2dde810363caa1c3f9eed33324aa47f1c7e281034d4bd69129b3d
 docs/data_licenses.csv	1054	24cfb44f307795b784fa0f1c0dbf9e010e67d7eb21af1a7c4d095873b481731c
 docs/hardware_contract.md	88	96e4aafcda1f4276432e137bbbccd5b3417a25c38bf3d9c7fed5b7ce01747c05
@@ -312,33 +312,131 @@ class QualityAndRanker {
 ```
 END FILE `app/src/main/java/org/eyeatlas/ai/QualityAndRanker.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/core/DecisionEngine.kt` | bytes=124 | SHA256=`fdf90e15456f10f800ac889e063a7ca550cf2947192dee9f28136e6e8c81724d`
+### FILE `app/src/main/java/org/eyeatlas/core/DecisionEngine.kt` | bytes=3319 | SHA256=`77cc6d972b109524226e67f0a2f9ae42f2585499287966a31c3665ffde22e3f5`
 ```kt
 package org.eyeatlas.core
 
 class DecisionEngine {
+
+    companion object {
+        val EMERGENCY_RED_FLAGS = listOf(
+            "SUDDEN_VISION_LOSS",
+            "CORNEAL_TRAUMA",
+            "CHEMICAL_EXPOSURE",
+            "PAINFUL_PHOTOPHOBIC_RED_EYE",
+            "RETINAL_DETACHMENT_SIGNS"
+        )
+    }
+
     fun evaluate(laterality: EyeLaterality): List<String> = emptyList()
+
+    fun screenIntakeForEmergency(symptoms: List<String>): Referral? {
+        val detected = symptoms.filter { sym ->
+            EMERGENCY_RED_FLAGS.any { flag -> sym.equals(flag, ignoreCase = true) }
+        }
+        if (detected.isNotEmpty()) {
+            return Referral(
+                urgency = EmergencyUrgency.EMERGENCY_IMMEDIATE,
+                reason = "Emergency clinical red-flag detected: ${detected.joinToString()}",
+                recommendedTests = listOf("IMMEDIATE_OPHTHALMIC_EXAMINATION", "SLIT_LAMP_BIOMICROSCOPY", "DILATED_FUNDUSCOPY"),
+                completionStatus = "BYPASSED_ROUTINE"
+            )
+        }
+        return null
+    }
+
+    /**
+     * Evaluates independent per-eye findings.
+     * Enforces that multi-disease conditions can coexist independently,
+     * and missing tests are classified as unknown, not negative.
+     */
+    fun evaluateEyeFindings(
+        eye: EyeLaterality,
+        measurements: List<Measurement>,
+        availableTests: Set<TestDomain>
+    ): List<ConditionInference> {
+        val inferences = mutableListOf<ConditionInference>()
+
+        // Check for Glaucoma evidence
+        val visualFieldAvailable = availableTests.contains(TestDomain.VISUAL_FIELD)
+        val fieldAbnormal = measurements.any { it.method == "PERIMETRY_54PT" && it.value > 0.0 && it.validity }
+        
+        inferences.add(
+            ConditionInference(
+                eye = eye,
+                diseaseCode = "GLAUCOMA_SUSPICION",
+                probabilityOrScore = if (visualFieldAvailable && fieldAbnormal) 0.75 else null,
+                calibrationId = "CAL-P01-BASELINE",
+                evidenceFor = if (fieldAbnormal) listOf("REPRODUCIBLE_FIELD_DEFECT") else emptyList(),
+                evidenceAgainst = emptyList(),
+                unknownEvidence = if (!visualFieldAvailable) listOf("PERIMETRY_54PT_UNASSESSED") else emptyList(),
+                recommendedTest = if (!visualFieldAvailable) "PERIMETRY_54PT" else null
+            )
+        )
+
+        // Check for Cataract evidence independently
+        val anteriorAvailable = availableTests.contains(TestDomain.ANTERIOR)
+        val mediaOpacity = measurements.any { it.method == "MEDIA_OPACITY" && it.value > 0.5 && it.validity }
+
+        inferences.add(
+            ConditionInference(
+                eye = eye,
+                diseaseCode = "CATARACT_SUSPICION",
+                probabilityOrScore = if (anteriorAvailable && mediaOpacity) 0.80 else null,
+                calibrationId = "CAL-P01-BASELINE",
+                evidenceFor = if (mediaOpacity) listOf("MEDIA_OPACITY_DETECTED") else emptyList(),
+                evidenceAgainst = emptyList(),
+                unknownEvidence = if (!anteriorAvailable) listOf("ANTERIOR_MEDIA_UNASSESSED") else emptyList(),
+                recommendedTest = if (!anteriorAvailable) "SLIT_LAMP_IMAGING" else null
+            )
+        )
+
+        return inferences
+    }
 }
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/DecisionEngine.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt` | bytes=127 | SHA256=`364d5a4336dc3cc1db88f16699c490505988edcb618f02fa1eab235dac6d8b87`
+### FILE `app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt` | bytes=837 | SHA256=`65e064d9da51572686cdb407cdecee02854de8505305b3c20e22cc2d5fa09371`
 ```kt
 package org.eyeatlas.core
 
 class MeasurementEngine {
-    fun recordMetric(metricName: String, value: Double): Boolean = true
+    private val measurements = mutableListOf<Measurement>()
+
+    fun recordMeasurement(measurement: Measurement): Boolean {
+        // Physical plausibility checks
+        val isPlausible = when (measurement.method) {
+            "ACUITY_LOGMAR" -> measurement.value in -0.3..2.5
+            "PERIMETRY_54PT" -> measurement.value in 0.0..54.0
+            "MEDIA_OPACITY" -> measurement.value in 0.0..1.0
+            else -> true
+        }
+        val validated = measurement.copy(validity = isPlausible && measurement.validity)
+        measurements.add(validated)
+        return isPlausible
+    }
+
+    fun getMeasurementsForEye(eye: EyeLaterality): List<Measurement> {
+        return measurements.filter { it.eye == eye }
+    }
+
+    fun clear() {
+        measurements.clear()
+    }
 }
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/core/Models.kt` | bytes=317 | SHA256=`0dca44424abace43c1424f56116a8721cdf1d9aa698c6e1f775c30e25e0493f6`
+### FILE `app/src/main/java/org/eyeatlas/core/Models.kt` | bytes=4981 | SHA256=`31cee2f6b30af7567c73014e35e8fc862b6d9f8ed2e0aeed7a2daa67011da316`
 ```kt
 package org.eyeatlas.core
 
+import java.security.MessageDigest
+
 enum class EyeLaterality {
-    OD, // Right eye
-    OS  // Left eye
+    OD, // Right eye (Oculus Dexter)
+    OS  // Left eye (Oculus Sinister)
 }
 
 enum class TestDomain {
@@ -350,21 +448,259 @@ enum class TestDomain {
     BINOCULAR
 }
 
+enum class EmergencyUrgency {
+    ROUTINE,
+    PRIORITY,
+    EMERGENCY_IMMEDIATE
+}
+
+enum class SessionState {
+    INTAKE,
+    URGENT_BYPASS,
+    DEVICE_CALIBRATION,
+    FUNCTIONAL_TESTS,
+    IMAGING,
+    REVIEW_AND_REFERRAL,
+    STOPPED
+}
+
 data class PatientRecord(
-    val id: String,
-    val timestamp: Long,
-    val notes: String = ""
+    val patientId: String,
+    val ageBand: String,
+    val hasDiabetes: Boolean,
+    val symptoms: List<String>,
+    val currentCorrection: String,
+    val comorbidityFlags: List<String> = emptyList(),
+    val isEmergencyFlagged: Boolean = false,
+    val emergencyReason: String? = null
+) {
+    fun anonymizedHash(): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        return digest.digest(patientId.toByteArray(Charsets.UTF_8))
+            .joinToString("") { "%02x".format(it) }
+    }
+}
+
+data class ClinicalSession(
+    val sessionId: String,
+    val patientId: String,
+    val patientPhoneId: String,
+    val clinicianPhoneId: String,
+    val responsePhoneId: String,
+    val responseRole: String = "RESPONSE_PAD",
+    val mode: String = "RESEARCH_BASELINE",
+    val hasConsent: Boolean,
+    val startTimeMs: Long,
+    val state: SessionState
+)
+
+data class EyeRecord(
+    val laterality: EyeLaterality,
+    val correctionStatus: String,
+    val opticalProfile: String,
+    val fixationStatus: String
+)
+
+data class StimulusTrial(
+    val trialId: String,
+    val sessionId: String,
+    val eye: EyeLaterality,
+    val testCode: String,
+    val targetAngleDeg: Double,
+    val luminanceCdM2: Double,
+    val opticalIndex: Double,
+    val monotonicPresentedNs: Long,
+    val responsePhoneMonotonicNs: Long? = null,
+    val correctedResponseNs: Long? = null,
+    val clockOffsetNs: Long = 0L,
+    val clockUncertaintyNs: Long = 0L,
+    val expectedAnswer: String,
+    val observedAnswer: String? = null,
+    val framesRendered: Int,
+    val calibrationHash: String,
+    val responseEventId: String? = null,
+    val validityFlags: List<String> = emptyList()
+) {
+    val isUngradableOrInvalid: Boolean
+        get() = validityFlags.any { it.startsWith("INVALID") || it.startsWith("DISCONNECT") }
+}
+
+data class ResponseEvent(
+    val eventId: String,
+    val sessionId: String,
+    val trialId: String? = null,
+    val responsePhoneId: String,
+    val monotonicEventNs: Long,
+    val inputType: String, // "TOUCH_TAP", "LONG_PRESS_STOP", "NONE"
+    val pointerCount: Int = 1,
+    val inputQuality: String = "VALID",
+    val clockSyncId: String = "DEFAULT_SYNC",
+    val receivedByPatientNs: Long = 0L,
+    val durableStatus: String = "COMMITTED"
+)
+
+data class ImageCapture(
+    val imageId: String,
+    val sessionId: String,
+    val eye: EyeLaterality,
+    val mode: String, // "ANTERIOR", "TEAR_FILM", "RETINAL_FUNDUS"
+    val cameraId: String,
+    val rawUri: String,
+    val processingHash: String,
+    val focusMetric: Double,
+    val exposureTimeMs: Double,
+    val whiteBalance: String,
+    val visibleStructures: List<String>,
+    val fieldCoverage: String,
+    val qualityScore: Double
+)
+
+data class Measurement(
+    val measurementId: String,
+    val provenanceIds: List<String>,
+    val eye: EyeLaterality,
+    val method: String,
+    val value: Double,
+    val units: String,
+    val confidenceLower: Double? = null,
+    val confidenceUpper: Double? = null,
+    val validity: Boolean,
+    val limits: List<String> = emptyList()
+)
+
+data class Finding(
+    val eye: EyeLaterality,
+    val broadDomain: TestDomain,
+    val finding: String,
+    val direction: String = "DEFAULT",
+    val severity: String = "MILD",
+    val provenanceIds: List<String> = emptyList(),
+    val validity: Boolean = true
+)
+
+data class ConditionInference(
+    val eye: EyeLaterality,
+    val diseaseCode: String,
+    val probabilityOrScore: Double?,
+    val calibrationId: String,
+    val evidenceFor: List<String> = emptyList(),
+    val evidenceAgainst: List<String> = emptyList(),
+    val unknownEvidence: List<String> = emptyList(),
+    val recommendedTest: String? = null
+) {
+    init {
+        // Enforce no-pretend-diagnosis invariant:
+        // Numeric probabilities require explicit calibration ID
+        if (probabilityOrScore != null) {
+            require(calibrationId.isNotBlank() && calibrationId != "NONE") {
+                "Numerical scores require validated calibration ID"
+            }
+        }
+    }
+}
+
+data class Referral(
+    val urgency: EmergencyUrgency,
+    val reason: String,
+    val recommendedTests: List<String>,
+    val completionStatus: String = "PENDING"
+)
+
+data class AuditEvent(
+    val eventId: String,
+    val actor: String,
+    val timestampMs: Long,
+    val deviceId: String,
+    val action: String,
+    val beforeHash: String,
+    val afterHash: String,
+    val reason: String
 )
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/Models.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/core/Protocols.kt` | bytes=111 | SHA256=`92dfb9564aa3512935e1986767d4077842a7ef455ef8cfd47377ce694a79b0c5`
+### FILE `app/src/main/java/org/eyeatlas/core/Protocols.kt` | bytes=3548 | SHA256=`17e6452e69d164bca236541099d1c7c984cdd9cdf987b1542608c6cb4e3c06aa`
 ```kt
 package org.eyeatlas.core
 
-interface TestProtocol {
-    val domain: TestDomain
-    fun isComplete(): Boolean
+sealed class SessionEvent {
+    object BeginIntake : SessionEvent()
+    data class TriggerEmergencyBypass(val redFlag: String) : SessionEvent()
+    object TriagePassed : SessionEvent()
+    object CalibrationVerified : SessionEvent()
+    object FunctionalCompleted : SessionEvent()
+    object ImagingCompleted : SessionEvent()
+    data class PriorityStop(val reason: String) : SessionEvent()
+    object ResumeSession : SessionEvent()
+    object FinalizeReview : SessionEvent()
+}
+
+class ClinicalStateMachine(private var currentState: SessionState = SessionState.INTAKE) {
+
+    fun getState(): SessionState = currentState
+
+    fun processEvent(event: SessionEvent): Result<SessionState> {
+        val nextState = when (event) {
+            is SessionEvent.TriggerEmergencyBypass -> {
+                // Urgent signs immediately bypass routine testing
+                SessionState.URGENT_BYPASS
+            }
+            is SessionEvent.PriorityStop -> {
+                SessionState.STOPPED
+            }
+            is SessionEvent.BeginIntake -> {
+                if (currentState == SessionState.STOPPED || currentState == SessionState.INTAKE) {
+                    SessionState.INTAKE
+                } else {
+                    return Result.failure(IllegalStateException("Cannot reset to INTAKE from $currentState"))
+                }
+            }
+            is SessionEvent.TriagePassed -> {
+                if (currentState == SessionState.INTAKE) {
+                    SessionState.DEVICE_CALIBRATION
+                } else {
+                    return Result.failure(IllegalStateException("Triage only valid from INTAKE, got $currentState"))
+                }
+            }
+            is SessionEvent.CalibrationVerified -> {
+                if (currentState == SessionState.DEVICE_CALIBRATION) {
+                    SessionState.FUNCTIONAL_TESTS
+                } else {
+                    return Result.failure(IllegalStateException("Calibration must precede functional tests"))
+                }
+            }
+            is SessionEvent.FunctionalCompleted -> {
+                if (currentState == SessionState.FUNCTIONAL_TESTS) {
+                    SessionState.IMAGING
+                } else {
+                    return Result.failure(IllegalStateException("Functional tests must complete before imaging"))
+                }
+            }
+            is SessionEvent.ImagingCompleted -> {
+                if (currentState == SessionState.IMAGING) {
+                    SessionState.REVIEW_AND_REFERRAL
+                } else {
+                    return Result.failure(IllegalStateException("Imaging must complete before review"))
+                }
+            }
+            is SessionEvent.ResumeSession -> {
+                if (currentState == SessionState.STOPPED) {
+                    SessionState.DEVICE_CALIBRATION // Safe re-calibration required after stop
+                } else {
+                    return Result.failure(IllegalStateException("Resume only valid when stopped"))
+                }
+            }
+            is SessionEvent.FinalizeReview -> {
+                if (currentState == SessionState.REVIEW_AND_REFERRAL || currentState == SessionState.URGENT_BYPASS) {
+                    currentState // stays completed
+                } else {
+                    return Result.failure(IllegalStateException("Finalize only valid from review or bypass"))
+                }
+            }
+        }
+        currentState = nextState
+        return Result.success(currentState)
+    }
 }
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/Protocols.kt`
@@ -429,14 +765,20 @@ class VrPresenter {
 ```
 END FILE `app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/store/PatientStore.kt` | bytes=184 | SHA256=`56529fab7a3f4be1aa92ee4e90b9ae316dbb866e46dac8d4f8a842f1b141892d`
+### FILE `app/src/main/java/org/eyeatlas/store/PatientStore.kt` | bytes=309 | SHA256=`7aa7a18614ed846c7c84f60f79a3e927aa0e69ae38a18dc847ef45c3fec68f57`
 ```kt
 package org.eyeatlas.store
 
 import org.eyeatlas.core.PatientRecord
 
 class PatientStore {
-    fun getRecord(id: String): PatientRecord = PatientRecord(id, System.currentTimeMillis())
+    fun getRecord(id: String): PatientRecord = PatientRecord(
+        patientId = id,
+        ageBand = "40-59",
+        hasDiabetes = false,
+        symptoms = listOf("NONE"),
+        currentCorrection = "NONE"
+    )
 }
 ```
 END FILE `app/src/main/java/org/eyeatlas/store/PatientStore.kt`
@@ -451,28 +793,56 @@ class ReportsAndExports {
 ```
 END FILE `app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt` | bytes=2942 | SHA256=`409c49776ce4d6ea19d4f75d416f2e17a1cdbca99661609b494f60abe3f24841`
+### FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt` | bytes=9541 | SHA256=`2ec5ea0079ad1e019b53fc963bce95bf6cc56b4ed0ce1909d2eddbf94b576fbc`
 ```kt
 package org.eyeatlas.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.eyeatlas.core.*
 
 @Composable
 fun DoctorDashboard(
     onRoleChange: (AppRole) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val stateMachine = remember { ClinicalStateMachine() }
+    val decisionEngine = remember { DecisionEngine() }
+
+    var currentState by remember { mutableStateOf(stateMachine.getState()) }
+    var patientId by remember { mutableStateOf("P-101") }
+    var hasDiabetes by remember { mutableStateOf(false) }
+    var selectedSymptom by remember { mutableStateOf("BLURRED_VISION") }
+    var hasConsent by remember { mutableStateOf(true) }
+    var emergencyReason by remember { mutableStateOf<String?>(null) }
+    var recoveryNotice by remember { mutableStateOf<String?>(null) }
+
+    val symptomOptions = listOf(
+        "NONE",
+        "BLURRED_VISION",
+        "EYE_STRAIN",
+        "DRYNESS",
+        "SUDDEN_VISION_LOSS",
+        "CORNEAL_TRAUMA",
+        "PAINFUL_PHOTOPHOBIC_RED_EYE",
+        "CHEMICAL_EXPOSURE"
+    )
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         AppHeader(
             title = "EyeAtlas VR - Clinician Station",
@@ -482,56 +852,166 @@ fun DoctorDashboard(
 
         ResearchNotice()
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Active Clinical Session (Baseline)",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Clinical Intake & Session State",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+            StateBadge(state = currentState)
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-        ) {
-            Column(modifier = Modifier.padding(12.dp)) {
-                Text(text = "Patient ID: P-DEMO-001", fontWeight = FontWeight.Bold)
-                Text(text = "Laterality: Bilateral Protocol (OD / OS Independent)", fontSize = 13.sp)
-                Text(text = "Response Pad Mode: Active on Clinician Handset", fontSize = 13.sp)
-                Text(text = "Optical Profile: Baseline / Simulated", fontSize = 13.sp)
+        if (currentState == SessionState.URGENT_BYPASS && emergencyReason != null) {
+            EmergencyAlertCard(
+                reason = emergencyReason!!,
+                onAcknowledge = {
+                    emergencyReason = null
+                    stateMachine.processEvent(SessionEvent.FinalizeReview)
+                    currentState = stateMachine.getState()
+                }
+            )
+        }
+
+        if (recoveryNotice != null) {
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9))
+            ) {
+                Text(
+                    text = recoveryNotice!!,
+                    color = Color(0xFF2E7D32),
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(8.dp)
+                )
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        ) {
+            Column(modifier = Modifier.padding(14.dp)) {
+                Text(text = "Patient Intake Form", fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(6.dp))
 
-        Text(text = "Diagnostic Test Modules", fontWeight = FontWeight.SemiBold)
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        val modules = listOf(
-            "Visual Acuity & Optical Focus (P06)",
-            "Colour, Contrast & Central Macular (P07)",
-            "Visual Field Suprathreshold 54-pt (P08)",
-            "External Eye & Anterior Segment (P10/P11)",
-            "Retinal Fundus Imaging (P12/P13)"
-        )
-
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(modules.size) { index ->
-                Card(
+                OutlinedTextField(
+                    value = patientId,
+                    onValueChange = { patientId = it },
+                    label = { Text("Patient Identifier (Pseudonymized)") },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                    singleLine = true
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = hasDiabetes,
+                        onCheckedChange = { hasDiabetes = it }
+                    )
+                    Text("History of Diabetes Mellitus (Mandates Retinal Screening)")
+                }
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = hasConsent,
+                        onCheckedChange = { hasConsent = it }
+                    )
+                    Text("Informed Consent Signed & Logged")
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Primary Presenting Symptom:", fontSize = 13.sp, fontWeight = FontWeight.Medium)
+                symptomOptions.chunked(2).forEach { rowSymptoms ->
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        rowSymptoms.forEach { sym ->
+                            FilterChip(
+                                selected = selectedSymptom == sym,
+                                onClick = { selectedSymptom = sym },
+                                label = { Text(sym.replace("_", " "), fontSize = 11.sp) }
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = {
+                            val referral = decisionEngine.screenIntakeForEmergency(listOf(selectedSymptom))
+                            if (referral != null) {
+                                emergencyReason = referral.reason
+                                stateMachine.processEvent(SessionEvent.TriggerEmergencyBypass(referral.reason))
+                                currentState = stateMachine.getState()
+                            } else {
+                                stateMachine.processEvent(SessionEvent.TriagePassed)
+                                currentState = stateMachine.getState()
+                                recoveryNotice = "Triage Passed: Proceeding to safe device calibration."
+                            }
+                        },
+                        enabled = hasConsent && currentState != SessionState.URGENT_BYPASS
                     ) {
-                        Text(text = modules[index], fontSize = 14.sp)
-                        Text(text = "Ready", color = MaterialTheme.colorScheme.primary, fontSize = 13.sp)
+                        Text("Process Intake & Triage")
+                    }
+
+                    if (currentState != SessionState.STOPPED) {
+                        OutlinedButton(
+                            onClick = {
+                                stateMachine.processEvent(SessionEvent.PriorityStop("Clinician requested STOP"))
+                                currentState = stateMachine.getState()
+                                recoveryNotice = "STOP engaged: Routine stimulus halted immediately."
+                            }
+                        ) {
+                            Text("Priority STOP")
+                        }
+                    } else {
+                        Button(
+                            onClick = {
+                                stateMachine.processEvent(SessionEvent.ResumeSession)
+                                currentState = stateMachine.getState()
+                                recoveryNotice = "Session resumed safely into calibration state."
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary)
+                        ) {
+                            Text("Resume Safe Session")
+                        }
+                    }
+                }
+            }
+        }
+
+        // Per-Eye Laterality Independence Display
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        ) {
+            Column(modifier = Modifier.padding(14.dp)) {
+                Text(text = "Per-Eye Multi-Morbidity & Status", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(6.dp))
+
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(text = "OD (Right Eye)", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                        Text(text = "Status: Independent assessment", fontSize = 12.sp)
+                        Text(text = "Glaucoma: Suspicion pending field", fontSize = 11.sp)
+                        Text(text = "Cataract: Independent score", fontSize = 11.sp)
+                    }
+                    VerticalDivider(modifier = Modifier.height(60.dp).width(1.dp))
+                    Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+                        Text(text = "OS (Left Eye)", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+                        Text(text = "Status: Independent assessment", fontSize = 12.sp)
+                        Text(text = "Retina: No negative on missing data", fontSize = 11.sp)
+                        Text(text = "Acuity: Independent logMAR", fontSize = 11.sp)
                     }
                 }
             }
@@ -541,7 +1021,7 @@ fun DoctorDashboard(
 ```
 END FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt` | bytes=2285 | SHA256=`3159cee979b48e7a8db27f93574b6f6ca14f6b97afc483cc6deaa2e5ad32248a`
+### FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt` | bytes=3169 | SHA256=`d45ede7561a9f789d84c9cf80fe13a36543c813450a2e1d0f54228be70bd6d9d`
 ```kt
 package org.eyeatlas.ui
 
@@ -549,19 +1029,22 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.eyeatlas.core.SessionState
 
 @Composable
 fun PatientScreen(
     onRoleChange: (AppRole) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isEmergencyHalted by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -571,28 +1054,36 @@ fun PatientScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppHeader(
-            title = "EyeAtlas VR - Patient Mode",
+            title = "EyeAtlas VR - Patient VR Mode",
             role = AppRole.PATIENT,
             onToggleRole = onRoleChange
         )
 
         ResearchNotice()
 
+        if (isEmergencyHalted) {
+            EmergencyAlertCard(
+                reason = "Patient triggered emergency quick-release STOP.",
+                onAcknowledge = { isEmergencyHalted = false }
+            )
+        }
+
+        // Central VR Stimulus Viewport
         Card(
             modifier = Modifier
                 .size(240.dp)
                 .padding(8.dp),
             shape = CircleShape,
-            colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
+            colors = CardDefaults.cardColors(containerColor = if (isEmergencyHalted) Color(0xFF4A0000) else Color.DarkGray)
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "+",
+                    text = if (isEmergencyHalted) "STOP" else "+",
                     color = Color.White,
-                    fontSize = 48.sp,
+                    fontSize = if (isEmergencyHalted) 28.sp else 48.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -604,17 +1095,24 @@ fun PatientScreen(
                 .padding(8.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
         ) {
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(
+                modifier = Modifier.padding(12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
-                    text = "Status: Stimulus Alignment Ready",
+                    text = "Perimetry Response Pad: Clinician Phone Paired",
                     color = Color.LightGray,
-                    fontSize = 13.sp
+                    fontSize = 12.sp
                 )
-                Text(
-                    text = "Perimetry Response: Touch Input Paired",
-                    color = Color.LightGray,
-                    fontSize = 13.sp
-                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Button(
+                    onClick = { isEmergencyHalted = !isEmergencyHalted },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (isEmergencyHalted) Color.DarkGray else Color(0xFFB00020)
+                    )
+                ) {
+                    Text(if (isEmergencyHalted) "Reset Patient View" else "Emergency STOP / Quick Release")
+                }
             }
         }
     }
@@ -622,7 +1120,7 @@ fun PatientScreen(
 ```
 END FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt` | bytes=2398 | SHA256=`d31e0b1c551549fb1f56f21f239e0f29e38444cc3e9a3bd0a55eda61b82ed813`
+### FILE `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt` | bytes=4482 | SHA256=`9ae9fa06594c5ee25887ed1ccada39bbd37c28ea977015c05668c09a7c316968`
 ```kt
 package org.eyeatlas.ui
 
@@ -637,6 +1135,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.eyeatlas.core.SessionState
 
 enum class AppRole {
     PATIENT,
@@ -662,7 +1161,7 @@ fun AppHeader(title: String, role: AppRole, onToggleRole: (AppRole) -> Unit) {
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    text = "Role: ${role.name} | Baseline P00",
+                    text = "Role: ${role.name} | Data Contracts (P01)",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
                 )
@@ -686,10 +1185,69 @@ fun ResearchNotice(modifier: Modifier = Modifier) {
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3CD))
     ) {
         Text(
-            text = "NOTICE: Research Prototype (P00 Baseline). No medical diagnosis or superiority claims. Calibration active.",
+            text = "NOTICE: Research Prototype (P01 Data Contracts). No medical diagnosis or superiority claims. Full multi-morbidity support.",
             color = Color(0xFF856404),
             fontSize = 11.sp,
             modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
+@Composable
+fun EmergencyAlertCard(reason: String, onAcknowledge: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFFD2D2)),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(modifier = Modifier.padding(14.dp)) {
+            Text(
+                text = "CRITICAL EMERGENCY ALERT - URGENT BYPASS",
+                color = Color(0xFF900000),
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = reason,
+                color = Color(0xFF500000),
+                fontSize = 13.sp
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = "ACTION: Routine VR testing halted. Immediate ophthalmic referral instructed.",
+                color = Color(0xFF900000),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Button(
+                onClick = onAcknowledge,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB00020))
+            ) {
+                Text("Acknowledge & Open Emergency Referral", color = Color.White)
+            }
+        }
+    }
+}
+
+@Composable
+fun StateBadge(state: SessionState) {
+    val bgColor = when (state) {
+        SessionState.URGENT_BYPASS -> Color(0xFFFFCDD2)
+        SessionState.STOPPED -> Color(0xFFFFE0B2)
+        SessionState.REVIEW_AND_REFERRAL -> Color(0xFFC8E6C9)
+        else -> MaterialTheme.colorScheme.secondaryContainer
+    }
+    Surface(
+        color = bgColor,
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Text(
+            text = "STATE: ${state.name}",
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold
         )
     }
 }
@@ -770,41 +1328,158 @@ class FaultTests {
 ```
 END FILE `app/src/test/java/org/eyeatlas/FaultTests.kt`
 
-### FILE `app/src/test/java/org/eyeatlas/LogicTests.kt` | bytes=562 | SHA256=`c3f64fa5067fcc7679976a1cfff0790ce9eeb42599d4ead8abcd85f791be4c7d`
+### FILE `app/src/test/java/org/eyeatlas/LogicTests.kt` | bytes=5167 | SHA256=`3ef3047ba557c2e4c99d0cc43ab3b32d2cc633acf1d3003bc6ba81a428b39b9d`
 ```kt
 package org.eyeatlas
 
-import org.eyeatlas.core.EyeLaterality
-import org.eyeatlas.core.PatientRecord
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.eyeatlas.core.*
+import org.junit.Assert.*
 import org.junit.Test
 
 class LogicTests {
+
     @Test
-    fun baselineLogicVerification() {
-        val record = PatientRecord("P-001", 1000L, "Baseline test")
-        assertEquals("P-001", record.id)
-        assertNotNull(record)
+    fun modelSerializationAndHashingPropertyTest() {
+        val record = PatientRecord(
+            patientId = "PATIENT-SECRET-12345",
+            ageBand = "40-59",
+            hasDiabetes = true,
+            symptoms = listOf("BLURRED_VISION"),
+            currentCorrection = "GLASSES"
+        )
+        val hash = record.anonymizedHash()
+        assertNotNull(hash)
+        assertEquals(64, hash.length) // SHA-256 produces 64 hex chars
+        assertFalse(hash.contains("PATIENT-SECRET-12345"))
     }
 
     @Test
-    fun lateralityIndependenceCheck() {
+    fun lateralityIndependenceTest() {
         val od = EyeLaterality.OD
         val os = EyeLaterality.OS
-        assert(od != os)
+        assertNotEquals(od, os)
+
+        val measurementEngine = MeasurementEngine()
+        val odAcuity = Measurement(
+            measurementId = "M-OD-01",
+            provenanceIds = listOf("TRIAL-OD-01"),
+            eye = EyeLaterality.OD,
+            method = "ACUITY_LOGMAR",
+            value = 0.1, // good acuity
+            units = "logMAR",
+            validity = true
+        )
+        val osAcuity = Measurement(
+            measurementId = "M-OS-01",
+            provenanceIds = listOf("TRIAL-OS-01"),
+            eye = EyeLaterality.OS,
+            method = "ACUITY_LOGMAR",
+            value = 1.0, // impaired acuity
+            units = "logMAR",
+            validity = true
+        )
+
+        measurementEngine.recordMeasurement(odAcuity)
+        measurementEngine.recordMeasurement(osAcuity)
+
+        val odResults = measurementEngine.getMeasurementsForEye(EyeLaterality.OD)
+        val osResults = measurementEngine.getMeasurementsForEye(EyeLaterality.OS)
+
+        assertEquals(1, odResults.size)
+        assertEquals(1, osResults.size)
+        assertEquals(0.1, odResults[0].value, 0.001)
+        assertEquals(1.0, osResults[0].value, 0.001)
+    }
+
+    @Test
+    fun dualDiseaseCoexistencePropertyTest() {
+        val decisionEngine = DecisionEngine()
+        val availableTests = setOf(TestDomain.VISUAL_FIELD, TestDomain.ANTERIOR)
+
+        val measurements = listOf(
+            Measurement(
+                measurementId = "M-01",
+                provenanceIds = listOf("PROV-1"),
+                eye = EyeLaterality.OD,
+                method = "PERIMETRY_54PT",
+                value = 12.0, // abnormal field
+                units = "points",
+                validity = true
+            ),
+            Measurement(
+                measurementId = "M-02",
+                provenanceIds = listOf("PROV-2"),
+                eye = EyeLaterality.OD,
+                method = "MEDIA_OPACITY",
+                value = 0.75, // media opacity present
+                units = "index",
+                validity = true
+            )
+        )
+
+        val inferences = decisionEngine.evaluateEyeFindings(
+            eye = EyeLaterality.OD,
+            measurements = measurements,
+            availableTests = availableTests
+        )
+
+        // Verifies coexisting diagnoses for the SAME eye
+        assertEquals(2, inferences.size)
+        val glaucoma = inferences.first { it.diseaseCode == "GLAUCOMA_SUSPICION" }
+        val cataract = inferences.first { it.diseaseCode == "CATARACT_SUSPICION" }
+
+        assertNotNull(glaucoma.probabilityOrScore)
+        assertNotNull(cataract.probabilityOrScore)
+
+        // Non-exclusive invariant: Probabilities MUST NOT be constrained to sum to 1.0 (no softmax)
+        val scoreSum = glaucoma.probabilityOrScore!! + cataract.probabilityOrScore!!
+        assertTrue("Dual disease scores must be independent (sum: $scoreSum)", scoreSum > 1.0)
+    }
+
+    @Test
+    fun missingEvidencePropertyTest() {
+        val decisionEngine = DecisionEngine()
+        // Simulate missing visual field test
+        val availableTests = setOf(TestDomain.ANTERIOR)
+
+        val inferences = decisionEngine.evaluateEyeFindings(
+            eye = EyeLaterality.OS,
+            measurements = emptyList(),
+            availableTests = availableTests
+        )
+
+        val glaucoma = inferences.first { it.diseaseCode == "GLAUCOMA_SUSPICION" }
+        // Invariant: Missing test must NOT be treated as negative evidence
+        assertTrue("Missing test must be flagged in unknownEvidence", glaucoma.unknownEvidence.isNotEmpty())
+        assertTrue("Missing test must NOT be claimed negative evidence", glaucoma.evidenceAgainst.isEmpty())
+        assertNull("Unassessed test cannot produce numeric diagnostic score", glaucoma.probabilityOrScore)
+        assertEquals("PERIMETRY_54PT", glaucoma.recommendedTest)
+    }
+
+    @Test
+    fun noPretendDiagnosisInvariantTest() {
+        try {
+            ConditionInference(
+                eye = EyeLaterality.OD,
+                diseaseCode = "DIABETIC_RETINOPATHY",
+                probabilityOrScore = 0.85,
+                calibrationId = "" // Empty calibration must fail
+            )
+            fail("Expected IllegalArgumentException when score provided without calibration ID")
+        } catch (expected: IllegalArgumentException) {
+            assertTrue(expected.message!!.contains("calibration"))
+        }
     }
 }
 ```
 END FILE `app/src/test/java/org/eyeatlas/LogicTests.kt`
 
-### FILE `app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt` | bytes=376 | SHA256=`6c79bb2eb7b819bf9e0ea3e0d0eb74422afbeef630e907840dc6cb4705f4b727`
+### FILE `app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt` | bytes=1063 | SHA256=`5d28bf7479e08d0c0c794495ad35598ddc1c3d9fb181cbea70830d5b7260dbaf`
 ```kt
 package org.eyeatlas
 
-import org.eyeatlas.core.DecisionEngine
-import org.eyeatlas.core.EyeLaterality
-import org.junit.Assert.assertNotNull
+import org.eyeatlas.core.*
+import org.junit.Assert.*
 import org.junit.Test
 
 class MultiDiseaseTests {
@@ -814,23 +1489,106 @@ class MultiDiseaseTests {
         val results = engine.evaluate(EyeLaterality.OD)
         assertNotNull(results)
     }
+
+    @Test
+    fun independentPerEyeMultiDiseaseEvaluation() {
+        val engine = DecisionEngine()
+        val available = setOf(TestDomain.VISUAL_FIELD, TestDomain.ANTERIOR)
+        val odMeasurements = listOf(
+            Measurement("M-1", listOf("P-1"), EyeLaterality.OD, "PERIMETRY_54PT", 15.0, "pts", null, null, true),
+            Measurement("M-2", listOf("P-2"), EyeLaterality.OD, "MEDIA_OPACITY", 0.8, "ratio", null, null, true)
+        )
+        val inferences = engine.evaluateEyeFindings(EyeLaterality.OD, odMeasurements, available)
+        assertEquals(2, inferences.size)
+        assertTrue(inferences.any { it.diseaseCode == "GLAUCOMA_SUSPICION" })
+        assertTrue(inferences.any { it.diseaseCode == "CATARACT_SUSPICION" })
+    }
 }
 ```
 END FILE `app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt`
 
-### FILE `app/src/test/java/org/eyeatlas/ProtocolTests.kt` | bytes=282 | SHA256=`737f58b26cf13c1c78df7549cac9f7e9c0f4df5c91ccea8d576eea5316e7d967`
+### FILE `app/src/test/java/org/eyeatlas/ProtocolTests.kt` | bytes=3298 | SHA256=`fe406c9db9d5687b406f85eae9ace907727411b35045c2e270b75042c2d8bc91`
 ```kt
 package org.eyeatlas
 
-import org.eyeatlas.core.TestDomain
-import org.junit.Assert.assertEquals
+import org.eyeatlas.core.*
+import org.junit.Assert.*
 import org.junit.Test
 
 class ProtocolTests {
+
     @Test
-    fun baselineProtocolVerification() {
-        val domain = TestDomain.ACUITY
-        assertEquals("ACUITY", domain.name)
+    fun stateMachineNormalProgressionTest() {
+        val sm = ClinicalStateMachine()
+        assertEquals(SessionState.INTAKE, sm.getState())
+
+        assertTrue(sm.processEvent(SessionEvent.TriagePassed).isSuccess)
+        assertEquals(SessionState.DEVICE_CALIBRATION, sm.getState())
+
+        assertTrue(sm.processEvent(SessionEvent.CalibrationVerified).isSuccess)
+        assertEquals(SessionState.FUNCTIONAL_TESTS, sm.getState())
+
+        assertTrue(sm.processEvent(SessionEvent.FunctionalCompleted).isSuccess)
+        assertEquals(SessionState.IMAGING, sm.getState())
+
+        assertTrue(sm.processEvent(SessionEvent.ImagingCompleted).isSuccess)
+        assertEquals(SessionState.REVIEW_AND_REFERRAL, sm.getState())
+
+        assertTrue(sm.processEvent(SessionEvent.FinalizeReview).isSuccess)
+        assertEquals(SessionState.REVIEW_AND_REFERRAL, sm.getState())
+    }
+
+    @Test
+    fun urgentBypassEmergencyTriageTest() {
+        val decisionEngine = DecisionEngine()
+        val sm = ClinicalStateMachine()
+
+        // Red flag symptoms: sudden vision loss, corneal trauma, painful red eye
+        val redFlagSymptoms = listOf("SUDDEN_VISION_LOSS", "EYE_PAIN")
+        val referral = decisionEngine.screenIntakeForEmergency(redFlagSymptoms)
+
+        assertNotNull(referral)
+        assertEquals(EmergencyUrgency.EMERGENCY_IMMEDIATE, referral!!.urgency)
+        assertTrue(referral.reason.contains("SUDDEN_VISION_LOSS"))
+
+        // Trigger urgent bypass event in state machine
+        val result = sm.processEvent(SessionEvent.TriggerEmergencyBypass(referral.reason))
+        assertTrue(result.isSuccess)
+        assertEquals(SessionState.URGENT_BYPASS, sm.getState())
+
+        // Routine functional test transition must be blocked from urgent bypass
+        val illegalProgression = sm.processEvent(SessionEvent.FunctionalCompleted)
+        assertTrue(illegalProgression.isFailure)
+        assertEquals(SessionState.URGENT_BYPASS, sm.getState())
+    }
+
+    @Test
+    fun priorityStopAndRecoveryTest() {
+        val sm = ClinicalStateMachine()
+        sm.processEvent(SessionEvent.TriagePassed)
+        sm.processEvent(SessionEvent.CalibrationVerified)
+        assertEquals(SessionState.FUNCTIONAL_TESTS, sm.getState())
+
+        // Patient or clinician triggers priority stop
+        val stopResult = sm.processEvent(SessionEvent.PriorityStop("Patient discomfort"))
+        assertTrue(stopResult.isSuccess)
+        assertEquals(SessionState.STOPPED, sm.getState())
+
+        // Recovery transition must safely return to calibration
+        val resumeResult = sm.processEvent(SessionEvent.ResumeSession)
+        assertTrue(resumeResult.isSuccess)
+        assertEquals(SessionState.DEVICE_CALIBRATION, sm.getState())
+    }
+
+    @Test
+    fun invalidStateTransitionRejectionTest() {
+        val sm = ClinicalStateMachine()
+        assertEquals(SessionState.INTAKE, sm.getState())
+
+        // Attempting to jump directly to functional tests without triage/calibration must fail
+        val invalidResult = sm.processEvent(SessionEvent.FunctionalCompleted)
+        assertTrue(invalidResult.isFailure)
+        assertEquals(SessionState.INTAKE, sm.getState())
     }
 }
 ```

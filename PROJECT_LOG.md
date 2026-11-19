@@ -1,5 +1,5 @@
 # EYEATLAS VR - PROJECT LOG
-**Created:** 2026-11-19 | **Current gate:** P00 PASSED | **Current accepted phase:** P00
+**Created:** 2026-11-19 | **Current gate:** P01 PASSED | **Current accepted phase:** P01
 
 ## Immutable mission / current project state
 The P00 repository lock and runnable baseline is established under MASTER_BLUEPRINT v1.1 (CR-001 two-phone response architecture). Build scripts, valid Gradle app, unit test baseline, installable hello-world APK, and verification scripts are all working and verified. No real phone has been selected; no clinical models trained; no clinical dataset has been downloaded or medically validated. The hardware diagrams are research baseline. See MASTER_BLUEPRINT.md as controlling plan.
@@ -78,6 +78,64 @@ The P00 repository lock and runnable baseline is established under MASTER_BLUEPR
 - Real device verification pending selection and bench characterisation of target phones.
 
 **Gate:** PASS
-**Git commit SHA/tag:** PENDING_AUDIT_COMMIT (tag: v0.0.0-p00)
+**Git commit SHA/tag:** 0874457 (tag: v0.0.0-p00)
 **Code dump hash:** `979ae4d70bd0a007deaec9cac106cee8e9cde1281db37a5e0d3c3b47797f89a6`
-**Next approved action:** P00-B independent adversarial audit.
+**Next approved action:** P00-B independent adversarial audit (PASSED).
+
+### [P01] Data contracts and clinical semantics - 2026-11-20 01:45 IST
+**Goal / files edited:**
+- Implemented full clinical data contracts in `app/src/main/java/org/eyeatlas/core/Models.kt` (PatientRecord, ClinicalSession, EyeRecord, StimulusTrial, ResponseEvent, ImageCapture, Measurement, Finding, ConditionInference, Referral, AuditEvent).
+- Implemented state machine engine in `app/src/main/java/org/eyeatlas/core/Protocols.kt` (ClinicalStateMachine with emergency triage bypass, safe calibration gate, priority STOP, and recovery transitions).
+- Implemented emergency triage, missing-evidence isolation, and per-eye non-exclusive multi-morbidity in `app/src/main/java/org/eyeatlas/core/DecisionEngine.kt`.
+- Implemented physiological measurement plausibility checks and laterality routing in `app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt`.
+- Updated `app/src/main/java/org/eyeatlas/store/PatientStore.kt` to conform to revised `PatientRecord` schema.
+- Built interactive intake and triage UI in `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt` (intake form, diabetes retinal mandate flag, symptom selection, emergency red-flag bypass, Priority STOP/recovery).
+- Built patient quick-release stop and session status in `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt`.
+- Added shared clinical UI alert banners and state badges in `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt`.
+- Added property and unit tests in `app/src/test/java/org/eyeatlas/LogicTests.kt` (serialization/hashing, laterality independence, dual disease co-existence without softmax sum-to-1 constraint, missing evidence handling, and no-pretend-diagnosis calibration check).
+- Added state machine and triage tests in `app/src/test/java/org/eyeatlas/ProtocolTests.kt` (normal progression, emergency triage bypass, priority stop & recovery, invalid state rejection).
+- Added multi-disease tests in `app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt`.
+
+**Antigravity exact prompt:** P01-A
+**Commands + exit codes:**
+- `gradle assembleDebug`: Exit code 0 (Updated `app-debug.apk`)
+- `gradle testDebugUnitTest`: Exit code 0 (13 tests executed, 13 passed)
+- `gradle lintDebug`: Exit code 0 (0 errors)
+- `python scripts/snapshot.py --phase P01 --verify`: Exit code 0 (SHA256: `d9c6b800cd90f6b7de783284f00ab71e4cf6a017367457856fa46b7b6863aa6e`)
+- `bash scripts/verify.sh --phase P01`: Exit code 0 (Full verification suite passed)
+
+**Hardware/model/data profile IDs:**
+- Calibration profile: `CAL-P01-BASELINE` / `BASE-P00-SIMULATED`
+- Laterality: Independent OD and OS channels
+
+**Tests:**
+- `org.eyeatlas.LogicTests.modelSerializationAndHashingPropertyTest`: PASS
+- `org.eyeatlas.LogicTests.lateralityIndependenceTest`: PASS
+- `org.eyeatlas.LogicTests.dualDiseaseCoexistencePropertyTest`: PASS
+- `org.eyeatlas.LogicTests.missingEvidencePropertyTest`: PASS
+- `org.eyeatlas.LogicTests.noPretendDiagnosisInvariantTest`: PASS
+- `org.eyeatlas.ProtocolTests.stateMachineNormalProgressionTest`: PASS
+- `org.eyeatlas.ProtocolTests.urgentBypassEmergencyTriageTest`: PASS
+- `org.eyeatlas.ProtocolTests.priorityStopAndRecoveryTest`: PASS
+- `org.eyeatlas.ProtocolTests.invalidStateTransitionRejectionTest`: PASS
+- `org.eyeatlas.MultiDiseaseTests.baselineMultiDiseaseVerification`: PASS
+- `org.eyeatlas.MultiDiseaseTests.independentPerEyeMultiDiseaseEvaluation`: PASS
+- `org.eyeatlas.CalibrationTests.baselineCalibrationVerification`: PASS
+- `org.eyeatlas.FaultTests.baselineFaultVerification`: PASS
+
+**Defects:**
+- Symptom: Compile error in `PatientStore.kt` on `PatientRecord` instantiation due to outdated constructor call from P00 placeholder.
+- Root cause: `PatientRecord` schema expanded with clinical fields (`ageBand`, `hasDiabetes`, `symptoms`, `currentCorrection`).
+- Exact fix: Updated `PatientStore.kt` to supply full valid clinical attributes.
+- Regression evidence: `gradle testDebugUnitTest` and `assembleDebug` passed with exit code 0.
+
+**Clinical/safety/licence caveats:**
+- Per-eye multi-morbidity enforced: dual diseases (e.g. Glaucoma + Cataract) evaluated independently without softmax constraint.
+- Emergency red flags (sudden vision loss, corneal trauma, painful red eye, chemical burn) automatically bypass routine tests.
+- Missing evidence explicitly marked `unknownEvidence`, never scored as negative evidence.
+- Numeric diagnostic scores require validated calibration ID.
+
+**Gate:** PASS
+**Git commit SHA/tag:** e110dbc (tag: v0.1.0-p01)
+**Code dump hash:** `d9c6b800cd90f6b7de783284f00ab71e4cf6a017367457856fa46b7b6863aa6e`
+**Next approved action:** P01-B independent adversarial audit.
