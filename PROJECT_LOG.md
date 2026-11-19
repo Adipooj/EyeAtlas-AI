@@ -28,6 +28,7 @@ The P00 repository lock and runnable baseline is established under MASTER_BLUEPR
 | 2026-11-19 | planning | Dataset licences inconsistent | Publisher text versus repository file licences differ | Gate dataset imports and quarantine conflicts | source references in blueprint | OPEN pending audit |
 | 2026-11-19 | P00 | Dedicated BLE controller added hardware complexity | CR-001 replaces BLE controller with paired phone touch-response pad | Updated MASTER_BLUEPRINT to v1.1, renamed ControllerAndGaze to ResponseAndGaze | S1 tree updated, build passes | RESOLVED |
 | 2026-11-19 | P00 | Snapshot sort drift on Windows | Path comparison folds case on Windows, write_text emits CRLF | Tuple parts sort and newline='\n' in snapshot.py | snapshot.py --verify exit 0 | RESOLVED |
+| 2026-11-19 | P00 | lintDebug failed on CoarseFineLocation | ACCESS_FINE_LOCATION without ACCESS_COARSE_LOCATION | Added ACCESS_COARSE_LOCATION to AndroidManifest.xml | clean lintDebug exit 0 | RESOLVED |
 
 ## Phase Entries
 
@@ -77,6 +78,6 @@ The P00 repository lock and runnable baseline is established under MASTER_BLUEPR
 - Real device verification pending selection and bench characterisation of target phones.
 
 **Gate:** PASS
-**Git commit SHA/tag:** bfd0a36 (tag: v0.0.0-p00)
-**Code dump hash:** `9322d9d0aaa8d63dfd7c45e0b60a4d974849cf531722225f90833dac8958a56f`
+**Git commit SHA/tag:** PENDING_AUDIT_COMMIT (tag: v0.0.0-p00)
+**Code dump hash:** `979ae4d70bd0a007deaec9cac106cee8e9cde1281db37a5e0d3c3b47797f89a6`
 **Next approved action:** P00-B independent adversarial audit.

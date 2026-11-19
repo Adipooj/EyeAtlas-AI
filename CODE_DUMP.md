@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** P00 | **Essential files:** 60 | **Manifest SHA256:** `d93fafb6bca4e66fca2a1ebb5bcc5f5470ce7b5919cf365a1731b3e1a442a1d3`
+**Phase:** P00 | **Essential files:** 60 | **Manifest SHA256:** `eaf20b4b1a8ad272d6cc369b1d4f990194eff0d8e722ebff7995324ed1681c88`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -10,7 +10,7 @@ LICENSE	71	fb4ce93af302ec49bf195fad681cd411d8ddd20478d5b9ec5e484fa1ef5087f0
 README.md	184	7568991cabc3db176c5025550428bb8aed0e1ab35d2c0bfd73120e21d316c8b2
 app/build.gradle.kts	1800	b4c67e70f9b019e1b7953b50a0ff6bbff4eabdb15dd8f79a913f52795a367d65
 app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt	298	c212bc6d917caaa3f1210b05289c1882e1c6fd01de74c6f59eface9b5b87750c
-app/src/main/AndroidManifest.xml	1653	9934d045a0cc8a7ce85f112faf81596a0b4dbdcf17dc8c0327862fd3d83b5369
+app/src/main/AndroidManifest.xml	1734	d4f29f6be9c8c7d020ab65203de97597bc095cc8e7895d105662ca4d1b87904e
 app/src/main/java/org/eyeatlas/App.kt	145	fc796baa9afb716758e5dee3e97017a3aaf87990f4783b254834a16751fd440b
 app/src/main/java/org/eyeatlas/MainActivity.kt	1348	9fd823a848084f7b63e3d12253d0f60a49557d892afc859e7a90d27de8f0309b
 app/src/main/java/org/eyeatlas/ai/Inference.kt	116	fd839d39ee2d3f5801c320d779e433e649bb0207755446e364222a50c93cd3f2
@@ -194,7 +194,7 @@ class DeviceE2ETests {
 ```
 END FILE `app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt`
 
-### FILE `app/src/main/AndroidManifest.xml` | bytes=1653 | SHA256=`9934d045a0cc8a7ce85f112faf81596a0b4dbdcf17dc8c0327862fd3d83b5369`
+### FILE `app/src/main/AndroidManifest.xml` | bytes=1734 | SHA256=`d4f29f6be9c8c7d020ab65203de97597bc095cc8e7895d105662ca4d1b87904e`
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -207,6 +207,7 @@ END FILE `app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt`
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
