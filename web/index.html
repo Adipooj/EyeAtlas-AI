@@ -365,7 +365,7 @@
         <button id="btn-mode-pad" class="btn-toggle" onclick="setPortalMode('PHONE2_RESPONSE_PAD')">Phone 2 Response Pad</button>
       </div>
       <button id="btn-pair-modal-open" class="btn-secondary" style="border-color:#38BDF8; color:#0369A1; font-weight:700;" onclick="openRemotePairingModal()">Pair Online APK (CR-002)</button>
-      <div id="backend-status" class="status-badge">FastAPI Connecting...</div>
+      <div id="backend-status" class="status-badge" style="cursor:pointer;" title="Click to configure Backend URL &amp; Pairing" onclick="openRemotePairingModal()">FastAPI Connecting...</div>
       <button class="btn-vr" onclick="toggleVrView()">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z"/><circle cx="12" cy="10" r="2"/></svg>
         Enter WebXR VR
@@ -2101,6 +2101,10 @@
 
     function openRemotePairingModal() {
       const modal = document.getElementById('remote-pairing-modal');
+      const urlInput = document.getElementById('modal-backend-url');
+      if (urlInput) {
+        urlInput.value = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || '';
+      }
       if (modal) modal.style.display = 'flex';
     }
 
@@ -2120,6 +2124,16 @@
       const sessId = document.getElementById('modal-session-id').value.trim();
       const pin = document.getElementById('modal-pairing-pin').value.trim();
       const role = document.getElementById('modal-role-select').value;
+      const customUrl = document.getElementById('modal-backend-url')?.value.trim();
+
+      if (customUrl) {
+        const cleanUrl = customUrl.replace(/\/+$/, '');
+        localStorage.setItem('eyeatlas_backend_url', cleanUrl);
+        if (cleanUrl !== backendBaseUrl) {
+          backendBaseUrl = cleanUrl;
+          checkBackend();
+        }
+      }
 
       remoteSessionState.sessionId = sessId;
       remoteSessionState.pairingPin = pin;
@@ -2674,12 +2688,17 @@
     }
 
     async function checkBackend() {
+      const storedUrl = localStorage.getItem('eyeatlas_backend_url');
       const currentHost = window.location.hostname || 'localhost';
-      const hosts = [
-        `http://${currentHost}:8008`,
-        'http://localhost:8008',
-        'http://127.0.0.1:8008'
-      ];
+      const currentProtocol = window.location.protocol || 'http:';
+      const hosts = [];
+      if (storedUrl) hosts.push(storedUrl);
+      if (window.location.origin && window.location.origin !== 'null') {
+        hosts.push(window.location.origin);
+      }
+      hosts.push(`http://${currentHost}:8008`);
+      hosts.push('http://localhost:8008');
+      hosts.push('http://127.0.0.1:8008');
       const uniqueHosts = [...new Set(hosts)];
 
       for (const host of uniqueHosts) {
@@ -4426,6 +4445,11 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="screening-notice-banner" style="margin-bottom:14px;">
         <div>CDSCO Class B SaMD • Authoritative Android Host + Remote Physician Station</div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Backend Broker URL (REST + WSS):</label>
+        <input type="text" id="modal-backend-url" placeholder="http://localhost:8008 or https://your-backend.onrender.com" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600; font-family:monospace; font-size:12px;">
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Auto-scanned across localhost:8008 and local network; override here if cloud-hosted.</div>
       </div>
       <div style="margin-bottom:14px;">
         <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Session ID:</label>

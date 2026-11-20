@@ -12,6 +12,7 @@ if root_dir not in sys.path:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from backend.app.core.config import settings
 from backend.app.core.database import engine, Base, SessionLocal
@@ -132,6 +133,11 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+# Mount web portal for zero-configuration unified deployment
+web_dir = Path(__file__).resolve().parents[2] / "web"
+if web_dir.exists():
+    app.mount("/portal", StaticFiles(directory=str(web_dir), html=True), name="portal")
 
 @app.get("/")
 def root():
