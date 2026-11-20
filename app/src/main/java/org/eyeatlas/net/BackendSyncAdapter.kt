@@ -168,16 +168,16 @@ class BackendSyncAdapter(
         }
     }
 
-    fun queueMeasurement(measurement: Measurement) {
+    fun queueMeasurement(measurement: Measurement, sessionId: String = "SESSION-LIVE-01") {
         val payload = """{
             "measurementId": "${measurement.measurementId}",
-            "sessionId": "${measurement.sessionId}",
+            "sessionId": "$sessionId",
             "eye": "${measurement.eye.name}",
             "method": "${measurement.method}",
             "value": ${measurement.value},
             "units": "${measurement.units}",
-            "ciLower": ${measurement.ciLower},
-            "ciUpper": ${measurement.ciUpper},
+            "ciLower": ${measurement.confidenceLower ?: 0.0},
+            "ciUpper": ${measurement.confidenceUpper ?: 0.0},
             "validity": ${measurement.validity}
         }""".trimIndent()
         queue.add(SyncQueueItem(measurement.measurementId, "MEASUREMENT", payload))
@@ -248,7 +248,8 @@ class BackendSyncAdapter(
             lastSyncTimestampMs = System.currentTimeMillis()
             lastError = null
 
-            val isConflict = response.body.contains("conflictCount") && !response.body.contains("\"conflictCount\":0")
+            val hasZeroConflicts = Regex("\"conflictCount\"\\s*:\\s*0").containsMatchIn(response.body)
+            val isConflict = response.body.contains("conflictCount") && !hasZeroConflicts
             if (isConflict) {
                 status = SyncStatus.CONFLICT_RESOLVED
                 conflictLog.add("Batch $batchId: Conflict detected and resolved (client physical measurements preserved).")

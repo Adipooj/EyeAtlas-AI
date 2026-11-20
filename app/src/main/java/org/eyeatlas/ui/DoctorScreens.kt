@@ -456,8 +456,9 @@ fun DoctorDashboard(
                     color = ClinicalTheme.TextSecondary
                 )
                 Spacer(modifier = Modifier.height(6.dp))
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Verified Open: 4 (RFMiD, IDRiD, Conjunctivitis, NIKBUT)", fontSize = 11.sp, color = ClinicalTheme.SuccessGreen, fontWeight = FontWeight.SemiBold)
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(text = "Gated: 4 (PAPILA, CSDI, SLID, APTOS)", fontSize = 11.sp, color = ClinicalTheme.AlertRed, fontWeight = FontWeight.SemiBold)
                 }
                 Spacer(modifier = Modifier.height(4.dp))

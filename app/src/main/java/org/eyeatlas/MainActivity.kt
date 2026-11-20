@@ -1,6 +1,8 @@
 package org.eyeatlas
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +19,9 @@ import org.eyeatlas.ui.PatientScreen
 import org.eyeatlas.ui.ResponsePadScreen
 
 class MainActivity : ComponentActivity() {
+
+    private var onVolumeClickListener: (() -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,12 +29,32 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     var currentRole by remember { mutableStateOf(AppRole.PATIENT) }
                     when (currentRole) {
-                        AppRole.PATIENT -> PatientScreen(onRoleChange = { currentRole = it })
+                        AppRole.PATIENT -> PatientScreen(
+                            onRoleChange = { currentRole = it },
+                            onToggleVrOrientation = { isVr ->
+                                requestedOrientation = if (isVr) {
+                                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                                } else {
+                                    ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                                }
+                            },
+                            registerVolumeKeyListener = { listener ->
+                                onVolumeClickListener = listener
+                            }
+                        )
                         AppRole.CLINICIAN -> DoctorDashboard(onRoleChange = { currentRole = it })
                         AppRole.RESPONSE_PAD -> ResponsePadScreen(onRoleChange = { currentRole = it })
                     }
                 }
             }
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            onVolumeClickListener?.invoke()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

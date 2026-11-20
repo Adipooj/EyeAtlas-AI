@@ -362,7 +362,7 @@ fun ResponsePadScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = "Paired Host: PHONE-PATIENT-VR (Wi-Fi Direct P2P)",
                         color = ClinicalTheme.TextPrimary,
@@ -474,6 +474,15 @@ fun ResponsePadScreen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
+                if (!isStopped) {
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = "TAPS: $tapCount",
+                        color = ClinicalTheme.SeaGreenDark,
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = if (isStopped)

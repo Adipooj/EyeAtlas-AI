@@ -557,13 +557,13 @@ class FaultTests {
         val trial = baseTrial.copy(trialId = "TR-SYNC-01")
         val measurement = Measurement(
             measurementId = "M-SYNC-01",
-            sessionId = "SESSION-RESEARCH-001",
+            provenanceIds = listOf("TR-SYNC-01"),
             eye = EyeLaterality.OD,
             method = "LOGMAR",
             value = 0.05,
             units = "logMAR",
-            ciLower = 0.0,
-            ciUpper = 0.10,
+            confidenceLower = 0.0,
+            confidenceUpper = 0.10,
             validity = true
         )
 
