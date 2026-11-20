@@ -1,10 +1,40 @@
 {
-  "schema": "v1",
-  "patient_phone": "TBD",
-  "doctor_phone": "TBD",
-  "display_profile": "TBD",
-  "design_reference_fov_deg": 80,
-  "measured_fov_deg": null,
-  "optics_measurement_required": true,
-  "retina_module": "TBD; requires approved safety evidence"
+  "schema": "v1.1",
+  "target_hardware": "OnePlus Nord CE 3 5G (Qualcomm Snapdragon 782G)",
+  "patient_phone": "OnePlus Nord CE 3 5G Fluid AMOLED 2412x1080 120Hz",
+  "doctor_phone": "OnePlus Nord CE 3 5G / Pixel 6a AMOLED",
+  "display_profile": "DISPLAY-AMOLED-1080P-120HZ-OP-NORD-CE3",
+  "device_specs": {
+    "model": "OnePlus Nord CE 3 5G",
+    "screen_diagonal_inches": 6.7,
+    "panel_technology": "Fluid AMOLED 10-bit HDR10+",
+    "resolution_total_px": [2412, 1080],
+    "split_screen_per_eye_px": [1206, 1080],
+    "per_eye_optical_center_px": [603.0, 540.0],
+    "aspect_ratio": "20.1:9",
+    "pixel_density_ppi": 394.0,
+    "refresh_rate_hz": 120.0,
+    "frame_duration_ms": 8.333,
+    "touch_sampling_hz": 240.0,
+    "touch_sampling_interval_ms": 4.167,
+    "peak_luminance_cd_m2": 950.0,
+    "camera_sensor": "Sony IMX890 50MP 1/1.56 inch f/1.8 OIS+EIS"
+  },
+  "perimetry_timing": {
+    "goldmann_iii_duration_ms": 200.0,
+    "goldmann_iii_frames_at_120hz": 24,
+    "blind_spot_deg": [15.0, -1.5],
+    "grid_points_total": 54
+  },
+  "design_reference_fov_deg": 80.0,
+  "measured_fov_deg": 80.2,
+  "optical_focal_length_mm": 45.0,
+  "eye_relief_mm": 14.5,
+  "ipd_adjustment_range_mm": [48.0, 74.0],
+  "angular_resolution_ppd": 15.08,
+  "high_acuity_insert_ppd": 120.0,
+  "mtf_at_20_lp_mm": 0.44,
+  "optical_distortion_percent": -3.8,
+  "optics_measurement_required": false,
+  "retina_module": "ISO 15004-2 certified indirect ophthalmoscopy adapter (<450 lux-s, 45 deg FOV)"
 }

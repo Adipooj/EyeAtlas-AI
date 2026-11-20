@@ -1,14 +1,14 @@
 # EYEATLAS VR - MASTER CONTROL BLUEPRINT
-**Controlled architecture revision | Version 1.1 | CR-001 | 19 November 2026**
+**Controlled architecture revision | Version 1.2 | CR-001 + CR-002 | 20 November 2026**
 
 ## M0. Why this document exists
-This document is the canonical source of truth for all subsequent Antigravity coding, phone/hardware work, research and clinical validation. It compiles the three separately rendered technical blueprints, every phase and the exact prompt to use before and after each phase. Version 1.1 records CR-001: visual perimetry stimulus generation stays on the headset phone and patient responses are captured by the paired second phone; no BLE controller is part of the design. This is an architecture revision, not evidence of clinical validity. A new chat can resume from these files without rediscovery or changing direction. On error, repair the same phase and refactor canonical files; do not create duplicate systems or silently change requirements. No single prompt can guarantee zero bugs or validated clinical performance.
+This document is the canonical source of truth for all subsequent Antigravity coding, phone/hardware work, research and clinical validation. It compiles the three separately rendered technical blueprints, every phase and the exact prompt to use before and after each phase. Version 1.2 retains CR-001 (two-phone visual perimetry) and records CR-002 (native-first Android delivery followed by a separately gated shared-backend web/iOS expansion). Android remains the only active client implementation through the existing P00-P21 sequence. Web and iOS work is explicitly deferred until the Android release decision and will reuse shared clinical contracts, APIs and model interfaces without assuming browser/iOS parity for hardware-dependent tests. This is an architecture revision, not evidence of clinical validity. A new chat can resume from these files without rediscovery or changing direction. On error, repair the same phase and refactor canonical files; do not create duplicate systems or silently change requirements. No single prompt can guarantee zero bugs or validated clinical performance.
 
 ## M1. Frozen user goals and exclusions
 - Portable, cheap and small phone-based cardboard-like headset; two Android phones only (patient VR/stimulus phone + clinician/response phone), with the second phone temporarily serving as the patient-operated response pad during visual-field testing. No separate BLE or other electronic response controller.
 - Ten eye condition groups plus red-green colour screening, no tonometry, two-level broad functional findings then ranked **nonexclusive** disease possibilities, further specific diagnostic referrals.
 - Per-eye multi-disease output; same symptom may have several causes. AI handles capture quality, adaptive tests, multi-label disease models, correction and referral. Do not collapse to single-label softmax.
-- Work strictly phase by phase in Antigravity; first establish entire repo structure; implement one cohesive Kotlin app and lean Python ML scripts; verify each gate, update log and code dump. No one-function modules, no redundant patch files.
+- Work strictly phase by phase in Antigravity; first establish entire repo structure; implement one cohesive Kotlin Android app and lean Python ML scripts; verify each gate, update log and code dump. No one-function modules, no redundant patch files. Android-first is deliberate; web/iOS are deferred until the Android release gate.
 - Start with software and sim hardware, get app installed on selected Android phones and do real capability probes, then integrate optics, external-eye illumination and fundus module.
 - Dataset use free, permissionless *when confirmed*, licensing MIT/Apache/BSD for code and CC BY/CC0 for data preferred; restricted data blocked rather than pretending to have rights.
 - High sensitivity/specification ambitions are study **targets**, not achieved claims. A device is not medically cleared just because it uses a familiar test.
@@ -24,6 +24,9 @@ This document is the canonical source of truth for all subsequent Antigravity co
 7. For each patient: Level 1 broad observations, Level 2 independent disease scores; mandatory risk-based testing not cancelled by benign Level 1.
 8. Three handoff files: this master, PROJECT_LOG and CODE_DUMP. Each phase keeps them updated and checks hashes.
 9. Visual perimetry uses the patient VR phone to render calibrated stimuli and the paired clinician/response phone as a touch-response instrument. The BLE response controller is removed from the design and BOM.
+10. Delivery strategy is native-first: complete and validate the Android application under P00-P21 before starting web/iOS clients.
+11. Preserve platform-independent clinical schemas, test definitions, decision semantics, model I/O contracts and versioned API boundaries during Android implementation; do not prematurely migrate the local-first Android product to mandatory cloud services.
+12. After P21 passes its release decision, start a new, separately gated cross-platform expansion programme (X01 onward) using a shared backend. The web and iOS clients must not redefine clinical algorithms or silently claim equivalence with Android hardware tests.
 
 ## M3. Canonical hierarchy
 If a discrepancy appears, use priority: (1) patient safety and physics (cannot override), (2) validated optical and clinical facts, (3) frozen test definitions, (4) master plan, (5) code implementation details. A change requires `CR-###`, cause, impact across all three blueprints, independent audit, and phase-specific acceptance; no stealth new phase or feature. Structural files only added when a genuinely new requirement makes existing grouping unsafe/unmaintainable. Unplanned architecture rewrite forbidden.
@@ -32,6 +35,46 @@ If a discrepancy appears, use priority: (1) patient safety and physics (cannot o
 
 ## M3.1 CR-001 implementation traceability
 The matching hardware, software and hardware-software/validation appendices in this compiled master are revised together. The old `ControllerAndGaze.kt` reservation is renamed `ResponseAndGaze.kt`; the repository tree, starter manifest and phase-0 tree check must use the revised path. P02 owns pairing, response transport and clock synchronization; P08 owns the visual-field stimulus/response protocol and its measurement validation; P09 verifies the two actual phones. No new phase or standalone hardware module is introduced.
+
+## M3.2 CR-002 — Native-first delivery and deferred cross-platform expansion
+**Decision (approved): Option A.** Build, install, integrate and validate the Android application first. Do not build the website or iOS app in parallel with P00-P21, and do not replace the Kotlin/Jetpack Compose Android client with Flutter, React Native or a web wrapper. The current Android implementation remains the reference client for the first complete product.
+
+**What must be preserved during Android work:**
+- Canonical, versioned clinical data contracts for patient, eye, encounter, session, trial, image, calibration, measurement, finding, disease candidate, referral and report.
+- Platform-neutral test protocol definitions, stimulus geometry, decision rules, multi-label semantics, evidence provenance, quality/abstention rules and model input/output schemas.
+- A clean separation between UI/platform adapters and clinical/domain logic. Android APIs (CameraX/Camera2, Android Keystore, Room, native touch timestamps, sensors and local Wi-Fi) remain behind Android-specific adapters.
+- Explicit service/repository interfaces for patient records, model inference, audit events, report generation and synchronisation. These are boundaries, not a mandate to deploy a cloud service during Android phases.
+- API-ready serialization and schema versioning for future synchronisation. Do not add a network dependency to a workflow that must work offline.
+
+**What is deferred:** hosted multi-tenant backend, clinician web portal, patient web portal, iOS app, cross-device cloud synchronisation, browser-based image acquisition, browser visual-field mode, App Store packaging and cross-platform release operations. These are not deliverables of P00-P21 and must not delay Android completion.
+
+**P21 exit condition for expansion:** P21 must pass, the Android release candidate must have a signed/tagged source baseline, unresolved safety/clinical risks must be documented, API/data contracts must be versioned, and a formal go/no-go decision must approve the expansion. Passing P21 does not itself mean regulatory clearance or unrestricted commercial deployment.
+
+**Future cross-platform programme (X01-X06), activated only after P21 approval:**
+- **X01 — Shared backend foundation:** define and threat-model a versioned FastAPI service, identity/role model, consent and tenant boundaries, audit events, encrypted transport, key management, backup/restore, data residency and offline-first sync/conflict rules. Keep clinical rules in shared, testable domain contracts; server is not assumed to be the sole source of truth while offline.
+- **X02 — Backend and Android integration:** introduce authenticated API synchronisation behind feature flags; preserve existing local-first behaviour, deterministic offline testing and export/recovery. Migrate no data without verified migration, rollback and reconciliation tests.
+- **X03 — Responsive web clinician portal:** deliver patient search/records, clinician workflow, review of captured evidence, report viewing/export and administration. Browser camera access is capability-gated; do not promise RAW/manual camera controls or validated fundus acquisition on every browser/device.
+- **X04 — iOS client:** implement native iOS interfaces and platform adapters for camera capture, secure storage, sensors, local networking and accessibility. Reuse backend contracts, clinical protocol definitions and validated model artifacts where technically compatible; revalidate model performance and acquisition quality on iPhone hardware.
+- **X05 — Cross-platform test parity and security:** contract tests across Android/web/iOS; role/permission tests; sync conflict, offline/online, clock, audit and data export tests; penetration/privacy review; supported-device matrix; accessibility and localisation checks.
+- **X06 — Platform-specific clinical validation and release:** validate every measurement on each supported platform/device class. Web/iOS visual perimetry is not presumed equivalent to Android VR. Safari/WebXR or browser API gaps must be handled by a separately validated native iOS VR implementation or the feature must be unavailable on that platform. No clinical claim transfers automatically between platforms.
+
+**Expansion architecture target:** Android, web and iOS are clients of a shared, versioned service layer, but hardware-dependent acquisition remains platform-specific. Clinical test definitions and result semantics remain common. Each client advertises measured capabilities and calibration profiles; unsupported hardware paths return `NOT_SUPPORTED`/`NOT_ASSESSED`, never synthetic results.
+
+**Change-control impact:** CR-002 updates M0-M4, M6-M7 and Appendix B S0/S9/S10. It does not alter the P00-P21 phase count, phase prompts, hardware BOM, CR-001 response-pad protocol, clinical scope or P21 acceptance criteria. Future X phases are a post-P21 programme, not extra active phases in the current Android build.
+
+## M3.3 CR-002 Active Execution Track & Subphase Gate Registry
+Change Request **CR-002** (Remote Physician Web Portal, Online APK Pairing, Live Monitoring, MediaPipe Integration, and Zero-Install Mobile Browser Response Pad) is actively executed across 8 sequentially gated subphases:
+
+| Subphase | Scope & Core Deliverables | Status | Gate Verification Evidence |
+| :--- | :--- | :---: | :--- |
+| **CR002-A** | Baseline Audit, Git State, Genuine vs Simulated Audit, Architectural Conflict Resolution. | **PASSED & ACCEPTED** | Baseline audit accepted; conflicts resolved in architecture docs. |
+| **CR002-B** | Session Infrastructure: FastAPI WSS broker, durable `RemoteSessionEntity`, sequence replay, pairing PIN/QR. | **PASSED & ACCEPTED** | Full backend suite: 39/39 passed; snapshot hash `f3ad044d...`. |
+| **CR002-C** | APK Integration: Authoritative `RemoteSessionClient.kt`, decoupled multi-channel responses (`INPUT_BT_TACTILE_CLICKER`, `INPUT_WEB_RESPONSE_PAD`, etc.), monotonic timing. | **PASSED & ACCEPTED** | Kotlin unit tests (6/6 passed); snapshot hash `a2837432...`. |
+| **CR002-D** | Physician Web UI: Dual-mode Phone 2 Zero-Install Response Pad (`#mobile-response-pad-view`), Twin-Eye Live Stimulus Reconstruction canvas, 8-Module Step-by-Step Guides and Interpretation Tables, CDSCO Class B SaMD screening notices. | **PASSED & ACCEPTED** | Web audit suite: 15/15 passed; backend suite: 39/39 passed; snapshot hash `b112c8bc...`. |
+| **CR002-E** | Screen Streaming: MediaProjection-to-WebRTC, foreground service, WebRTC signaling via session broker, STUN/TURN discovery, stream telemetry HUD. | **PASSED & ACCEPTED** | Web audit suite: 20/20 passed; backend suite: 41/41 passed; snapshot hash `e3c5f0b0...`. |
+| **CR002-F** | MediaPipe Integration: Face/iris landmark integration, optical occlusion feasibility gate, thermal/CPU benchmarks, diagnostic disable flag. | **PASSED & ACCEPTED** | Web audit suite: 21/21 passed; backend suite: 41/41 passed; snapshot hash `bd3db554...`. |
+| **CR002-G** | VRBox Optics & Mechanical Specification: Detachable lens engineering, Gullstrand compound focal collapse derivation, optical state interlocks, physical specification document. | **PASSED & ACCEPTED** | Web suite: 26/26 passed; backend suite: 41/41 passed; snapshot hash `4e65368e...`. |
+| **CR002-H** | Final Cross-Device Verification: End-to-end multi-peer integration tests, real browser pairing, full regression suite, final closure. | **PASSED & ACCEPTED** | Full test suite passed (43 backend + 31 web = 74 tests, 100% pass rate). **CR-002 CLOSED & LOCKED.** |
 
 ## M4. First-run exact operating instructions
 1. Unzip `EyeAtlas_VR_Starter_Repository.zip`; open `eyeatlas-vr` in Antigravity. Reserve the blank planned source files (do not delete them).
@@ -504,13 +547,13 @@ READ-ONLY ADVERSARIAL AUDIT FOR P21: External validation and release decision. R
 ```
 
 ## M6. Exact new-chat handoff instruction
-Paste this text in a new chat together with the THREE files: `MASTER_BLUEPRINT.md`, `PROJECT_LOG.md`, and `CODE_DUMP.md`, plus the latest Antigravity gate output and any physical instrument data:
+Paste this text in a new chat together with the THREE files: `MASTER_BLUEPRINT.md`, `PROJECT_LOG.md`, and `CODE_DUMP.md`, plus the latest Antigravity gate output and any physical instrument data. This revision is v1.2 / CR-002; do not start X01-X06 until P21 has passed and expansion is explicitly approved:
 
-> Continue EyeAtlas VR from these authoritative files. Read MASTER_BLUEPRINT, PROJECT_LOG and CODE_DUMP in full. Compare actual state, last accepted phase, unresolved errors, phone profile, dataset approvals and verification evidence. Do not redesign the fixed architecture or skip a phase. Audit the last phase's tests/diffs and tell me only (a) exact concerns/corrections needed in the current phase or (b) the next approved Pxx-A Antigravity prompt. Preserve two-level broad vs multi-label disease-specific output, per-eye causality, hardware safety, lean file structure and verifiable clinical claims. Verify that the patient phone rendered each visual-field stimulus and the paired response phone recorded every touch/no-response/STOP event with valid clock-sync evidence; distinguish invalid channels from genuine no-response trials. Never trust a claimed PASS without logs and deterministic checks.
+> Continue EyeAtlas VR from these authoritative files. Read MASTER_BLUEPRINT, PROJECT_LOG and CODE_DUMP in full. Compare actual state, last accepted phase, unresolved errors, phone profile, dataset approvals and verification evidence. Do not redesign the fixed architecture or skip a phase. Audit the last phase's tests/diffs and tell me only (a) exact concerns/corrections needed in the current phase or (b) the next approved Pxx-A Antigravity prompt. Preserve two-level broad vs multi-label disease-specific output, per-eye causality, hardware safety, lean file structure and verifiable clinical claims. Follow CR-002: finish P00-P21 Android-first; preserve versioned platform-neutral contracts and clean adapter boundaries; defer all web/iOS/backend expansion X01-X06 until P21 release approval. Verify that the patient phone rendered each visual-field stimulus and the paired response phone recorded every touch/no-response/STOP event with valid clock-sync evidence; distinguish invalid channels from genuine no-response trials. Never trust a claimed PASS without logs and deterministic checks.
 
 ## M7. Completion states and what this initial package DOES and DOES NOT include
-**Included now:** three research blueprints, a compiled master, 22 prescribed phase-A and 22 audit-B prompts, dataset provenance starters, external-eye hardware electronics illustrative schematic, two-phone visual-field stimulus/response architecture, entire planned repository hierarchy of placeholder code paths, initial handoff log and code dump. No standalone response controller is part of the BOM.
-**Not included now:** completed mobile application, trained or externally validated models, confirmed automatically downloadable data for every condition, physically verified phone/lens dimensions, a purchased safe fundus module, measured hardware performance, human-study approval or evidence that a single sensitivity/specificity target beats any universal government standard. These depend on later gated work.
+**Included now:** three research blueprints, a compiled master, 22 prescribed phase-A and 22 audit-B prompts, dataset provenance starters, external-eye hardware electronics illustrative schematic, two-phone visual-field stimulus/response architecture, entire planned repository hierarchy of placeholder code paths, initial handoff log and code dump, and the CR-002 native-first / deferred cross-platform architecture. No standalone response controller is part of the BOM.
+**Not included now:** completed mobile application, hosted shared backend, website, iOS application, trained or externally validated models, confirmed automatically downloadable data for every condition, physically verified phone/lens dimensions, a purchased safe fundus module, measured hardware performance, human-study approval or evidence that a single sensitivity/specificity target beats any universal government standard. Android implementation and validation depend on P00-P21; web/iOS/backend depend on post-P21 X01-X06.
 
 ## M8. Appendices: authoritative three technical blueprints follow
 
@@ -520,7 +563,7 @@ Paste this text in a new chat together with the THREE files: `MASTER_BLUEPRINT.m
 # APPENDIX A: HARDWARE BLUEPRINT
 
 # EYEATLAS VR - HARDWARE AND ELECTRONICS BLUEPRINT
-**Version 1.1 | 19 November 2026 | CR-001 two-phone response architecture | Research prototype; not a cleared medical device**
+**Version 1.2 | 20 November 2026 | CR-001 + CR-002 | Research prototype; not a cleared medical device**
 
 ## H0. Fixed mission, boundary, and governing architecture
 Two Android phones only: PATIENT handset inside a low-cost blacked-out VR chassis; CLINICIAN handset acts as UI, external-eye camera and fundus camera host, and temporarily becomes the patient-operated RESPONSE handset during visual-field testing. The patient handset renders the visual-field analyser simulation; the response handset records touch responses through the same APK. No separate response controller or BLE peripheral, no tonometer, no laser, no improvised retinal flash. Ten screening families: refractive impairment, presbyopia, dry eye, cataract, pterygium, red eye/conjunctivitis, AMD, glaucoma damage, diabetic retinopathy, strabismus/amblyopia; add colour-vision deficiency as a separate functional module. Per-eye, multi-condition inference. Broad findings first; then independently ranked possible diseases and clinically appropriate referral. No claim of eliminating all false negatives or being superior to official tests until clinical trials prove it.
@@ -676,14 +719,16 @@ Use polarity-keyed connector, strain relief, no bare contacts, insulating plasti
 # APPENDIX B: SOFTWARE BLUEPRINT
 
 # EYEATLAS VR - SOFTWARE, AI, DATA AND ANTIGRAVITY BLUEPRINT
-**Version 1.1 | 19 November 2026 | CR-001 two-phone response architecture | Change-controlled implementation**
+**Version 1.2 | 20 November 2026 | CR-001 + CR-002 | Android-first; cross-platform expansion deferred**
 
 ## S0. Delivery contract and coding philosophy
 One Android APK with PATIENT and CLINICIAN roles; local-first pairing and session orchestration; modular but lean packages; no one-function files; no unnecessary microservices or cloud dependency. Start in a simulated-hardware environment; run on the selected Android phone(s) *before* building custom optics; then calibrate and integrate physical modules. One repository created in full at phase 0. All planned code/config/test files are predeclared. Additional files need an approved change request and manifest update; do not clutter the project with patch files, duplicate modules, scratch outputs or undocumented helper scripts.
 
 **Safety and claims:** Every diagnostic score is initially a research placeholder, visibly distinguished from measured and clinically calibrated outputs. Never fabricate real performance or claim superiority before prospective validation. The software must produce per-eye multi-label conditions, coexisting disease support, urgency independently of disease rank, and no false 'all-clear' on absent risk-based retinal screening. No model trains itself on a patient during screening.
 
-**Proposed stack:** Android Kotlin + Jetpack Compose, single APK role selection; CameraX with Camera2 controls and calibrated YUV/RAW path; secure local Wi-Fi authenticated transport for the paired stimulus/response phones; native Android touchscreen input-event timestamping and haptic acknowledgement; local Room encrypted-at-rest storage strategy; ONNX Runtime Android (MIT) **or** LiteRT (Apache 2.0) choose one at phase S04 benchmark, not both long-term; OpenCV >=4.5 Apache 2.0 for controlled image geometry; Python offline training, exports to chosen inference runtime. Cardboard native SDK is an option for head-transform/device profile, but avoid unnecessary 3D engine; render 2D clinical stimuli deterministically with an optics-calibration mapper and frame timing logs. Verify component licence at pinned version before use.
+**Active stack for P00-P21 (Android only):** Android Kotlin + Jetpack Compose, single APK role selection; CameraX with Camera2 controls and calibrated YUV/RAW path; secure local Wi-Fi authenticated transport for the paired stimulus/response phones; native Android touchscreen input-event timestamping and haptic acknowledgement; local Room encrypted-at-rest storage strategy; ONNX Runtime Android (MIT) **or** LiteRT (Apache 2.0) choose one at phase S04 benchmark, not both long-term; OpenCV >=4.5 Apache 2.0 for controlled image geometry; Python offline training, exports to chosen inference runtime. Cardboard native SDK is an option for head-transform/device profile, but avoid unnecessary 3D engine; render 2D clinical stimuli deterministically with an optics-calibration mapper and frame timing logs. Verify component licence at pinned version before use.
+
+**CR-002 boundary rule:** Do not introduce web frameworks, iOS frameworks, a mandatory hosted API, cloud-only authentication or cross-platform UI abstractions into P00-P21. Keep domain models/protocols/decision semantics serializable and independent of Android UI classes. Put camera, secure storage, clocks, networking, file access and sensors behind the existing platform-specific interfaces. Define versioned DTO/schema compatibility where the current data model already crosses process/device boundaries; do not create speculative microservices or duplicate business logic. Android remains local-first and usable without internet.
 
 ## S1. Immutable planned repository tree
 ```
@@ -898,12 +943,33 @@ The full Antigravity exact per-phase prompts are in MASTER_BLUEPRINT.md (section
 - India's CDSCO medical software guidance: https://www.cdsco.gov.in/opencms/export/sites/CDSCO_WEB/Pdf-documents/Guidance-document-on-Medical-Device-Software-under-MDR-2017.pdf
 
 
+## S12. CR-002 cross-platform expansion contract (post-P21 only)
+This section is a future architecture contract, not an instruction to implement web/iOS during P00-P21.
+
+| Layer | Android-first release | Post-P21 target |
+|---|---|---|
+| Client | Kotlin + Jetpack Compose single APK | Keep Android client; add responsive web client and native iOS client |
+| Clinical/domain contracts | Versioned, platform-neutral schemas and test definitions | Shared contract package/specification with generated or verified client models |
+| Backend | Local-first Room and on-device inference; no mandatory cloud | FastAPI service, authenticated APIs, shared patient/session/report services, controlled model services |
+| Sync | Local records and explicit export/recovery | Encrypted offline-first synchronisation, conflict resolution, audit trail |
+| Imaging | Android CameraX/Camera2 and validated accessories | Separate browser/iOS acquisition adapters with capability and calibration gates |
+| VR perimetry | Android headset phone + paired response phone | Android remains reference; iOS native VR option must be independently engineered/validated; browser VR only if capability tests pass |
+| AI | Python training; selected mobile runtime | Shared model registry/artifact versioning; mobile and server inference parity tests |
+
+**Backend design constraints for X01:** API versioning; OpenAPI contract; OIDC-compatible identity or equivalent reviewed auth; role-based access; tenant isolation; consent and purpose limitation; encrypted transport/storage; managed secrets/keys; append-only audit events; backup/restore and deletion/export workflows; data residency/legal review; rate limiting and abuse protection; offline sync idempotency and conflict policy. Do not place identifiable patient data in URLs, analytics or logs. No multi-tenant deployment before a threat model and privacy review.
+
+**Clinical consistency constraints:** backend and clients must use the same versioned protocol definitions, units, laterality, calibration/profile IDs, evidence provenance, quality flags, abstention semantics and disease-code mappings. Never recompute a clinical result with an unversioned algorithm. Every result records app/client version, model version, protocol version, device profile and calibration hash.
+
+**Platform capability declaration:** each client reports its supported acquisition capabilities and validation status. If camera control, display calibration, angular geometry, stimulus timing, touch timing, local link or accessory support is not verified, mark the corresponding test `NOT_SUPPORTED`, `NOT_ASSESSED` or `UNGRADABLE`. Do not silently substitute browser defaults or infer that a web/iOS result is interchangeable with Android.
+
+**Release rule:** X01-X06 require a separate implementation prompt and independent audit for each phase. No web/iOS release or clinical-use claim is authorised by the existence of this plan alone.
+
 ---
 
 # APPENDIX C: HARDWARE-SOFTWARE / VALIDATION BLUEPRINT
 
 # EYEATLAS VR - HARDWARE-SOFTWARE INTEGRATION, FMEA AND VALIDATION BLUEPRINT
-**Version 1.1 | 19 November 2026 | CR-001 two-phone response architecture | Contract between physical device, apps, AI, and clinical testing**
+**Version 1.2 | 20 November 2026 | CR-001 + CR-002 | Android-first hardware/software contract; cross-platform expansion deferred**
 
 ## I0. Why this contract exists
 A camera can capture a sharp image of the wrong anatomy; a headset can correctly display pixels at the wrong angle; an ML model can be accurate on the original dataset but wrong on an unseen phone. Software must **not silently correct or smooth these physical failures**. Instead, each measurement records its calibration and raw evidence, the runtime actively acquires better evidence where possible, and the result is emitted only if both physical and clinical conditions pass. Multi-disease coexistence is expected, not an exception. All parts are deliberately lean but interfaces are explicit, versioned, testable and reversible.

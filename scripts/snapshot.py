@@ -9,8 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {'CODE_DUMP.md', 'MASTER_BLUEPRINT.md', 'PROJECT_LOG.md'}
-EXCLUDE_DIR = {'.git','.gradle','.idea','.venv','build','__pycache__','.pytest_cache','data','datasets','weights','models_artifacts'}
-EXCLUDE_SUFFIX = {'.apk','.aab','.so','.jar','.png','.jpg','.jpeg','.webp','.bin','.onnx','.tflite','.pt','.pth','.ckpt','.zip','.pdf','.mp4','.mkv','.mov'}
+EXCLUDE_DIR = {'.git','.gradle','.idea','.venv','build','__pycache__','.pytest_cache','data','datasets','weights','models_artifacts','htmlcov','node_modules','dist'}
+EXCLUDE_SUFFIX = {'.apk','.aab','.so','.jar','.png','.jpg','.jpeg','.webp','.bin','.onnx','.tflite','.pt','.pth','.ckpt','.zip','.pdf','.mp4','.mkv','.mov','.db','.sqlite','.sqlite3','.pyc'}
 
 def digest(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()

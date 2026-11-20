@@ -1,0 +1,386 @@
+[
+  {
+    "plate_num": 1,
+    "filename": "plate_01.png",
+    "type": "DEMONSTRATION",
+    "normal_view": "12",
+    "rg_view": "12",
+    "protan_view": "12",
+    "deutan_view": "12",
+    "description": "Demonstration Plate: High-contrast introductory plate; visible to both normal trichromats and all colour-deficient individuals.",
+    "choices": [
+      "12",
+      "None",
+      "8",
+      "3"
+    ]
+  },
+  {
+    "plate_num": 2,
+    "filename": "plate_02.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "8",
+    "rg_view": "3",
+    "protan_view": "3",
+    "deutan_view": "3",
+    "description": "Transformation Plate: Normal trichromats perceive 8; red-green deficient perceive 3.",
+    "choices": [
+      "8",
+      "3",
+      "None",
+      "5"
+    ]
+  },
+  {
+    "plate_num": 3,
+    "filename": "plate_03.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "29",
+    "rg_view": "70",
+    "protan_view": "70",
+    "deutan_view": "70",
+    "description": "Transformation Plate: Normal trichromats perceive 29; red-green deficient perceive 70.",
+    "choices": [
+      "29",
+      "70",
+      "None",
+      "20"
+    ]
+  },
+  {
+    "plate_num": 4,
+    "filename": "plate_04.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "5",
+    "rg_view": "2",
+    "protan_view": "2",
+    "deutan_view": "2",
+    "description": "Transformation Plate: Normal trichromats perceive 5; red-green deficient perceive 2.",
+    "choices": [
+      "5",
+      "2",
+      "None",
+      "8"
+    ]
+  },
+  {
+    "plate_num": 5,
+    "filename": "plate_05.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "3",
+    "rg_view": "5",
+    "protan_view": "5",
+    "deutan_view": "5",
+    "description": "Transformation Plate: Normal trichromats perceive 3; red-green deficient perceive 5.",
+    "choices": [
+      "3",
+      "5",
+      "None",
+      "8"
+    ]
+  },
+  {
+    "plate_num": 6,
+    "filename": "plate_06.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "15",
+    "rg_view": "17",
+    "protan_view": "17",
+    "deutan_view": "17",
+    "description": "Transformation Plate: Normal trichromats perceive 15; red-green deficient perceive 17.",
+    "choices": [
+      "15",
+      "17",
+      "None",
+      "13"
+    ]
+  },
+  {
+    "plate_num": 7,
+    "filename": "plate_07.png",
+    "type": "TRANSFORMATION",
+    "normal_view": "74",
+    "rg_view": "21",
+    "protan_view": "21",
+    "deutan_view": "21",
+    "description": "Transformation Plate: Normal trichromats perceive 74; red-green deficient perceive 21.",
+    "choices": [
+      "74",
+      "21",
+      "None",
+      "71"
+    ]
+  },
+  {
+    "plate_num": 8,
+    "filename": "plate_08.png",
+    "type": "VANISHING",
+    "normal_view": "6",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 6; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "6",
+      "None",
+      "5",
+      "8"
+    ]
+  },
+  {
+    "plate_num": 9,
+    "filename": "plate_09.png",
+    "type": "VANISHING",
+    "normal_view": "45",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 45; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "45",
+      "None",
+      "40",
+      "15"
+    ]
+  },
+  {
+    "plate_num": 10,
+    "filename": "plate_10.png",
+    "type": "VANISHING",
+    "normal_view": "5",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 5; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "5",
+      "None",
+      "2",
+      "6"
+    ]
+  },
+  {
+    "plate_num": 11,
+    "filename": "plate_11.png",
+    "type": "VANISHING",
+    "normal_view": "7",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 7; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "7",
+      "None",
+      "1",
+      "4"
+    ]
+  },
+  {
+    "plate_num": 12,
+    "filename": "plate_12.png",
+    "type": "VANISHING",
+    "normal_view": "16",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 16; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "16",
+      "None",
+      "18",
+      "10"
+    ]
+  },
+  {
+    "plate_num": 13,
+    "filename": "plate_13.png",
+    "type": "VANISHING",
+    "normal_view": "73",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Plate: Normal trichromats clearly read 73; red-green deficient individuals cannot read or read indistinctly.",
+    "choices": [
+      "73",
+      "None",
+      "78",
+      "23"
+    ]
+  },
+  {
+    "plate_num": 14,
+    "filename": "plate_14.png",
+    "type": "HIDDEN_DIGIT",
+    "normal_view": "None",
+    "rg_view": "5",
+    "protan_view": "5",
+    "deutan_view": "5",
+    "description": "Hidden Digit Plate: Normal trichromats perceive nothing / no number; red-green deficient perceive 5.",
+    "choices": [
+      "None",
+      "5",
+      "2",
+      "6"
+    ]
+  },
+  {
+    "plate_num": 15,
+    "filename": "plate_15.png",
+    "type": "HIDDEN_DIGIT",
+    "normal_view": "None",
+    "rg_view": "45",
+    "protan_view": "45",
+    "deutan_view": "45",
+    "description": "Hidden Digit Plate: Normal trichromats perceive nothing / no number; red-green deficient perceive 45.",
+    "choices": [
+      "None",
+      "45",
+      "40",
+      "15"
+    ]
+  },
+  {
+    "plate_num": 16,
+    "filename": "plate_16.png",
+    "type": "CLASSIFICATION",
+    "normal_view": "26",
+    "rg_view": "Partial",
+    "protan_view": "6",
+    "deutan_view": "2",
+    "description": "Qualitative Diagnostic Plate: Normal trichromats read 26. Protanopes/protanomalous subjects read only 6. Deuteranopes/deuteranomalous subjects read only 2.",
+    "choices": [
+      "26",
+      "6",
+      "2",
+      "None"
+    ]
+  },
+  {
+    "plate_num": 17,
+    "filename": "plate_17.png",
+    "type": "CLASSIFICATION",
+    "normal_view": "42",
+    "rg_view": "Partial",
+    "protan_view": "2",
+    "deutan_view": "4",
+    "description": "Qualitative Diagnostic Plate: Normal trichromats read 42. Protanopes/protanomalous subjects read only 2. Deuteranopes/deuteranomalous subjects read only 4.",
+    "choices": [
+      "42",
+      "2",
+      "4",
+      "None"
+    ]
+  },
+  {
+    "plate_num": 18,
+    "filename": "plate_18.png",
+    "type": "WINDING_LINE_DIAGNOSTIC",
+    "normal_view": "Both Lines (Purple & Red)",
+    "rg_view": "One Line Only",
+    "protan_view": "Only Purple Line",
+    "deutan_view": "Only Red Line",
+    "description": "Diagnostic Pathway: Normal traces continuous line through purple and red dots. Protan traces only purple; Deutan traces only red.",
+    "choices": [
+      "Both Lines",
+      "Purple Line Only",
+      "Red Line Only",
+      "None"
+    ]
+  },
+  {
+    "plate_num": 19,
+    "filename": "plate_19.png",
+    "type": "WINDING_LINE_HIDDEN",
+    "normal_view": "None",
+    "rg_view": "A Line",
+    "protan_view": "A Line",
+    "deutan_view": "A Line",
+    "description": "Hidden Pathway: Normal trichromats cannot trace a line; red-green deficient trace a winding line across dots.",
+    "choices": [
+      "None",
+      "A Winding Line",
+      "Two Lines",
+      "Circle"
+    ]
+  },
+  {
+    "plate_num": 20,
+    "filename": "plate_20.png",
+    "type": "WINDING_LINE_VANISHING",
+    "normal_view": "Blue-Green Line",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Pathway: Normal traces blue-green winding line; red-green deficient cannot trace line.",
+    "choices": [
+      "Blue-Green Line",
+      "None",
+      "Red Line",
+      "Orange Line"
+    ]
+  },
+  {
+    "plate_num": 21,
+    "filename": "plate_21.png",
+    "type": "WINDING_LINE_VANISHING",
+    "normal_view": "Orange Line",
+    "rg_view": "None",
+    "protan_view": "None",
+    "deutan_view": "None",
+    "description": "Vanishing Pathway: Normal traces orange winding line; red-green deficient cannot trace line or trace false path.",
+    "choices": [
+      "Orange Line",
+      "None",
+      "Blue Line",
+      "Green Line"
+    ]
+  },
+  {
+    "plate_num": 22,
+    "filename": "plate_22.png",
+    "type": "WINDING_LINE_DUAL",
+    "normal_view": "Blue-Green & Yellow-Green",
+    "rg_view": "Violet / Red-Green only",
+    "protan_view": "Violet only",
+    "deutan_view": "Violet only",
+    "description": "Dual Pathway: Normal traces blue-green and yellow-green lines between marks.",
+    "choices": [
+      "Both Green Lines",
+      "Violet Line Only",
+      "None",
+      "Red Line"
+    ]
+  },
+  {
+    "plate_num": 23,
+    "filename": "plate_23.png",
+    "type": "WINDING_LINE_DUAL",
+    "normal_view": "Violet & Orange Lines",
+    "rg_view": "Blue-Green & Violet",
+    "protan_view": "Partial",
+    "deutan_view": "Partial",
+    "description": "Dual Pathway: Normal traces violet and orange continuous paths.",
+    "choices": [
+      "Violet & Orange Lines",
+      "Blue-Green Line Only",
+      "None",
+      "One Line Only"
+    ]
+  },
+  {
+    "plate_num": 24,
+    "filename": "plate_24.png",
+    "type": "WINDING_LINE_DEMONSTRATION",
+    "normal_view": "Orange Line",
+    "rg_view": "Orange Line",
+    "protan_view": "Orange Line",
+    "deutan_view": "Orange Line",
+    "description": "Demonstration Pathway: High-contrast winding path clearly visible to all subjects.",
+    "choices": [
+      "Orange Line",
+      "None",
+      "Green Line",
+      "Two Lines"
+    ]
+  }
+]

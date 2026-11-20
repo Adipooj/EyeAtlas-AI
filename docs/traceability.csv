@@ -1,23 +1,29 @@
 requirement,implementation_path,test_path,physical_gate
-P00,to be mapped during phase,to be mapped during phase,see master
-P01,to be mapped during phase,to be mapped during phase,see master
-P02,to be mapped during phase,to be mapped during phase,see master
-P03,to be mapped during phase,to be mapped during phase,see master
-P04,to be mapped during phase,to be mapped during phase,see master
-P05,to be mapped during phase,to be mapped during phase,see master
-P06,to be mapped during phase,to be mapped during phase,see master
-P07,to be mapped during phase,to be mapped during phase,see master
-P08,to be mapped during phase,to be mapped during phase,see master
-P09,to be mapped during phase,to be mapped during phase,see master
-P10,to be mapped during phase,to be mapped during phase,see master
-P11,to be mapped during phase,to be mapped during phase,see master
-P12,to be mapped during phase,to be mapped during phase,see master
-P13,to be mapped during phase,to be mapped during phase,see master
-P14,to be mapped during phase,to be mapped during phase,see master
-P15,to be mapped during phase,to be mapped during phase,see master
-P16,to be mapped during phase,to be mapped during phase,see master
-P17,to be mapped during phase,to be mapped during phase,see master
-P18,to be mapped during phase,to be mapped during phase,see master
-P19,to be mapped during phase,to be mapped during phase,see master
-P20,to be mapped during phase,to be mapped during phase,see master
-P21,to be mapped during phase,to be mapped during phase,see master
+P00,app/build.gradle.kts;scripts/snapshot.py;scripts/verify.sh,scripts/verify.sh,Repository lock and zero-unapproved tree gate
+P01,app/src/main/java/org/eyeatlas/core/Models.kt;app/src/main/java/org/eyeatlas/core/DecisionEngine.kt,app/src/test/java/org/eyeatlas/LogicTests.kt,Clinical semantics and laterality separation
+P02,app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt;app/src/main/java/org/eyeatlas/net/SessionSync.kt,app/src/test/java/org/eyeatlas/FaultTests.kt,Two-phone local encrypted session and clock sync
+P03,app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt;docs/data_licenses.csv;ml/datasets.yaml,app/src/test/java/org/eyeatlas/LogicTests.kt,Dataset license audit and patient-level holdout
+P04,app/src/main/java/org/eyeatlas/sensors/Calibration.kt;app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt,app/src/test/java/org/eyeatlas/CalibrationTests.kt,Optical parameters and physical chassis limits
+P05,app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt;app/src/main/java/org/eyeatlas/ui/PatientScreens.kt;app/src/main/java/org/eyeatlas/ui/SharedComponents.kt,app/src/test/java/org/eyeatlas/ProtocolTests.kt,UX-01 to UX-14 skeleton and two-role flows
+P06,app/src/main/java/org/eyeatlas/vision/FunctionalTests.kt;app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt,app/src/test/java/org/eyeatlas/LogicTests.kt,Optical vergence and distance/near visual acuity
+P07,app/src/main/java/org/eyeatlas/vision/FunctionalTests.kt,app/src/test/java/org/eyeatlas/LogicTests.kt,Colour discrimination and central scotoma hyperacuity
+P08,app/src/main/java/org/eyeatlas/vision/FunctionalTests.kt;app/src/main/java/org/eyeatlas/vision/BinocularTests.kt,app/src/test/java/org/eyeatlas/LogicTests.kt,54-point visual field perimetry and binocular motility
+P09,app/src/main/java/org/eyeatlas/sensors/CameraPipeline.kt,app/src/test/java/org/eyeatlas/CalibrationTests.kt,On-device thermal stress and clock-sync gate
+P10,app/src/main/java/org/eyeatlas/sensors/CameraPipeline.kt;app/src/main/java/org/eyeatlas/vision/AnteriorTests.kt,app/src/test/java/org/eyeatlas/FaultTests.kt,Multi-gaze anterior image acquisition and quality gate
+P11,app/src/main/java/org/eyeatlas/vision/AnteriorTests.kt,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Placido NIBUT and pterygium/cataract algorithms
+P12,app/src/main/java/org/eyeatlas/vision/RetinalTests.kt,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Certified fundus adapter profile and 2-field acquisition
+P13,app/src/main/java/org/eyeatlas/ai/Inference.kt;ml/train.py;ml/export.py,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Multi-label retinal AI inference and latency budget
+P14,app/src/main/java/org/eyeatlas/vision/BinocularTests.kt,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Strabismus cover motility and amblyopia crowding
+P15,app/src/main/java/org/eyeatlas/ai/QualityAndRanker.kt,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Multi-disease independent sigmoids and probability calibration
+P16,app/src/main/java/org/eyeatlas/core/DecisionEngine.kt,app/src/test/java/org/eyeatlas/ProtocolTests.kt,Adaptive battery planning and causal fault recovery
+P17,app/src/main/java/org/eyeatlas/sensors/Calibration.kt;app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt,app/src/test/java/org/eyeatlas/CalibrationTests.kt,Optical bench measurement and resolution floor interlock
+P18,docs/hardware_contract.md;app/src/main/java/org/eyeatlas/sensors/CameraPipeline.kt,app/src/test/java/org/eyeatlas/CalibrationTests.kt,External LED ring electrical and tear illumination safety
+P19,docs/hardware_contract.md;app/src/main/java/org/eyeatlas/vision/RetinalTests.kt,app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt,Retinal light safety and phantom resolution verification
+P20,app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt;docs/validation_plan.md,app/src/test/java/org/eyeatlas/ProtocolTests.kt,Ethics preregistration and masked clinical pilot feasibility
+P21,app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt;docs/validation_plan.md;docs/risk_register.csv,app/src/test/java/org/eyeatlas/ProtocolTests.kt,Prospective multi-site validation and CDSCO regulatory lock
+X01,backend/app/main.py;backend/app/api/v1/router.py,backend/tests/test_auth.py;backend/tests/test_sync.py,FastAPI REST OpenAPI RBAC tenant isolation and offline sync foundation
+X02,app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt,app/src/test/java/org/eyeatlas/FaultTests.kt,Android local-first to backend synchronization and conflict recovery
+X03,web/src/App.tsx;web/src/vr/WebXrEngine.ts,web/tests/e2e.spec.ts,Responsive 2D clinician portal and WebXR immersive VR session capability gate
+X04,ios/EyeAtlasVR/ContentView.swift,ios/EyeAtlasVRTests/ContractTests.swift,Native iOS SwiftUI client and AVFoundation camera capability gate
+X05,backend/tests/test_cross_platform_parity.py,backend/tests/test_cross_platform_parity.py,Cross-platform contract parity security penetration and supported device matrix
+X06,docs/platform_validation_report.md,docs/platform_validation_report.md,Platform-specific clinical validation release matrix and CDSCO regulatory lock

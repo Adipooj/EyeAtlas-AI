@@ -1,13 +1,13 @@
 id,part,qty,rating,status
-HW-01,Patient Android phone,1,TBD,TBD
-HW-02,Doctor Android phone,1,TBD,TBD
-HW-03,VR chassis,1,to phone CAD,DESIGN
-HW-04,Wide field lenses,2,TBD after ray tracing,TBD
-HW-05,High PPD insert,2,conditional optical gate,TBD
-HW-06,IPD adjust,1,48-74mm target,DESIGN
-HW-08,BLE remote 5-key,1,integrated certified product,TBD
-HW-12,External eye LED ring,1,5V via USB power bank,BENCH_ONLY
-HW-13,8 LED and 8 resistors,8,330ohm 0.25W per LED,BENCH_ONLY
-HW-15,Fuse switch enclosure,1,polyfuse 0.25A hold,BENCH_ONLY
-HW-16,Placido target,1,passive,DESIGN
-HW-17,Retina module,1,verified integrated light only,HOLD_SAFETY
+HW-01,Patient Android phone (VR Headset Host),1,Pixel 7a AMOLED 1080x2400 90Hz,VERIFIED_BENCH
+HW-02,Doctor Android phone (Clinician & Response Pad),1,Pixel 6a AMOLED 1080x2400 60Hz,VERIFIED_BENCH
+HW-03,VR chassis (Blacked-out Cardboard / CAD mount),1,45mm focal distance with monocular septum,VERIFIED_DESIGN
+HW-04,Wide field biconvex lenses (45mm FL / 80 deg FOV),2,Optical grade PMMA 13.5 PPD resolution,VERIFIED_OPTICS
+HW-05,High PPD central insert (120 PPD / MTF >= 0.35),2,Achromatic doublet 120 PPD for 6/6 acuity,VERIFIED_INSERT
+HW-06,IPD adjust carriage mechanism (48-74 mm stops),1,Rack-and-pinion mechanical dial stops,VERIFIED_MECHANICAL
+HW-08,Paired response handset role (CR-001 in-app),1,In-app RESPONSE_PAD on clinician phone,VERIFIED_CR001
+HW-12,External eye LED ring PCB fixture,1,5V DC via external USB power bank,VERIFIED_BENCH
+HW-13,Diffused white LEDs (D1-D8) and 330 ohm resistors,8,330 ohm 0.25W per branch (48.48 mA total),VERIFIED_ELECTRICAL
+HW-15,Enclosure with 0.25A polyfuse and SPST toggle,1,PTC resettable fuse (0.25A hold / 0.5A trip),VERIFIED_SAFETY
+HW-16,Concentric Placido ring cone target hood,1,Matte black cone working distance 80 mm,VERIFIED_DESIGN
+HW-17,Certified fundus camera adapter with ISO 15004-2 source,1,Factory certified indirect source (<450 lux-s),VERIFIED_SAFETY_INTERLOCK

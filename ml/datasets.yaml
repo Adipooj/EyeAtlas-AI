@@ -1,1 +1,103 @@
-# P03 will populate with verified source manifest. This file is not yet a clinical data download authorization.
+# EyeAtlas VR - Clinical Dataset Manifest and License Registry (P03)
+# Policy: Open data with verified permissive license (CC BY 4.0 / CC0) only.
+# Withheld, conflicted, or login-gated sources are strictly gated and skipped.
+
+version: "1.0"
+updated: "2026-11-20"
+
+datasets:
+  - id: "RFMiD"
+    name: "Retinal Fundus Multi-Disease Image Dataset"
+    license: "CC BY 4.0"
+    license_status: "VERIFIED_OPEN"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Patient_ID"
+    url: "https://riadd.grand-challenge.org/download-all-classes/"
+    target_disease: "MULTI_LABEL_RETINA"
+    gated: false
+    attribution: "Pachade et al., 2021 (CC BY 4.0)"
+
+  - id: "IDRiD"
+    name: "Indian Diabetic Retinopathy Image Dataset"
+    license: "CC BY 4.0"
+    license_status: "VERIFIED_OPEN"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Subject_ID"
+    url: "https://idrid.grand-challenge.org/Data/"
+    target_disease: "DIABETIC_RETINOPATHY"
+    gated: false
+    attribution: "Porwal et al., 2018 (CC BY 4.0)"
+
+  - id: "CONJUNCTIVITIS_MENDELEY"
+    name: "Conjunctivitis Recognition Dataset"
+    license: "CC BY 4.0"
+    license_status: "VERIFIED_OPEN"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Individual_ID"
+    url: "https://data.mendeley.com/datasets/vhy5mjb6wg/1"
+    target_disease: "CONJUNCTIVITIS_RED_EYE"
+    gated: false
+    attribution: "Mendeley Data Contributor (CC BY 4.0)"
+
+  - id: "DRY_EYE_NIKBUT"
+    name: "Dry Eye Non-Invasive Keratograph Break-Up Time"
+    license: "CC BY 4.0"
+    license_status: "VERIFIED_OPEN"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Subject_No"
+    url: "https://repod.icm.edu.pl/dataset.xhtml?persistentId=doi:10.18150/TT8JVD"
+    target_disease: "DRY_EYE"
+    gated: false
+    attribution: "RepOD Open Data Repository (CC BY 4.0)"
+
+  - id: "SLID"
+    name: "Slit-Lamp Image Dataset"
+    license: "PAPER_CC_BY_UNCONFIRMED"
+    license_status: "HOLD_LICENSE"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Patient_ID"
+    url: "https://github.com/xumingyu-hub/SLID"
+    target_disease: "ANTERIOR_LESIONS"
+    gated: true
+    gating_reason: "Repository lacks explicit license text despite paper CC BY claim"
+
+  - id: "PAPILA"
+    name: "Papila Glaucoma and Fundus Dataset"
+    license: "GPLv3_VS_CC_BY_CONFLICT"
+    license_status: "HOLD_LICENSE"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "ID"
+    url: "https://figshare.com/articles/dataset/PAPILA/14798004"
+    target_disease: "GLAUCOMA"
+    gated: true
+    gating_reason: "Figshare GPL3 repository metadata conflicts with paper CC BY claim"
+
+  - id: "CSDI"
+    name: "Cataract Slit-Lamp Dataset Images"
+    license: "CC_BY_VS_NC_CONFLICT"
+    license_status: "HOLD_LICENSE"
+    auth_required: false
+    captcha_required: false
+    patient_id_column: "Subject_ID"
+    url: "https://www.nature.com/articles/s41597-026-06684-8"
+    target_disease: "CATARACT"
+    gated: true
+    gating_reason: "Nature paper CC BY conflicts with repository host non-commercial restriction"
+
+  - id: "APTOS_2019"
+    name: "APTOS 2019 Blindness Detection"
+    license: "KAGGLE_COMPETITION_NONCOMMERCIAL"
+    license_status: "EXCLUDED_RESTRICTED"
+    auth_required: true
+    captcha_required: true
+    patient_id_column: "id_code"
+    url: "https://www.kaggle.com/c/aptos2019-blindness-detection/data"
+    target_disease: "DIABETIC_RETINOPATHY"
+    gated: true
+    gating_reason: "Requires Kaggle login/CAPTCHA and restrictive noncommercial terms"

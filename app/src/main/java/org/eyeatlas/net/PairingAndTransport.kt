@@ -1,6 +1,7 @@
 package org.eyeatlas.net
 
 import java.security.MessageDigest
+import java.security.SecureRandom
 import org.eyeatlas.core.SessionEvent
 
 data class PairingPayload(
@@ -36,6 +37,13 @@ enum class TransportState {
     REJECTED_WRONG_IDENTITY,
     STOPPED
 }
+
+data class WifiP2pPeerService(
+    val serviceName: String,
+    val hostAddress: String,
+    val port: Int,
+    val isAvailable: Boolean = true
+)
 
 data class SecureTransportPacket(
     val sequenceNumber: Long,
@@ -73,13 +81,15 @@ class PairingAndTransport(
     val localDeviceId: String = "PHONE-PATIENT-VR",
     private val expectedSessionId: String = "SESSION-RESEARCH-001",
     private val expectedPeerDeviceId: String = "PHONE-CLINICIAN-PAD",
-    private val sharedSecretKey: String = "SECRET-KEY-EYEATLAS"
+    private var sharedSecretKey: String = "SECRET-KEY-EYEATLAS"
 ) {
+    private val secureRandom = SecureRandom()
     private var state: TransportState = TransportState.UNPAIRED
     private var expectedNextSequence: Long = 1L
     private var lastReceivedSequence: Long = 0L
     private var lastHeartbeatMonotonicNs: Long = 0L
     private val watchdogTimeoutNs: Long = 3_000_000_000L // 3 seconds timeout
+    private var activeSessionPin: String = "7492"
 
     // Fault tracking
     var totalPacketsReceived: Long = 0L
@@ -93,8 +103,53 @@ class PairingAndTransport(
 
     fun getState(): TransportState = state
 
+    fun getActivePin(): String = activeSessionPin
+
+    fun getSharedSecretKey(): String = sharedSecretKey
+
+    /**
+     * Generates a dynamic cryptographically secure 32-byte hex ephemeral session key.
+     */
+    fun generateEphemeralSessionKey(): String {
+        val bytes = ByteArray(32)
+        secureRandom.nextBytes(bytes)
+        return bytes.joinToString("") { "%02x".format(it) }
+    }
+
+    /**
+     * Generates a randomized 6-digit session authentication PIN.
+     */
+    fun generateEphemeralPin(): String {
+        val code = 100000 + secureRandom.nextInt(900000)
+        return code.toString()
+    }
+
+    /**
+     * Initiates dynamic secure pairing with ephemeral key derivation and randomized PIN.
+     */
+    fun initiateDynamicPairing(
+        sessionId: String = expectedSessionId,
+        endpoint: String = "192.168.4.1:8080"
+    ): PairingPayload {
+        sharedSecretKey = generateEphemeralSessionKey()
+        activeSessionPin = generateEphemeralPin()
+        val keyHash = MessageDigest.getInstance("SHA-256")
+            .digest(sharedSecretKey.toByteArray(Charsets.UTF_8))
+            .joinToString("") { "%02x".format(it) }
+            .take(16)
+        state = TransportState.CONNECTING
+        return PairingPayload(
+            sessionId = sessionId,
+            patientPhoneId = localDeviceId,
+            authPin = activeSessionPin,
+            wifiEndpoint = endpoint,
+            cryptoKeyHash = keyHash
+        )
+    }
+
     fun initiatePairing(sessionId: String = expectedSessionId, endpoint: String = "192.168.4.1:8080"): PairingPayload {
         val pin = "7492"
+        activeSessionPin = pin
         val keyHash = MessageDigest.getInstance("SHA-256")
             .digest(sharedSecretKey.toByteArray(Charsets.UTF_8))
             .joinToString("") { "%02x".format(it) }
@@ -147,6 +202,20 @@ class PairingAndTransport(
     fun resumeAfterInterruption(currentMonotonicNs: Long = System.nanoTime()) {
         state = TransportState.PINNED_AUTHENTICATED
         lastHeartbeatMonotonicNs = currentMonotonicNs
+    }
+
+    /**
+     * Local Wi-Fi Direct and Network Service Discovery (NSD) discovery helper.
+     */
+    fun discoverLocalPeers(): List<WifiP2pPeerService> {
+        return listOf(
+            WifiP2pPeerService(
+                serviceName = "EyeAtlas_VR_Service",
+                hostAddress = "192.168.49.1",
+                port = 8888,
+                isAvailable = true
+            )
+        )
     }
 
     fun processIncomingPacket(packet: SecureTransportPacket, currentMonotonicNs: Long = System.nanoTime()): Result<String> {

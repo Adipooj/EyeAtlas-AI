@@ -5,6 +5,7 @@ sealed class SessionEvent {
     data class TriggerEmergencyBypass(val redFlag: String) : SessionEvent()
     object TriagePassed : SessionEvent()
     object CalibrationVerified : SessionEvent()
+    data class OpticalStateChanged(val state: String) : SessionEvent()
     object FunctionalCompleted : SessionEvent()
     object ImagingCompleted : SessionEvent()
     data class PriorityStop(val reason: String) : SessionEvent()
@@ -44,6 +45,14 @@ class ClinicalStateMachine(private var currentState: SessionState = SessionState
                     SessionState.FUNCTIONAL_TESTS
                 } else {
                     return Result.failure(IllegalStateException("Calibration must precede functional tests"))
+                }
+            }
+            is SessionEvent.OpticalStateChanged -> {
+                // Changing optical configuration during testing returns to DEVICE_CALIBRATION for re-verification
+                if (currentState == SessionState.FUNCTIONAL_TESTS || currentState == SessionState.IMAGING || currentState == SessionState.DEVICE_CALIBRATION) {
+                    SessionState.DEVICE_CALIBRATION
+                } else {
+                    currentState
                 }
             }
             is SessionEvent.FunctionalCompleted -> {

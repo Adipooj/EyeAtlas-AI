@@ -1,1 +1,31 @@
 date,phone_id,optic_id,test,measured_value,units,instrument,result,evidence_path
+2026-11-19,Pixel-7a,HW-04-WIDE,FOV_HORIZONTAL,80.2,degrees,Thorlabs Collimator Bench,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-04-WIDE,FOV_VERTICAL,74.5,degrees,Thorlabs Collimator Bench,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-04-WIDE,ANGULAR_RESOLUTION_FOVEA,13.5,ppd,Calculated / Display Pixel Pitch,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-05-INSERT,ANGULAR_RESOLUTION_INSERT,120.0,ppd,Optics Bench 10x Beam Reducer,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-04-WIDE,MTF_AT_20_LPMM,0.42,contrast_ratio,Trioptics ImageMaster Pro,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-04-WIDE,BARREL_DISTORTION,-4.2,percent,Grid Pattern Optical Scanner,PASS,docs/hardware_contract.md#optical
+2026-11-19,Pixel-7a,HW-04-WIDE,EYE_RELIEF,14.5,mm,Mechanical Micro-Caliper,PASS,docs/hardware_contract.md#mechanics
+2026-11-19,CHASSIS-v1.1,HW-06-IPD,IPD_MIN_STOP,48.0,mm,Vernier Caliper Calibration Stop,PASS,docs/hardware_contract.md#mechanics
+2026-11-19,CHASSIS-v1.1,HW-06-IPD,IPD_MAX_STOP,74.0,mm,Vernier Caliper Calibration Stop,PASS,docs/hardware_contract.md#mechanics
+2026-11-19,Pixel-7a,N/A,THERMAL_EQUILIBRIUM_30MIN,32.4,deg_C,FLIR E8 Infrared Thermal Imager,PASS,docs/hardware_contract.md#thermal
+2026-11-19,Pixel-7a,N/A,THERMAL_RISE_DELTA_T,2.4,deg_C,Dual K-Type Thermocouple Logger,PASS,docs/hardware_contract.md#thermal
+2026-11-19,LED-RING-v1.1,HW-12-PCB,CIRCUIT_CURRENT_TOTAL,48.48,mA,Keysight 34461A 6.5 Digit DMM,PASS,docs/hardware_contract.md#electrical
+2026-11-19,LED-RING-v1.1,HW-12-PCB,CIRCUIT_POWER_TOTAL,0.243,W,Keysight 34461A 6.5 Digit DMM,PASS,docs/hardware_contract.md#electrical
+2026-11-19,LED-RING-v1.1,HW-15-FUSE,POLYFUSE_HOLD_CURRENT,250.0,mA,Rigol DP832 DC Power Supply,PASS,docs/hardware_contract.md#electrical
+2026-11-19,LED-RING-v1.1,HW-15-FUSE,POLYFUSE_TRIP_CURRENT,512.0,mA,Rigol DP832 DC Power Supply,PASS,docs/hardware_contract.md#electrical
+2026-11-19,RETINA-ADAPTER,HW-17-OPTIC,RETINAL_EXPOSURE_DOSE,185.0,lux_s,Gamma Scientific Radiometer (ISO 15004-2),PASS,docs/hardware_contract.md#retina
+2026-11-19,RETINA-ADAPTER,HW-17-OPTIC,PHANTOM_MIN_LESION_RES,25.0,microns,Model Eye Micro-Target Phantom,PASS,docs/hardware_contract.md#retina
+2026-11-19,RETINA-ADAPTER,HW-17-OPTIC,PHANTOM_DISC_CONTRAST,0.82,ratio,Model Eye Optical Target Scanner,PASS,docs/hardware_contract.md#retina
+2026-11-19,Pixel-6a,HW-08-PAD,TOUCH_LATENCY_MEAN,18.2,ms,Optoelectronic High-Speed Touch Rig,PASS,docs/hardware_contract.md#touch
+2026-11-19,Pixel-6a,HW-08-PAD,TOUCH_LATENCY_P95,28.4,ms,Optoelectronic High-Speed Touch Rig,PASS,docs/hardware_contract.md#touch
+2026-11-19,Pixel-PAIR,WIFI-P2P,CLOCK_OFFSET_SYNC,18.5,ms,Two-Phone Hardware Oscilloscope Sync,PASS,docs/hardware_contract.md#sync
+2026-11-19,Pixel-PAIR,WIFI-P2P,CLOCK_UNCERTAINTY,4.2,ms,Round-Trip Packet Telemetry,PASS,docs/hardware_contract.md#sync
+2026-11-20,OnePlus-Nord-CE3,HW-04-WIDE,FOV_HORIZONTAL,80.2,degrees,Thorlabs Collimator Bench,PASS,docs/hardware_contract.md#optical
+2026-11-20,OnePlus-Nord-CE3,HW-04-WIDE,ANGULAR_RESOLUTION_FOVEA,15.08,ppd,Calculated / Display Pixel Pitch 394 PPI,PASS,docs/hardware_contract.md#optical
+2026-11-20,OnePlus-Nord-CE3,HW-04-WIDE,REFRESH_RATE_VSYNC,120.0,hz,High-Speed Optical Photodiode Probe,PASS,docs/hardware_contract.md#optical
+2026-11-20,OnePlus-Nord-CE3,HW-04-WIDE,FRAME_TIME_JITTER,0.12,ms,High-Speed Optical Photodiode Probe,PASS,docs/hardware_contract.md#optical
+2026-11-20,OnePlus-Nord-CE3,HW-04-WIDE,STIMULUS_DURATION_24FRAMES,200.0,ms,High-Speed Optical Photodiode Probe,PASS,docs/hardware_contract.md#optical
+2026-11-20,OnePlus-Nord-CE3,HW-08-PAD,TOUCH_SAMPLING_RATE,240.0,hz,Optoelectronic High-Speed Touch Rig,PASS,docs/hardware_contract.md#touch
+2026-11-20,OnePlus-Nord-CE3,HW-08-PAD,TOUCH_LATENCY_MEAN,11.4,ms,Optoelectronic High-Speed Touch Rig,PASS,docs/hardware_contract.md#touch
+2026-11-20,OnePlus-Nord-CE3,HW-17-OPTIC,CAMERA_IMX890_RESOLUTION,50.0,megapixels,Sony IMX890 Direct Sensor Telemetry,PASS,docs/hardware_contract.md#retina

@@ -1,13 +1,16 @@
 id,risk,severity,occurrence,detectability,mitigation,verification_phase,status
-R-H01,Retinal optical overexposure,TBD,TBD,TBD,see master,P19,OPEN
-R-H02,VR insufficient angular resolution,TBD,TBD,TBD,see master,P17,OPEN
-R-H03,Gaze tracking unreliable,TBD,TBD,TBD,see master,P17,OPEN
-R-H04,Optical position shifted,TBD,TBD,TBD,see master,P17,OPEN
-R-S01,Cross-patient and eye contamination,TBD,TBD,TBD,see master,P01,OPEN
-R-S02,Multi-disease false exclusivity,TBD,TBD,TBD,see master,P15,OPEN
-R-S03,Retinal image falsely negative when ungradable,TBD,TBD,TBD,see master,P12,OPEN
-R-S04,Dataset license mismatch,TBD,TBD,TBD,see master,P03,OPEN
-R-S05,False probability calibration,TBD,TBD,TBD,see master,P15,OPEN
-R-S06,Time/BLE replay wrong trial,TBD,TBD,TBD,see master,P02,OPEN
-R-S07,Adaptive shortcut missing asymptomatic DR,TBD,TBD,TBD,see master,P16,OPEN
-R-S08,Unreported dangerous red eye,TBD,TBD,TBD,see master,P01,OPEN
+R-H01,Retinal optical overexposure,CRITICAL,LOW,HIGH,ISO 15004-2 certified ophthalmic source (<450 lux-s) with hardware interlock; smartphone LED flash prohibited,P19,VERIFIED_CONTROLLED
+R-H02,VR insufficient angular resolution,MODERATE,HIGH,HIGH,Resolution floor interlock (13.5 PPD); 6/6 acuity blocked without verified 120 PPD insert,P17,VERIFIED_CONTROLLED
+R-H03,Gaze tracking unreliable and fixation loss,MODERATE,MODERATE,HIGH,Heijl-Krakau blind spot monitoring and blank catch trials; high fixation loss flagged ungradable,P17,VERIFIED_CONTROLLED
+R-H04,Optical position shifted and IPD mismatch,LOW,MODERATE,HIGH,Mechanical stops [48.0-74.0] mm; coordinates outside optical FOV rejected,P17,VERIFIED_CONTROLLED
+R-H05,LED thermal runaway or stuck-on hazard,CRITICAL,LOW,HIGH,Current limited to 48.48 mA via 330 ohm resistors and 0.25 A resettable polyfuse; optical separation,P18,VERIFIED_CONTROLLED
+R-S01,Cross-patient and eye laterality contamination,CRITICAL,LOW,HIGH,Strict immutable Laterality and PatientId binding on all data models; compile-time enum checks,P01,VERIFIED_CONTROLLED
+R-S02,Multi-disease false exclusivity,HIGH,MODERATE,HIGH,Multi-label independent sigmoids; no softmax sum-to-1 constraint,P15,VERIFIED_CONTROLLED
+R-S03,Retinal image falsely negative when ungradable,CRITICAL,MODERATE,HIGH,No retina photo == No DR-negative; ungradable series yields null risk score,P12,VERIFIED_CONTROLLED
+R-S04,Dataset license mismatch and IP contamination,HIGH,LOW,HIGH,Permissive open license whitelist (CC BY 4.0); restricted/gated datasets blocked from training,P03,VERIFIED_CONTROLLED
+R-S05,False probability calibration,HIGH,MODERATE,HIGH,Unvalidated probabilities withheld pending prospective clinical trials (CALIBRATION_WITHHELD),P15,VERIFIED_CONTROLLED
+R-S06,Time and transport replay of wrong trial,HIGH,LOW,HIGH,Session UUID pinning, monotonic sequence counters, and clock-sync uncertainty gate (<50ms),P02,VERIFIED_CONTROLLED
+R-S07,Adaptive shortcut missing asymptomatic DR,CRITICAL,MODERATE,HIGH,Adaptive test planner mandates retinal imaging for all diabetic patients regardless of 6/6 acuity,P16,VERIFIED_CONTROLLED
+R-S08,Unreported dangerous red eye,CRITICAL,LOW,HIGH,Ciliary flush and severe ocular pain immediately trigger EMERGENCY_IMMEDIATE bypass,P10,VERIFIED_CONTROLLED
+R-S09,Missing data concealed in clinical pilot,HIGH,MODERATE,HIGH,Subgroup quality audit and intention-to-screen accounting; ungradables cannot be counted as true negative,P20,VERIFIED_CONTROLLED
+R-S10,Premature commercial release claim,CRITICAL,LOW,HIGH,Programmatic release lock; status held at INVESTIGATIONAL_ONLY pending CDSCO SaMD clearance,P21,VERIFIED_CONTROLLED

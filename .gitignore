@@ -16,4 +16,7 @@ __pycache__/
 /models_artifacts/
 *.apk
 *.aab
+*.sqlite
+*.sqlite3
+*.db
 !gradle/wrapper/gradle-wrapper.jar

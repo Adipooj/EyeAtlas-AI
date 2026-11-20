@@ -321,4 +321,361 @@ class FaultTests {
         assertFalse(noResponseTrial.isUngradableOrInvalid)
         assertEquals("VALID_NO_RESPONSE", noResponseTrial.validityFlags.first())
     }
+
+    @Test
+    fun cameraCaptureBlurAndExposureFaultInjectionTest() {
+        val pipeline = org.eyeatlas.sensors.CameraPipeline()
+
+        // 1. Injected Blur
+        val blurResult = pipeline.evaluateCaptureQuality(focusMetric = 8.5, meanLuminance = 120.0, glarePercentage = 1.0)
+        assertFalse(blurResult.isPassed)
+        assertTrue(blurResult.failureReasons.any { it.contains("BLUR_EXCEEDS_LIMIT") })
+        assertEquals(0.0, blurResult.qualityScore, 0.01)
+
+        // 2. Injected Underexposure
+        val darkResult = pipeline.evaluateCaptureQuality(focusMetric = 35.0, meanLuminance = 22.0, glarePercentage = 0.0)
+        assertFalse(darkResult.isPassed)
+        assertTrue(darkResult.failureReasons.any { it.contains("UNDEREXPOSED") })
+
+        // 3. Injected Overexposure
+        val brightResult = pipeline.evaluateCaptureQuality(focusMetric = 35.0, meanLuminance = 235.0, glarePercentage = 2.0)
+        assertFalse(brightResult.isPassed)
+        assertTrue(brightResult.failureReasons.any { it.contains("OVEREXPOSED") })
+
+        // 4. Injected Glare
+        val glareResult = pipeline.evaluateCaptureQuality(focusMetric = 35.0, meanLuminance = 140.0, glarePercentage = 9.8)
+        assertFalse(glareResult.isPassed)
+        assertTrue(glareResult.failureReasons.any { it.contains("EXCESSIVE_GLARE") })
+
+        // 5. Clean passing capture
+        val cleanResult = pipeline.evaluateCaptureQuality(focusMetric = 42.0, meanLuminance = 125.0, glarePercentage = 1.2)
+        assertTrue(cleanResult.isPassed)
+        assertTrue(cleanResult.qualityScore > 0.7)
+        assertTrue(cleanResult.failureReasons.isEmpty())
+    }
+
+    @Test
+    fun scaleMarkerAndSideLabelIntegrityTest() {
+        val anterior = org.eyeatlas.vision.AnteriorTests()
+        val pipeline = org.eyeatlas.sensors.CameraPipeline()
+        val goodQuality = pipeline.evaluateCaptureQuality(focusMetric = 40.0, meanLuminance = 120.0, glarePercentage = 0.5)
+
+        val lockedSettings = org.eyeatlas.sensors.LockedCameraSettings()
+
+        // Build valid OD multi-gaze series
+        val odCaptures = org.eyeatlas.vision.AnteriorGazeDirection.values().associateWith { gaze ->
+            org.eyeatlas.vision.AnteriorImageCapture(
+                captureId = "CAP-OD-${gaze.name}",
+                sessionId = "SESSION-RESEARCH-001",
+                eye = EyeLaterality.OD,
+                gazeDirection = gaze,
+                rawImageHash = "HASH-OD-${gaze.name}",
+                cameraSettings = lockedSettings,
+                quality = goodQuality,
+                scaleMarkerDetected = true
+            )
+        }
+        val validSeries = org.eyeatlas.vision.MultiGazeSeries("SESSION-RESEARCH-001", EyeLaterality.OD, odCaptures)
+        assertTrue(anterior.validateMultiGazeSeries(validSeries).isSuccess)
+
+        // Inject Laterality Mismatch (substituting OS image into OD series)
+        val tamperedCaptures = odCaptures.toMutableMap()
+        tamperedCaptures[org.eyeatlas.vision.AnteriorGazeDirection.UPGAZE] = tamperedCaptures[org.eyeatlas.vision.AnteriorGazeDirection.UPGAZE]!!.copy(
+            eye = EyeLaterality.OS
+        )
+        val tamperedSeries = org.eyeatlas.vision.MultiGazeSeries("SESSION-RESEARCH-001", EyeLaterality.OD, tamperedCaptures)
+        val tamperedResult = anterior.validateMultiGazeSeries(tamperedSeries)
+        assertTrue(tamperedResult.isFailure)
+        assertTrue(tamperedResult.exceptionOrNull() is IllegalArgumentException)
+    }
+
+    @Test
+    fun cameraOutputHashStabilityTest() {
+        val sample1 = "RAW_CAMERA_FRAME_DATA_LOCKED_PARAMETERS_OD_PRIMARY".toByteArray(Charsets.UTF_8)
+        val sample2 = "RAW_CAMERA_FRAME_DATA_LOCKED_PARAMETERS_OD_PRIMARY".toByteArray(Charsets.UTF_8)
+        val sample3 = "RAW_CAMERA_FRAME_DATA_LOCKED_PARAMETERS_OD_PRIMARY_TAMPERED".toByteArray(Charsets.UTF_8)
+
+        val hash1 = org.eyeatlas.sensors.CameraPipeline.computeSha256(sample1)
+        val hash2 = org.eyeatlas.sensors.CameraPipeline.computeSha256(sample2)
+        val hash3 = org.eyeatlas.sensors.CameraPipeline.computeSha256(sample3)
+
+        assertEquals("Hashes for identical captures must be stable and match", hash1, hash2)
+        assertNotEquals("Tampered capture must produce distinct hash", hash1, hash3)
+        assertEquals(64, hash1.length) // 256-bit hex
+    }
+
+    @Test
+    fun infectionTriageRedFlagAndConjunctivitisDifferentialTest() {
+        val anterior = org.eyeatlas.vision.AnteriorTests()
+
+        // 1. Emergency Red Flag: Red eye + severe pain + corneal infiltrate + ciliary flush
+        val emergencySigns = org.eyeatlas.vision.AnteriorSymptomSigns(
+            hasRedEye = true,
+            hasSeverePain = true,
+            ciliaryFlushPresent = true,
+            cornealOpacityOrInfiltrate = true
+        )
+        val emergencyResult = anterior.performInfectionTriage(EyeLaterality.OD, emergencySigns, null)
+        assertEquals(org.eyeatlas.vision.InfectionTriageUrgency.EMERGENCY_SAME_DAY, emergencyResult.urgency)
+        assertTrue(emergencyResult.requiresSameDayOphthalmologist)
+        assertTrue(emergencyResult.differentialDiagnoses.contains("Microbial Keratitis"))
+
+        // 2. Non-emergency red eye with purulent discharge (bacterial/viral differential)
+        val dischargeSigns = org.eyeatlas.vision.AnteriorSymptomSigns(
+            hasRedEye = true,
+            purulentDischargePresent = true,
+            hasSeverePain = false,
+            ciliaryFlushPresent = false
+        )
+        val dischargeResult = anterior.performInfectionTriage(EyeLaterality.OD, dischargeSigns, null)
+        assertEquals(org.eyeatlas.vision.InfectionTriageUrgency.ROUTINE, dischargeResult.urgency)
+        assertFalse(dischargeResult.requiresSameDayOphthalmologist)
+        assertTrue(dischargeResult.differentialDiagnoses.any { it.contains("Bacterial Conjunctivitis") })
+
+        // 3. Dry eye / mild irritation (no discharge, no red flags)
+        val dryEyeSigns = org.eyeatlas.vision.AnteriorSymptomSigns(
+            hasRedEye = true,
+            foreignBodySensationOnly = true,
+            hasSeverePain = false
+        )
+        val dryEyeResult = anterior.performInfectionTriage(EyeLaterality.OS, dryEyeSigns, null)
+        assertEquals(org.eyeatlas.vision.InfectionTriageUrgency.ROUTINE, dryEyeResult.urgency)
+        assertTrue(dryEyeResult.differentialDiagnoses.any { it.contains("Dry Eye") })
+    }
+
+    // --- Defect Remediation Test (DEF-09) ---
+
+    @Test
+    fun dynamicCryptoKeyAndRandomPinPairingTest() {
+        val transport = org.eyeatlas.net.PairingAndTransport(
+            localDeviceId = "PHONE-PATIENT-VR",
+            expectedSessionId = "SES-DYNAMIC-01",
+            expectedPeerDeviceId = "PHONE-CLINICIAN-PAD"
+        )
+
+        // 1. Dynamic pairing initiation generates fresh key and random 6-digit PIN
+        val payload = transport.initiateDynamicPairing(sessionId = "SES-DYNAMIC-01")
+        assertNotNull(payload)
+        assertEquals(6, payload.authPin.length)
+        assertTrue("PIN must be numeric 6 digits", payload.authPin.toIntOrNull() != null)
+        assertEquals(16, payload.cryptoKeyHash.length)
+
+        // 2. Peer discovery
+        val peers = transport.discoverLocalPeers()
+        assertTrue(peers.isNotEmpty())
+        assertEquals("EyeAtlas_VR_Service", peers[0].serviceName)
+
+        // 3. Complete pairing
+        val paired = transport.completePairingWithPayload(payload, "PHONE-CLINICIAN-PAD")
+        assertTrue(paired)
+        assertEquals(org.eyeatlas.net.TransportState.PINNED_AUTHENTICATED, transport.getState())
+
+        // 4. Dynamic key is used to sign and process packets
+        val packet = org.eyeatlas.net.SecureTransportPacket.createSigned(
+            sequence = 1L,
+            sessionId = "SES-DYNAMIC-01",
+            senderId = "PHONE-CLINICIAN-PAD",
+            type = "TOUCH_EVENT",
+            data = "SEEN_TAP",
+            key = transport.getSharedSecretKey()
+        )
+        val result = transport.processIncomingPacket(packet)
+        assertTrue(result.isSuccess)
+        assertEquals("SEEN_TAP", result.getOrNull())
+    }
+
+    // --- X02 Backend Integration Tests ---
+
+    class MockHttpTransport : HttpTransport {
+        var lastUrl: String? = null
+        var lastHeaders: Map<String, String>? = null
+        var lastBody: String? = null
+        var mockResponse: SyncHttpResponse = SyncHttpResponse(200, "{\"status\": \"SUCCESS\"}")
+
+        override fun post(url: String, headers: Map<String, String>, body: String): SyncHttpResponse {
+            lastUrl = url
+            lastHeaders = headers
+            lastBody = body
+            return mockResponse
+        }
+
+        override fun get(url: String, headers: Map<String, String>): SyncHttpResponse {
+            lastUrl = url
+            lastHeaders = headers
+            return mockResponse
+        }
+    }
+
+    @Test
+    fun backendSyncLocalFirstOfflinePreservationTest() {
+        val mockTransport = MockHttpTransport()
+        val adapter = BackendSyncAdapter(
+            isSyncEnabled = false, // Disabled: local-first mode
+            transport = mockTransport
+        )
+        val store = org.eyeatlas.store.PatientStore()
+        store.syncAdapter = adapter
+
+        val patient = PatientRecord(
+            patientId = "P-LOCAL-999",
+            ageBand = "40-59",
+            hasDiabetes = true,
+            symptoms = listOf("BLURRED_VISION"),
+            currentCorrection = "CURRENT_HABITUAL"
+        )
+        assertTrue(store.saveRecord(patient))
+
+        // Verify that local store immediately decrypts and returns record without any network call
+        val retrieved = store.getRecord("P-LOCAL-999")
+        assertEquals("P-LOCAL-999", retrieved.patientId)
+        assertTrue(retrieved.hasDiabetes)
+        assertEquals(0, adapter.pendingCount)
+        assertNull(mockTransport.lastUrl)
+    }
+
+    @Test
+    fun backendSyncUploadQueueAndBatchPackagingTest() {
+        val mockTransport = MockHttpTransport()
+        mockTransport.mockResponse = SyncHttpResponse(
+            200,
+            "{\"status\": \"SUCCESS\", \"processedCount\": 3, \"conflictCount\": 0}"
+        )
+
+        val adapter = BackendSyncAdapter(
+            isSyncEnabled = true,
+            transport = mockTransport
+        )
+        adapter.authenticate("MOCK-JWT-TOKEN-APEX")
+
+        val patient = PatientRecord(
+            patientId = "P-SYNC-01",
+            ageBand = "ADULT_18_TO_64",
+            hasDiabetes = false,
+            symptoms = listOf("DRYNESS"),
+            currentCorrection = "UNAIDED"
+        )
+        val trial = baseTrial.copy(trialId = "TR-SYNC-01")
+        val measurement = Measurement(
+            measurementId = "M-SYNC-01",
+            sessionId = "SESSION-RESEARCH-001",
+            eye = EyeLaterality.OD,
+            method = "LOGMAR",
+            value = 0.05,
+            units = "logMAR",
+            ciLower = 0.0,
+            ciUpper = 0.10,
+            validity = true
+        )
+
+        adapter.queuePatient(patient)
+        adapter.queueTrial(trial)
+        adapter.queueMeasurement(measurement)
+        assertEquals(3, adapter.pendingCount)
+
+        val summary = adapter.syncNow()
+        assertEquals(SyncStatus.SUCCESS, summary.status)
+        assertEquals(3, summary.processedCount)
+        assertEquals(0, adapter.pendingCount)
+
+        // Verify sent payload
+        assertNotNull(mockTransport.lastBody)
+        assertTrue(mockTransport.lastBody!!.contains("P-SYNC-01"))
+        assertTrue(mockTransport.lastBody!!.contains("TR-SYNC-01"))
+        assertTrue(mockTransport.lastBody!!.contains("M-SYNC-01"))
+        assertEquals("Bearer MOCK-JWT-TOKEN-APEX", mockTransport.lastHeaders?.get("Authorization"))
+    }
+
+    @Test
+    fun backendSyncInterruptedNetworkRetryTest() {
+        val mockTransport = MockHttpTransport()
+        // Simulate network connection timeout / network drop
+        mockTransport.mockResponse = SyncHttpResponse(0, "Connection timeout to 127.0.0.1:8000")
+
+        val adapter = BackendSyncAdapter(
+            isSyncEnabled = true,
+            transport = mockTransport
+        )
+        adapter.authenticate("MOCK-TOKEN")
+
+        val patient = PatientRecord(
+            patientId = "P-RETRY-01",
+            ageBand = "ADULT_18_TO_64",
+            hasDiabetes = true,
+            symptoms = listOf("FLOATERS"),
+            currentCorrection = "NONE"
+        )
+        adapter.queuePatient(patient)
+        assertEquals(1, adapter.pendingCount)
+
+        val summary = adapter.syncNow()
+        assertEquals(SyncStatus.OFFLINE, summary.status)
+        assertEquals(1, adapter.pendingCount) // Unsynced record remains safely queued!
+        assertNotNull(adapter.lastError)
+
+        // Next attempt: network recovers
+        mockTransport.mockResponse = SyncHttpResponse(200, "{\"status\": \"SUCCESS\", \"processedCount\": 1}")
+        val retrySummary = adapter.syncNow()
+        assertEquals(SyncStatus.SUCCESS, retrySummary.status)
+        assertEquals(0, adapter.pendingCount)
+    }
+
+    @Test
+    fun backendSyncConflictReconciliationTest() {
+        val mockTransport = MockHttpTransport()
+        mockTransport.mockResponse = SyncHttpResponse(
+            200,
+            "{\"status\": \"SUCCESS\", \"processedCount\": 1, \"conflictCount\": 1, \"conflicts\": [{\"entity\": \"patient\", \"id\": \"P-CONF-01\", \"resolution\": \"MERGED_SERVER_VERSION_BUMPED\"}]}"
+        )
+
+        val adapter = BackendSyncAdapter(
+            isSyncEnabled = true,
+            transport = mockTransport
+        )
+        adapter.authenticate("MOCK-TOKEN")
+
+        val patient = PatientRecord(
+            patientId = "P-CONF-01",
+            ageBand = "40-59",
+            hasDiabetes = false,
+            symptoms = listOf("TIRED_EYES"),
+            currentCorrection = "NONE"
+        )
+        adapter.queuePatient(patient)
+
+        val summary = adapter.syncNow()
+        assertEquals(SyncStatus.CONFLICT_RESOLVED, summary.status)
+        assertEquals(1, summary.conflictCount)
+        assertEquals(1, adapter.recordedConflicts.size)
+        assertTrue(adapter.recordedConflicts[0].contains("Conflict detected"))
+        assertEquals(0, adapter.pendingCount)
+    }
+
+    @Test
+    fun backendSyncDuplicateRetransmissionIdempotencyTest() {
+        val mockTransport = MockHttpTransport()
+        // Server recognizes duplicate batch_id and returns IDEMPOTENT_SUCCESS
+        mockTransport.mockResponse = SyncHttpResponse(
+            200,
+            "{\"status\": \"IDEMPOTENT_SUCCESS\", \"processedCount\": 0, \"conflictCount\": 0}"
+        )
+
+        val adapter = BackendSyncAdapter(
+            isSyncEnabled = true,
+            transport = mockTransport
+        )
+        adapter.authenticate("MOCK-TOKEN")
+
+        val patient = PatientRecord(
+            patientId = "P-IDEM-01",
+            ageBand = "40-59",
+            hasDiabetes = false,
+            symptoms = listOf("NONE"),
+            currentCorrection = "NONE"
+        )
+        adapter.queuePatient(patient)
+
+        val summary = adapter.syncNow()
+        assertEquals(SyncStatus.SUCCESS, summary.status)
+        assertEquals(0, adapter.pendingCount)
+    }
 }

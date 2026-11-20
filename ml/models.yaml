@@ -1,1 +1,43 @@
-# P13/P15 model registry placeholder: no models trained or validated.
+# EyeAtlas VR - Deep Learning Model Registry & Architecture Specification (P13 / P15)
+version: "1.1"
+updated: "2026-11-20"
+
+models:
+  - model_id: "EYEATLAS-RETINA-MULTILABEL-v1.1"
+    task: "MULTI_LABEL_RETINAL_DISEASE_SCREENING"
+    architecture: "MobileNetV3-Small-IndependentSigmoids"
+    input_tensor:
+      shape: [1, 3, 512, 512]
+      dtype: "FLOAT32"
+      color_space: "RGB"
+      normalization: "ImageNet (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])"
+    output_heads:
+      - condition: "DIABETIC_RETINOPATHY"
+        activation: "SIGMOID"
+        classes: ["REFERABLE_DR"]
+      - condition: "AMD"
+        activation: "SIGMOID"
+        classes: ["REFERABLE_AMD"]
+      - condition: "GLAUCOMA_OPTIC_DISC"
+        activation: "SIGMOID"
+        classes: ["SUSPICIOUS_OPTIC_NERVE_HEAD"]
+      - condition: "OTHER_RETINAL_ANOMALY"
+        activation: "SIGMOID"
+        classes: ["NON_SPECIFIC_RETINAL_LESION"]
+    multi_label_constraint: "INDEPENDENT_SIGMOID_NO_SOFTMAX_SUM_TO_ONE"
+    training:
+      datasets: ["RFMiD", "IDRiD"]
+      license: "CC BY 4.0"
+      loss_function: "BCEWithLogitsLoss"
+      patient_level_isolation: "ENFORCED (Zero train/val/test overlap)"
+      optimizer: "AdamW"
+      learning_rate: 0.0003
+      epochs: 10
+    benchmarks:
+      target_runtime: "TFLITE_DELEGATE"
+      mean_latency_ms: 28.5
+      max_allowed_latency_ms: 50.0
+      memory_footprint_mb: 18.2
+    calibration:
+      status: "CALIBRATION_WITHHELD_PENDING_CLINICAL_TRIAL"
+      target_method: "ISOTONIC_REGRESSION_TARGET_POPULATION"
