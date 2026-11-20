@@ -4,7 +4,8 @@ import java.security.MessageDigest
 
 enum class EyeLaterality {
     OD, // Right eye (Oculus Dexter)
-    OS  // Left eye (Oculus Sinister)
+    OS, // Left eye (Oculus Sinister)
+    OU  // Both eyes (Oculus Uterque / Binocular)
 }
 
 enum class TestDomain {

@@ -179,6 +179,7 @@ class OpticalInterlockManager(
                         currentOpticalState == OpticalConfigurationState.OS_LENS_REMOVED
                 EyeLaterality.OS -> currentOpticalState == OpticalConfigurationState.BOTH_VR_LENSES_INSTALLED ||
                         currentOpticalState == OpticalConfigurationState.OD_LENS_REMOVED
+                EyeLaterality.OU -> currentOpticalState == OpticalConfigurationState.BOTH_VR_LENSES_INSTALLED
             }
 
             if (!hasTargetEyeLens) {
@@ -206,6 +207,7 @@ class OpticalInterlockManager(
                 EyeLaterality.OS -> currentOpticalState == OpticalConfigurationState.OS_LENS_REMOVED ||
                         currentOpticalState == OpticalConfigurationState.BOTH_LENSES_REMOVED ||
                         osRingType == AdapterRingType.OPEN_APERTURE_NO_LENS
+                EyeLaterality.OU -> currentOpticalState == OpticalConfigurationState.BOTH_LENSES_REMOVED
             }
 
             if (!isTargetEyeLensRemoved) {

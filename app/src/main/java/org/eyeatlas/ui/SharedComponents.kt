@@ -44,9 +44,14 @@ object ClinicalTheme {
 }
 
 enum class AppRole {
-    PATIENT,
-    CLINICIAN,
-    RESPONSE_PAD
+    PATIENT_VR,
+    PHYSICIAN_CONTROLLER;
+
+    companion object {
+        val PATIENT get() = PATIENT_VR
+        val CLINICIAN get() = PHYSICIAN_CONTROLLER
+        val RESPONSE_PAD get() = PHYSICIAN_CONTROLLER
+    }
 }
 
 enum class ScreenId(val title: String, val description: String) {
@@ -195,8 +200,14 @@ fun AppHeader(title: String, role: AppRole, onToggleRole: (AppRole) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                AppRole.values().forEach { targetRole ->
-                    val isSelected = role == targetRole
+                val roles = listOf(
+                    Pair(AppRole.PATIENT_VR, "Patient VR View"),
+                    Pair(AppRole.PHYSICIAN_CONTROLLER, "Physician & Response Pad")
+                )
+                roles.forEach { (targetRole, label) ->
+                    val isSelected = (role == targetRole) ||
+                            (targetRole == AppRole.PATIENT_VR && role.name.contains("PATIENT")) ||
+                            (targetRole == AppRole.PHYSICIAN_CONTROLLER && !role.name.contains("PATIENT"))
                     Surface(
                         color = if (isSelected) ClinicalTheme.SeaGreenPrimary else ClinicalTheme.BackgroundWhite,
                         shape = RoundedCornerShape(8.dp),
@@ -206,11 +217,7 @@ fun AppHeader(title: String, role: AppRole, onToggleRole: (AppRole) -> Unit) {
                             .clickable { onToggleRole(targetRole) }
                     ) {
                         Text(
-                            text = when (targetRole) {
-                                AppRole.PATIENT -> "Patient VR"
-                                AppRole.CLINICIAN -> "Clinician"
-                                AppRole.RESPONSE_PAD -> "Response Pad"
-                            },
+                            text = label,
                             fontSize = 11.sp,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                             color = if (isSelected) ClinicalTheme.PureWhite else ClinicalTheme.TextSecondary,

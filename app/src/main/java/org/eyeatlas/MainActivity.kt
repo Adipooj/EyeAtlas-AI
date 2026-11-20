@@ -14,9 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import org.eyeatlas.ui.AppRole
-import org.eyeatlas.ui.DoctorDashboard
 import org.eyeatlas.ui.PatientScreen
-import org.eyeatlas.ui.ResponsePadScreen
+import org.eyeatlas.ui.PhysicianAndResponsePadScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -27,9 +26,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    var currentRole by remember { mutableStateOf(AppRole.PATIENT) }
+                    var currentRole by remember { mutableStateOf(AppRole.PATIENT_VR) }
                     when (currentRole) {
-                        AppRole.PATIENT -> PatientScreen(
+                        AppRole.PATIENT_VR, AppRole.PATIENT -> PatientScreen(
                             onRoleChange = { currentRole = it },
                             onToggleVrOrientation = { isVr ->
                                 requestedOrientation = if (isVr) {
@@ -42,8 +41,9 @@ class MainActivity : ComponentActivity() {
                                 onVolumeClickListener = listener
                             }
                         )
-                        AppRole.CLINICIAN -> DoctorDashboard(onRoleChange = { currentRole = it })
-                        AppRole.RESPONSE_PAD -> ResponsePadScreen(onRoleChange = { currentRole = it })
+                        AppRole.PHYSICIAN_CONTROLLER, AppRole.CLINICIAN, AppRole.RESPONSE_PAD -> PhysicianAndResponsePadScreen(
+                            onRoleChange = { currentRole = it }
+                        )
                     }
                 }
             }

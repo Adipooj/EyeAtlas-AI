@@ -2,6 +2,10 @@ package org.eyeatlas.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,20 +15,37 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.eyeatlas.core.*
 import org.eyeatlas.net.PairingAndTransport
 import org.eyeatlas.net.TransportState
+import org.eyeatlas.sensors.ResponseAndGaze
 
 @Composable
 fun DoctorDashboard(
     onRoleChange: (AppRole) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    PhysicianAndResponsePadScreen(onRoleChange = onRoleChange, modifier = modifier)
+}
+
+/**
+ * Unified Physician & Tactile Response Pad Handset Screen (Response-cum-Physician Mode).
+ * Combines live clinical monitoring, remote test switching, instant reset,
+ * and high-frequency 240Hz tactile response controls on a single surface.
+ */
+@Composable
+fun PhysicianAndResponsePadScreen(
+    onRoleChange: (AppRole) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val stateMachine = remember { ClinicalStateMachine() }
     val decisionEngine = remember { DecisionEngine() }
+    val responseEngine = remember { ResponseAndGaze() }
     val transport = remember {
         PairingAndTransport().apply {
             val payload = initiatePairing()
@@ -42,6 +63,9 @@ fun DoctorDashboard(
     var hasConsent by remember { mutableStateOf(true) }
     var emergencyReason by remember { mutableStateOf<String?>(null) }
     var recoveryNotice by remember { mutableStateOf<String?>(null) }
+    var padTapCount by remember { mutableStateOf(0) }
+    var lastTapTimeMs by remember { mutableStateOf(0L) }
+    var feedbackMessage by remember { mutableStateOf("Response pad active. Tap anywhere or switch tests below.") }
 
     val symptomOptions = listOf(
         "NONE",
@@ -54,21 +78,325 @@ fun DoctorDashboard(
         "CHEMICAL_EXPOSURE"
     )
 
+    val activeModule = ClinicalSessionCoordinator.activeModule
+    val activeEye = ClinicalSessionCoordinator.activeEye
+    val isEmergencyHalted = ClinicalSessionCoordinator.isEmergencyHalted
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(ClinicalTheme.BackgroundWhite)
-            .padding(16.dp)
+            .padding(14.dp)
             .verticalScroll(rememberScrollState())
     ) {
         AppHeader(
-            title = "EyeAtlas VR - Clinician Station",
-            role = AppRole.CLINICIAN,
+            title = "EyeAtlas VR - Physician & Response Pad",
+            role = AppRole.PHYSICIAN_CONTROLLER,
             onToggleRole = onRoleChange
         )
 
         ResearchNotice()
 
+        // =====================================================================
+        // SECTION 1: REMOTE VR TEST CONTROLLER (Instant Switch & Reset)
+        // =====================================================================
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
+            border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                        Text(
+                            text = "REMOTE VR TEST CONTROLLER",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark
+                        )
+                        Text(
+                            text = "Switches test on Patient VR phone without exiting headset",
+                            fontSize = 11.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                    }
+                    Surface(
+                        color = if (isEmergencyHalted) ClinicalTheme.AlertRedBg else ClinicalTheme.SeaGreenLight,
+                        shape = RoundedCornerShape(6.dp),
+                        border = BorderStroke(1.dp, if (isEmergencyHalted) ClinicalTheme.AlertRedBorder else ClinicalTheme.SeaGreenBorder)
+                    ) {
+                        Text(
+                            text = if (isEmergencyHalted) "STOPPED" else "PAIRED (PIN: ${ClinicalSessionCoordinator.pairingPin})",
+                            color = if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenDark,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Tested Eye Selection (OD, OS, OU)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Target Eye:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OD,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OD) },
+                        label = { Text("OD (Right)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OS,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OS) },
+                        label = { Text("OS (Left)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OU,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OU) },
+                        label = { Text("OU (Both Eyes)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Module Selector Carousel
+                Text("Select Active Test Module:", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = ClinicalTheme.TextSecondary)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    ClinicalModuleId.values().forEach { module ->
+                        val isSelected = activeModule == module
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = {
+                                ClinicalSessionCoordinator.switchModule(module)
+                                feedbackMessage = "Switched Patient VR to ${module.title}"
+                            },
+                            label = { Text(module.title, fontSize = 11.sp, fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium) },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = ClinicalTheme.SeaGreenPrimary,
+                                selectedLabelColor = Color.White
+                            )
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Test Action Buttons: Reset & Emergency Stop
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = {
+                            ClinicalSessionCoordinator.resetActiveTest()
+                            feedbackMessage = "↺ Current test reset and re-initialized."
+                        },
+                        border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("↺ Reset Current Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                    }
+
+                    Button(
+                        onClick = {
+                            val nextHalt = !ClinicalSessionCoordinator.isEmergencyHalted
+                            ClinicalSessionCoordinator.toggleEmergencyHalt(nextHalt)
+                            feedbackMessage = if (nextHalt) "EMERGENCY STOP TRIGGERED: VR exam paused." else "Exam resumed."
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = if (isEmergencyHalted) ClinicalTheme.SuccessGreen else ClinicalTheme.AlertRed),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(if (isEmergencyHalted) "Resume Exam" else "Priority STOP", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // =====================================================================
+        // SECTION 2: INTERACTIVE TACTILE RESPONSE PAD (Patient Handset / Clicker)
+        // =====================================================================
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
+            border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(14.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "TACTILE RESPONSE HANDSET",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark
+                        )
+                        Text(
+                            text = "240Hz touch sampling (<4.16ms) | Blind-operable surface",
+                            fontSize = 11.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                    }
+                    Surface(
+                        color = ClinicalTheme.SeaGreenLight,
+                        shape = RoundedCornerShape(6.dp)
+                    ) {
+                        Text(
+                            text = "TAPS: $padTapCount",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Primary Blind Touch Surface
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(130.dp)
+                        .background(
+                            if (isEmergencyHalted) ClinicalTheme.AlertRedBg else Color(0xFF0F172A),
+                            RoundedCornerShape(12.dp)
+                        )
+                        .border(
+                            2.dp,
+                            if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenPrimary,
+                            RoundedCornerShape(12.dp)
+                        )
+                        .pointerInput(isEmergencyHalted) {
+                            if (!isEmergencyHalted) {
+                                detectTapGestures(
+                                    onTap = {
+                                        val now = System.nanoTime()
+                                        padTapCount++
+                                        lastTapTimeMs = System.currentTimeMillis()
+                                        ClinicalSessionCoordinator.dispatchTap("TOUCH_SURFACE")
+                                        feedbackMessage = "Tap #$padTapCount registered (Stimulus Seen)!"
+                                    }
+                                )
+                            }
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "TAP ANYWHERE TO RESPOND",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "WHEN YOU SEE THE LIGHT OR PATTERN",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF38BDF8)
+                        )
+                        Text(
+                            text = feedbackMessage,
+                            fontSize = 10.sp,
+                            color = Color(0xFF94A3B8),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
+
+                // Contextual Keypads based on active module
+                if (activeModule == ClinicalModuleId.ACUITY) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Acuity: Point Direction of Optotype:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        listOf("▲ UP", "◄ LEFT", "► RIGHT", "▼ DOWN").forEach { dir ->
+                            Button(
+                                onClick = {
+                                    padTapCount++
+                                    ClinicalSessionCoordinator.dispatchTap("DIRECTION_$dir")
+                                    feedbackMessage = "Acuity direction $dir recorded"
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenLight),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(dir, color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                            }
+                        }
+                    }
+                } else if (activeModule == ClinicalModuleId.COLOUR) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Colour: Select Number Seen on Ishihara Plate:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        listOf("12", "8", "6", "29", "57", "74", "None").forEach { num ->
+                            Surface(
+                                color = ClinicalTheme.BackgroundWhite,
+                                border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+                                shape = RoundedCornerShape(6.dp),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clickable {
+                                        padTapCount++
+                                        ClinicalSessionCoordinator.dispatchTap("NUM_$num")
+                                        feedbackMessage = "Ishihara selection $num recorded"
+                                    }
+                            ) {
+                                Text(
+                                    text = num,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = ClinicalTheme.TextPrimary,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(vertical = 6.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // =====================================================================
+        // SECTION 3: CLINICAL GOVERNANCE & MULTI-MORBIDITY SCREENING
+        // =====================================================================
         ScreenNavigator(
             currentScreen = currentScreen,
             onNavigate = { currentScreen = it }

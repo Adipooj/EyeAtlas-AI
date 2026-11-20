@@ -1,8 +1,10 @@
 package org.eyeatlas.ui
 
+import android.graphics.BitmapFactory
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,17 +19,23 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import org.eyeatlas.core.ClinicalSessionCoordinator
 import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.net.RemoteSessionClient
 import org.eyeatlas.sensors.Calibration
@@ -43,14 +51,20 @@ import kotlin.random.Random
  */
 enum class ClinicalModuleId(val title: String, val shortDesc: String) {
     PERIMETRY("Visual Field (24-2)", "54-point suprathreshold perimetry & scotoma mapping"),
-    ACUITY("Visual Acuity (Tumbling E)", "Adaptive ETDRS logMAR & Snellen acuity staircase"),
-    COLOUR("Colour Vision (Ishihara)", "Calibrated pseudo-isochromatic plates & deficiency triage"),
+    ACUITY("Visual Acuity (ETDRS)", "Adaptive ETDRS logMAR & Snellen acuity staircase"),
+    COLOUR("Colour Vision (Ishihara)", "24 authentic pseudo-isochromatic plates & deficiency triage"),
     CONTRAST("Contrast Sensitivity", "Pelli-Robson triplet staircase & logCS determination"),
     AMSLER("Central Amsler (10°)", "Maculopathy, metamorphopsia & central scotoma map"),
     WORTH_DOT("Binocular (Worth 4-Dot)", "Sensory fusion, suppression & diplopia detection"),
     MOTILITY("Ocular Motility (Broad-H)", "9 cardinal gazes smooth pursuit & cranial nerve paresis"),
     PUPIL_RAPD("Pupillary Exam (RAPD)", "Swinging flashlight test & afferent defect assessment"),
     GUIDED_PROTOCOL("Guided 14-Stage Protocol", "Standardized ophthalmic screening examination workflow")
+}
+
+enum class AcuityOptotypeMode(val label: String) {
+    TUMBLING_E("Tumbling E"),
+    LANDOLT_C("Landolt C"),
+    SLOAN("Sloan Letters")
 }
 
 enum class PointStatus {
@@ -79,17 +93,28 @@ fun PatientScreen(
     val remoteClient = remember { RemoteSessionClient(sessionId = "SES-REM-LIVE-01") }
 
     // Navigation and Mode States
-    var selectedModule by remember { mutableStateOf(ClinicalModuleId.PERIMETRY) }
-    var testedEye by remember { mutableStateOf(EyeLaterality.OD) }
+    var selectedModule by remember { mutableStateOf(ClinicalSessionCoordinator.activeModule) }
+    var testedEye by remember { mutableStateOf(ClinicalSessionCoordinator.activeEye) }
     var isVrMode by remember { mutableStateOf(false) }
-    var isEmergencyHalted by remember { mutableStateOf(false) }
+    var isEmergencyHalted by remember { mutableStateOf(ClinicalSessionCoordinator.isEmergencyHalted) }
     var pairingPin by remember { mutableStateOf("839201") }
     var feedbackToast by remember { mutableStateOf("Ready. Select module or enter VR Mode.") }
     var currentScreen by remember { mutableStateOf(ScreenId.UX_07) }
 
-    // --- Perimetry Engine State ---
+    // --- Acuity Engine State ---
+    var acuityOptotypeMode by remember { mutableStateOf(AcuityOptotypeMode.TUMBLING_E) }
+    var acuitySloanLetter by remember { mutableStateOf('E') }
+    var acuityLogMar by remember { mutableStateOf(1.0) } // Starts at 6/60
+    var acuityOrientation by remember { mutableStateOf(OptotypeOrientation.RIGHT) }
+    var acuityTrialsDone by remember { mutableStateOf(0) }
+    var acuityConsecutiveCorrect by remember { mutableStateOf(0) }
+    var acuityScore by remember { mutableStateOf("Measuring (Current: 6/60)...") }
+
+    // --- Perimetry Engine State (RANDOMIZED 24-2 SEQUENCE) ---
     val perimetryPoints = remember(testedEye) { functionalTests.generateFiftyFourPointMap(testedEye) }
-    var activePerimetryIndex by remember { mutableStateOf(0) }
+    val perimetryOrder = remember(testedEye) { (0 until perimetryPoints.size).shuffled().toMutableList() }
+    var activePerimetryStep by remember { mutableStateOf(0) }
+    var activePerimetryIndex by remember { mutableStateOf(perimetryOrder.firstOrNull() ?: 0) }
     var isPerimetryRunning by remember { mutableStateOf(false) }
     var isStimulusActive by remember { mutableStateOf(false) }
     var stimulusAngleX by remember { mutableStateOf(0.0) }
@@ -100,20 +125,13 @@ fun PatientScreen(
     var fixationLosses by remember { mutableStateOf(0) }
     var falsePositives by remember { mutableStateOf(0) }
 
-    // --- Acuity Engine State ---
-    var acuityLogMar by remember { mutableStateOf(1.0) } // Starts at 6/60
-    var acuityOrientation by remember { mutableStateOf(OptotypeOrientation.RIGHT) }
-    var acuityTrialsDone by remember { mutableStateOf(0) }
-    var acuityConsecutiveCorrect by remember { mutableStateOf(0) }
-    var acuityScore by remember { mutableStateOf("Measuring (Current: 6/60)...") }
-
-    // --- Colour Vision State ---
-    var colourPlateIndex by remember { mutableStateOf(0) } // 0=Demo 12, 1=Plate 8, 2=Plate 29, 3=Plate 74
+    // --- Colour Vision State (24 ISHIHARA PLATES) ---
+    var colourPlateIndex by remember { mutableStateOf(0) }
     val colourPlateAnswers = remember { mutableStateListOf<String>() }
     var colourDiagnosis by remember { mutableStateOf<String?>(null) }
 
     // --- Contrast Sensitivity State ---
-    var contrastStep by remember { mutableStateOf(0) } // 0=100%, 1=50%, 2=25%, 3=12.5%, 4=6.25%, 5=3.12%, 6=1.56%
+    var contrastStep by remember { mutableStateOf(0) }
     var contrastLogCsScore by remember { mutableStateOf<Double?>(null) }
 
     // --- Amsler Grid State ---
@@ -135,7 +153,70 @@ fun PatientScreen(
     var pupilIlluminatedEye by remember { mutableStateOf<EyeLaterality?>(null) }
     var pupilRapdResult by remember { mutableStateOf<String?>(null) }
 
-    // Generic Clicker Handler (dispatched from screen tap or physical volume rocker)
+    // RESET HANDLER: Restarts and clears state for whichever test is active
+    val resetCurrentModule: () -> Unit = {
+        when (selectedModule) {
+            ClinicalModuleId.PERIMETRY -> {
+                perimetryOrder.clear()
+                perimetryOrder.addAll((0 until perimetryPoints.size).shuffled())
+                activePerimetryStep = 0
+                activePerimetryIndex = perimetryOrder.firstOrNull() ?: 0
+                perimetryReactionTimes.clear()
+                perimetryResults.clear()
+                falsePositives = 0
+                fixationLosses = 0
+                isPerimetryRunning = false
+                isStimulusActive = false
+                feedbackToast = "24-2 Perimetry reset & point order randomized."
+            }
+            ClinicalModuleId.ACUITY -> {
+                acuityLogMar = 1.0
+                acuityTrialsDone = 0
+                acuityConsecutiveCorrect = 0
+                acuityScore = "Staircase reset (Current: 6/60)..."
+                feedbackToast = "Visual Acuity staircase reset to initial step."
+            }
+            ClinicalModuleId.COLOUR -> {
+                colourPlateIndex = 0
+                colourPlateAnswers.clear()
+                colourDiagnosis = null
+                feedbackToast = "Ishihara Colour test reset to Plate 1."
+            }
+            ClinicalModuleId.CONTRAST -> {
+                contrastStep = 0
+                contrastLogCsScore = null
+                feedbackToast = "Contrast Sensitivity reset to 100%."
+            }
+            ClinicalModuleId.AMSLER -> {
+                amslerDefectPoints.clear()
+                amslerResult = null
+                feedbackToast = "Amsler grid cleared."
+            }
+            ClinicalModuleId.WORTH_DOT -> {
+                worthDotResult = null
+                feedbackToast = "Worth 4-Dot test reset."
+            }
+            ClinicalModuleId.MOTILITY -> {
+                isMotilityRunning = false
+                motilityAngleX = 0f
+                motilityAngleY = 0f
+                motilityGazeLabel = "Primary Position (Center)"
+                motilityResult = null
+                feedbackToast = "Motility test reset to primary fixation."
+            }
+            ClinicalModuleId.PUPIL_RAPD -> {
+                isPupilRunning = false
+                pupilIlluminatedEye = null
+                pupilRapdResult = null
+                feedbackToast = "Pupillary RAPD test reset."
+            }
+            else -> {
+                feedbackToast = "${selectedModule.title} reset."
+            }
+        }
+    }
+
+    // Generic Clicker Handler (dispatched from screen tap, physical volume rocker, or remote response pad)
     val handleTactileResponse = {
         val now = System.nanoTime()
         if (isEmergencyHalted) {
@@ -156,10 +237,30 @@ fun PatientScreen(
         }
     }
 
-    // Register hardware volume rocker key listener
+    // Listen to remote module switching without leaving VR
+    LaunchedEffect(ClinicalSessionCoordinator.activeModule, ClinicalSessionCoordinator.activeEye) {
+        if (selectedModule != ClinicalSessionCoordinator.activeModule || testedEye != ClinicalSessionCoordinator.activeEye) {
+            selectedModule = ClinicalSessionCoordinator.activeModule
+            testedEye = ClinicalSessionCoordinator.activeEye
+            resetCurrentModule()
+            feedbackToast = "Switched to ${selectedModule.title} (${testedEye.name})"
+        }
+    }
+
+    LaunchedEffect(ClinicalSessionCoordinator.isEmergencyHalted) {
+        isEmergencyHalted = ClinicalSessionCoordinator.isEmergencyHalted
+    }
+
+    // Register hardware volume rocker and remote coordinator listener
     DisposableEffect(Unit) {
         registerVolumeKeyListener { handleTactileResponse() }
-        onDispose { registerVolumeKeyListener(null) }
+        ClinicalSessionCoordinator.onRemoteTapListener = { _ -> handleTactileResponse() }
+        ClinicalSessionCoordinator.onResetTestListener = { resetCurrentModule() }
+        onDispose {
+            registerVolumeKeyListener(null)
+            ClinicalSessionCoordinator.onRemoteTapListener = null
+            ClinicalSessionCoordinator.onResetTestListener = null
+        }
     }
 
     // Synchronize landscape/portrait orientation with VR Mode
@@ -167,11 +268,13 @@ fun PatientScreen(
         onToggleVrOrientation(isVrMode)
     }
 
-    // Perimetry Stimulus Presentation Loop
-    LaunchedEffect(isPerimetryRunning, activePerimetryIndex) {
-        if (isPerimetryRunning && activePerimetryIndex < perimetryPoints.size && !isEmergencyHalted) {
-            delay(1200L + Random.nextLong(0, 500))
-            val currentPt = perimetryPoints[activePerimetryIndex]
+    // Perimetry Stimulus Presentation Loop (RANDOMIZED ORDER)
+    LaunchedEffect(isPerimetryRunning, activePerimetryStep) {
+        if (isPerimetryRunning && activePerimetryStep < perimetryOrder.size && !isEmergencyHalted) {
+            delay(1100L + Random.nextLong(0, 400))
+            val pointIdx = perimetryOrder[activePerimetryStep]
+            activePerimetryIndex = pointIdx
+            val currentPt = perimetryPoints[pointIdx]
             stimulusAngleX = currentPt.first
             stimulusAngleY = currentPt.second
             stimulusStartNs = System.nanoTime()
@@ -183,12 +286,12 @@ fun PatientScreen(
 
             // Wait 600ms for response window
             delay(600L)
-            if (!perimetryResults.containsKey(activePerimetryIndex)) {
-                perimetryResults[activePerimetryIndex] = PointStatus.MISSED
+            if (!perimetryResults.containsKey(pointIdx)) {
+                perimetryResults[pointIdx] = PointStatus.MISSED
             }
 
-            if (activePerimetryIndex + 1 < perimetryPoints.size) {
-                activePerimetryIndex++
+            if (activePerimetryStep + 1 < perimetryOrder.size) {
+                activePerimetryStep++
             } else {
                 isPerimetryRunning = false
                 feedbackToast = "24-2 Visual Field Complete! Seen: ${perimetryResults.values.count { it == PointStatus.SEEN }}/54"
@@ -251,27 +354,29 @@ fun PatientScreen(
         ) {
             // Stereo Split Screen: Left Eye (OS) | Vertical Septum | Right Eye (OD)
             Row(modifier = Modifier.fillMaxSize()) {
+                val isOsActive = testedEye == EyeLaterality.OS || testedEye == EyeLaterality.OU ||
+                        selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY
+                val isOdActive = testedEye == EyeLaterality.OD || testedEye == EyeLaterality.OU ||
+                        selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY
+
                 // Left Eye Viewport (OS)
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(
-                            if (testedEye == EyeLaterality.OD && selectedModule != ClinicalModuleId.WORTH_DOT && selectedModule != ClinicalModuleId.MOTILITY)
-                                Color.Black // Monocular Occlusion of Left Eye
-                            else
-                                Color(0xFF050811)
-                        ),
+                        .background(if (!isOsActive) Color.Black else Color(0xFF050811)),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (testedEye == EyeLaterality.OS || selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY) {
+                    if (isOsActive) {
                         RenderActiveStimulusInVr(
                             eye = EyeLaterality.OS,
                             module = selectedModule,
                             isStimulusActive = isStimulusActive,
                             stimulusAngleX = stimulusAngleX,
                             stimulusAngleY = stimulusAngleY,
+                            acuityOptotypeMode = acuityOptotypeMode,
                             acuityOrientation = acuityOrientation,
+                            acuitySloanLetter = acuitySloanLetter,
                             acuityLogMar = acuityLogMar,
                             colourPlateIndex = colourPlateIndex,
                             contrastStep = contrastStep,
@@ -297,22 +402,19 @@ fun PatientScreen(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .background(
-                            if (testedEye == EyeLaterality.OS && selectedModule != ClinicalModuleId.WORTH_DOT && selectedModule != ClinicalModuleId.MOTILITY)
-                                Color.Black // Monocular Occlusion of Right Eye
-                            else
-                                Color(0xFF050811)
-                        ),
+                        .background(if (!isOdActive) Color.Black else Color(0xFF050811)),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (testedEye == EyeLaterality.OD || selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY) {
+                    if (isOdActive) {
                         RenderActiveStimulusInVr(
                             eye = EyeLaterality.OD,
                             module = selectedModule,
                             isStimulusActive = isStimulusActive,
                             stimulusAngleX = stimulusAngleX,
                             stimulusAngleY = stimulusAngleY,
+                            acuityOptotypeMode = acuityOptotypeMode,
                             acuityOrientation = acuityOrientation,
+                            acuitySloanLetter = acuitySloanLetter,
                             acuityLogMar = acuityLogMar,
                             colourPlateIndex = colourPlateIndex,
                             contrastStep = contrastStep,
@@ -326,7 +428,7 @@ fun PatientScreen(
                 }
             }
 
-            // Top HUD Overlay: Module Name, Active Eye, Exit Button
+            // Top HUD Overlay: Module Name, Active Eye, Reset & Exit Buttons
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -335,12 +437,12 @@ fun PatientScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Surface(
-                    color = Color.Black.copy(alpha = 0.7f),
+                    color = Color.Black.copy(alpha = 0.75f),
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(1.dp, Color(0xFF334155))
                 ) {
                     Text(
-                        text = "VR MODE • ${selectedModule.title} • Eye: ${testedEye.name} • Tap Screen or Volume Key to Respond",
+                        text = "VR MODE • ${selectedModule.title} • Eye: ${testedEye.name} • Tap Screen or Volume Key",
                         color = Color(0xFF38BDF8),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -348,13 +450,27 @@ fun PatientScreen(
                     )
                 }
 
-                Button(
-                    onClick = { isVrMode = false },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDC2626)),
-                    shape = RoundedCornerShape(8.dp),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
-                ) {
-                    Text("Exit VR", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedButton(
+                        onClick = { resetCurrentModule() },
+                        border = BorderStroke(1.dp, Color(0xFF38BDF8)),
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text("↺ Reset", color = Color(0xFF38BDF8), fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+
+                    Button(
+                        onClick = {
+                            isVrMode = false
+                            ClinicalSessionCoordinator.isVrModeActive = false
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDC2626)),
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+                    ) {
+                        Text("Exit VR", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
                 }
             }
         }
@@ -381,7 +497,7 @@ fun PatientScreen(
 
         ResearchNotice()
 
-        // 1. TOP CONTROL BAR: Eye Laterality Toggle + VR Box Launcher + Emergency Halt
+        // 1. TOP CONTROL BAR: Eye Laterality Toggle (OD, OS, OU) + VR Box Launcher + Reset Button
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -391,40 +507,71 @@ fun PatientScreen(
             shape = RoundedCornerShape(10.dp)
         ) {
             Column(modifier = Modifier.padding(10.dp)) {
+                // Tested Eye Selector Row with OD, OS, OU
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    // Tested Eye Selector
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("Eye: ", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = ClinicalTheme.TextPrimary)
-                        Spacer(modifier = Modifier.width(4.dp))
-                        FilterChip(
-                            selected = testedEye == EyeLaterality.OD,
-                            onClick = { testedEye = EyeLaterality.OD },
-                            label = { Text("OD (Right)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        FilterChip(
-                            selected = testedEye == EyeLaterality.OS,
-                            onClick = { testedEye = EyeLaterality.OS },
-                            label = { Text("OS (Left)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
-                        )
-                    }
+                    Text("Eye: ", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = ClinicalTheme.TextPrimary)
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OD,
+                        onClick = {
+                            testedEye = EyeLaterality.OD
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OD)
+                        },
+                        label = { Text("OD (Right)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OS,
+                        onClick = {
+                            testedEye = EyeLaterality.OS
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OS)
+                        },
+                        label = { Text("OS (Left)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OU,
+                        onClick = {
+                            testedEye = EyeLaterality.OU
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OU)
+                        },
+                        label = { Text("OU (Both)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                }
 
-                    // VR Mode Button
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Action Buttons Row: Launch VR Box & Reset Test
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Button(
-                        onClick = { isVrMode = true },
+                        onClick = {
+                            isVrMode = true
+                            ClinicalSessionCoordinator.isVrModeActive = true
+                        },
                         colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
                         shape = RoundedCornerShape(8.dp),
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
                     ) {
                         Text("🥽 Launch VR Box", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
+
+                    OutlinedButton(
+                        onClick = { resetCurrentModule() },
+                        border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                    ) {
+                        Text("↺ Reset Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    }
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 // Status Toast / Monitored Prompt
                 Text(
                     text = feedbackToast,
@@ -447,7 +594,7 @@ fun PatientScreen(
             color = ClinicalTheme.TextSecondary,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp, bottom = 4.dp, start = 4.dp)
+                .padding(top = 10.dp, bottom = 4.dp, start = 4.dp)
         )
 
         Row(
@@ -463,6 +610,7 @@ fun PatientScreen(
                     selected = isSelected,
                     onClick = {
                         selectedModule = module
+                        ClinicalSessionCoordinator.switchModule(module)
                         feedbackToast = "Launched ${module.title}. Configure and test below."
                     },
                     label = {
@@ -503,7 +651,7 @@ fun PatientScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                         Text(
                             text = selectedModule.title,
                             fontWeight = FontWeight.Bold,
@@ -513,7 +661,9 @@ fun PatientScreen(
                         Text(
                             text = selectedModule.shortDesc,
                             fontSize = 11.sp,
-                            color = ClinicalTheme.TextSecondary
+                            color = ClinicalTheme.TextSecondary,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                     Surface(
@@ -556,6 +706,7 @@ fun PatientScreen(
                                 feedbackToast = "24-2 Visual Field Exam Started. Fixate central + mark."
                             },
                             onPause = { isPerimetryRunning = false },
+                            onReset = { resetCurrentModule() },
                             onTap = handleTactileResponse
                         )
                     }
@@ -563,11 +714,14 @@ fun PatientScreen(
                     ClinicalModuleId.ACUITY -> {
                         AcuityModuleView(
                             eye = testedEye,
+                            mode = acuityOptotypeMode,
                             logMar = acuityLogMar,
                             orientation = acuityOrientation,
+                            sloanLetter = acuitySloanLetter,
                             trialsDone = acuityTrialsDone,
                             scoreText = acuityScore,
-                            onResponse = { chosenOrientation ->
+                            onModeChange = { acuityOptotypeMode = it },
+                            onResponseOrientation = { chosenOrientation ->
                                 acuityTrialsDone++
                                 val isCorrect = chosenOrientation == acuityOrientation
                                 if (isCorrect) {
@@ -582,11 +736,31 @@ fun PatientScreen(
                                     acuityLogMar = min(1.2, acuityLogMar + 0.2)
                                     acuityConsecutiveCorrect = 0
                                 }
-                                // Next random orientation
                                 acuityOrientation = OptotypeOrientation.values().random()
                                 val snellenDenominator = round(6.0 * 10.0.pow(acuityLogMar)).toInt()
                                 acuityScore = "Snellen: 6/$snellenDenominator (${round(acuityLogMar * 100) / 100.0} logMAR)"
-                            }
+                            },
+                            onResponseLetter = { chosenLetter ->
+                                acuityTrialsDone++
+                                val isCorrect = chosenLetter == acuitySloanLetter
+                                if (isCorrect) {
+                                    acuityConsecutiveCorrect++
+                                    feedbackToast = "Correct! Letter matched."
+                                    if (acuityConsecutiveCorrect >= 2) {
+                                        acuityLogMar = max(0.0, acuityLogMar - 0.2)
+                                        acuityConsecutiveCorrect = 0
+                                    }
+                                } else {
+                                    feedbackToast = "Incorrect. Stepping to larger optotype."
+                                    acuityLogMar = min(1.2, acuityLogMar + 0.2)
+                                    acuityConsecutiveCorrect = 0
+                                }
+                                val sloanOptions = listOf('C', 'D', 'E', 'F', 'L', 'O', 'P', 'T', 'Z')
+                                acuitySloanLetter = sloanOptions.random()
+                                val snellenDenominator = round(6.0 * 10.0.pow(acuityLogMar)).toInt()
+                                acuityScore = "Snellen: 6/$snellenDenominator (${round(acuityLogMar * 100) / 100.0} logMAR)"
+                            },
+                            onReset = { resetCurrentModule() }
                         )
                     }
 
@@ -596,28 +770,49 @@ fun PatientScreen(
                             diagnosis = colourDiagnosis,
                             onAnswer = { ans ->
                                 colourPlateAnswers.add(ans)
-                                if (colourPlateIndex + 1 < 4) {
+                                if (colourPlateIndex + 1 < 24) {
                                     colourPlateIndex++
-                                    feedbackToast = "Plate ${colourPlateIndex + 1} presented. Select number seen."
+                                    feedbackToast = "Plate ${colourPlateIndex + 1} of 24. Record number seen."
                                 } else {
-                                    // Evaluate diagnosis
-                                    val isNormal = colourPlateAnswers.getOrNull(0) == "12" &&
-                                            colourPlateAnswers.getOrNull(1) == "8" &&
-                                            colourPlateAnswers.getOrNull(2) == "29" &&
-                                            colourPlateAnswers.getOrNull(3) == "74"
-                                    colourDiagnosis = if (isNormal) {
-                                        "NORMAL TRICHROMAT (No Red-Green Defect)"
+                                    val errorCount = colourPlateAnswers.filterIndexed { idx, answer ->
+                                        when (idx) {
+                                            0 -> answer != "12"
+                                            1 -> answer != "8"
+                                            2 -> answer != "6"
+                                            3 -> answer != "29"
+                                            4 -> answer != "57"
+                                            5 -> answer != "5"
+                                            6 -> answer != "3"
+                                            7 -> answer != "15"
+                                            8 -> answer != "74"
+                                            9 -> answer != "2"
+                                            10 -> answer != "6"
+                                            11 -> answer != "97"
+                                            12 -> answer != "45"
+                                            13 -> answer != "5"
+                                            14 -> answer != "7"
+                                            15 -> answer != "16"
+                                            16 -> answer != "73"
+                                            17, 18, 19, 20 -> answer != "Blank" && answer.isNotEmpty()
+                                            21 -> !answer.contains("26")
+                                            22 -> !answer.contains("42")
+                                            23 -> !answer.contains("35")
+                                            else -> false
+                                        }
+                                    }.size
+                                    colourDiagnosis = if (errorCount <= 2) {
+                                        "NORMAL TRICHROMAT (≤2 errors / 24 plates)"
+                                    } else if (colourPlateAnswers.getOrNull(21) == "2" || colourPlateAnswers.getOrNull(22) == "4" || colourPlateAnswers.getOrNull(23) == "3") {
+                                        "DEUTERANOPIA / DEUTERANOMALY (Green deficiency)"
+                                    } else if (colourPlateAnswers.getOrNull(21) == "6" || colourPlateAnswers.getOrNull(22) == "2" || colourPlateAnswers.getOrNull(23) == "5") {
+                                        "PROTANOPIA / PROTANOMALY (Red deficiency)"
                                     } else {
-                                        "DEUTERANOMALOUS / PROTAN DEFICIENCY DETECTED"
+                                        "RED-GREEN DEFICIENCY DETECTED ($errorCount errors / 24 plates)"
                                     }
-                                    feedbackToast = "Colour Vision Complete: $colourDiagnosis"
+                                    feedbackToast = "Ishihara 24-Plate Complete: $colourDiagnosis"
                                 }
                             },
-                            onReset = {
-                                colourPlateIndex = 0
-                                colourPlateAnswers.clear()
-                                colourDiagnosis = null
-                            }
+                            onReset = { resetCurrentModule() }
                         )
                     }
 
@@ -759,13 +954,15 @@ fun RenderActiveStimulusInVr(
     isStimulusActive: Boolean,
     stimulusAngleX: Double,
     stimulusAngleY: Double,
-    acuityOrientation: OptotypeOrientation,
-    acuityLogMar: Double,
-    colourPlateIndex: Int,
-    contrastStep: Int,
-    motilityAngleX: Float,
-    motilityAngleY: Float,
-    pupilIlluminated: Boolean
+    acuityOptotypeMode: AcuityOptotypeMode = AcuityOptotypeMode.TUMBLING_E,
+    acuityOrientation: OptotypeOrientation = OptotypeOrientation.UP,
+    acuitySloanLetter: Char = 'E',
+    acuityLogMar: Double = 0.0,
+    colourPlateIndex: Int = 0,
+    contrastStep: Int = 0,
+    motilityAngleX: Float = 0f,
+    motilityAngleY: Float = 0f,
+    pupilIlluminated: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -794,11 +991,15 @@ fun RenderActiveStimulusInVr(
 
             ClinicalModuleId.ACUITY -> {
                 val sizeDp = max(18.0, 90.0 * 10.0.pow(acuityLogMar - 1.0)).dp
-                TumblingECanvas(orientation = acuityOrientation, sizeDp = sizeDp)
+                when (acuityOptotypeMode) {
+                    AcuityOptotypeMode.TUMBLING_E -> TumblingECanvas(orientation = acuityOrientation, sizeDp = sizeDp, color = Color.White)
+                    AcuityOptotypeMode.LANDOLT_C -> LandoltCCanvas(orientation = acuityOrientation, sizeDp = sizeDp, color = Color.White)
+                    AcuityOptotypeMode.SLOAN -> SloanLetterDisplay(letter = acuitySloanLetter, sizeDp = sizeDp, color = Color.White)
+                }
             }
 
             ClinicalModuleId.COLOUR -> {
-                IshiharaPlateCanvas(plateIndex = colourPlateIndex, diameterDp = 220.dp)
+                IshiharaPlateBitmapView(plateNumber = colourPlateIndex + 1, diameterDp = 220.dp)
             }
 
             ClinicalModuleId.CONTRAST -> {
@@ -864,6 +1065,7 @@ fun PerimetryModuleView(
     falsePositives: Int,
     onStart: () -> Unit,
     onPause: () -> Unit,
+    onReset: () -> Unit,
     onTap: () -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -955,92 +1157,188 @@ fun PerimetryModuleView(
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.weight(1f)
             ) {
-                Text(if (isRunning) "Pause Field Exam" else "Start 24-2 Exam", color = Color.White, fontWeight = FontWeight.Bold)
+                Text(if (isRunning) "Pause" else "Start 24-2", color = Color.White, fontWeight = FontWeight.Bold)
             }
 
             OutlinedButton(
-                onClick = onTap,
-                modifier = Modifier.weight(1f),
+                onClick = onReset,
+                modifier = Modifier.weight(0.7f),
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.5.dp, ClinicalTheme.SeaGreenPrimary)
+                border = BorderStroke(1.dp, Color(0xFF94A3B8))
             ) {
-                Text("Tap Response (Seen)", color = ClinicalTheme.SeaGreenPrimary, fontWeight = FontWeight.Bold)
+                Text("↺ Reset", color = ClinicalTheme.TextPrimary, fontWeight = FontWeight.Medium)
+            }
+
+            Button(
+                onClick = onTap,
+                modifier = Modifier.weight(1.3f),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+            ) {
+                Text("Seen (Tap)", color = Color.White, fontWeight = FontWeight.Bold)
             }
         }
     }
 }
 
 // =============================================================================
-// MODULE 2: VISUAL ACUITY VIEW (TUMBLING E)
+// MODULE 2: VISUAL ACUITY VIEW (ETDRS: TUMBLING E, LANDOLT C, SLOAN LETTERS)
 // =============================================================================
 @Composable
 fun AcuityModuleView(
     eye: EyeLaterality,
+    mode: AcuityOptotypeMode,
     logMar: Double,
     orientation: OptotypeOrientation,
+    sloanLetter: Char,
     trialsDone: Int,
     scoreText: String,
-    onResponse: (OptotypeOrientation) -> Unit
+    onModeChange: (AcuityOptotypeMode) -> Unit,
+    onResponseOrientation: (OptotypeOrientation) -> Unit,
+    onResponseLetter: (Char) -> Unit,
+    onReset: () -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Mode Selector
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            listOf(
+                AcuityOptotypeMode.TUMBLING_E to "Tumbling E",
+                AcuityOptotypeMode.LANDOLT_C to "Landolt C",
+                AcuityOptotypeMode.SLOAN to "Sloan Letters"
+            ).forEach { (m, label) ->
+                FilterChip(
+                    selected = mode == m,
+                    onClick = { onModeChange(m) },
+                    label = { Text(label, fontSize = 11.sp, fontWeight = if (mode == m) FontWeight.Bold else FontWeight.Normal) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = ClinicalTheme.SeaGreenLight,
+                        selectedLabelColor = ClinicalTheme.SeaGreenDark
+                    ),
+                    modifier = Modifier.padding(horizontal = 3.dp)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
         // Acuity Box
         Box(
             modifier = Modifier
-                .size(240.dp)
+                .size(220.dp)
                 .background(Color.White)
                 .border(2.dp, ClinicalTheme.CardBorder, RoundedCornerShape(12.dp)),
             contentAlignment = Alignment.Center
         ) {
             val sizeDp = max(24.0, 110.0 * 10.0.pow(logMar - 1.0)).dp
-            TumblingECanvas(orientation = orientation, sizeDp = sizeDp)
+            when (mode) {
+                AcuityOptotypeMode.TUMBLING_E -> TumblingECanvas(orientation = orientation, sizeDp = sizeDp, color = Color.Black)
+                AcuityOptotypeMode.LANDOLT_C -> LandoltCCanvas(orientation = orientation, sizeDp = sizeDp, color = Color.Black)
+                AcuityOptotypeMode.SLOAN -> SloanLetterDisplay(letter = sloanLetter, sizeDp = sizeDp, color = Color.Black)
+            }
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        Text(scoreText, fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 14.sp)
-        Text("Which direction is the letter E facing?", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // 4-Way Directional Response Buttons
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(
-                onClick = { onResponse(OptotypeOrientation.UP) },
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(scoreText, fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 13.sp)
+            OutlinedButton(
+                onClick = onReset,
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
             ) {
-                Text("▲ UP", color = Color.White, fontWeight = FontWeight.Bold)
+                Text("↺ Reset", fontSize = 11.sp)
             }
-            Spacer(modifier = Modifier.height(6.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Response Controls
+        if (mode == AcuityOptotypeMode.TUMBLING_E || mode == AcuityOptotypeMode.LANDOLT_C) {
+            Text(
+                if (mode == AcuityOptotypeMode.TUMBLING_E) "Which direction is the letter E facing?" else "Where is the opening of the ring?",
+                fontSize = 12.sp,
+                color = ClinicalTheme.TextSecondary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Button(
-                    onClick = { onResponse(OptotypeOrientation.LEFT) },
+                    onClick = { onResponseOrientation(OptotypeOrientation.UP) },
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
                 ) {
-                    Text("◄ LEFT", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("▲ UP", color = Color.White, fontWeight = FontWeight.Bold)
                 }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Button(
+                        onClick = { onResponseOrientation(OptotypeOrientation.LEFT) },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("◄ LEFT", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                    Button(
+                        onClick = { onResponseOrientation(OptotypeOrientation.RIGHT) },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("► RIGHT", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
                 Button(
-                    onClick = { onResponse(OptotypeOrientation.RIGHT) },
+                    onClick = { onResponseOrientation(OptotypeOrientation.DOWN) },
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
                 ) {
-                    Text("► RIGHT", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("▼ DOWN", color = Color.White, fontWeight = FontWeight.Bold)
                 }
             }
+        } else {
+            Text("Select the Sloan letter displayed:", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
             Spacer(modifier = Modifier.height(6.dp))
-            Button(
-                onClick = { onResponse(OptotypeOrientation.DOWN) },
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+            val sloanLetters = listOf('C', 'D', 'E', 'F', 'L', 'O', 'P', 'T', 'Z')
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text("▼ DOWN", color = Color.White, fontWeight = FontWeight.Bold)
+                sloanLetters.take(5).forEach { l ->
+                    Button(
+                        onClick = { onResponseLetter(l) },
+                        shape = RoundedCornerShape(6.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text(l.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                sloanLetters.drop(5).forEach { l ->
+                    Button(
+                        onClick = { onResponseLetter(l) },
+                        shape = RoundedCornerShape(6.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text(l.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                }
             }
         }
     }
 }
 
 // =============================================================================
-// MODULE 3: COLOUR VISION VIEW (ISHIHARA PLATES)
+// MODULE 3: COLOUR VISION VIEW (24 AUTHENTIC ISHIHARA PLATES)
 // =============================================================================
 @Composable
 fun ColourVisionModuleView(
@@ -1049,16 +1347,10 @@ fun ColourVisionModuleView(
     onAnswer: (String) -> Unit,
     onReset: () -> Unit
 ) {
+    val plateNumber = plateIndex + 1
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val plateTitles = listOf(
-            "Plate 1: Demonstration (Numeral 12)",
-            "Plate 2: Red-Green Screening (Numeral 8 vs 3)",
-            "Plate 3: Deutan Diagnostic (Numeral 29 vs 70)",
-            "Plate 4: Protan Diagnostic (Numeral 74 vs 21)"
-        )
-
         Text(
-            text = plateTitles.getOrElse(plateIndex) { "Ishihara Test" },
+            text = "Ishihara Plate $plateNumber of 24 (Authentic Plates)",
             fontWeight = FontWeight.Bold,
             fontSize = 13.sp,
             color = ClinicalTheme.TextPrimary
@@ -1066,8 +1358,8 @@ fun ColourVisionModuleView(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Ishihara Plate Canvas
-        IshiharaPlateCanvas(plateIndex = plateIndex, diameterDp = 220.dp)
+        // Display authentic extracted plate from assets
+        IshiharaPlateBitmapView(plateNumber = plateNumber, diameterDp = 220.dp)
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -1078,34 +1370,71 @@ fun ColourVisionModuleView(
                 border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder)
             ) {
                 Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("ASSESSMENT RESULT:", fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 11.sp)
+                    Text("DIAGNOSTIC ASSESSMENT:", fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 11.sp)
                     Text(diagnosis, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary, fontSize = 13.sp, textAlign = TextAlign.Center)
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = onReset, colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)) {
-                        Text("Retest Colour Plates", color = Color.White)
+                        Text("Retest All 24 Plates", color = Color.White)
                     }
                 }
             }
         } else {
-            Text("Select the number you see on the plate:", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
+            Text("Select or enter the numeral seen:", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
             Spacer(modifier = Modifier.height(8.dp))
 
-            val options = when (plateIndex) {
-                0 -> listOf("12", "Can't See / Blank")
-                1 -> listOf("8", "3", "Can't See / Blank")
-                2 -> listOf("29", "70", "Can't See / Blank")
-                else -> listOf("74", "21", "Can't See / Blank")
+            val choices = when (plateNumber) {
+                1 -> listOf("12", "Can't See / Blank")
+                2 -> listOf("8", "3", "Can't See / Blank")
+                3 -> listOf("6", "5", "Can't See / Blank")
+                4 -> listOf("29", "70", "Can't See / Blank")
+                5 -> listOf("57", "35", "Can't See / Blank")
+                6 -> listOf("5", "2", "Can't See / Blank")
+                7 -> listOf("3", "5", "Can't See / Blank")
+                8 -> listOf("15", "17", "Can't See / Blank")
+                9 -> listOf("74", "21", "Can't See / Blank")
+                10 -> listOf("2", "Can't See / Blank")
+                11 -> listOf("6", "Can't See / Blank")
+                12 -> listOf("97", "Can't See / Blank")
+                13 -> listOf("45", "Can't See / Blank")
+                14 -> listOf("5", "Can't See / Blank")
+                15 -> listOf("7", "Can't See / Blank")
+                16 -> listOf("16", "Can't See / Blank")
+                17 -> listOf("73", "Can't See / Blank")
+                18 -> listOf("5", "Can't See / Blank")
+                19 -> listOf("2", "Can't See / Blank")
+                20 -> listOf("45", "Can't See / Blank")
+                21 -> listOf("73", "Can't See / Blank")
+                22 -> listOf("26 (Normal)", "6 (Protan)", "2 (Deutan)", "Blank")
+                23 -> listOf("42 (Normal)", "2 (Protan)", "4 (Deutan)", "Blank")
+                24 -> listOf("35 (Normal)", "5 (Protan)", "3 (Deutan)", "Blank")
+                else -> listOf("Blank", "Other")
             }
 
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                options.forEach { opt ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                choices.forEach { opt ->
                     Button(
-                        onClick = { onAnswer(opt) },
+                        onClick = { onAnswer(opt.split(" ").first()) },
                         colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
-                        shape = RoundedCornerShape(8.dp)
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.padding(horizontal = 3.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
                     ) {
-                        Text(opt, color = Color.White, fontWeight = FontWeight.Bold)
+                        Text(opt, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedButton(onClick = onReset) {
+                    Text("↺ Restart", color = ClinicalTheme.TextSecondary, fontSize = 11.sp)
                 }
             }
         }
@@ -1471,40 +1800,134 @@ fun GuidedProtocolView(
 }
 
 // =============================================================================
-// GEOMETRIC CANVASES (TUMBLING E, ISHIHARA, AMSLER, WORTH DOTS)
+// GEOMETRIC CANVASES (TUMBLING E, LANDOLT C, SLOAN, ISHIHARA, AMSLER, WORTH DOTS)
 // =============================================================================
 @Composable
-fun TumblingECanvas(orientation: OptotypeOrientation, sizeDp: androidx.compose.ui.unit.Dp) {
+fun TumblingECanvas(
+    orientation: OptotypeOrientation,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
     Canvas(modifier = Modifier.size(sizeDp)) {
         val s = size.width
         val strokeW = s / 5f
-        val color = Color.Black
+        val drawColor = color
 
         when (orientation) {
             OptotypeOrientation.RIGHT -> {
-                drawRect(color, Offset(0f, 0f), Size(strokeW, s))
-                drawRect(color, Offset(0f, 0f), Size(s, strokeW))
-                drawRect(color, Offset(0f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
-                drawRect(color, Offset(0f, s - strokeW), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
             }
             OptotypeOrientation.LEFT -> {
-                drawRect(color, Offset(s - strokeW, 0f), Size(strokeW, s))
-                drawRect(color, Offset(0f, 0f), Size(s, strokeW))
-                drawRect(color, Offset(s * 0.25f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
-                drawRect(color, Offset(0f, s - strokeW), Size(s, strokeW))
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(s * 0.25f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
             }
             OptotypeOrientation.UP -> {
-                drawRect(color, Offset(0f, s - strokeW), Size(s, strokeW))
-                drawRect(color, Offset(0f, 0f), Size(strokeW, s))
-                drawRect(color, Offset(s / 2f - strokeW / 2f, s * 0.25f), Size(strokeW, s * 0.75f))
-                drawRect(color, Offset(s - strokeW, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(s / 2f - strokeW / 2f, s * 0.25f), Size(strokeW, s * 0.75f))
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
             }
             OptotypeOrientation.DOWN -> {
-                drawRect(color, Offset(0f, 0f), Size(s, strokeW))
-                drawRect(color, Offset(0f, 0f), Size(strokeW, s))
-                drawRect(color, Offset(s / 2f - strokeW / 2f, 0f), Size(strokeW, s * 0.75f))
-                drawRect(color, Offset(s - strokeW, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(s / 2f - strokeW / 2f, 0f), Size(strokeW, s * 0.75f))
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
             }
+        }
+    }
+}
+
+@Composable
+fun LandoltCCanvas(
+    orientation: OptotypeOrientation,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
+    Canvas(modifier = Modifier.size(sizeDp)) {
+        val s = size.width
+        val strokeW = s / 5f
+        val gapSweep = 45f
+        val startAngle = when (orientation) {
+            OptotypeOrientation.RIGHT -> gapSweep / 2f
+            OptotypeOrientation.DOWN -> 90f + gapSweep / 2f
+            OptotypeOrientation.LEFT -> 180f + gapSweep / 2f
+            OptotypeOrientation.UP -> 270f + gapSweep / 2f
+        }
+        val sweepAngle = 360f - gapSweep
+
+        drawArc(
+            color = color,
+            startAngle = startAngle,
+            sweepAngle = sweepAngle,
+            useCenter = false,
+            topLeft = Offset(strokeW / 2f, strokeW / 2f),
+            size = Size(s - strokeW, s - strokeW),
+            style = Stroke(width = strokeW)
+        )
+    }
+}
+
+@Composable
+fun SloanLetterDisplay(
+    letter: Char,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
+    Box(
+        modifier = Modifier.size(sizeDp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = letter.toString(),
+            color = color,
+            fontSize = (sizeDp.value * 0.75).sp,
+            fontWeight = FontWeight.Black,
+            fontFamily = FontFamily.Monospace,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun IshiharaPlateBitmapView(plateNumber: Int, diameterDp: androidx.compose.ui.unit.Dp) {
+    val context = LocalContext.current
+    val plateClamped = plateNumber.coerceIn(1, 24)
+    val bitmapState = remember(plateClamped) {
+        derivedStateOf {
+            try {
+                val filename = "ishihara/plate_%02d.png".format(plateClamped)
+                context.assets.open(filename).use { stream ->
+                    BitmapFactory.decodeStream(stream)?.asImageBitmap()
+                }
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    val bmp = bitmapState.value
+    Box(
+        modifier = Modifier
+            .size(diameterDp)
+            .clip(CircleShape)
+            .background(Color.White)
+            .border(2.dp, Color(0xFF94A3B8), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        if (bmp != null) {
+            Image(
+                bitmap = bmp,
+                contentDescription = "Authentic Ishihara Plate $plateClamped",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+        } else {
+            IshiharaPlateCanvas(plateIndex = (plateClamped - 1).coerceIn(0, 3), diameterDp = diameterDp)
         }
     }
 }

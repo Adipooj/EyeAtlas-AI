@@ -359,16 +359,16 @@
       </div>
     </div>
     <div class="nav-actions">
-      <!-- Mode Switcher: Desktop Cockpit vs Phone 2 Response Touch Pad -->
+      <!-- Mode Switcher: 2 Unified Modes (Patient VR vs Physician & Response Pad) -->
       <div style="display:flex; background:#E2E8F0; border-radius:8px; padding:2px; gap:2px;">
-        <button id="btn-mode-cockpit" class="btn-toggle active" onclick="setPortalMode('PHYSICIAN_COCKPIT')">Physician Cockpit</button>
-        <button id="btn-mode-pad" class="btn-toggle" onclick="setPortalMode('PHONE2_RESPONSE_PAD')">Phone 2 Response Pad</button>
+        <button id="btn-mode-patient-vr" class="btn-toggle" onclick="enterPatientVrMode()">Patient VR View</button>
+        <button id="btn-mode-physician-pad" class="btn-toggle active" onclick="setPortalMode('PHYSICIAN_AND_RESPONSE')">Physician &amp; Response Pad</button>
       </div>
       <button id="btn-pair-modal-open" class="btn-secondary" style="border-color:#38BDF8; color:#0369A1; font-weight:700;" onclick="openRemotePairingModal()">Pair Online APK (CR-002)</button>
       <div id="backend-status" class="status-badge" style="cursor:pointer;" title="Click to configure Backend URL &amp; Pairing" onclick="openRemotePairingModal()">FastAPI Connecting...</div>
-      <button class="btn-vr" onclick="toggleVrView()">
+      <button class="btn-vr" onclick="enterPatientVrMode()">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z"/><circle cx="12" cy="10" r="2"/></svg>
-        Enter WebXR VR
+        Launch VR Box View
       </button>
     </div>
   </header>
@@ -506,6 +506,105 @@
             <div><strong>Role:</strong> <span id="info-role" style="font-weight:700; color:#0369A1;">PHYSICIAN_CONTROLLER (Authoritative)</span></div>
             <div><strong>Connected Peers:</strong> <span id="info-peers-count" style="font-weight:700;">2</span> (Host VR + Response Pad)</div>
             <div><strong>Clock Sync Latency:</strong> <span id="info-sync-latency" style="font-weight:700; color:#10B981;">14.2 ms</span> (&lt; 50ms Invariant Passed)</div>
+          </div>
+        </div>
+
+        <!-- REMOTE VR TEST CONTROLLER & DUAL-DEVICE COCKPIT (Switch Tests in VR without Exiting) -->
+        <div class="card" style="margin-bottom:20px; border-left:4px solid var(--sea-green);">
+          <div class="card-title">
+            <span>Remote VR Test Switcher &amp; Dynamic Laterality (Live Headset Control)</span>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD; font-weight:700;" onclick="resetCurrentTest()">&#8634; Reset Current Test</button>
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-weight:700;" onclick="triggerEmergencyHalt()">Priority STOP</button>
+            </div>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+            Switch active diagnostic stimuli on the paired VR Headset (Phone 1) instantly. The patient stays inside the VR headset while the clinician controls test parameters, laterality, and restarts from this station.
+          </p>
+
+          <!-- Module Chips -->
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Select Clinical Module:</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;" id="remote-module-chips">
+            <button class="btn-secondary active-module-btn" id="mod-btn-PERIMETRY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteTestSwitch('PERIMETRY')">&#9678; Visual Field (24-2)</button>
+            <button class="btn-secondary" id="mod-btn-ACUITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('ACUITY')">&#9670; Visual Acuity (ETDRS)</button>
+            <button class="btn-secondary" id="mod-btn-COLOUR" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('COLOUR')">&#9688; Colour Vision (24-Plate Ishihara)</button>
+            <button class="btn-secondary" id="mod-btn-CONTRAST" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('CONTRAST')">&#9681; Contrast Sensitivity</button>
+            <button class="btn-secondary" id="mod-btn-AMSLER" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('AMSLER')">&#9635; Central Amsler (10°)</button>
+            <button class="btn-secondary" id="mod-btn-WORTH_DOT" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('WORTH_DOT')">&#9684; Binocular (Worth 4-Dot)</button>
+            <button class="btn-secondary" id="mod-btn-MOTILITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('MOTILITY')">&#9690; Ocular Motility (Broad-H)</button>
+            <button class="btn-secondary" id="mod-btn-PUPIL_RAPD" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('PUPIL_RAPD')">&#9673; Pupillary Exam (RAPD)</button>
+          </div>
+
+          <!-- Eye Laterality Selector -->
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--border);">
+            <div style="font-size:12px; font-weight:700;">Tested Eye:</div>
+            <div style="display:flex; gap:8px;" id="remote-eye-chips">
+              <button class="btn-secondary active-eye-btn" id="eye-btn-OD" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteEyeSwitch('OD')">OD (Right Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OS" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OS')">OS (Left Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OU" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OU')">OU (Both Eyes / Binocular)</button>
+            </div>
+            <span style="font-size:11px; color:var(--text-muted); margin-left:auto;">Binocular OU presents stimuli to both viewports simultaneously.</span>
+          </div>
+        </div>
+
+        <!-- EMBEDDED TACTILE RESPONSE HANDSET (Laptop Keyboard Spacebar & Click Response) -->
+        <div class="card" style="margin-bottom:20px; background:#0B1329; color:white; border:1px solid #1E293B;">
+          <div class="card-title" style="color:white; border-bottom:1px solid #1E293B; padding-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:#38BDF8; font-weight:800; font-size:16px;">Tactile Patient Response Handset (Embedded)</span>
+              <span class="status-badge" style="background:#065F46; color:#A7F3D0; font-size:11px;">Active Handset</span>
+            </div>
+            <div style="font-size:12px; color:#94A3B8;">
+              Taps Registered: <strong id="cockpit-tap-count" style="color:#38BDF8; font-size:14px;">0</strong>
+            </div>
+          </div>
+
+          <!-- Laptop Keyboard Assist Notice -->
+          <div style="background:#1E293B; border-radius:6px; padding:8px 14px; font-size:12px; color:#38BDF8; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:16px;">⌨️</span>
+            <span><strong>Laptop / Browser Handset Active:</strong> Press <strong>[SPACE]</strong> or Click anywhere below to record Seen &bull; <strong>[Arrow Keys]</strong> for Acuity &bull; <strong>[0-9]</strong> for Ishihara Plates &bull; <strong>[ESC]</strong> for Priority STOP.</span>
+          </div>
+
+          <!-- Large Tactile Surface -->
+          <div id="btn-cockpit-tap" onclick="handleResponsePadTap('LAPTOP_CLICK')" style="background:#1E293B; border:2px solid #10B981; border-radius:12px; padding:28px 16px; text-align:center; cursor:pointer; user-select:none; transition:all 0.15s;">
+            <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:#F8FAFC;">CLICK HERE OR PRESS SPACEBAR</div>
+            <div style="font-size:15px; font-weight:700; color:#10B981; margin-top:4px;">WHEN STIMULUS IS SEEN</div>
+            <div style="font-size:12px; color:#94A3B8; margin-top:2px;">(Suprathreshold Goldmann Spot / Contrast Pattern Recognized)</div>
+            <div id="cockpit-tap-feedback" style="margin-top:10px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">Tap Registered!</div>
+          </div>
+
+          <!-- Directional Pad (Visible for Acuity) -->
+          <div id="cockpit-e-controls" style="margin-top:14px; text-align:center; display:none;">
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Acuity Direction (Click or Press Arrow Keys):</div>
+            <div style="display:inline-grid; grid-template-columns: repeat(3, 56px); gap:6px;">
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_UP')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&uarr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_LEFT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&larr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_RIGHT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&rarr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_DOWN')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&darr;</button>
+              <div></div>
+            </div>
+          </div>
+
+          <!-- Ishihara Numeric Pad (Visible for Colour) -->
+          <div id="cockpit-num-controls" style="margin-top:14px; text-align:center; display:none;">
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Ishihara Plate Number (Click or Press 0-9 on Keyboard):</div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px; max-width:400px; margin:0 auto;">
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_1')">1</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_2')">2</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_3')">3</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_4')">4</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_5')">5</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_6')">6</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_7')">7</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_8')">8</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_9')">9</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_0')">0</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:12px; font-weight:600; padding:0 12px; height:36px;" onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank</button>
+            </div>
           </div>
         </div>
 
@@ -2052,7 +2151,11 @@
     // =========================================================================
     // CR-002: Remote Physician Portal & Phone 2 Patient Response Pad Logic
     // =========================================================================
-    let currentPortalMode = 'PHYSICIAN_COCKPIT';
+    let currentPortalMode = 'PHYSICIAN_AND_RESPONSE';
+    let cockpitTapCount = 0;
+    let activeRemoteWs = null;
+    let perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
+
     let remoteSessionState = {
       sessionId: 'SES-ONEPLUS-NORD3-01',
       pairingPin: '749281',
@@ -2063,7 +2166,7 @@
       screenShareActive: false,
       activeStimulus: {
         trial_index: 14,
-        test_module: 'PERIMETRY_24_2',
+        test_module: 'PERIMETRY',
         eye_laterality: 'OD',
         coordinates: { x_deg: 9.0, y_deg: 3.0 },
         stimulus_properties: { goldmann_size: 'III', luminance_nits: 31.8, contrast_percent: 100 },
@@ -2075,28 +2178,145 @@
 
     function setPortalMode(mode) {
       currentPortalMode = mode;
-      const btnCockpit = document.getElementById('btn-mode-cockpit');
-      const btnPad = document.getElementById('btn-mode-pad');
+      const btnPatientVr = document.getElementById('btn-mode-patient-vr');
+      const btnPhysicianPad = document.getElementById('btn-mode-physician-pad');
       const padView = document.getElementById('mobile-response-pad-view');
+      const vrViewport = document.getElementById('vr-viewport');
       const containerView = document.querySelector('.container');
       const headerView = document.querySelector('header');
       const regBanner = document.querySelector('.regulatory-banner');
 
-      if (mode === 'PHONE2_RESPONSE_PAD') {
-        if (btnPad) btnPad.classList.add('active');
-        if (btnCockpit) btnCockpit.classList.remove('active');
-        if (padView) padView.style.display = 'flex';
+      if (mode === 'PATIENT_VR') {
+        if (btnPatientVr) btnPatientVr.classList.add('active');
+        if (btnPhysicianPad) btnPhysicianPad.classList.remove('active');
+        if (vrViewport) vrViewport.style.display = 'flex';
         if (containerView) containerView.style.display = 'none';
-        if (headerView) headerView.style.display = 'none';
-        if (regBanner) regBanner.style.display = 'none';
+        if (padView) padView.style.display = 'none';
       } else {
-        if (btnCockpit) btnCockpit.classList.add('active');
-        if (btnPad) btnPad.classList.remove('active');
+        // PHYSICIAN_AND_RESPONSE (Unified Cockpit)
+        if (btnPhysicianPad) btnPhysicianPad.classList.add('active');
+        if (btnPatientVr) btnPatientVr.classList.remove('active');
+        if (vrViewport) vrViewport.style.display = 'none';
         if (padView) padView.style.display = 'none';
         if (containerView) containerView.style.display = 'flex';
         if (headerView) headerView.style.display = 'flex';
         if (regBanner) regBanner.style.display = 'flex';
+        switchTab('remote-session');
       }
+    }
+
+    function enterPatientVrMode() {
+      setPortalMode('PATIENT_VR');
+    }
+
+    function exitPatientVrMode() {
+      setPortalMode('PHYSICIAN_AND_RESPONSE');
+    }
+
+    function sendRemoteTestSwitch(moduleKey) {
+      if (remoteSessionState.isEmergencyHalted) {
+        alert('Action Blocked: Priority STOP is currently active.');
+        return;
+      }
+
+      remoteSessionState.activeStimulus.test_module = moduleKey;
+
+      // Update module chip styling
+      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Show/hide sub-keypads for acuity & colour
+      const eControls = document.getElementById('cockpit-e-controls');
+      const numControls = document.getElementById('cockpit-num-controls');
+      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
+      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
+
+      // Update active parameters in telemetry card
+      const modNameEl = document.getElementById('stim-test-name');
+      if (modNameEl) modNameEl.innerText = moduleKey;
+
+      // Broadcast command to paired headset over WebSocket
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
+        activeRemoteWs.send(JSON.stringify({
+          type: 'CONTROL_COMMAND',
+          command: 'SET_MODULE',
+          module: moduleKey,
+          eye: remoteSessionState.activeStimulus.eye_laterality,
+          sender: 'PHYSICIAN_CONTROLLER',
+          timestamp: Date.now()
+        }));
+      }
+
+      addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
+    }
+
+    function sendRemoteEyeSwitch(eye) {
+      remoteSessionState.activeStimulus.eye_laterality = eye;
+
+      // Update eye chip styling
+      document.querySelectorAll('#remote-eye-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('eye-btn-' + eye);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Broadcast command to paired headset over WebSocket
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
+        activeRemoteWs.send(JSON.stringify({
+          type: 'CONTROL_COMMAND',
+          command: 'SET_EYE',
+          eye: eye,
+          module: remoteSessionState.activeStimulus.test_module,
+          sender: 'PHYSICIAN_CONTROLLER',
+          timestamp: Date.now()
+        }));
+      }
+
+      addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
+      drawTwinCanvases(remoteSessionState.activeStimulus);
+    }
+
+    function resetCurrentTest() {
+      remoteSessionState.trialIndex = 0;
+      cockpitTapCount = 0;
+      const countEl = document.getElementById('cockpit-tap-count');
+      if (countEl) countEl.innerText = '0';
+
+      // Re-randomize perimetry 24-2 sequence
+      perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
+
+      // Reset trial display
+      const trialEl = document.getElementById('stim-trial-idx');
+      if (trialEl) trialEl.innerText = `Trial #1 of 54 (Randomized Sequence Reset)`;
+
+      // Broadcast reset command to paired headset over WebSocket
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
+        activeRemoteWs.send(JSON.stringify({
+          type: 'CONTROL_COMMAND',
+          command: 'RESET_TEST',
+          module: remoteSessionState.activeStimulus.test_module,
+          eye: remoteSessionState.activeStimulus.eye_laterality,
+          sender: 'PHYSICIAN_CONTROLLER',
+          timestamp: Date.now()
+        }));
+      }
+
+      addTimelineItem('RESET', `Current test (${remoteSessionState.activeStimulus.test_module}) reset & re-randomized.`);
     }
 
     function openRemotePairingModal() {
@@ -2153,14 +2373,31 @@
         connStatus.style.color = '#065F46';
       }
 
+      // Try connecting WebSocket if backend is available
+      try {
+        const wsProto = (location.protocol === 'https:' || backendBaseUrl.startsWith('https:')) ? 'wss:' : 'ws:';
+        const hostOnly = backendBaseUrl.replace(/^https?:\/\//, '');
+        const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?pin=${pin}&role=${role}`;
+        activeRemoteWs = new WebSocket(wsUrl);
+        activeRemoteWs.onopen = () => {
+          addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}.`);
+        };
+        activeRemoteWs.onmessage = (evt) => {
+          try {
+            const data = JSON.parse(evt.data);
+            if (data.type === 'STIMULUS_PRESENTATION') {
+              remoteSessionState.activeStimulus = data.payload || data;
+              drawTwinCanvases(remoteSessionState.activeStimulus);
+            }
+          } catch(e) {}
+        };
+      } catch(e) {
+        console.warn('WebSocket connection attempt:', e);
+      }
+
       addTimelineItem('PEER', `Station connected to room ${sessId} with PIN ${pin} as ${role}.`);
       closeRemotePairingModal();
-
-      if (role === 'PATIENT_RESPONSE_PAD') {
-        setPortalMode('PHONE2_RESPONSE_PAD');
-      } else {
-        switchTab('remote-session');
-      }
+      setPortalMode('PHYSICIAN_AND_RESPONSE');
     }
 
     function handleResponsePadTap(source) {
@@ -2169,7 +2406,18 @@
         return;
       }
 
-      // Visual flash
+      cockpitTapCount++;
+      const countEl = document.getElementById('cockpit-tap-count');
+      if (countEl) countEl.innerText = cockpitTapCount;
+
+      // Visual flash on embedded cockpit pad
+      const cockpitTapArea = document.getElementById('btn-cockpit-tap');
+      if (cockpitTapArea) {
+        cockpitTapArea.style.background = '#10B981';
+        setTimeout(() => { cockpitTapArea.style.background = '#1E293B'; }, 150);
+      }
+
+      // Visual flash on full mobile response pad if open
       const tapArea = document.getElementById('btn-blind-tap');
       if (tapArea && source === 'TOUCH_SURFACE') {
         tapArea.style.background = '#10B981';
@@ -2182,27 +2430,71 @@
       }
 
       // Feedback label
-      const feedback = document.getElementById('pad-tap-feedback');
+      const feedback = document.getElementById('cockpit-tap-feedback');
       if (feedback) {
-        feedback.innerText = `Tap Registered via ${source}!`;
+        feedback.innerText = `Tap #${cockpitTapCount} Registered via ${source}!`;
         feedback.style.opacity = '1';
         setTimeout(() => { feedback.style.opacity = '0'; }, 600);
       }
+      const padFeedback = document.getElementById('pad-tap-feedback');
+      if (padFeedback) {
+        padFeedback.innerText = `Tap #${cockpitTapCount} Registered!`;
+        padFeedback.style.opacity = '1';
+        setTimeout(() => { padFeedback.style.opacity = '0'; }, 600);
+      }
 
-      // Simulated latency derived from local Android monotonic clock simulation
+      // Simulated latency
       const simulatedLatencyMs = (180 + Math.random() * 120).toFixed(1);
       remoteSessionState.trialIndex++;
 
       // Update active parameters
       const latEl = document.getElementById('stim-latency');
-      if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Android Monotonic Clock)`;
+      if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Monotonic Clock)`;
       const trialEl = document.getElementById('stim-trial-idx');
-      if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54`;
+      if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54 (Point index: ${perimetryOrder[remoteSessionState.trialIndex % 54]})`;
       const padSub = document.getElementById('pad-active-trial-sub');
       if (padSub) padSub.innerText = `Trial #${remoteSessionState.trialIndex} — Waiting for next stimulus...`;
 
-      addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap detected via ${source} — Latency: ${simulatedLatencyMs}ms`);
+      // Broadcast tap event over WebSocket to patient phone
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
+        activeRemoteWs.send(JSON.stringify({
+          type: 'RESPONSE_EVENT',
+          response_type: 'TAP',
+          source: source,
+          timestamp: Date.now()
+        }));
+      }
+
+      addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap registered (#${cockpitTapCount}) via ${source} — Latency: ${simulatedLatencyMs}ms`);
     }
+
+    // Keyboard Handler for Laptop / Browser Operation
+    window.addEventListener('keydown', function(e) {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handleResponsePadTap('LAPTOP_SPACEBAR');
+      } else if (e.code === 'ArrowUp') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_UP');
+      } else if (e.code === 'ArrowDown') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_DOWN');
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_LEFT');
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_RIGHT');
+      } else if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        handleResponsePadTap('NUM_' + e.key);
+      } else if (e.code === 'Escape') {
+        e.preventDefault();
+        triggerEmergencyHalt();
+      }
+    });
 
     function addTimelineItem(type, message) {
       const list = document.getElementById('remote-timeline-list');
@@ -2736,13 +3028,15 @@
       }
     }, 2500);
 
-    // WebXR Toggle
+    // WebXR Toggle between Patient VR Mode and Physician & Response Cockpit
     function toggleVrView() {
       const vp = document.getElementById('vr-viewport');
       const isHidden = (vp.style.display !== 'flex');
-      vp.style.display = isHidden ? 'flex' : 'none';
       if (isHidden) {
+        enterPatientVrMode();
         setVrSubmode('COLOUR');
+      } else {
+        exitPatientVrMode();
       }
     }
 
