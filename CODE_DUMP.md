@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `dc81802a8fff9b88a601a9f483e5158a74d4ea88e1dab307ec2dfa6bdf061898`
+**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `c0e56c77cd495f5ef91722c581b6b32ff72f7668eb3ef913c1663810d8ca9a8c`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -134,7 +134,7 @@ scripts/snapshot.py	3094	ca6f9c4a81e12536168e34e987428f5a8299ca9a47b9780406251ea
 scripts/verify.sh	1004	72e85a05188f7fa53ccb717c0f6bde28a333234b8253328e9d2e115439a617ff
 settings.gradle.kts	330	c6d9c63da777d5c516130ec5a4f21afda05b83db0bab7c0120c16e31b972d74f
 web/assets/ishihara/manifest.json	10169	707dabf22a91d4583ee7e6493b97a48d5af94b6f515274771e366f5afb68adfd
-web/index.html	283776	f5bb6a9b9f1f9b31699d17bb6884bccb724d2775499cf832324345ecb3f00764
+web/index.html	285956	48428baca04afb4da782bd1818b41e1aa4a107dd947df9d7e404613ab10ff366
 web/netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 web/package.json	709	08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1
 web/src/api/client.ts	3502	e1fee231d6ce0b3265db7bbfeae0e01b6e97b42252cad6f512f2d191d2a7348d
@@ -22937,7 +22937,7 @@ END FILE `settings.gradle.kts`
 ```
 END FILE `web/assets/ishihara/manifest.json`
 
-### FILE `web/index.html` | bytes=283776 | SHA256=`f5bb6a9b9f1f9b31699d17bb6884bccb724d2775499cf832324345ecb3f00764`
+### FILE `web/index.html` | bytes=285956 | SHA256=`48428baca04afb4da782bd1818b41e1aa4a107dd947df9d7e404613ab10ff366`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -26553,11 +26553,11 @@ END FILE `web/assets/ishihara/manifest.json`
           urlInput.value = currentVal;
         }
         const sessInput = document.getElementById('modal-session-id');
-        if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
+        if (sessInput && (!sessInput.value || sessInput.value.includes('NORD3') || sessInput.value.startsWith('SES-REMOTE-'))) {
           sessInput.value = '';
         }
         const pinInput = document.getElementById('modal-pairing-pin');
-        if (pinInput && !pinInput.value) {
+        if (pinInput && (!pinInput.value || pinInput.value === '749281')) {
           pinInput.value = '';
         }
         if (modal) modal.style.display = 'flex';
@@ -26565,7 +26565,33 @@ END FILE `web/assets/ishihara/manifest.json`
 
       function closeRemotePairingModal() {
         const modal = document.getElementById('remote-pairing-modal');
-        if (modal) mod.stplay = 'none';
+        if (modal) modal.style.display = 'none';
+      }
+
+      async function generateNewRemoteSession() {
+        const targetUrl = backendBaseUrl || 'https://eyeatlas-ai.onrender.com';
+        try {
+          const res = await fetch(`${targetUrl}/api/v1/remote/create`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              device_id: 'PHYSICIAN_WEB_COCKPIT',
+              hardware_model: 'Web Cockpit Station',
+              supported_inputs: ['LAPTOP_KEYBOARD', 'MOUSE_CLICK'],
+              tenant_id: 'TENANT-APEX'
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            document.getElementById('modal-session-id').value = data.session_id;
+            document.getElementById('modal-pairing-pin').value = data.pairing_pin;
+            alert(`New Session Generated on Render!\n\nSession ID: ${data.session_id}\nPairing PIN: ${data.pairing_pin}\n\nTo connect, enter these credentials on the other device or click 'Connect to Session'.`);
+          } else {
+            alert('Failed to generate new session on Render.');
+          }
+        } catch (e) {
+          alert('Error generating session: ' + e.message);
+        }
       }
 
       async function connectRemoteSessionFromModal() {
@@ -26575,24 +26601,28 @@ END FILE `web/assets/ishihara/manifest.json`
         const customUrl = document.getElementById('modal-backend-url')?.value.trim();
 
         if (!sessId || !pin) {
-          alert('Please enter both the Session ID and 6-digit PIN displayed on the Patient APK.');
+          alert('Please enter both the Session ID and 6-digit PIN displayed on your Patient APK.');
           return;
         }
 
-        if (customUrl) {
-          const cleanUrl = customUrl.replace(/\/+$/, '');
-          localStorage.setItem('eyeatlas_backend_url', cleanUrl);
-          if (cleanUrl !== backendBaseUrl) {
-            backendBaseUrl = cleanUrl;
-            checkBackend();
-          }
+        let targetUrl = customUrl ? customUrl.replace(/\/+$/, '') : (backendBaseUrl || 'https://eyeatlas-ai.onrender.com');
+        if (location.protocol === 'https:' && targetUrl.startsWith('http://')) {
+          targetUrl = 'https://eyeatlas-ai.onrender.com';
         }
+        backendBaseUrl = targetUrl;
+        localStorage.setItem('eyeatlas_backend_url', targetUrl);
 
         const connStatus = document.getElementById('remote-conn-status');
         if (connStatus) {
           connStatus.innerText = 'Authorizing with Broker...';
           connStatus.style.background = '#FEF3C7';
           connStatus.style.color = '#B45309';
+        }
+
+        const btnConnect = document.querySelector('#remote-pairing-modal .btn-action');
+        if (btnConnect) {
+          btnConnect.innerText = 'Connecting...';
+          btnConnect.disabled = true;
         }
 
         // Step 1: Call REST join endpoint POST /api/v1/remote/join
@@ -26613,12 +26643,16 @@ END FILE `web/assets/ishihara/manifest.json`
           if (!joinResp.ok) {
             const errData = await joinResp.json().catch(() => ({}));
             const errMsg = errData.detail || `Pairing failed (HTTP ${joinResp.status})`;
-            alert(`Remote Pairing Failed: ${errMsg}`);
+            alert(`Remote Pairing Failed: ${errMsg}\n\nPlease verify that the APK has created the session and that the Session ID and PIN match exactly.`);
             remoteSessionState.isConnected = false;
             if (connStatus) {
               connStatus.innerText = `Error: ${errMsg}`;
               connStatus.style.background = '#FEE2E2';
               connStatus.style.color = '#B91C1C';
+            }
+            if (btnConnect) {
+              btnConnect.innerText = 'Connect to Session';
+              btnConnect.disabled = false;
             }
             return;
           }
@@ -26632,7 +26666,16 @@ END FILE `web/assets/ishihara/manifest.json`
             connStatus.style.background = '#FEE2E2';
             connStatus.style.color = '#B91C1C';
           }
+          if (btnConnect) {
+            btnConnect.innerText = 'Connect to Session';
+            btnConnect.disabled = false;
+          }
           return;
+        } finally {
+          if (btnConnect) {
+            btnConnect.innerText = 'Connect to Session';
+            btnConnect.disabled = false;
+          }
         }
 
         // Store authenticated credentials
@@ -29082,14 +29125,14 @@ END FILE `web/assets/ishihara/manifest.json`
         <label
           style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Session
           ID:</label>
-        <input type="text" id="modal-session-id" value="SES-ONEPLUS-NORD3-01"
+        <input type="text" id="modal-session-id" placeholder="e.g. SES-REM-XXXXXX"
           style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600;">
       </div>
       <div style="margin-bottom:14px;">
         <label
           style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">6-Digit
           Pairing PIN:</label>
-        <input type="text" id="modal-pairing-pin" value="749281" maxlength="6"
+        <input type="text" id="modal-pairing-pin" placeholder="Enter 6-digit PIN" maxlength="6"
           style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:18px; font-weight:800; letter-spacing:3px; color:var(--sea-green-dark);">
       </div>
       <div style="margin-bottom:14px;">
