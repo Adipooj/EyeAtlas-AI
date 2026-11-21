@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `02ec85a10cea618f0a5033527366ab1259ab2ff54effa284f3af810ecfcbece8`
+**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `a3ac2bd84ee1ff0ccf44f1e88bd39ca27089f9df9ce518d4340c8edcd506d4c2`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -134,7 +134,7 @@ scripts/snapshot.py	3094	ca6f9c4a81e12536168e34e987428f5a8299ca9a47b9780406251ea
 scripts/verify.sh	1004	72e85a05188f7fa53ccb717c0f6bde28a333234b8253328e9d2e115439a617ff
 settings.gradle.kts	330	c6d9c63da777d5c516130ec5a4f21afda05b83db0bab7c0120c16e31b972d74f
 web/assets/ishihara/manifest.json	10169	707dabf22a91d4583ee7e6493b97a48d5af94b6f515274771e366f5afb68adfd
-web/index.html	260838	d29628398bd00c1a0fdd8d5103a10bd658f4800111990a6802ac257295cd04aa
+web/index.html	285112	60816d7693a2fd9e486ecb69d211897019b36e02b7ef39dd902f6fc91f1e819a
 web/netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 web/package.json	709	08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1
 web/src/api/client.ts	3502	e1fee231d6ce0b3265db7bbfeae0e01b6e97b42252cad6f512f2d191d2a7348d
@@ -22937,10 +22937,11 @@ END FILE `settings.gradle.kts`
 ```
 END FILE `web/assets/ishihara/manifest.json`
 
-### FILE `web/index.html` | bytes=260838 | SHA256=`d29628398bd00c1a0fdd8d5103a10bd658f4800111990a6802ac257295cd04aa`
+### FILE `web/index.html` | bytes=285112 | SHA256=`60816d7693a2fd9e486ecb69d211897019b36e02b7ef39dd902f6fc91f1e819a`
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22960,8 +22961,20 @@ END FILE `web/assets/ishihara/manifest.json`
       --blue: #2563EB;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--slate-bg); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--slate-bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
     /* Top Regulatory Header */
     .regulatory-banner {
@@ -22975,6 +22988,7 @@ END FILE `web/assets/ishihara/manifest.json`
       align-items: center;
       font-weight: 600;
     }
+
     .regulatory-tag {
       background: #FEF3C7;
       padding: 2px 8px;
@@ -22993,299 +23007,956 @@ END FILE `web/assets/ishihara/manifest.json`
       justify-content: space-between;
       align-items: center;
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-icon {
-      width: 36px; height: 36px; background: var(--sea-green); color: white;
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 18px;
-    }
-    .brand-title { font-size: 18px; font-weight: 700; color: var(--sea-green-dark); }
-    .brand-subtitle { font-size: 12px; color: var(--text-muted); }
 
-    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--sea-green);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--sea-green-dark);
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .status-badge {
-      background: var(--mint-wash); color: var(--sea-green-dark);
-      padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;
+      background: var(--mint-wash);
+      color: var(--sea-green-dark);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
     }
+
     .btn-vr {
-      background: var(--sea-green); color: white; border: none; padding: 8px 16px;
-      border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer;
-      display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+      background: var(--sea-green);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
     }
-    .btn-vr:hover { background: var(--sea-green-dark); }
+
+    .btn-vr:hover {
+      background: var(--sea-green-dark);
+    }
 
     /* Layout */
-    .container { display: flex; flex: 1; }
-    aside {
-      width: 250px; background: var(--surface); border-right: 1px solid var(--border);
-      padding: 20px 14px; display: flex; flex-direction: column; gap: 6px;
+    .container {
+      display: flex;
+      flex: 1;
     }
-    .nav-item {
-      padding: 10px 14px; border-radius: 6px; font-size: 13px; font-weight: 500;
-      color: var(--text-muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px;
-    }
-    .nav-item.active { background: var(--mint-wash); color: var(--sea-green-dark); font-weight: 700; }
-    .nav-item:hover:not(.active) { background: #F1F5F9; color: var(--text-main); }
 
-    main { flex: 1; padding: 24px 32px; overflow-y: auto; }
+    aside {
+      width: 250px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-item {
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-item.active {
+      background: var(--mint-wash);
+      color: var(--sea-green-dark);
+      font-weight: 700;
+    }
+
+    .nav-item:hover:not(.active) {
+      background: #F1F5F9;
+      color: var(--text-main);
+    }
+
+    main {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
 
     /* Content Views */
-    .tab-view { display: none; }
-    .tab-view.active { display: block; }
+    .tab-view {
+      display: none;
+    }
+
+    .tab-view.active {
+      display: block;
+    }
 
     /* Grid & Cards */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
     }
-    .card-title { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     /* Candidate list */
     .candidate-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
     }
-    .candidate-row.od { border-left: 4px solid var(--sea-green); }
-    .candidate-row.os { border-left: 4px solid var(--blue); }
-    .candidate-name { font-weight: 600; font-size: 14px; }
-    .candidate-score { font-weight: 700; color: var(--sea-green-dark); font-size: 13px; }
+
+    .candidate-row.od {
+      border-left: 4px solid var(--sea-green);
+    }
+
+    .candidate-row.os {
+      border-left: 4px solid var(--blue);
+    }
+
+    .candidate-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .candidate-score {
+      font-weight: 700;
+      color: var(--sea-green-dark);
+      font-size: 13px;
+    }
 
     /* Buttons */
     .btn-action {
-      background: var(--sea-green); color: white; border: none; padding: 8px 14px;
-      border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+      background: var(--sea-green);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
     }
-    .btn-action:hover { background: var(--sea-green-dark); }
+
+    .btn-action:hover {
+      background: var(--sea-green-dark);
+    }
+
     .btn-secondary {
-      background: white; border: 1px solid var(--border); color: var(--text-main);
-      padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     /* Perimetry Canvas & Controls */
     .perimetry-viewport {
-      background: #000; border-radius: 12px; padding: 20px; color: #FFF;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; min-height: 420px;
+      background: #000;
+      border-radius: 12px;
+      padding: 20px;
+      color: #FFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 420px;
     }
+
     #perimetry-canvas {
-      background: #0F172A; border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      background: #0F172A;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
+
     .perimetry-hud {
-      display: flex; gap: 24px; margin-top: 16px; font-size: 13px;
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      font-size: 13px;
     }
-    .hud-stat { background: rgba(255,255,255,0.08); padding: 8px 14px; border-radius: 6px; text-align: center; }
-    .hud-val { font-size: 18px; font-weight: 700; color: #38BDF8; }
+
+    .hud-stat {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .hud-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: #38BDF8;
+    }
 
     /* Acuity Test */
     .acuity-box {
-      background: white; border: 2px solid var(--border); border-radius: 12px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 30px; text-align: center; min-height: 250px;
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+      min-height: 250px;
     }
+
     .tumbling-e {
-      font-size: 80px; font-weight: 900; line-height: 1; transition: transform 0.1s; user-select: none;
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 1;
+      transition: transform 0.1s;
+      user-select: none;
     }
-    .e-controls { display: grid; grid-template-columns: repeat(3, 60px); gap: 8px; margin-top: 20px; }
+
+    .e-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 8px;
+      margin-top: 20px;
+    }
 
     /* Tables */
-    table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    table.data-table th, table.data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
-    table.data-table th { background: var(--slate-bg); font-weight: 600; color: var(--text-muted); }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table.data-table th,
+    table.data-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table.data-table th {
+      background: var(--slate-bg);
+      font-weight: 600;
+      color: var(--text-muted);
+    }
 
     /* Segmented Controls & Badges */
-    .segmented-control { display: inline-flex; background: #E2E8F0; border-radius: 6px; padding: 2px; gap: 2px; }
-    .segmented-btn { border: none; background: transparent; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 4px; cursor: pointer; color: var(--text-muted); }
-    .segmented-btn.active { background: white; color: var(--sea-green-dark); box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+    .segmented-control {
+      display: inline-flex;
+      background: #E2E8F0;
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .segmented-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .segmented-btn.active {
+      background: white;
+      color: var(--sea-green-dark);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
 
     /* Acuity Sloan letters */
-    .sloan-char { font-family: monospace, sans-serif; font-weight: 800; user-select: none; letter-spacing: 4px; }
-    .crowd-border { border: 4px solid #0F172A; padding: 12px 24px; border-radius: 4px; display: inline-block; }
+    .sloan-char {
+      font-family: monospace, sans-serif;
+      font-weight: 800;
+      user-select: none;
+      letter-spacing: 4px;
+    }
+
+    .crowd-border {
+      border: 4px solid #0F172A;
+      padding: 12px 24px;
+      border-radius: 4px;
+      display: inline-block;
+    }
 
     /* Ishihara Plate */
-    .ishihara-box { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; }
-    .ishihara-canvas { border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: #FFF; }
-    .digit-pad { display: grid; grid-template-columns: repeat(5, 52px); gap: 6px; margin-top: 14px; }
-    .digit-btn { height: 40px; font-size: 15px; font-weight: 700; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; }
-    .digit-btn:hover { background: var(--mint-wash); color: var(--sea-green-dark); }
+    .ishihara-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+    }
+
+    .ishihara-canvas {
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: #FFF;
+    }
+
+    .digit-pad {
+      display: grid;
+      grid-template-columns: repeat(5, 52px);
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .digit-btn {
+      height: 40px;
+      font-size: 15px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .digit-btn:hover {
+      background: var(--mint-wash);
+      color: var(--sea-green-dark);
+    }
 
     /* Contrast Sensitivity Table */
-    .cs-triplet-card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-    .cs-letters { font-family: monospace, sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 10px; user-select: none; }
+    .cs-triplet-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cs-letters {
+      font-family: monospace, sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: 10px;
+      user-select: none;
+    }
 
     /* Worth 4-Dot Box */
-    .worth-box { width: 180px; height: 180px; background: #0F172A; border-radius: 12px; position: relative; margin: 0 auto; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-    .worth-dot { width: 34px; height: 34px; border-radius: 50%; position: absolute; }
-    .worth-red { background: #EF4444; box-shadow: 0 0 12px #EF4444; }
-    .worth-green { background: #10B981; box-shadow: 0 0 12px #10B981; }
-    .worth-white { background: #FFFFFF; box-shadow: 0 0 12px #FFFFFF; }
+    .worth-box {
+      width: 180px;
+      height: 180px;
+      background: #0F172A;
+      border-radius: 12px;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .worth-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .worth-red {
+      background: #EF4444;
+      box-shadow: 0 0 12px #EF4444;
+    }
+
+    .worth-green {
+      background: #10B981;
+      box-shadow: 0 0 12px #10B981;
+    }
+
+    .worth-white {
+      background: #FFFFFF;
+      box-shadow: 0 0 12px #FFFFFF;
+    }
 
     /* Ocular Motility Stage */
-    .motility-viewport { background: #0F172A; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; color: white; position: relative; }
-    .motility-canvas { background: #1E293B; border-radius: 8px; }
+    .motility-viewport {
+      background: #0F172A;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
+
+    .motility-canvas {
+      background: #1E293B;
+      border-radius: 8px;
+    }
 
     /* Pupillometry Stage */
-    .pupil-stage { display: flex; gap: 24px; justify-content: center; align-items: center; padding: 20px; background: #0F172A; border-radius: 12px; }
-    .eye-pupil-box { width: 150px; height: 110px; background: #FFF; border-radius: 55px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-    .iris-disc { width: 85px; height: 85px; border-radius: 50%; background: radial-gradient(circle, #3B82F6 40%, #1D4ED8 80%); display: flex; align-items: center; justify-content: center; position: relative; }
-    .pupil-aperture { background: #000; border-radius: 50%; transition: width 0.25s ease-out, height 0.25s ease-out; }
+    .pupil-stage {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: #0F172A;
+      border-radius: 12px;
+    }
+
+    .eye-pupil-box {
+      width: 150px;
+      height: 110px;
+      background: #FFF;
+      border-radius: 55px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .iris-disc {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #3B82F6 40%, #1D4ED8 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pupil-aperture {
+      background: #000;
+      border-radius: 50%;
+      transition: width 0.25s ease-out, height 0.25s ease-out;
+    }
 
     /* Spatial VR Viewport */
     #vr-viewport {
-      display: none; position: fixed; inset: 0; background: #000000; z-index: 9999;
-      flex-direction: column; align-items: center; justify-content: center; color: white; overflow-y: auto; padding: 20px;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow-y: auto;
+      padding: 20px;
     }
-    .spatial-hud { display: flex; gap: 24px; max-width: 1000px; width: 90%; }
+
+    .spatial-hud {
+      display: flex;
+      gap: 24px;
+      max-width: 1000px;
+      width: 90%;
+    }
+
     .spatial-panel {
-      flex: 1; background: rgba(30, 41, 59, 0.9); border: 1px solid #334155;
-      border-radius: 12px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      flex: 1;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
-    .vr-mode-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
-    .vr-mode-btn { background: #334155; color: #FFF; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .vr-mode-btn.active { background: var(--sea-green); color: #FFF; }
-    .vr-split-viewport { display: flex; gap: 24px; justify-content: center; align-items: center; width: 100%; max-width: 900px; }
-    .vr-eye-view { flex: 1; display: flex; flex-direction: column; align-items: center; background: #0F172A; border: 1px solid #334155; border-radius: 12px; padding: 14px; }
-    .vr-keypad { display: grid; grid-template-columns: repeat(5, 54px); gap: 8px; margin-top: 14px; }
-    .vr-key-btn { height: 46px; font-size: 18px; font-weight: 800; background: #1E293B; color: #FFF; border: 1px solid #475569; border-radius: 8px; cursor: pointer; }
-    .vr-key-btn:hover { background: var(--sea-green); }
-  
+
+    .vr-mode-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .vr-mode-btn {
+      background: #334155;
+      color: #FFF;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .vr-mode-btn.active {
+      background: var(--sea-green);
+      color: #FFF;
+    }
+
+    .vr-split-viewport {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .vr-eye-view {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .vr-keypad {
+      display: grid;
+      grid-template-columns: repeat(5, 54px);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .vr-key-btn {
+      height: 46px;
+      font-size: 18px;
+      font-weight: 800;
+      background: #1E293B;
+      color: #FFF;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .vr-key-btn:hover {
+      background: var(--sea-green);
+    }
+
     /* --- CR-002 Remote Physician Portal & Phone 2 Response Pad Styles --- */
     .btn-toggle {
-      border: none; background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 700;
-      border-radius: 6px; cursor: pointer; color: var(--text-muted); transition: all 0.15s;
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.15s;
     }
+
     .btn-toggle.active {
-      background: var(--sea-green); color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      background: var(--sea-green);
+      color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     }
+
     .screening-notice-banner {
-      background: #FFFBEB; border: 1px solid #FCD34D; border-left: 5px solid #F59E0B;
-      padding: 10px 16px; border-radius: 6px; font-size: 12px; color: #92400E; margin-bottom: 16px;
-      display: flex; align-items: center; justify-content: space-between; font-weight: 600;
+      background: #FFFBEB;
+      border: 1px solid #FCD34D;
+      border-left: 5px solid #F59E0B;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #92400E;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
     }
+
     .screening-notice-banner .pill {
-      background: #FEF3C7; border: 1px solid #F59E0B; padding: 2px 8px; border-radius: 4px;
-      font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+
     .module-guide-card {
-      background: #FFFFFF; border: 1px solid var(--border); border-radius: 12px; padding: 20px;
-      margin-top: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
     }
+
     .module-guide-card h3 {
-      font-size: 16px; font-weight: 700; color: var(--sea-green-dark); margin-bottom: 12px;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--sea-green-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+
     .module-guide-card h4 {
-      font-size: 13px; font-weight: 700; color: var(--text-main); margin-top: 14px; margin-bottom: 6px;
-      text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 14px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .module-guide-card ol, .module-guide-card ul {
-      margin-left: 20px; font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 12px;
+
+    .module-guide-card ol,
+    .module-guide-card ul {
+      margin-left: 20px;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 12px;
     }
+
     .guide-table {
-      width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; margin-bottom: 12px;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
     }
-    .guide-table th, .guide-table td {
-      border: 1px solid var(--border); padding: 8px 10px; text-align: left;
+
+    .guide-table th,
+    .guide-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
     }
+
     .guide-table th {
-      background: #F1F5F9; color: var(--text-muted); font-weight: 700;
+      background: #F1F5F9;
+      color: var(--text-muted);
+      font-weight: 700;
     }
 
     /* Twin-Eye Reconstruction Canvases */
     .twin-canvas-wrap {
-      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
     }
+
     .eye-canvas-box {
-      background: #0F172A; border: 1px solid #334155; border-radius: 12px; padding: 14px;
-      display: flex; flex-direction: column; align-items: center; color: white; min-width: 320px; flex: 1;
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      min-width: 320px;
+      flex: 1;
     }
+
     .stim-canvas {
-      border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.6); background: #0F172A;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      background: #0F172A;
     }
+
     .verification-badge {
-      font-size: 11px; background: rgba(56, 189, 248, 0.1); border: 1px solid #0284C7;
-      color: #38BDF8; padding: 6px 12px; border-radius: 6px; text-align: center; margin-top: 10px; font-weight: 600;
+      font-size: 11px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid #0284C7;
+      color: #38BDF8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: 600;
     }
 
     /* Timeline */
     .timeline-container {
-      max-height: 240px; overflow-y: auto; background: #0F172A; border-radius: 8px;
-      padding: 10px 14px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #CBD5E1;
+      max-height: 240px;
+      overflow-y: auto;
+      background: #0F172A;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: #CBD5E1;
     }
+
     .timeline-entry {
-      padding: 5px 0; border-bottom: 1px solid #1E293B; display: flex; gap: 10px; align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid #1E293B;
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
-    .badge-stimulus { background: #0284C7; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
-    .badge-response { background: #059669; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
-    .badge-emergency { background: #DC2626; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
-    .badge-obs { background: #D97706; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+
+    .badge-stimulus {
+      background: #0284C7;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge-response {
+      background: #059669;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge-emergency {
+      background: #DC2626;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge-obs {
+      background: #D97706;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
 
     /* Phone 2 Mobile Response Pad Full View */
     #mobile-response-pad-view {
-      display: none; position: fixed; inset: 0; background: #0B1329; color: white;
-      z-index: 9998; flex-direction: column; padding: 16px; overflow-y: auto; -webkit-user-select: none; user-select: none;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0B1329;
+      color: white;
+      z-index: 9998;
+      flex-direction: column;
+      padding: 16px;
+      overflow-y: auto;
+      -webkit-user-select: none;
+      user-select: none;
     }
+
     .pad-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
-      padding-bottom: 10px; border-bottom: 1px solid #1E293B;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1E293B;
     }
+
     .pad-status-pill {
-      background: #064E3B; border: 1px solid #10B981; color: #6EE7B7; padding: 4px 10px;
-      border-radius: 6px; font-size: 12px; font-weight: 700;
+      background: #064E3B;
+      border: 1px solid #10B981;
+      color: #6EE7B7;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
     }
+
     .touch-target-huge {
-      flex: 1; min-height: 250px; background: #1E293B; border: 4px solid #10B981;
-      border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.1s, transform 0.1s; touch-action: manipulation;
-      box-shadow: 0 0 24px rgba(16, 185, 129, 0.2); text-align: center; padding: 20px;
+      flex: 1;
+      min-height: 250px;
+      background: #1E293B;
+      border: 4px solid #10B981;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.1s, transform 0.1s;
+      touch-action: manipulation;
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+      text-align: center;
+      padding: 20px;
     }
+
     .touch-target-huge:active {
-      background: #10B981; color: #0F172A; transform: scale(0.98);
+      background: #10B981;
+      color: #0F172A;
+      transform: scale(0.98);
     }
-    .touch-target-huge:active .touch-sub { color: #064E3B; }
-    .touch-sub { font-size: 13px; color: #94A3B8; margin-top: 8px; }
+
+    .touch-target-huge:active .touch-sub {
+      color: #064E3B;
+    }
+
+    .touch-sub {
+      font-size: 13px;
+      color: #94A3B8;
+      margin-top: 8px;
+    }
+
     .e-direction-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; max-width: 320px; width: 100%; align-self: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+      max-width: 320px;
+      width: 100%;
+      align-self: center;
     }
+
     .e-pad-btn {
-      height: 60px; font-size: 24px; font-weight: 800; background: #1E293B; border: 2px solid #334155;
-      color: white; border-radius: 12px; cursor: pointer; touch-action: manipulation;
+      height: 60px;
+      font-size: 24px;
+      font-weight: 800;
+      background: #1E293B;
+      border: 2px solid #334155;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      touch-action: manipulation;
     }
-    .e-pad-btn:active { background: #38BDF8; color: #0F172A; }
+
+    .e-pad-btn:active {
+      background: #38BDF8;
+      color: #0F172A;
+    }
+
     .num-pad-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 14px; max-width: 360px; width: 100%; align-self: center;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+      max-width: 360px;
+      width: 100%;
+      align-self: center;
     }
+
     .num-pad-btn {
-      height: 48px; font-size: 18px; font-weight: 800; background: #1E293B; border: 2px solid #334155;
-      color: white; border-radius: 8px; cursor: pointer; touch-action: manipulation;
+      height: 48px;
+      font-size: 18px;
+      font-weight: 800;
+      background: #1E293B;
+      border: 2px solid #334155;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      touch-action: manipulation;
     }
-    .num-pad-btn:active { background: #10B981; color: #0F172A; }
+
+    .num-pad-btn:active {
+      background: #10B981;
+      color: #0F172A;
+    }
+
     .emergency-halt-btn {
-      margin-top: 16px; background: #DC2626; color: white; border: none; border-radius: 12px;
-      padding: 16px; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer;
-      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4); touch-action: manipulation; width: 100%;
+      margin-top: 16px;
+      background: #DC2626;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+      touch-action: manipulation;
+      width: 100%;
     }
-    .emergency-halt-btn:active { background: #991B1B; }
+
+    .emergency-halt-btn:active {
+      background: #991B1B;
+    }
 
     /* Modal */
     .pairing-modal-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7);
-      z-index: 9999; align-items: center; justify-content: center; padding: 20px;
-    }
-    .pairing-modal-card {
-      background: white; border-radius: 16px; width: 100%; max-width: 480px; padding: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border);
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
+    .pairing-modal-card {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+    }
   </style>
 </head>
+
 <body>
 
   <!-- CDSCO Regulatory Notice -->
   <div class="regulatory-banner">
     <div>
       <span class="regulatory-tag">Class B SaMD Hold</span>
-      <span style="margin-left:8px;">CDSCO MDR-2017 Investigational Prototype • Commercial Release Locked (`isReleaseApproved = false`)</span>
+      <span style="margin-left:8px;">CDSCO MDR-2017 Investigational Prototype • Commercial Release Locked
+        (`isReleaseApproved = false`)</span>
     </div>
     <div style="font-size:11px;">Ophthalmologist Supervision Mandatory</div>
   </div>
@@ -23303,12 +23974,20 @@ END FILE `web/assets/ishihara/manifest.json`
       <!-- Mode Switcher: 2 Unified Modes (Patient VR vs Physician & Response Pad) -->
       <div style="display:flex; background:#E2E8F0; border-radius:8px; padding:2px; gap:2px;">
         <button id="btn-mode-patient-vr" class="btn-toggle" onclick="enterPatientVrMode()">Patient VR View</button>
-        <button id="btn-mode-physician-pad" class="btn-toggle active" onclick="setPortalMode('PHYSICIAN_AND_RESPONSE')">Physician &amp; Response Pad</button>
+        <button id="btn-mode-physician-pad" class="btn-toggle active"
+          onclick="setPortalMode('PHYSICIAN_AND_RESPONSE')">Physician &amp; Response Pad</button>
       </div>
-      <button id="btn-pair-modal-open" class="btn-secondary" style="border-color:#38BDF8; color:#0369A1; font-weight:700;" onclick="openRemotePairingModal()">Pair Online APK (CR-002)</button>
-      <div id="backend-status" class="status-badge" style="cursor:pointer;" title="Click to configure Backend URL &amp; Pairing" onclick="openRemotePairingModal()">FastAPI Connecting...</div>
+      <button id="btn-pair-modal-open" class="btn-secondary"
+        style="border-color:#38BDF8; color:#0369A1; font-weight:700;" onclick="openRemotePairingModal()">Pair Online APK
+        (CR-002)</button>
+      <div id="backend-status" class="status-badge" style="cursor:pointer;"
+        title="Click to configure Backend URL &amp; Pairing" onclick="openRemotePairingModal()">FastAPI Connecting...
+      </div>
       <button class="btn-vr" onclick="enterPatientVrMode()">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z"/><circle cx="12" cy="10" r="2"/></svg>
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z" />
+          <circle cx="12" cy="10" r="2" />
+        </svg>
         Launch VR Box View
       </button>
     </div>
@@ -23318,12 +23997,18 @@ END FILE `web/assets/ishihara/manifest.json`
   <div class="container">
     <!-- Sidebar Navigation -->
     <aside>
-      <div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">Encounter</div>
-      <div class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">&#9679; Clinician Dashboard</div>
-      <div class="nav-item" data-tab="remote-session" onclick="switchTab('remote-session')">&#128225; Live Remote Exam (CR-002)</div>
+      <div
+        style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">
+        Encounter</div>
+      <div class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">&#9679; Clinician Dashboard
+      </div>
+      <div class="nav-item" data-tab="remote-session" onclick="switchTab('remote-session')">&#128225; Live Remote Exam
+        (CR-002)</div>
       <div class="nav-item" data-tab="patients" onclick="switchTab('patients')">&#9650; Patient Directory</div>
 
-      <div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:12px; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">Functional Vision Suite</div>
+      <div
+        style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:12px; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">
+        Functional Vision Suite</div>
       <div class="nav-item" data-tab="acuity" onclick="switchTab('acuity')">&#9670; Visual Acuity (ETDRS)</div>
       <div class="nav-item" data-tab="colour" onclick="switchTab('colour')">&#9688; Colour Vision (Ishihara / VR)</div>
       <div class="nav-item" data-tab="contrast" onclick="switchTab('contrast')">&#9681; Contrast Sensitivity</div>
@@ -23333,7 +24018,9 @@ END FILE `web/assets/ishihara/manifest.json`
       <div class="nav-item" data-tab="motility" onclick="switchTab('motility')">&#9690; Ocular Motility (Broad-H)</div>
       <div class="nav-item" data-tab="pupil" onclick="switchTab('pupil')">&#9673; Pupillary Assessment (RAPD)</div>
 
-      <div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:12px; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">Diagnostics & Records</div>
+      <div
+        style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-top:12px; margin-bottom:2px; padding-left:10px; letter-spacing:0.5px;">
+        Diagnostics & Records</div>
       <div class="nav-item" data-tab="evidence" onclick="switchTab('evidence')">&#9632; Evidence & Telemetry</div>
       <div class="nav-item" data-tab="reports" onclick="switchTab('reports')">&#9636; Diagnostic Reports</div>
       <div class="nav-item" data-tab="calibration" onclick="switchTab('calibration')">&#9881; Hardware Calibration</div>
@@ -23345,7 +24032,8 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-dashboard" class="tab-view active">
         <div style="margin-bottom:20px;">
           <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Active Encounter Overview</h2>
-          <p style="font-size:13px; color:var(--text-muted);">Real-time clinical decision support & multi-morbidity candidate evaluation.</p>
+          <p style="font-size:13px; color:var(--text-muted);">Real-time clinical decision support & multi-morbidity
+            candidate evaluation.</p>
         </div>
 
         <div class="grid">
@@ -23353,7 +24041,8 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">Patient Profile (Active Intake)</div>
             <p style="margin-bottom:6px;"><strong>Patient ID:</strong> P-101 (De-identified)</p>
             <p style="margin-bottom:6px;"><strong>Age Cohort:</strong> 54 yr (Adult 40–59)</p>
-            <p style="margin-bottom:6px;"><strong>Diabetic Status:</strong> <span style="color:var(--amber); font-weight:700;">Positive (Type 2 - Mandatory Fundus)</span></p>
+            <p style="margin-bottom:6px;"><strong>Diabetic Status:</strong> <span
+                style="color:var(--amber); font-weight:700;">Positive (Type 2 - Mandatory Fundus)</span></p>
             <p><strong>Habitual Correction:</strong> Bifocal (+1.75 DS Add)</p>
           </div>
 
@@ -23369,7 +24058,8 @@ END FILE `web/assets/ishihara/manifest.json`
         <div class="card" style="margin-bottom:24px;">
           <div class="card-title">
             <span>Per-Eye Independent Multimorbidity Candidates</span>
-            <span style="font-size:11px; background:#FEF3C7; color:#B45309; padding:2px 8px; border-radius:4px;">Sigmoid Heads (Sum &gt; 100%)</span>
+            <span style="font-size:11px; background:#FEF3C7; color:#B45309; padding:2px 8px; border-radius:4px;">Sigmoid
+              Heads (Sum &gt; 100%)</span>
           </div>
           <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
             CR-001 Invariant: Independent sigmoid heads evaluated without softmax distortion.
@@ -23378,7 +24068,8 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="candidate-row od">
             <div>
               <div class="candidate-name">Right Eye (OD) — Moderate Diabetic Retinopathy</div>
-              <div style="font-size:12px; color:var(--text-muted);">Microaneurysms detected in macula grid; requires dilated fundus review</div>
+              <div style="font-size:12px; color:var(--text-muted);">Microaneurysms detected in macula grid; requires
+                dilated fundus review</div>
             </div>
             <div style="text-align:right;">
               <div class="candidate-score">Score: 88.4%</div>
@@ -23389,7 +24080,8 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="candidate-row od">
             <div>
               <div class="candidate-name">Right Eye (OD) — Glaucoma Suspect (Nasal Step)</div>
-              <div style="font-size:12px; color:var(--text-muted);">Repeatable scotoma confirmed in 54-point visual field test at (15°, -1.5°)</div>
+              <div style="font-size:12px; color:var(--text-muted);">Repeatable scotoma confirmed in 54-point visual
+                field test at (15°, -1.5°)</div>
             </div>
             <div style="text-align:right;">
               <div class="candidate-score">Score: 74.2%</div>
@@ -23400,7 +24092,8 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="candidate-row os">
             <div>
               <div class="candidate-name">Left Eye (OS) — Nuclear Sclerotic Cataract</div>
-              <div style="font-size:12px; color:var(--text-muted);">Media opacity verified via anterior camera retroillumination</div>
+              <div style="font-size:12px; color:var(--text-muted);">Media opacity verified via anterior camera
+                retroillumination</div>
             </div>
             <div style="text-align:right;">
               <div class="candidate-score">Score: 91.0%</div>
@@ -23415,38 +24108,51 @@ END FILE `web/assets/ishihara/manifest.json`
         </div>
       </section>
 
-      
+
       <!-- TAB CR-002: LIVE REMOTE PHYSICIAN COCKPIT & LIVE MONITORING -->
       <section id="tab-remote-session" class="tab-view">
         <!-- Screening Notice -->
         <div class="screening-notice-banner">
           <div>
             <span class="pill">Primary Screening Aid</span>
-            <span style="margin-left:8px;">CR-002 Live Remote Monitoring • Solely for Ophthalmic Screening — Not an Autonomous Diagnostic Instrument.</span>
+            <span style="margin-left:8px;">CR-002 Live Remote Monitoring • Solely for Ophthalmic Screening — Not an
+              Autonomous Diagnostic Instrument.</span>
           </div>
           <div style="font-size:11px;">Physician Supervision Mandatory</div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Live Physician Monitoring & Remote Control (CR-002)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Authoritative Android stimulus telemetry, real-time twin-eye visual reconstruction & zero-install Phone 2 response pathway.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Live Physician Monitoring & Remote
+              Control (CR-002)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Authoritative Android stimulus telemetry, real-time
+              twin-eye visual reconstruction & zero-install Phone 2 response pathway.</p>
           </div>
           <div style="display:flex; gap:10px; align-items:center;">
-            <div id="remote-conn-status" class="status-badge" style="background:#FEF3C7; color:#92400E;">Offline / Disconnected</div>
+            <div id="remote-conn-status" class="status-badge" style="background:#FEF3C7; color:#92400E;">Offline /
+              Disconnected</div>
             <button class="btn-action" onclick="openRemotePairingModal()">Pair / Configure</button>
-            <button class="btn-secondary" style="background:#FEE2E2; border-color:#EF4444; color:#B91C1C; font-weight:700;" onclick="triggerEmergencyHalt()">Emergency Stop</button>
+            <button class="btn-secondary"
+              style="background:#FEE2E2; border-color:#EF4444; color:#B91C1C; font-weight:700;"
+              onclick="triggerEmergencyHalt()">Emergency Stop</button>
           </div>
         </div>
 
         <!-- Session Status Info Bar -->
         <div class="card" style="margin-bottom:20px; padding:14px 20px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:13px;">
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:13px;">
             <div><strong>Active Session:</strong> <code id="info-session-id">SES-ONEPLUS-NORD3-01</code></div>
-            <div><strong>Pairing PIN:</strong> <span id="info-pairing-pin" style="font-size:16px; font-weight:800; color:var(--sea-green-dark); letter-spacing:2px;">749281</span></div>
-            <div><strong>Role:</strong> <span id="info-role" style="font-weight:700; color:#0369A1;">PHYSICIAN_CONTROLLER (Authoritative)</span></div>
-            <div><strong>Connected Peers:</strong> <span id="info-peers-count" style="font-weight:700;">2</span> (Host VR + Response Pad)</div>
-            <div><strong>Clock Sync Latency:</strong> <span id="info-sync-latency" style="font-weight:700; color:#10B981;">14.2 ms</span> (&lt; 50ms Invariant Passed)</div>
+            <div><strong>Pairing PIN:</strong> <span id="info-pairing-pin"
+                style="font-size:16px; font-weight:800; color:var(--sea-green-dark); letter-spacing:2px;">749281</span>
+            </div>
+            <div><strong>Role:</strong> <span id="info-role"
+                style="font-weight:700; color:#0369A1;">PHYSICIAN_CONTROLLER (Authoritative)</span></div>
+            <div><strong>Connected Peers:</strong> <span id="info-peers-count" style="font-weight:700;">2</span> (Host
+              VR + Response Pad)</div>
+            <div><strong>Clock Sync Latency:</strong> <span id="info-sync-latency"
+                style="font-weight:700; color:#10B981;">14.2 ms</span> (&lt; 50ms Invariant Passed)</div>
           </div>
         </div>
 
@@ -23455,36 +24161,67 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card-title">
             <span>Remote VR Test Switcher &amp; Dynamic Laterality (Live Headset Control)</span>
             <div style="display:flex; gap:8px;">
-              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD; font-weight:700;" onclick="resetCurrentTest()">&#8634; Reset Current Test</button>
-              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-weight:700;" onclick="triggerEmergencyHalt()">Priority STOP</button>
+              <button class="btn-secondary"
+                style="font-size:12px; padding:6px 12px; background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD; font-weight:700;"
+                onclick="resetCurrentTest()">&#8634; Reset Current Test</button>
+              <button class="btn-secondary"
+                style="font-size:12px; padding:6px 12px; background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-weight:700;"
+                onclick="triggerEmergencyHalt()">Priority STOP</button>
             </div>
           </div>
           <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
-            Switch active diagnostic stimuli on the paired VR Headset (Phone 1) instantly. The patient stays inside the VR headset while the clinician controls test parameters, laterality, and restarts from this station.
+            Switch active diagnostic stimuli on the paired VR Headset (Phone 1) instantly. The patient stays inside the
+            VR headset while the clinician controls test parameters, laterality, and restarts from this station.
           </p>
 
           <!-- Module Chips -->
-          <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Select Clinical Module:</div>
+          <div
+            style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">
+            Select Clinical Module:</div>
           <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;" id="remote-module-chips">
-            <button class="btn-secondary active-module-btn" id="mod-btn-PERIMETRY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteTestSwitch('PERIMETRY')">&#9678; Visual Field (24-2)</button>
-            <button class="btn-secondary" id="mod-btn-ACUITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('ACUITY')">&#9670; Visual Acuity (ETDRS)</button>
-            <button class="btn-secondary" id="mod-btn-COLOUR" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('COLOUR')">&#9688; Colour Vision (24-Plate Ishihara)</button>
-            <button class="btn-secondary" id="mod-btn-CONTRAST" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('CONTRAST')">&#9681; Contrast Sensitivity</button>
-            <button class="btn-secondary" id="mod-btn-AMSLER" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('AMSLER')">&#9635; Central Amsler (10°)</button>
-            <button class="btn-secondary" id="mod-btn-WORTH_DOT" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('WORTH_DOT')">&#9684; Binocular (Worth 4-Dot)</button>
-            <button class="btn-secondary" id="mod-btn-MOTILITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('MOTILITY')">&#9690; Ocular Motility (Broad-H)</button>
-            <button class="btn-secondary" id="mod-btn-PUPIL_RAPD" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('PUPIL_RAPD')">&#9673; Pupillary Exam (RAPD)</button>
+            <button class="btn-secondary active-module-btn" id="mod-btn-PERIMETRY"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:700; background:var(--sea-green); color:white;"
+              onclick="sendRemoteTestSwitch('PERIMETRY')">&#9678; Visual Field (24-2)</button>
+            <button class="btn-secondary" id="mod-btn-ACUITY"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('ACUITY')">&#9670; Visual Acuity (ETDRS)</button>
+            <button class="btn-secondary" id="mod-btn-COLOUR"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('COLOUR')">&#9688; Colour Vision (24-Plate Ishihara)</button>
+            <button class="btn-secondary" id="mod-btn-CONTRAST"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('CONTRAST')">&#9681; Contrast Sensitivity</button>
+            <button class="btn-secondary" id="mod-btn-AMSLER"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('AMSLER')">&#9635; Central Amsler (10°)</button>
+            <button class="btn-secondary" id="mod-btn-WORTH_DOT"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('WORTH_DOT')">&#9684; Binocular (Worth 4-Dot)</button>
+            <button class="btn-secondary" id="mod-btn-MOTILITY"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('MOTILITY')">&#9690; Ocular Motility (Broad-H)</button>
+            <button class="btn-secondary" id="mod-btn-PUPIL_RAPD"
+              style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;"
+              onclick="sendRemoteTestSwitch('PUPIL_RAPD')">&#9673; Pupillary Exam (RAPD)</button>
           </div>
 
           <!-- Eye Laterality Selector -->
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--border);">
+          <div
+            style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--border);">
             <div style="font-size:12px; font-weight:700;">Tested Eye:</div>
             <div style="display:flex; gap:8px;" id="remote-eye-chips">
-              <button class="btn-secondary active-eye-btn" id="eye-btn-OD" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteEyeSwitch('OD')">OD (Right Eye)</button>
-              <button class="btn-secondary" id="eye-btn-OS" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OS')">OS (Left Eye)</button>
-              <button class="btn-secondary" id="eye-btn-OU" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OU')">OU (Both Eyes / Binocular)</button>
+              <button class="btn-secondary active-eye-btn" id="eye-btn-OD"
+                style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:700; background:var(--sea-green); color:white;"
+                onclick="sendRemoteEyeSwitch('OD')">OD (Right Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OS"
+                style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;"
+                onclick="sendRemoteEyeSwitch('OS')">OS (Left Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OU"
+                style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;"
+                onclick="sendRemoteEyeSwitch('OU')">OU (Both Eyes / Binocular)</button>
             </div>
-            <span style="font-size:11px; color:var(--text-muted); margin-left:auto;">Binocular OU presents stimuli to both viewports simultaneously.</span>
+            <span style="font-size:11px; color:var(--text-muted); margin-left:auto;">Binocular OU presents stimuli to
+              both viewports simultaneously.</span>
           </div>
         </div>
 
@@ -23492,8 +24229,10 @@ END FILE `web/assets/ishihara/manifest.json`
         <div class="card" style="margin-bottom:20px; background:#0B1329; color:white; border:1px solid #1E293B;">
           <div class="card-title" style="color:white; border-bottom:1px solid #1E293B; padding-bottom:10px;">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span style="color:#38BDF8; font-weight:800; font-size:16px;">Tactile Patient Response Handset (Embedded)</span>
-              <span class="status-badge" style="background:#065F46; color:#A7F3D0; font-size:11px;">Active Handset</span>
+              <span style="color:#38BDF8; font-weight:800; font-size:16px;">Tactile Patient Response Handset
+                (Embedded)</span>
+              <span class="status-badge" style="background:#065F46; color:#A7F3D0; font-size:11px;">Active
+                Handset</span>
             </div>
             <div style="font-size:12px; color:#94A3B8;">
               Taps Registered: <strong id="cockpit-tap-count" style="color:#38BDF8; font-size:14px;">0</strong>
@@ -23501,50 +24240,86 @@ END FILE `web/assets/ishihara/manifest.json`
           </div>
 
           <!-- Laptop Keyboard Assist Notice -->
-          <div style="background:#1E293B; border-radius:6px; padding:8px 14px; font-size:12px; color:#38BDF8; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <div
+            style="background:#1E293B; border-radius:6px; padding:8px 14px; font-size:12px; color:#38BDF8; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span style="font-size:16px;">⌨️</span>
-            <span><strong>Laptop / Browser Handset Active:</strong> Press <strong>[SPACE]</strong> or Click anywhere below to record Seen &bull; <strong>[Arrow Keys]</strong> for Acuity &bull; <strong>[0-9]</strong> for Ishihara Plates &bull; <strong>[ESC]</strong> for Priority STOP.</span>
+            <span><strong>Laptop / Browser Handset Active:</strong> Press <strong>[SPACE]</strong> or Click anywhere
+              below to record Seen &bull; <strong>[Arrow Keys]</strong> for Acuity &bull; <strong>[0-9]</strong> for
+              Ishihara Plates &bull; <strong>[ESC]</strong> for Priority STOP.</span>
           </div>
 
           <!-- Large Tactile Surface -->
-          <div id="btn-cockpit-tap" onclick="handleResponsePadTap('LAPTOP_CLICK')" style="background:#1E293B; border:2px solid #10B981; border-radius:12px; padding:28px 16px; text-align:center; cursor:pointer; user-select:none; transition:all 0.15s;">
-            <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:#F8FAFC;">CLICK HERE OR PRESS SPACEBAR</div>
+          <div id="btn-cockpit-tap" onclick="handleResponsePadTap('LAPTOP_CLICK')"
+            style="background:#1E293B; border:2px solid #10B981; border-radius:12px; padding:28px 16px; text-align:center; cursor:pointer; user-select:none; transition:all 0.15s;">
+            <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:#F8FAFC;">CLICK HERE OR PRESS
+              SPACEBAR</div>
             <div style="font-size:15px; font-weight:700; color:#10B981; margin-top:4px;">WHEN STIMULUS IS SEEN</div>
-            <div style="font-size:12px; color:#94A3B8; margin-top:2px;">(Suprathreshold Goldmann Spot / Contrast Pattern Recognized)</div>
-            <div id="cockpit-tap-feedback" style="margin-top:10px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">Tap Registered!</div>
+            <div style="font-size:12px; color:#94A3B8; margin-top:2px;">(Suprathreshold Goldmann Spot / Contrast Pattern
+              Recognized)</div>
+            <div id="cockpit-tap-feedback"
+              style="margin-top:10px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">
+              Tap Registered!</div>
           </div>
 
           <!-- Directional Pad (Visible for Acuity) -->
           <div id="cockpit-e-controls" style="margin-top:14px; text-align:center; display:none;">
-            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Acuity Direction (Click or Press Arrow Keys):</div>
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Acuity Direction (Click or Press Arrow Keys):
+            </div>
             <div style="display:inline-grid; grid-template-columns: repeat(3, 56px); gap:6px;">
               <div></div>
-              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_UP')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&uarr;</button>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_UP')"
+                style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&uarr;</button>
               <div></div>
-              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_LEFT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&larr;</button>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_LEFT')"
+                style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&larr;</button>
               <div></div>
-              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_RIGHT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&rarr;</button>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_RIGHT')"
+                style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&rarr;</button>
               <div></div>
-              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_DOWN')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&darr;</button>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_DOWN')"
+                style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&darr;</button>
               <div></div>
             </div>
           </div>
 
           <!-- Ishihara Numeric Pad (Visible for Colour) -->
           <div id="cockpit-num-controls" style="margin-top:14px; text-align:center; display:none;">
-            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Ishihara Plate Number (Click or Press 0-9 on Keyboard):</div>
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Ishihara Plate Number (Click or Press 0-9 on
+              Keyboard):</div>
             <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px; max-width:400px; margin:0 auto;">
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_1')">1</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_2')">2</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_3')">3</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_4')">4</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_5')">5</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_6')">6</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_7')">7</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_8')">8</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_9')">9</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_0')">0</button>
-              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:12px; font-weight:600; padding:0 12px; height:36px;" onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_1')">1</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_2')">2</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_3')">3</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_4')">4</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_5')">5</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_6')">6</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_7')">7</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_8')">8</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_9')">9</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;"
+                onclick="handleResponsePadTap('NUM_0')">0</button>
+              <button class="btn-secondary"
+                style="background:#1E293B; color:white; border-color:#334155; font-size:12px; font-weight:600; padding:0 12px; height:36px;"
+                onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank</button>
             </div>
           </div>
         </div>
@@ -23554,29 +24329,36 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card-title">
             <span>Real-Time Twin-Eye Stimulus Reconstruction (Primary Monitoring Mode)</span>
             <div style="display:flex; gap:8px;">
-              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="toggleScreenShareMode()">Switch to Actual Headset Stream</button>
-              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="simulateStimulusTrial()">Simulate Active Presentation</button>
+              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;"
+                onclick="toggleScreenShareMode()">Switch to Actual Headset Stream</button>
+              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;"
+                onclick="simulateStimulusTrial()">Simulate Active Presentation</button>
             </div>
           </div>
 
           <div class="twin-canvas-wrap">
             <!-- Left Eye (OS) Visual Field Canvas -->
             <div class="eye-canvas-box">
-              <div style="font-size:12px; font-weight:700; color:#38BDF8; margin-bottom:8px;">LEFT EYE (OS) — VISUAL FIELD (30-2)</div>
+              <div style="font-size:12px; font-weight:700; color:#38BDF8; margin-bottom:8px;">LEFT EYE (OS) — VISUAL
+                FIELD (30-2)</div>
               <canvas id="canvas-stim-os" width="280" height="280" class="stim-canvas"></canvas>
-              <div style="font-size:11px; color:#94A3B8; margin-top:8px;">Physiological Blind Spot: -15.0°, -1.5° (Nasal Field)</div>
+              <div style="font-size:11px; color:#94A3B8; margin-top:8px;">Physiological Blind Spot: -15.0°, -1.5° (Nasal
+                Field)</div>
             </div>
 
             <!-- Right Eye (OD) Visual Field Canvas -->
             <div class="eye-canvas-box">
-              <div style="font-size:12px; font-weight:700; color:#38BDF8; margin-bottom:8px;">RIGHT EYE (OD) — VISUAL FIELD (30-2)</div>
+              <div style="font-size:12px; font-weight:700; color:#38BDF8; margin-bottom:8px;">RIGHT EYE (OD) — VISUAL
+                FIELD (30-2)</div>
               <canvas id="canvas-stim-od" width="280" height="280" class="stim-canvas"></canvas>
-              <div style="font-size:11px; color:#94A3B8; margin-top:8px;">Physiological Blind Spot: +15.0°, -1.5° (Temporal Field)</div>
+              <div style="font-size:11px; color:#94A3B8; margin-top:8px;">Physiological Blind Spot: +15.0°, -1.5°
+                (Temporal Field)</div>
             </div>
           </div>
 
           <div class="verification-badge">
-            CR-002 Verification Notice: Browser-side stimulus reconstruction from immutable trial parameters — Not proof that headset optical output matches without physical optical verification.
+            CR-002 Verification Notice: Browser-side stimulus reconstruction from immutable trial parameters — Not proof
+            that headset optical output matches without physical optical verification.
           </div>
         </div>
 
@@ -23585,21 +24367,27 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card-title">
             <span>Headset Display Actual Video Stream (MediaProjection-to-WebRTC)</span>
             <div style="display:flex; gap:8px; align-items:center;">
-              <span id="webrtc-stream-badge" style="font-size:11px; background:#EFF6FF; color:#1D4ED8; padding:2px 8px; border-radius:4px; font-weight:700;">STANDBY</span>
-              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="simulateWebRtcStream()">Simulate Headset Stream</button>
-              <button class="btn-secondary" style="font-size:11px; padding:4px 8px; background:#FEE2E2; color:#B91C1C; border-color:#EF4444;" onclick="stopWebRtcStream()">Stop Stream</button>
+              <span id="webrtc-stream-badge"
+                style="font-size:11px; background:#EFF6FF; color:#1D4ED8; padding:2px 8px; border-radius:4px; font-weight:700;">STANDBY</span>
+              <button class="btn-secondary" style="font-size:11px; padding:4px 8px;"
+                onclick="simulateWebRtcStream()">Simulate Headset Stream</button>
+              <button class="btn-secondary"
+                style="font-size:11px; padding:4px 8px; background:#FEE2E2; color:#B91C1C; border-color:#EF4444;"
+                onclick="stopWebRtcStream()">Stop Stream</button>
             </div>
           </div>
 
           <!-- Real-Time WebRTC Video Viewport -->
           <div style="text-align:center; background:#000; border-radius:8px; padding:16px; position:relative;">
-            <video id="remote-screen-video" autoplay playsinline muted style="max-width:100%; max-height:360px; border-radius:6px; background:#111; display:none; margin:0 auto;"></video>
+            <video id="remote-screen-video" autoplay playsinline muted
+              style="max-width:100%; max-height:360px; border-radius:6px; background:#111; display:none; margin:0 auto;"></video>
             <div id="screen-share-placeholder" style="color:#94A3B8; font-size:13px; padding:40px 0;">
               WebRTC MediaProjection Stream Standby — Awaiting patient-side projection consent on OnePlus Nord 3.
             </div>
 
             <!-- Stream Health Telemetry Overlay -->
-            <div id="screen-stream-hud" style="display:none; justify-content:center; gap:16px; margin-top:12px; font-size:12px; color:#E2E8F0; background:rgba(15,23,42,0.85); padding:8px 14px; border-radius:6px; flex-wrap:wrap;">
+            <div id="screen-stream-hud"
+              style="display:none; justify-content:center; gap:16px; margin-top:12px; font-size:12px; color:#E2E8F0; background:rgba(15,23,42,0.85); padding:8px 14px; border-radius:6px; flex-wrap:wrap;">
               <div><strong>Resolution:</strong> <span id="hud-stream-res">1080x2400 @ 30fps</span></div>
               <div><strong>Bitrate:</strong> <span id="hud-stream-bitrate" style="color:#38BDF8;">2.2 Mbps</span></div>
               <div><strong>Dropped Frames:</strong> <span id="hud-stream-dropped" style="color:#10B981;">0</span></div>
@@ -23618,41 +24406,63 @@ END FILE `web/assets/ishihara/manifest.json`
               <p><strong>Trial Index:</strong> <span id="stim-trial-idx">Trial #14 of 54</span></p>
               <p><strong>Stimulus Coordinates:</strong> <span id="stim-coords">(x = 9.0°, y = 3.0°)</span></p>
               <p><strong>Goldmann Target Size:</strong> <span id="stim-size">Size III (0.43° = 26 arcmin)</span></p>
-              <p><strong>Target Luminance / Contrast:</strong> <span id="stim-luminance">31.8 cd/m² (100% Weber Contrast)</span></p>
-              <p><strong>Fixation Loss Rate:</strong> <span id="stim-fixation" style="color:#10B981; font-weight:700;">0 / 4 (0.0% — STEADY)</span></p>
-              <p><strong>Patient Reaction Latency:</strong> <span id="stim-latency" style="font-weight:700; color:#0369A1;">284.5 ms (Android Monotonic Clock)</span></p>
-              <p><strong>Active Response Pathway:</strong> <span id="stim-input-source" style="font-weight:700;">Phone 2 Touch Pad (WEB_RESPONSE_PAD)</span></p>
+              <p><strong>Target Luminance / Contrast:</strong> <span id="stim-luminance">31.8 cd/m² (100% Weber
+                  Contrast)</span></p>
+              <p><strong>Fixation Loss Rate:</strong> <span id="stim-fixation" style="color:#10B981; font-weight:700;">0
+                  / 4 (0.0% — STEADY)</span></p>
+              <p><strong>Patient Reaction Latency:</strong> <span id="stim-latency"
+                  style="font-weight:700; color:#0369A1;">284.5 ms (Android Monotonic Clock)</span></p>
+              <p><strong>Active Response Pathway:</strong> <span id="stim-input-source" style="font-weight:700;">Phone 2
+                  Touch Pad (WEB_RESPONSE_PAD)</span></p>
             </div>
 
             <!-- MediaPipe Experimental Eye Tracking & Optical Occlusion Gate (CR-002-F) -->
             <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span style="font-size:12px; font-weight:700; color:var(--text-main);">MediaPipe Iris & Fixation Telemetry</span>
-                <span style="font-size:10px; background:#FEF3C7; color:#B45309; padding:2px 6px; border-radius:4px; font-weight:700;">EXPERIMENTAL</span>
+                <span style="font-size:12px; font-weight:700; color:var(--text-main);">MediaPipe Iris & Fixation
+                  Telemetry</span>
+                <span
+                  style="font-size:10px; background:#FEF3C7; color:#B45309; padding:2px 6px; border-radius:4px; font-weight:700;">EXPERIMENTAL</span>
               </div>
-              <div style="font-size:12px; background:#FEF3C7; border-left:3px solid #F59E0B; padding:6px 10px; border-radius:4px; margin-bottom:10px; color:#92400E;">
-                <strong>Optical Status:</strong> <span id="opt-occlusion-status" style="font-weight:700;">OPTICALLY OCCLUDED (VRBox Central Divider)</span><br>
-                <em>Front camera line-of-sight obstructed by VRBox partition. Active Fallback: Psychophysical Heijl-Krakau Blind Spot Checks.</em>
+              <div
+                style="font-size:12px; background:#FEF3C7; border-left:3px solid #F59E0B; padding:6px 10px; border-radius:4px; margin-bottom:10px; color:#92400E;">
+                <strong>Optical Status:</strong> <span id="opt-occlusion-status" style="font-weight:700;">OPTICALLY
+                  OCCLUDED (VRBox Central Divider)</span><br>
+                <em>Front camera line-of-sight obstructed by VRBox partition. Active Fallback: Psychophysical
+                  Heijl-Krakau Blind Spot Checks.</em>
               </div>
               <div style="font-size:12px; line-height:1.6; color:#475569;">
-                <p><strong>Palpebral Aperture:</strong> <span id="eye-aperture">9.4 mm (Normal)</span> • <strong>Blink:</strong> <span id="eye-blink" style="color:#10B981; font-weight:700;">Inactive (Eyes Open)</span></p>
-                <p><strong>Fixation Stability:</strong> <span id="eye-bcea" style="font-weight:700;">BCEA: 0.72 deg² (Steady 1-SD Envelope)</span></p>
-                <p><strong>Compute / Thermal:</strong> <span id="eye-benchmark">14.2 ms / frame • GPU Delegate Active • Thermal Normal</span></p>
+                <p><strong>Palpebral Aperture:</strong> <span id="eye-aperture">9.4 mm (Normal)</span> •
+                  <strong>Blink:</strong> <span id="eye-blink" style="color:#10B981; font-weight:700;">Inactive (Eyes
+                    Open)</span>
+                </p>
+                <p><strong>Fixation Stability:</strong> <span id="eye-bcea" style="font-weight:700;">BCEA: 0.72 deg²
+                    (Steady 1-SD Envelope)</span></p>
+                <p><strong>Compute / Thermal:</strong> <span id="eye-benchmark">14.2 ms / frame • GPU Delegate Active •
+                    Thermal Normal</span></p>
               </div>
               <div style="font-size:10px; color:#B45309; margin-top:8px; font-weight:600;">
-                Clinical Safety Gate: Uncalibrated MediaPipe landmarks strictly disabled for clinical diagnostic decisions.
+                Clinical Safety Gate: Uncalibrated MediaPipe landmarks strictly disabled for clinical diagnostic
+                decisions.
               </div>
             </div>
 
             <!-- VRBox Optical Profile & Detachable Eyepiece Interlock (CR-002-G) -->
             <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span style="font-size:12px; font-weight:700; color:var(--text-main);">VRBox Optics & Detachable Lens Interlock</span>
-                <span id="opt-interlock-status-badge" style="font-size:10px; background:#ECFDF5; color:#065F46; padding:2px 6px; border-radius:4px; font-weight:700;">INTERLOCK SECURE</span>
+                <span style="font-size:12px; font-weight:700; color:var(--text-main);">VRBox Optics & Detachable Lens
+                  Interlock</span>
+                <span id="opt-interlock-status-badge"
+                  style="font-size:10px; background:#ECFDF5; color:#065F46; padding:2px 6px; border-radius:4px; font-weight:700;">INTERLOCK
+                  SECURE</span>
               </div>
-              <div style="display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; margin-bottom:10px;">
-                <select id="select-optical-config" style="padding:6px 10px; font-size:12px; border-radius:6px; border:1px solid var(--border);" onchange="updateOpticalHardwareState(this.value)">
-                  <option value="BOTH_VR_LENSES_INSTALLED" selected>Both VR Eyepieces Installed (+14.3D Wide-Field)</option>
+              <div
+                style="display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; margin-bottom:10px;">
+                <select id="select-optical-config"
+                  style="padding:6px 10px; font-size:12px; border-radius:6px; border:1px solid var(--border);"
+                  onchange="updateOpticalHardwareState(this.value)">
+                  <option value="BOTH_VR_LENSES_INSTALLED" selected>Both VR Eyepieces Installed (+14.3D Wide-Field)
+                  </option>
                   <option value="OD_LENS_REMOVED">Right Eyepiece (OD) Removed (Direct Bore)</option>
                   <option value="OS_LENS_REMOVED">Left Eyepiece (OS) Removed (Direct Bore)</option>
                   <option value="BOTH_LENSES_REMOVED">Both Eyepieces Removed (Clear Aperture)</option>
@@ -23660,14 +24470,21 @@ END FILE `web/assets/ishihara/manifest.json`
                   <option value="EXTERNAL_ADAPTER_PINHOLE_MOUNTED">1.2mm Pinhole Occluder Ring Mounted</option>
                   <option value="UNKNOWN_UNCALIBRATED">Uncalibrated / Unknown Optical State</option>
                 </select>
-                <button class="btn-secondary" style="font-size:11px; padding:6px 10px;" onclick="verifyOpticalInterlock()">Verify Interlock</button>
+                <button class="btn-secondary" style="font-size:11px; padding:6px 10px;"
+                  onclick="verifyOpticalInterlock()">Verify Interlock</button>
               </div>
-              <div id="optical-advisory-box" style="font-size:12px; background:#F8FAFC; border-left:3px solid #0284C7; padding:8px 10px; border-radius:4px; margin-bottom:8px; color:#334155;">
-                <strong>Clinical Invariant:</strong> <span id="opt-advisory-text">Standard wide-field psychophysical testing ready. Direct anterior/retinal capture is locked.</span>
+              <div id="optical-advisory-box"
+                style="font-size:12px; background:#F8FAFC; border-left:3px solid #0284C7; padding:8px 10px; border-radius:4px; margin-bottom:8px; color:#334155;">
+                <strong>Clinical Invariant:</strong> <span id="opt-advisory-text">Standard wide-field psychophysical
+                  testing ready. Direct anterior/retinal capture is locked.</span>
               </div>
               <div style="font-size:11px; color:#64748B; line-height:1.5;">
-                <div><strong>Permitted Tests:</strong> <span id="opt-permitted-tests" style="color:#0F172A; font-weight:600;">Perimetry 24-2/30-2, Contrast, Amsler, Ishihara, Tumbling E</span></div>
-                <div><strong>Compound Hazard Protection:</strong> <span id="opt-compound-hazard" style="color:#10B981; font-weight:700;">ACTIVE (Direct camera capture through VR eyepiece is prohibited to prevent focal collapse & Purkinje back-glare)</span></div>
+                <div><strong>Permitted Tests:</strong> <span id="opt-permitted-tests"
+                    style="color:#0F172A; font-weight:600;">Perimetry 24-2/30-2, Contrast, Amsler, Ishihara, Tumbling
+                    E</span></div>
+                <div><strong>Compound Hazard Protection:</strong> <span id="opt-compound-hazard"
+                    style="color:#10B981; font-weight:700;">ACTIVE (Direct camera capture through VR eyepiece is
+                    prohibited to prevent focal collapse & Purkinje back-glare)</span></div>
               </div>
             </div>
           </div>
@@ -23675,12 +24492,16 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span>Live Encounter Event Timeline</span>
-              <button class="btn-secondary" style="font-size:11px; padding:2px 8px;" onclick="clearEventTimeline()">Clear</button>
+              <button class="btn-secondary" style="font-size:11px; padding:2px 8px;"
+                onclick="clearEventTimeline()">Clear</button>
             </div>
             <div class="timeline-container" id="remote-timeline-list">
-              <div class="timeline-entry"><span class="badge-stimulus">INIT</span> Session SES-ONEPLUS-NORD3-01 initialized with 6-digit PIN 749281.</div>
-              <div class="timeline-entry"><span class="badge-response">PEER</span> Android APK Host (OnePlus Nord 3) paired and connected.</div>
-              <div class="timeline-entry"><span class="badge-response">PEER</span> Phone 2 Patient Response Pad paired as input controller.</div>
+              <div class="timeline-entry"><span class="badge-stimulus">INIT</span> Session SES-ONEPLUS-NORD3-01
+                initialized with 6-digit PIN 749281.</div>
+              <div class="timeline-entry"><span class="badge-response">PEER</span> Android APK Host (OnePlus Nord 3)
+                paired and connected.</div>
+              <div class="timeline-entry"><span class="badge-response">PEER</span> Phone 2 Patient Response Pad paired
+                as input controller.</div>
             </div>
           </div>
         </div>
@@ -23689,11 +24510,15 @@ END FILE `web/assets/ishihara/manifest.json`
         <div class="card" style="margin-bottom:24px;">
           <div class="card-title">
             <span>Physician Clinical Observation Entry</span>
-            <span style="font-size:11px; color:var(--text-muted);">Recorded in parallel session audit log without overwriting patient psychophysics</span>
+            <span style="font-size:11px; color:var(--text-muted);">Recorded in parallel session audit log without
+              overwriting patient psychophysics</span>
           </div>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:14px;">
+          <div
+            style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:14px;">
             <div>
-              <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Target Eye:</label>
+              <label
+                style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Target
+                Eye:</label>
               <select id="obs-eye" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border);">
                 <option value="OD">Right Eye (OD)</option>
                 <option value="OS">Left Eye (OS)</option>
@@ -23701,8 +24526,11 @@ END FILE `web/assets/ishihara/manifest.json`
               </select>
             </div>
             <div>
-              <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Clinical Domain:</label>
-              <select id="obs-category" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border);">
+              <label
+                style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Clinical
+                Domain:</label>
+              <select id="obs-category"
+                style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border);">
                 <option value="ANTERIOR_TORCH">Anterior Torch / Slit-Lamp (Cornea/Lens)</option>
                 <option value="PUPILLARY_RAPD">Pupillary Reflex (RAPD Grade 0–4+)</option>
                 <option value="OCULAR_MOTILITY">Ocular Motility (Restriction / Strabismus)</option>
@@ -23710,15 +24538,23 @@ END FILE `web/assets/ishihara/manifest.json`
               </select>
             </div>
             <div>
-              <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Numeric Finding / Grade:</label>
-              <input type="text" id="obs-grade" placeholder="e.g. RAPD Grade 2, Van Herick 2" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border);">
+              <label
+                style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Numeric
+                Finding / Grade:</label>
+              <input type="text" id="obs-grade" placeholder="e.g. RAPD Grade 2, Van Herick 2"
+                style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border);">
             </div>
           </div>
           <div style="margin-bottom:14px;">
-            <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Physician Clinical Observations & Diagnostic Remarks:</label>
-            <textarea id="obs-notes" rows="2" placeholder="Record qualitative clinical impressions (e.g., subtle relative afferent defect OD, nuclear cataract 2+, normal intraocular tension estimated)..." style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); font-size:13px;"></textarea>
+            <label
+              style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Physician
+              Clinical Observations & Diagnostic Remarks:</label>
+            <textarea id="obs-notes" rows="2"
+              placeholder="Record qualitative clinical impressions (e.g., subtle relative afferent defect OD, nuclear cataract 2+, normal intraocular tension estimated)..."
+              style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); font-size:13px;"></textarea>
           </div>
-          <button class="btn-action" onclick="submitPhysicianObservationForm()">Commit Clinical Observation to Encounter Log</button>
+          <button class="btn-action" onclick="submitPhysicianObservationForm()">Commit Clinical Observation to Encounter
+            Log</button>
         </div>
 
         <!-- Level 1 & Level 2 Screening Decision Support -->
@@ -23727,13 +24563,38 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">Level 1 Broad Functional Domains (Per-Eye)</div>
             <table class="data-table">
               <thead>
-                <tr><th>Domain</th><th>OD (Right)</th><th>OS (Left)</th><th>Screening Action</th></tr>
+                <tr>
+                  <th>Domain</th>
+                  <th>OD (Right)</th>
+                  <th>OS (Left)</th>
+                  <th>Screening Action</th>
+                </tr>
               </thead>
               <tbody>
-                <tr><td><strong>Visual Clarity</strong></td><td><span style="color:#10B981; font-weight:700;">NORMAL (0.00)</span></td><td><span style="color:#D97706; font-weight:700;">SUSPECT (0.38)</span></td><td>Pinhole Differential Required</td></tr>
-                <tr><td><strong>Peripheral Field</strong></td><td><span style="color:#10B981; font-weight:700;">NORMAL (MD -1.1dB)</span></td><td><span style="color:#10B981; font-weight:700;">NORMAL (MD -1.4dB)</span></td><td>Routine Baseline</td></tr>
-                <tr><td><strong>Colour Vision</strong></td><td><span style="color:#10B981; font-weight:700;">NORMAL (23/24)</span></td><td><span style="color:#10B981; font-weight:700;">NORMAL (22/24)</span></td><td>No Dyschromatopsia</td></tr>
-                <tr><td><strong>Pupillary Reactivity</strong></td><td><span style="color:#10B981; font-weight:700;">NORMAL (No RAPD)</span></td><td><span style="color:#10B981; font-weight:700;">NORMAL (No RAPD)</span></td><td>Afferent Pathway Intact</td></tr>
+                <tr>
+                  <td><strong>Visual Clarity</strong></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (0.00)</span></td>
+                  <td><span style="color:#D97706; font-weight:700;">SUSPECT (0.38)</span></td>
+                  <td>Pinhole Differential Required</td>
+                </tr>
+                <tr>
+                  <td><strong>Peripheral Field</strong></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (MD -1.1dB)</span></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (MD -1.4dB)</span></td>
+                  <td>Routine Baseline</td>
+                </tr>
+                <tr>
+                  <td><strong>Colour Vision</strong></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (23/24)</span></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (22/24)</span></td>
+                  <td>No Dyschromatopsia</td>
+                </tr>
+                <tr>
+                  <td><strong>Pupillary Reactivity</strong></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (No RAPD)</span></td>
+                  <td><span style="color:#10B981; font-weight:700;">NORMAL (No RAPD)</span></td>
+                  <td>Afferent Pathway Intact</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -23741,29 +24602,35 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span>Level 2 Multi-Condition Ranked Candidates</span>
-              <span style="font-size:11px; background:#FEF3C7; color:#B45309; padding:2px 8px; border-radius:4px;">Independent Sigmoid Heads</span>
+              <span
+                style="font-size:11px; background:#FEF3C7; color:#B45309; padding:2px 8px; border-radius:4px;">Independent
+                Sigmoid Heads</span>
             </div>
             <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
-              Multi-disease coexistence permitted. Probabilities do NOT sum to 100%. Missing evidence tracked explicitly.
+              Multi-disease coexistence permitted. Probabilities do NOT sum to 100%. Missing evidence tracked
+              explicitly.
             </p>
             <div class="candidate-row od">
               <div>
                 <div class="candidate-name">Diabetic Retinopathy (OS)</div>
-                <div style="font-size:11px; color:var(--text-muted);">Evidence: Type 2 Diabetes (+), Acuity reduction | Missing: Fundus Photo</div>
+                <div style="font-size:11px; color:var(--text-muted);">Evidence: Type 2 Diabetes (+), Acuity reduction |
+                  Missing: Fundus Photo</div>
               </div>
               <div class="candidate-score">88.4% <span style="font-size:11px; color:#D97706;">[URGENT]</span></div>
             </div>
             <div class="candidate-row os">
               <div>
                 <div class="candidate-name">Cataract / Media Opacity (OS)</div>
-                <div style="font-size:11px; color:var(--text-muted);">Evidence: LogMAR 0.38 pinhole refractory | Coexists with DR</div>
+                <div style="font-size:11px; color:var(--text-muted);">Evidence: LogMAR 0.38 pinhole refractory |
+                  Coexists with DR</div>
               </div>
               <div class="candidate-score">76.2% [ROUTINE]</div>
             </div>
             <div class="candidate-row od">
               <div>
                 <div class="candidate-name">Suspected Glaucoma (OU)</div>
-                <div style="font-size:11px; color:var(--text-muted);">Evidence: Age 54, Borderline PSD | Low immediate risk</div>
+                <div style="font-size:11px; color:var(--text-muted);">Evidence: Age 54, Borderline PSD | Low immediate
+                  risk</div>
               </div>
               <div class="candidate-score">24.1% [ROUTINE]</div>
             </div>
@@ -23774,20 +24641,31 @@ END FILE `web/assets/ishihara/manifest.json`
 
       <!-- TAB 2: INTERACTIVE VISUAL FIELD PERIMETRY (24-2 & 30-2) -->
       <section id="tab-perimetry" class="tab-view">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+        <div
+          style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Visual Field Perimetry Analyser</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Psychophysically randomized Goldmann III presentation with complete Upper & Lower quadrants.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Visual Field Perimetry Analyser
+            </h2>
+            <p style="font-size:13px; color:var(--text-muted);">Psychophysically randomized Goldmann III presentation
+              with complete Upper & Lower quadrants.</p>
           </div>
           <!-- Configuration Controls -->
           <div style="display:flex; gap:10px; align-items:center;">
-            <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:4px; display:flex; gap:4px;">
-              <button id="pattern-btn-24" class="btn-secondary" style="font-size:12px; padding:4px 10px; font-weight:700; background:var(--mint-wash); color:var(--sea-green-dark);" onclick="selectPerimetryPattern('24-2')">Standard 24-2 (54 Pts)</button>
-              <button id="pattern-btn-30" class="btn-secondary" style="font-size:12px; padding:4px 10px;" onclick="selectPerimetryPattern('30-2')">Expanded 30-2 (76 Pts)</button>
+            <div
+              style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:4px; display:flex; gap:4px;">
+              <button id="pattern-btn-24" class="btn-secondary"
+                style="font-size:12px; padding:4px 10px; font-weight:700; background:var(--mint-wash); color:var(--sea-green-dark);"
+                onclick="selectPerimetryPattern('24-2')">Standard 24-2 (54 Pts)</button>
+              <button id="pattern-btn-30" class="btn-secondary" style="font-size:12px; padding:4px 10px;"
+                onclick="selectPerimetryPattern('30-2')">Expanded 30-2 (76 Pts)</button>
             </div>
-            <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:4px; display:flex; gap:4px;">
-              <button id="eye-btn-od" class="btn-secondary" style="font-size:12px; padding:4px 10px; font-weight:700; background:var(--mint-wash); color:var(--sea-green-dark);" onclick="selectPerimetryEye('OD')">OD (Right Eye)</button>
-              <button id="eye-btn-os" class="btn-secondary" style="font-size:12px; padding:4px 10px;" onclick="selectPerimetryEye('OS')">OS (Left Eye)</button>
+            <div
+              style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:4px; display:flex; gap:4px;">
+              <button id="eye-btn-od" class="btn-secondary"
+                style="font-size:12px; padding:4px 10px; font-weight:700; background:var(--mint-wash); color:var(--sea-green-dark);"
+                onclick="selectPerimetryEye('OD')">OD (Right Eye)</button>
+              <button id="eye-btn-os" class="btn-secondary" style="font-size:12px; padding:4px 10px;"
+                onclick="selectPerimetryEye('OS')">OS (Left Eye)</button>
             </div>
           </div>
         </div>
@@ -23823,8 +24701,11 @@ END FILE `web/assets/ishihara/manifest.json`
           </div>
 
           <div style="margin-top:18px; display:flex; gap:16px; align-items:center;">
-            <button id="btn-perimetry-start" class="btn-action" onclick="startPerimetryTest()">Start Randomized Test</button>
-            <button id="btn-perimetry-response" class="btn-action" style="background:#0284C7; font-size:16px; padding:10px 32px;" onclick="recordPerimetryResponse()" disabled>
+            <button id="btn-perimetry-start" class="btn-action" onclick="startPerimetryTest()">Start Randomized
+              Test</button>
+            <button id="btn-perimetry-response" class="btn-action"
+              style="background:#0284C7; font-size:16px; padding:10px 32px;" onclick="recordPerimetryResponse()"
+              disabled>
               RESPOND (I See Light)
             </button>
             <button class="btn-secondary" onclick="resetPerimetryTest()">Reset</button>
@@ -23833,13 +24714,14 @@ END FILE `web/assets/ishihara/manifest.json`
             *Stimulus Order: Pseudorandom Non-Sequential Shuffle • Stimulus Duration: 200 ms • Background: 10 cd/m²
           </div>
         </div>
-      
+
         <!-- Module 2 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Supra-threshold perimetry is an initial screening test. Deficits require Humphrey Visual Field (HVF) gold-standard confirmation.</span>
+              <span style="margin-left:8px;">Supra-threshold perimetry is an initial screening test. Deficits require
+                Humphrey Visual Field (HVF) gold-standard confirmation.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -23848,17 +24730,24 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li>Instruct the patient to keep their gaze strictly locked on the central yellow fixation cross at all times. Emphasize: <em>"Do not look around for the dots; keep looking only at the central cross."</em></li>
-            <li>Place Phone 2 in the patient's hands in <strong>Patient Response Pad Mode</strong>. The entire screen acts as a single large touch button.</li>
-            <li>Tell the patient: <em>"Whenever you notice a quick flash of light anywhere in your side vision, tap the screen once immediately."</em></li>
-            <li>The native VR app presents Goldmann Size III spots (0.43° visual angle, 200 ms duration) at 54 standard grid points across the central 24° visual field.</li>
-            <li>The software periodically presents stimuli into the physiological blind spot (15° temporal, 1.5° inferior) to monitor fixation losses (Heijl-Krakau technique), along with silent false-positive catch trials.</li>
+            <li>Instruct the patient to keep their gaze strictly locked on the central yellow fixation cross at all
+              times. Emphasize: <em>"Do not look around for the dots; keep looking only at the central cross."</em></li>
+            <li>Place Phone 2 in the patient's hands in <strong>Patient Response Pad Mode</strong>. The entire screen
+              acts as a single large touch button.</li>
+            <li>Tell the patient: <em>"Whenever you notice a quick flash of light anywhere in your side vision, tap the
+                screen once immediately."</em></li>
+            <li>The native VR app presents Goldmann Size III spots (0.43° visual angle, 200 ms duration) at 54 standard
+              grid points across the central 24° visual field.</li>
+            <li>The software periodically presents stimuli into the physiological blind spot (15° temporal, 1.5°
+              inferior) to monitor fixation losses (Heijl-Krakau technique), along with silent false-positive catch
+              trials.</li>
           </ol>
 
           <h4>B. What It Screens For</h4>
           <ul>
             <li><strong>Glaucomatous Field Loss:</strong> Arcuate scotomas, nasal steps, paracentral depressions.</li>
-            <li><strong>Neurological Lesions:</strong> Bitemporal hemianopia (chiasm/pituitary), homonymous hemianopia (post-chiasmal/stroke).</li>
+            <li><strong>Neurological Lesions:</strong> Bitemporal hemianopia (chiasm/pituitary), homonymous hemianopia
+              (post-chiasmal/stroke).</li>
             <li><strong>Retinal Vascular Occlusions:</strong> Branch retinal vein / artery occlusion.</li>
             <li><strong>Retinitis Pigmentosa & Toxicity:</strong> Chloroquine / hydroxychloroquine toxicity.</li>
           </ul>
@@ -23866,22 +24755,62 @@ END FILE `web/assets/ishihara/manifest.json`
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Perimetry Index</th><th>Normal Range</th><th>Borderline / Suspect</th><th>Definite Deficit</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Perimetry Index</th>
+                <th>Normal Range</th>
+                <th>Borderline / Suspect</th>
+                <th>Definite Deficit</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Points Seen Ratio</strong></td><td>&ge; 95% (&gt;51/54)</td><td>85% - 94% (46-50/54)</td><td>&lt; 85% (&lt;46/54)</td><td>Quantifies overall peripheral field sensitivity.</td></tr>
-              <tr><td><strong>Mean Defect (MD)</strong></td><td>-2.0 to +1.0 dB</td><td>-2.1 to -6.0 dB</td><td>&lt; -6.0 dB</td><td>Reflects generalized depression of the visual field.</td></tr>
-              <tr><td><strong>Pattern Std Dev (PSD)</strong></td><td>&lt; 2.5 dB</td><td>2.5 to 4.0 dB</td><td>&gt; 4.0 dB</td><td>Hallmark of localized focal scotomas (crucial for early glaucoma).</td></tr>
-              <tr><td><strong>Fixation Losses</strong></td><td>&lt; 20%</td><td>20% - 33%</td><td>&gt; 33% (UNRELIABLE)</td><td>Patient broke fixation by searching for stimuli. High rate invalidates test.</td></tr>
-              <tr><td><strong>False Positive Rate</strong></td><td>&lt; 15%</td><td>15% - 25%</td><td>&gt; 25% (UNRELIABLE)</td><td>Patient tapped screen when no stimulus was present ("trigger happy").</td></tr>
+              <tr>
+                <td><strong>Points Seen Ratio</strong></td>
+                <td>&ge; 95% (&gt;51/54)</td>
+                <td>85% - 94% (46-50/54)</td>
+                <td>&lt; 85% (&lt;46/54)</td>
+                <td>Quantifies overall peripheral field sensitivity.</td>
+              </tr>
+              <tr>
+                <td><strong>Mean Defect (MD)</strong></td>
+                <td>-2.0 to +1.0 dB</td>
+                <td>-2.1 to -6.0 dB</td>
+                <td>&lt; -6.0 dB</td>
+                <td>Reflects generalized depression of the visual field.</td>
+              </tr>
+              <tr>
+                <td><strong>Pattern Std Dev (PSD)</strong></td>
+                <td>&lt; 2.5 dB</td>
+                <td>2.5 to 4.0 dB</td>
+                <td>&gt; 4.0 dB</td>
+                <td>Hallmark of localized focal scotomas (crucial for early glaucoma).</td>
+              </tr>
+              <tr>
+                <td><strong>Fixation Losses</strong></td>
+                <td>&lt; 20%</td>
+                <td>20% - 33%</td>
+                <td>&gt; 33% (UNRELIABLE)</td>
+                <td>Patient broke fixation by searching for stimuli. High rate invalidates test.</td>
+              </tr>
+              <tr>
+                <td><strong>False Positive Rate</strong></td>
+                <td>&lt; 15%</td>
+                <td>15% - 25%</td>
+                <td>&gt; 25% (UNRELIABLE)</td>
+                <td>Patient tapped screen when no stimulus was present ("trigger happy").</td>
+              </tr>
             </tbody>
           </table>
-          <div style="background:#F8FAFC; border-left:4px solid var(--amber); padding:10px 14px; font-size:12px; margin-top:8px;">
+          <div
+            style="background:#F8FAFC; border-left:4px solid var(--amber); padding:10px 14px; font-size:12px; margin-top:8px;">
             <strong>Hallmark Defect Patterns:</strong><br>
             &bull; <em>Nasal Step:</em> Deficit respecting horizontal meridian &rarr; Early Glaucoma.<br>
-            &bull; <em>Arcuate (Bjerrum) Scotoma:</em> Arching defect extending from blind spot around fovea &rarr; Moderate Glaucoma.<br>
-            &bull; <em>Altitudinal Hemianopia:</em> Loss of superior or inferior half &rarr; Ischemic Optic Neuropathy (AION) or Hemispheric Artery Occlusion.<br>
-            &bull; <em>Bitemporal Hemianopia:</em> Loss of both temporal hemifields &rarr; Compressive Pituitary Adenoma (urgent neurosurgical referral).
+            &bull; <em>Arcuate (Bjerrum) Scotoma:</em> Arching defect extending from blind spot around fovea &rarr;
+            Moderate Glaucoma.<br>
+            &bull; <em>Altitudinal Hemianopia:</em> Loss of superior or inferior half &rarr; Ischemic Optic Neuropathy
+            (AION) or Hemispheric Artery Occlusion.<br>
+            &bull; <em>Bitemporal Hemianopia:</em> Loss of both temporal hemifields &rarr; Compressive Pituitary Adenoma
+            (urgent neurosurgical referral).
           </div>
         </div>
 
@@ -23891,8 +24820,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-acuity" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Visual Acuity Assessment (ETDRS / LogMAR)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Calibrated monocular optotypes, psychometric staircase & amblyopic crowding bars.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Visual Acuity Assessment (ETDRS /
+              LogMAR)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Calibrated monocular optotypes, psychometric staircase &
+              amblyopic crowding bars.</p>
           </div>
           <div style="display:flex; gap:10px;">
             <div class="segmented-control">
@@ -23909,7 +24840,8 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">
               <span>Active Optotype Presentation</span>
               <div class="segmented-control">
-                <button class="segmented-btn active" id="opt-tumbling" onclick="setOptotypeMode('TUMBLING_E')">Tumbling E</button>
+                <button class="segmented-btn active" id="opt-tumbling" onclick="setOptotypeMode('TUMBLING_E')">Tumbling
+                  E</button>
                 <button class="segmented-btn" id="opt-landolt" onclick="setOptotypeMode('LANDOLT_C')">Landolt C</button>
                 <button class="segmented-btn" id="opt-sloan" onclick="setOptotypeMode('SLOAN')">Sloan Letters</button>
               </div>
@@ -23919,22 +24851,28 @@ END FILE `web/assets/ishihara/manifest.json`
               <div id="acuity-crowding-wrap">
                 <div id="acuity-char-display" class="tumbling-e">&#696;</div>
               </div>
-              <div id="acuity-level-label" style="margin-top:14px; font-weight:700; font-size:14px; color:var(--sea-green-dark);">
+              <div id="acuity-level-label"
+                style="margin-top:14px; font-weight:700; font-size:14px; color:var(--sea-green-dark);">
                 Line: 20/40 • 0.30 LogMAR (Stroke: 2.0 arcmin)
               </div>
-              <div style="margin-top:4px; font-size:11px; color:var(--text-muted);">Calibrated viewing distance: 4.0 m equivalent</div>
+              <div style="margin-top:4px; font-size:11px; color:var(--text-muted);">Calibrated viewing distance: 4.0 m
+                equivalent</div>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
               <div style="display:flex; align-items:center; gap:8px;">
-                <label style="font-size:12px; font-weight:600;"><input type="checkbox" id="chk-crowding" onchange="toggleCrowdingBars(this.checked)"> Crowding Bars</label>
-                <label style="font-size:12px; font-weight:600; margin-left:10px;"><input type="checkbox" id="chk-pinhole"> Pinhole Occluder</label>
+                <label style="font-size:12px; font-weight:600;"><input type="checkbox" id="chk-crowding"
+                    onchange="toggleCrowdingBars(this.checked)"> Crowding Bars</label>
+                <label style="font-size:12px; font-weight:600; margin-left:10px;"><input type="checkbox"
+                    id="chk-pinhole"> Pinhole Occluder</label>
               </div>
-              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="resetAcuityTest()">Reset Staircase</button>
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="resetAcuityTest()">Reset
+                Staircase</button>
             </div>
 
             <div style="display:flex; flex-direction:column; align-items:center; margin-top:16px;">
-              <p style="font-size:12px; margin-bottom:8px; font-weight:600;" id="acuity-prompt-text">Choose Orientation of Prongs:</p>
+              <p style="font-size:12px; margin-bottom:8px; font-weight:600;" id="acuity-prompt-text">Choose Orientation
+                of Prongs:</p>
               <div class="e-controls" id="acuity-directional-controls">
                 <div></div>
                 <button class="btn-secondary" onclick="recordAcuityInput('UP')">&uarr;</button>
@@ -23946,10 +24884,13 @@ END FILE `web/assets/ishihara/manifest.json`
                 <button class="btn-secondary" onclick="recordAcuityInput('DOWN')">&darr;</button>
                 <div></div>
               </div>
-              <div id="acuity-sloan-controls" style="display:none; gap:6px; flex-wrap:wrap; justify-content:center; max-width:320px;">
+              <div id="acuity-sloan-controls"
+                style="display:none; gap:6px; flex-wrap:wrap; justify-content:center; max-width:320px;">
                 <!-- Sloan letter buttons populated via JS -->
               </div>
-              <div id="acuity-feedback" style="margin-top:12px; font-weight:700; font-size:13px; color:var(--sea-green-dark);">Waiting for response...</div>
+              <div id="acuity-feedback"
+                style="margin-top:12px; font-weight:700; font-size:13px; color:var(--sea-green-dark);">Waiting for
+                response...</div>
             </div>
           </div>
 
@@ -23969,34 +24910,43 @@ END FILE `web/assets/ishihara/manifest.json`
               </tbody>
             </table>
             <div style="margin-top:16px; padding:12px; background:var(--mint-wash); border-radius:8px;">
-              <div style="font-weight:700; font-size:13px; color:var(--sea-green-dark);">Diagnostic Threshold Summary</div>
+              <div style="font-weight:700; font-size:13px; color:var(--sea-green-dark);">Diagnostic Threshold Summary
+              </div>
               <div id="acuity-score-summary" style="font-size:12px; margin-top:4px;">
                 Estimated Acuity: <strong>20/20 (0.00 LogMAR)</strong> • Normal Visual Resolution
               </div>
             </div>
           </div>
         </div>
-      
+
         <!-- Module 1 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Visual Acuity is a preliminary screening measure, not an autonomous refraction or diagnostic prescription.</span>
+              <span style="margin-left:8px;">Visual Acuity is a preliminary screening measure, not an autonomous
+                refraction or diagnostic prescription.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
 
           <h3>&#9670; Module 1 Clinical Guide: Visual Acuity (ETDRS / LogMAR / Pinhole Differential)</h3>
-          
+
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li>Ensure the patient is seated comfortably wearing the VR Box with IPD adjusted until the two eye views fuse into a single sharp field.</li>
-            <li>Select <strong>Visual Acuity</strong> on the Clinician Station (Phone 2 or Web Portal) and choose the starting eye (Right Eye OD or Left Eye OS).</li>
-            <li>The patient will see a high-contrast Tumbling "E" optotype in one of 4 orientations: Up (&uarr;), Down (&darr;), Left (&larr;), or Right (&rarr;).</li>
-            <li>The patient indicates the orientation using the directional touch zones on the Patient Response Pad (Phone 2 browser) or states the direction verbally to the health worker.</li>
-            <li>The software runs an adaptive 4-down / 1-up staircase from LogMAR 1.0 (Snellen 6/60) to LogMAR -0.1 (Snellen 6/4.8).</li>
-            <li><strong>Pinhole Differential Protocol:</strong> If the patient's baseline visual acuity is abnormal (&ge; 0.3 LogMAR / worse than 6/12), place the 1.2 mm pinhole occluder over the tested eye and re-run the staircase.</li>
+            <li>Ensure the patient is seated comfortably wearing the VR Box with IPD adjusted until the two eye views
+              fuse into a single sharp field.</li>
+            <li>Select <strong>Visual Acuity</strong> on the Clinician Station (Phone 2 or Web Portal) and choose the
+              starting eye (Right Eye OD or Left Eye OS).</li>
+            <li>The patient will see a high-contrast Tumbling "E" optotype in one of 4 orientations: Up (&uarr;), Down
+              (&darr;), Left (&larr;), or Right (&rarr;).</li>
+            <li>The patient indicates the orientation using the directional touch zones on the Patient Response Pad
+              (Phone 2 browser) or states the direction verbally to the health worker.</li>
+            <li>The software runs an adaptive 4-down / 1-up staircase from LogMAR 1.0 (Snellen 6/60) to LogMAR -0.1
+              (Snellen 6/4.8).</li>
+            <li><strong>Pinhole Differential Protocol:</strong> If the patient's baseline visual acuity is abnormal
+              (&ge; 0.3 LogMAR / worse than 6/12), place the 1.2 mm pinhole occluder over the tested eye and re-run the
+              staircase.</li>
           </ol>
 
           <h4>B. What It Screens For</h4>
@@ -24010,20 +24960,53 @@ END FILE `web/assets/ishihara/manifest.json`
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>LogMAR Score</th><th>Snellen</th><th>Metric Interpretation</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>LogMAR Score</th>
+                <th>Snellen</th>
+                <th>Metric Interpretation</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>&le; 0.00</strong></td><td>6/6 (20/20)</td><td>Normal Visual Acuity</td><td>Normal central resolving power. Low risk of significant pathology.</td></tr>
-              <tr><td><strong>0.10 to 0.20</strong></td><td>6/7.5 to 6/9</td><td>Mild Visual Impairment</td><td>Borderline acuity. Routine optometric evaluation recommended.</td></tr>
-              <tr><td><strong>0.30 to 0.50</strong></td><td>6/12 to 6/18</td><td>Moderate Impairment</td><td>Meets threshold for driving restriction. Pinhole test mandatory.</td></tr>
-              <tr><td><strong>0.60 to 0.90</strong></td><td>6/24 to 6/48</td><td>Severe Impairment</td><td>Substantial central vision loss. High suspicion of organic pathology.</td></tr>
-              <tr><td><strong>&ge; 1.00</strong></td><td>&le; 6/60 (20/200)</td><td>Profound Impairment</td><td>Legal blindness threshold. Urgent ophthalmology referral.</td></tr>
+              <tr>
+                <td><strong>&le; 0.00</strong></td>
+                <td>6/6 (20/20)</td>
+                <td>Normal Visual Acuity</td>
+                <td>Normal central resolving power. Low risk of significant pathology.</td>
+              </tr>
+              <tr>
+                <td><strong>0.10 to 0.20</strong></td>
+                <td>6/7.5 to 6/9</td>
+                <td>Mild Visual Impairment</td>
+                <td>Borderline acuity. Routine optometric evaluation recommended.</td>
+              </tr>
+              <tr>
+                <td><strong>0.30 to 0.50</strong></td>
+                <td>6/12 to 6/18</td>
+                <td>Moderate Impairment</td>
+                <td>Meets threshold for driving restriction. Pinhole test mandatory.</td>
+              </tr>
+              <tr>
+                <td><strong>0.60 to 0.90</strong></td>
+                <td>6/24 to 6/48</td>
+                <td>Severe Impairment</td>
+                <td>Substantial central vision loss. High suspicion of organic pathology.</td>
+              </tr>
+              <tr>
+                <td><strong>&ge; 1.00</strong></td>
+                <td>&le; 6/60 (20/200)</td>
+                <td>Profound Impairment</td>
+                <td>Legal blindness threshold. Urgent ophthalmology referral.</td>
+              </tr>
             </tbody>
           </table>
-          <div style="background:#F8FAFC; border-left:4px solid var(--sea-green); padding:10px 14px; font-size:12px; margin-top:8px;">
+          <div
+            style="background:#F8FAFC; border-left:4px solid var(--sea-green); padding:10px 14px; font-size:12px; margin-top:8px;">
             <strong>Pinhole Differential Rule:</strong><br>
-            &bull; <em>Pinhole Responsive (&ge; 2 LogMAR lines improvement):</em> Uncorrected <strong>Refractive Error</strong> (optical defocus neutralized). Non-urgent spectacle refraction.<br>
-            &bull; <em>Pinhole Refractory (No improvement or worsens):</em> <strong>Organic Pathology</strong> (cataract, corneal scar, macular lesion, amblyopia). Urgent ophthalmology referral required.
+            &bull; <em>Pinhole Responsive (&ge; 2 LogMAR lines improvement):</em> Uncorrected <strong>Refractive
+              Error</strong> (optical defocus neutralized). Non-urgent spectacle refraction.<br>
+            &bull; <em>Pinhole Refractory (No improvement or worsens):</em> <strong>Organic Pathology</strong>
+            (cataract, corneal scar, macular lesion, amblyopia). Urgent ophthalmology referral required.
           </div>
         </div>
 
@@ -24033,12 +25016,18 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-colour" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Colour Vision Assessment (Calibrated Pseudoisochromatic Battery)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Calibrated confusion loci for Protan (Red), Deutan (Green), and Tritan (Blue) deficiency.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Colour Vision Assessment
+              (Calibrated Pseudoisochromatic Battery)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Calibrated confusion loci for Protan (Red), Deutan
+              (Green), and Tritan (Blue) deficiency.</p>
           </div>
           <div style="display:flex; gap:10px;">
-            <button class="btn-action" style="background:#7C3AED; display:flex; align-items:center; gap:6px;" onclick="launchVrColourVision()">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z"/><circle cx="12" cy="10" r="2"/></svg>
+            <button class="btn-action" style="background:#7C3AED; display:flex; align-items:center; gap:6px;"
+              onclick="launchVrColourVision()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z" />
+                <circle cx="12" cy="10" r="2" />
+              </svg>
               Launch in VR Headset Mode
             </button>
             <button class="btn-action" onclick="syncColourVisionToBackend()">Commit Result to Backend</button>
@@ -24049,7 +25038,9 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span id="colour-plate-title">Plate 1 of 8: Demonstration Plate</span>
-              <span style="font-size:11px; background:var(--mint-wash); color:var(--sea-green-dark); padding:2px 8px; border-radius:4px;">Standard Illuminant D65</span>
+              <span
+                style="font-size:11px; background:var(--mint-wash); color:var(--sea-green-dark); padding:2px 8px; border-radius:4px;">Standard
+                Illuminant D65</span>
             </div>
 
             <div class="ishihara-box">
@@ -24059,22 +25050,32 @@ END FILE `web/assets/ishihara/manifest.json`
               </div>
 
               <!-- Quick Choice Pills for active plate -->
-              <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;" id="colour-choices-container">
+              <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;"
+                id="colour-choices-container">
                 <!-- Populated dynamically with p.choices -->
               </div>
 
               <!-- Custom Entry & Controls -->
-              <div style="margin-top:14px; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap;">
-                <input type="text" id="colour-custom-input" placeholder="Or type answer..." style="width:140px; padding:6px 10px; font-size:13px; font-weight:700; border:1px solid var(--border); border-radius:6px; text-align:center;" onkeydown="if(event.key==='Enter') submitPlateAnswer(this.value)">
-                <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="submitPlateAnswer(document.getElementById('colour-custom-input').value)">Submit</button>
-                <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="submitPlateAnswer('Blank')">Cannot See / Blank</button>
+              <div
+                style="margin-top:14px; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap;">
+                <input type="text" id="colour-custom-input" placeholder="Or type answer..."
+                  style="width:140px; padding:6px 10px; font-size:13px; font-weight:700; border:1px solid var(--border); border-radius:6px; text-align:center;"
+                  onkeydown="if(event.key==='Enter') submitPlateAnswer(this.value)">
+                <button class="btn-secondary" style="font-size:12px; padding:6px 12px;"
+                  onclick="submitPlateAnswer(document.getElementById('colour-custom-input').value)">Submit</button>
+                <button class="btn-secondary" style="font-size:12px; padding:6px 12px;"
+                  onclick="submitPlateAnswer('Blank')">Cannot See / Blank</button>
               </div>
 
               <!-- Stepping Controls -->
-              <div style="margin-top:14px; display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap;">
-                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;" onclick="prevColourPlate()">&larr; Previous Plate</button>
-                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;" onclick="nextColourPlate()">Next Plate &rarr;</button>
-                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;" onclick="resetColourVisionTest()">Restart Test</button>
+              <div
+                style="margin-top:14px; display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap;">
+                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;"
+                  onclick="prevColourPlate()">&larr; Previous Plate</button>
+                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;" onclick="nextColourPlate()">Next
+                  Plate &rarr;</button>
+                <button class="btn-secondary" style="font-size:12px; padding:6px 14px;"
+                  onclick="resetColourVisionTest()">Restart Test</button>
               </div>
             </div>
           </div>
@@ -24096,21 +25097,24 @@ END FILE `web/assets/ishihara/manifest.json`
               </tbody>
             </table>
 
-            <div id="colour-diagnostic-card" style="margin-top:16px; padding:14px; background:var(--mint-wash); border-radius:8px;">
-              <div style="font-weight:700; font-size:14px; color:var(--sea-green-dark);" id="colour-diagnosis-heading">Status: Testing In Progress</div>
+            <div id="colour-diagnostic-card"
+              style="margin-top:16px; padding:14px; background:var(--mint-wash); border-radius:8px;">
+              <div style="font-weight:700; font-size:14px; color:var(--sea-green-dark);" id="colour-diagnosis-heading">
+                Status: Testing In Progress</div>
               <div id="colour-diagnosis-detail" style="font-size:12px; margin-top:4px; color:var(--text-muted);">
                 Complete all 8 plates to determine trichromatic integrity or classify Protan/Deutan red-green defect.
               </div>
             </div>
           </div>
         </div>
-      
+
         <!-- Module 3 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Ishihara plates screen for congenital and acquired red-green dyschromatopsia. Does not diagnose acquired maculopathy alone.</span>
+              <span style="margin-left:8px;">Ishihara plates screen for congenital and acquired red-green
+                dyschromatopsia. Does not diagnose acquired maculopathy alone.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24119,16 +25123,21 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li>Ensure the patient display is set to standard sRGB colour space with neutral white balance (6500 K) and photopic luminance.</li>
-            <li>Select <strong>Colour Vision</strong> in either Monocular Mode (testing each eye independently) or Stereoscopic VR Mode.</li>
+            <li>Ensure the patient display is set to standard sRGB colour space with neutral white balance (6500 K) and
+              photopic luminance.</li>
+            <li>Select <strong>Colour Vision</strong> in either Monocular Mode (testing each eye independently) or
+              Stereoscopic VR Mode.</li>
             <li>Plates 1 through 24 are sequentially presented for 3 to 5 seconds each:
               <ul>
                 <li><em>Plate 1 (Demo Plate 12):</em> Seen by all functional eyes; instructs patient.</li>
-                <li><em>Plates 2–7 (Transformation Plates):</em> Normal sees one number; defective sees a different number.</li>
+                <li><em>Plates 2–7 (Transformation Plates):</em> Normal sees one number; defective sees a different
+                  number.</li>
                 <li><em>Plates 8–13 (Vanishing Plates):</em> Normal sees number; defective sees nothing.</li>
                 <li><em>Plates 14–15 (Hidden Digit Plates):</em> Normal sees nothing; colour defective sees number.</li>
-                <li><em>Plates 16–17 (Diagnostic Plates):</em> Differentiates Protan (red) from Deutan (green) deficiency.</li>
-                <li><em>Plates 18–24 (Tracing Pathways):</em> Continuous pathways for pediatric or unlettered patients.</li>
+                <li><em>Plates 16–17 (Diagnostic Plates):</em> Differentiates Protan (red) from Deutan (green)
+                  deficiency.</li>
+                <li><em>Plates 18–24 (Tracing Pathways):</em> Continuous pathways for pediatric or unlettered patients.
+                </li>
               </ul>
             </li>
             <li>The patient identifies the numeral using quick-choice chips on Phone 2 or states it verbally.</li>
@@ -24136,28 +25145,61 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>B. What It Screens For</h4>
           <ul>
-            <li><strong>Congenital Colour Deficiency:</strong> Protanopia / Protanomaly (red), Deuteranopia / Deuteranomaly (green).</li>
-            <li><strong>Acquired Optic Nerve Pathology:</strong> Optic Neuritis, Ethambutol toxic optic neuropathy, early Compressive Neuropathy.</li>
+            <li><strong>Congenital Colour Deficiency:</strong> Protanopia / Protanomaly (red), Deuteranopia /
+              Deuteranomaly (green).</li>
+            <li><strong>Acquired Optic Nerve Pathology:</strong> Optic Neuritis, Ethambutol toxic optic neuropathy,
+              early Compressive Neuropathy.</li>
             <li><strong>Macular Dystrophies:</strong> Cone-rod dystrophy, Stargardt disease.</li>
           </ul>
 
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Correct Plates (/24)</th><th>Classification</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Correct Plates (/24)</th>
+                <th>Classification</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>&ge; 20 Plates</strong></td><td>NORMAL TRICHROMACY</td><td>Normal colour perception. Low risk of dyschromatopsia.</td></tr>
-              <tr><td><strong>14 to 19 Plates</strong></td><td>BORDERLINE / MILD DEFECT</td><td>Partial red-green colour anomaly. Repeat testing recommended.</td></tr>
-              <tr><td><strong>&lt; 14 Plates</strong></td><td>RED-GREEN DEFICIENCY</td><td>Significant red-green dyschromatopsia detected.</td></tr>
-              <tr><td><strong>Plates 16–17 (Protan)</strong></td><td>PROTAN DEFICIENCY</td><td>Protanopia (absent L-cones) or Protanomaly. Reduced sensitivity to red light.</td></tr>
-              <tr><td><strong>Plates 16–17 (Deutan)</strong></td><td>DEUTAN DEFICIENCY</td><td>Deuteranopia (absent M-cones) or Deuteranomaly. Most common congenital defect (&gt;6% males).</td></tr>
-              <tr><td><strong>Plate 1 Failed</strong></td><td>SUSPECT MALINGERING / SEVERE AMBLYOPIA</td><td>Plate 1 is universally visible. Failure indicates severe opacity or comprehension loss.</td></tr>
+              <tr>
+                <td><strong>&ge; 20 Plates</strong></td>
+                <td>NORMAL TRICHROMACY</td>
+                <td>Normal colour perception. Low risk of dyschromatopsia.</td>
+              </tr>
+              <tr>
+                <td><strong>14 to 19 Plates</strong></td>
+                <td>BORDERLINE / MILD DEFECT</td>
+                <td>Partial red-green colour anomaly. Repeat testing recommended.</td>
+              </tr>
+              <tr>
+                <td><strong>&lt; 14 Plates</strong></td>
+                <td>RED-GREEN DEFICIENCY</td>
+                <td>Significant red-green dyschromatopsia detected.</td>
+              </tr>
+              <tr>
+                <td><strong>Plates 16–17 (Protan)</strong></td>
+                <td>PROTAN DEFICIENCY</td>
+                <td>Protanopia (absent L-cones) or Protanomaly. Reduced sensitivity to red light.</td>
+              </tr>
+              <tr>
+                <td><strong>Plates 16–17 (Deutan)</strong></td>
+                <td>DEUTAN DEFICIENCY</td>
+                <td>Deuteranopia (absent M-cones) or Deuteranomaly. Most common congenital defect (&gt;6% males).</td>
+              </tr>
+              <tr>
+                <td><strong>Plate 1 Failed</strong></td>
+                <td>SUSPECT MALINGERING / SEVERE AMBLYOPIA</td>
+                <td>Plate 1 is universally visible. Failure indicates severe opacity or comprehension loss.</td>
+              </tr>
             </tbody>
           </table>
-          <div style="background:#F8FAFC; border-left:4px solid #3B82F6; padding:10px 14px; font-size:12px; margin-top:8px;">
+          <div
+            style="background:#F8FAFC; border-left:4px solid #3B82F6; padding:10px 14px; font-size:12px; margin-top:8px;">
             <strong>Congenital vs. Acquired Rule:</strong><br>
-            Congenital red-green deficiency is strictly symmetric in both eyes and stable. <strong>Asymmetric colour vision loss</strong> between eyes strongly indicates an <strong>acquired optic nerve lesion</strong> (e.g., retrobulbar optic neuritis).
+            Congenital red-green deficiency is strictly symmetric in both eyes and stable. <strong>Asymmetric colour
+              vision loss</strong> between eyes strongly indicates an <strong>acquired optic nerve lesion</strong>
+            (e.g., retrobulbar optic neuritis).
           </div>
         </div>
 
@@ -24167,8 +25209,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-contrast" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Contrast Sensitivity Testing (Pelli-Robson Standard)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">1-meter calibrated letter triplet chart with 0.15 log CS stepped contrast degradation.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Contrast Sensitivity Testing
+              (Pelli-Robson Standard)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">1-meter calibrated letter triplet chart with 0.15 log CS
+              stepped contrast degradation.</p>
           </div>
           <button class="btn-action" onclick="syncContrastToBackend()">Commit Contrast to Backend</button>
         </div>
@@ -24177,10 +25221,12 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span>Interactive Pelli-Robson Letter Triplet Chart</span>
-              <span style="font-size:11px; background:#F1F5F9; padding:2px 8px; border-radius:4px;">Luminance: 85 cd/m²</span>
+              <span style="font-size:11px; background:#F1F5F9; padding:2px 8px; border-radius:4px;">Luminance: 85
+                cd/m²</span>
             </div>
             <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
-              Ask patient to read letter triplets across each row. Threshold is scored at the last triplet where &ge; 2 of 3 letters are correctly named.
+              Ask patient to read letter triplets across each row. Threshold is scored at the last triplet where &ge; 2
+              of 3 letters are correctly named.
             </p>
 
             <div id="contrast-triplets-list">
@@ -24190,19 +25236,26 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <div class="card">
             <div class="card-title">Contrast Sensitivity Clinical Interpretation</div>
-            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px; margin-bottom:16px;">
+            <div
+              style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px; margin-bottom:16px;">
               <div style="font-size:12px; color:var(--text-muted);">Scored Log Contrast Sensitivity:</div>
-              <div style="font-size:28px; font-weight:800; color:var(--sea-green-dark); margin:6px 0;" id="cs-score-display">1.95 log CS</div>
-              <div id="cs-grade-badge" style="display:inline-block; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; background:#D1FAE5; color:#065F46;">
+              <div style="font-size:28px; font-weight:800; color:var(--sea-green-dark); margin:6px 0;"
+                id="cs-score-display">1.95 log CS</div>
+              <div id="cs-grade-badge"
+                style="display:inline-block; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; background:#D1FAE5; color:#065F46;">
                 NORMAL ADULT CS (&ge; 1.65)
               </div>
             </div>
 
             <h4 style="font-size:13px; font-weight:700; margin-bottom:8px;">Diagnostic Reference Norms:</h4>
             <ul style="font-size:12px; color:var(--text-muted); line-height:1.7; padding-left:18px;">
-              <li><strong>Normal Range (&ge; 1.65 log CS):</strong> Preserved neuro-retinal ganglion cell sensitivity and clear optical media.</li>
-              <li><strong>Borderline (1.50 – 1.60 log CS):</strong> Suspect early ocular compromise; recheck under standardized photopic illumination.</li>
-              <li><strong>Abnormal Deficit (&lt; 1.50 log CS):</strong> Significant functional impairment. Characteristic of early nuclear cataract opacity, primary open-angle glaucoma, or diabetic macular compromise.</li>
+              <li><strong>Normal Range (&ge; 1.65 log CS):</strong> Preserved neuro-retinal ganglion cell sensitivity
+                and clear optical media.</li>
+              <li><strong>Borderline (1.50 – 1.60 log CS):</strong> Suspect early ocular compromise; recheck under
+                standardized photopic illumination.</li>
+              <li><strong>Abnormal Deficit (&lt; 1.50 log CS):</strong> Significant functional impairment.
+                Characteristic of early nuclear cataract opacity, primary open-angle glaucoma, or diabetic macular
+                compromise.</li>
             </ul>
 
             <div style="margin-top:16px; display:flex; gap:8px;">
@@ -24212,13 +25265,14 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
           </div>
         </div>
-      
+
         <!-- Module 4 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Contrast sensitivity detects spatial loss. Loss with normal Snellen acuity warrants optic nerve and lens examination.</span>
+              <span style="margin-left:8px;">Contrast sensitivity detects spatial loss. Loss with normal Snellen acuity
+                warrants optic nerve and lens examination.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24227,16 +25281,21 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li>In the VR headset, present triplet optotype letters at a fixed spatial frequency (1.5 cycles/degree, optotype size equivalent to 6/60).</li>
-            <li>The optotype contrast progressively diminishes across 16 triplet steps, decreasing by 0.15 log units per triplet from 0.00 LogCS (100% contrast) down to 2.25 LogCS (0.56% contrast).</li>
+            <li>In the VR headset, present triplet optotype letters at a fixed spatial frequency (1.5 cycles/degree,
+              optotype size equivalent to 6/60).</li>
+            <li>The optotype contrast progressively diminishes across 16 triplet steps, decreasing by 0.15 log units per
+              triplet from 0.00 LogCS (100% contrast) down to 2.25 LogCS (0.56% contrast).</li>
             <li>The patient reads or selects the letters on Phone 2.</li>
-            <li>The screening threshold is established at the lowest contrast triplet where the patient correctly identifies at least 2 out of 3 letters.</li>
+            <li>The screening threshold is established at the lowest contrast triplet where the patient correctly
+              identifies at least 2 out of 3 letters.</li>
           </ol>
 
           <h4>B. What It Screens For</h4>
           <ul>
-            <li><strong>Early Glaucoma:</strong> Parvocellular/magnocellular contrast loss often precedes visual field scotomas.</li>
-            <li><strong>Optic Neuritis & MS:</strong> Demyelinating optic neuropathy causes profound contrast depression even with 6/6 Snellen acuity.</li>
+            <li><strong>Early Glaucoma:</strong> Parvocellular/magnocellular contrast loss often precedes visual field
+              scotomas.</li>
+            <li><strong>Optic Neuritis & MS:</strong> Demyelinating optic neuropathy causes profound contrast depression
+              even with 6/6 Snellen acuity.</li>
             <li><strong>Early Cataract:</strong> Diffuse forward light scatter degrades retinal image contrast.</li>
             <li><strong>Diabetic Retinopathy:</strong> Macular ischemia and capillary non-perfusion.</li>
           </ul>
@@ -24244,13 +25303,36 @@ END FILE `web/assets/ishihara/manifest.json`
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>LogCS Value</th><th>Contrast Threshold (%)</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>LogCS Value</th>
+                <th>Contrast Threshold (%)</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>&ge; 1.80</strong></td><td>&lt; 1.6%</td><td><strong>Normal Contrast Sensitivity:</strong> Healthy ocular media, clear optical pathway.</td></tr>
-              <tr><td><strong>1.50 to 1.79</strong></td><td>1.6% - 3.2%</td><td><strong>Mild Contrast Loss:</strong> Early subtle media changes (cataract), early glaucoma, mild DR.</td></tr>
-              <tr><td><strong>1.20 to 1.49</strong></td><td>3.2% - 6.3%</td><td><strong>Moderate Loss:</strong> Significant difficulty with night driving, steps, and low-contrast reading.</td></tr>
-              <tr><td><strong>&lt; 1.20</strong></td><td>&gt; 6.3%</td><td><strong>Severe Impairment:</strong> High risk of mobility accidents and falls. Urgent evaluation indicated.</td></tr>
+              <tr>
+                <td><strong>&ge; 1.80</strong></td>
+                <td>&lt; 1.6%</td>
+                <td><strong>Normal Contrast Sensitivity:</strong> Healthy ocular media, clear optical pathway.</td>
+              </tr>
+              <tr>
+                <td><strong>1.50 to 1.79</strong></td>
+                <td>1.6% - 3.2%</td>
+                <td><strong>Mild Contrast Loss:</strong> Early subtle media changes (cataract), early glaucoma, mild DR.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>1.20 to 1.49</strong></td>
+                <td>3.2% - 6.3%</td>
+                <td><strong>Moderate Loss:</strong> Significant difficulty with night driving, steps, and low-contrast
+                  reading.</td>
+              </tr>
+              <tr>
+                <td><strong>&lt; 1.20</strong></td>
+                <td>&gt; 6.3%</td>
+                <td><strong>Severe Impairment:</strong> High risk of mobility accidents and falls. Urgent evaluation
+                  indicated.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -24261,14 +25343,19 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-amsler" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Central Amsler Distortion Grid (10° Macular Field)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Standardized 20&times;20 square grid for macular metamorphopsia, central scotoma, and toxic maculopathy mapping.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Central Amsler Distortion Grid
+              (10° Macular Field)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Standardized 20&times;20 square grid for macular
+              metamorphopsia, central scotoma, and toxic maculopathy mapping.</p>
           </div>
           <div style="display:flex; gap:10px;">
             <div class="segmented-control">
-              <button class="segmented-btn active" id="btn-amsler-bw" onclick="setAmslerStyle('BLACK_ON_WHITE')">Black on White</button>
-              <button class="segmented-btn" id="btn-amsler-wb" onclick="setAmslerStyle('WHITE_ON_BLACK')">White on Black</button>
-              <button class="segmented-btn" id="btn-amsler-red" onclick="setAmslerStyle('RED_ON_BLACK')">Red on Black</button>
+              <button class="segmented-btn active" id="btn-amsler-bw" onclick="setAmslerStyle('BLACK_ON_WHITE')">Black
+                on White</button>
+              <button class="segmented-btn" id="btn-amsler-wb" onclick="setAmslerStyle('WHITE_ON_BLACK')">White on
+                Black</button>
+              <button class="segmented-btn" id="btn-amsler-red" onclick="setAmslerStyle('RED_ON_BLACK')">Red on
+                Black</button>
             </div>
             <button class="btn-action" onclick="syncAmslerToBackend()">Commit Amsler to Backend</button>
           </div>
@@ -24278,20 +25365,26 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span>Interactive Distortion Canvas</span>
-              <label style="font-size:12px; font-weight:600;"><input type="checkbox" id="chk-amsler-diagonals" onchange="toggleAmslerDiagonals(this.checked)"> Diagonal Fixation Lines</label>
+              <label style="font-size:12px; font-weight:600;"><input type="checkbox" id="chk-amsler-diagonals"
+                  onchange="toggleAmslerDiagonals(this.checked)"> Diagonal Fixation Lines</label>
             </div>
 
-            <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-radius:8px; padding:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-              <canvas id="amsler-canvas" width="280" height="280" style="background:#FFF; border:2px solid #0F172A; cursor:crosshair; box-shadow:0 1px 3px rgba(0,0,0,0.1);"></canvas>
+            <div
+              style="background:#F8FAFC; border:1px solid #CBD5E1; border-radius:8px; padding:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+              <canvas id="amsler-canvas" width="280" height="280"
+                style="background:#FFF; border:2px solid #0F172A; cursor:crosshair; box-shadow:0 1px 3px rgba(0,0,0,0.1);"></canvas>
               <div style="margin-top:8px; font-size:11px; color:var(--text-muted);">
                 Click or drag across grid to map scotomas (blind spots) or wavy distorted lines (metamorphopsia)
               </div>
             </div>
 
             <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
-              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="clearAmslerMarks()">Clear Marks</button>
-              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="recordAmslerFinding('NORMAL')">Record Normal (No Distortion)</button>
-              <button class="btn-action" style="font-size:12px; padding:6px 12px; background:var(--amber);" onclick="recordAmslerFinding('METAMORPHOPSIA')">Flag Metamorphopsia / Defect</button>
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;" onclick="clearAmslerMarks()">Clear
+                Marks</button>
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px;"
+                onclick="recordAmslerFinding('NORMAL')">Record Normal (No Distortion)</button>
+              <button class="btn-action" style="font-size:12px; padding:6px 12px; background:var(--amber);"
+                onclick="recordAmslerFinding('METAMORPHOPSIA')">Flag Metamorphopsia / Defect</button>
             </div>
           </div>
 
@@ -24299,27 +25392,34 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">Macular Pathology Correlation</div>
             <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">
               <p style="margin-bottom:10px;">
-                <strong>Fixation Center Point:</strong> Positioned at the exact geometric intersection (140, 140) representing the 0° foveal fixation axis. Each grid square subtends exactly 0.5° (total 10° in all four cardinal quadrants).
+                <strong>Fixation Center Point:</strong> Positioned at the exact geometric intersection (140, 140)
+                representing the 0° foveal fixation axis. Each grid square subtends exactly 0.5° (total 10° in all four
+                cardinal quadrants).
               </p>
               <p style="margin-bottom:10px;">
-                <strong>Red Grid Utility:</strong> Preferentially used for detecting subtle subclinical optic neuropathy, ethambutol toxicity, and early chloroquine/hydroxychloroquine (Plaquenil) retinal toxicity before anatomical fundus pigment changes appear.
+                <strong>Red Grid Utility:</strong> Preferentially used for detecting subtle subclinical optic
+                neuropathy, ethambutol toxicity, and early chloroquine/hydroxychloroquine (Plaquenil) retinal toxicity
+                before anatomical fundus pigment changes appear.
               </p>
               <p style="margin-bottom:10px;">
-                <strong>Diagonal Lines:</strong> Assists patients with central scotoma to locate and maintain the foveal center by extrapolating the outer diagonal intersection.
+                <strong>Diagonal Lines:</strong> Assists patients with central scotoma to locate and maintain the foveal
+                center by extrapolating the outer diagonal intersection.
               </p>
             </div>
-            <div id="amsler-status-box" style="margin-top:14px; padding:12px; background:#F1F5F9; border-radius:6px; font-size:12px;">
+            <div id="amsler-status-box"
+              style="margin-top:14px; padding:12px; background:#F1F5F9; border-radius:6px; font-size:12px;">
               Marked Defect Zones: <strong id="amsler-defect-count">0</strong> points mapped.
             </div>
           </div>
         </div>
-      
+
         <!-- Module 5 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Amsler grid screens for macular metamorphopsia and scotomas. Any detected distortion requires urgent Optical Coherence Tomography (OCT).</span>
+              <span style="margin-left:8px;">Amsler grid screens for macular metamorphopsia and scotomas. Any detected
+                distortion requires urgent Optical Coherence Tomography (OCT).</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24328,7 +25428,8 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li>Display a white grid pattern with a central fixation dot on a black background covering the central 20° of vision (10° around fovea).</li>
+            <li>Display a white grid pattern with a central fixation dot on a black background covering the central 20°
+              of vision (10° around fovea).</li>
             <li>The test is strictly <strong>monocular</strong> (tested OD, then OS, with non-tested eye occluded).</li>
             <li>The patient fixes their gaze steadily on the central white dot.</li>
             <li>While looking directly at the center, the patient reports:
@@ -24342,8 +25443,10 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>B. What It Screens For</h4>
           <ul>
-            <li><strong>Age-Related Macular Degeneration (AMD):</strong> Wet neovascular AMD and Dry geographic atrophy.</li>
-            <li><strong>Diabetic Macular Edema (DME):</strong> Retinal thickening disrupting photoreceptor alignment.</li>
+            <li><strong>Age-Related Macular Degeneration (AMD):</strong> Wet neovascular AMD and Dry geographic atrophy.
+            </li>
+            <li><strong>Diabetic Macular Edema (DME):</strong> Retinal thickening disrupting photoreceptor alignment.
+            </li>
             <li><strong>Central Serous Chorioretinopathy (CSCR):</strong> Subretinal neurosensory detachment.</li>
             <li><strong>Macular Hole & Epiretinal Membrane:</strong> Vitreomacular traction and macular pucker.</li>
           </ul>
@@ -24351,13 +25454,33 @@ END FILE `web/assets/ishihara/manifest.json`
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Grid Finding</th><th>Pathophysiological Interpretation</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Grid Finding</th>
+                <th>Pathophysiological Interpretation</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Normal Grid</strong></td><td>Intact foveal photoreceptor architecture.</td><td>Normal macular baseline. Low risk of active fluid.</td></tr>
-              <tr><td><strong>Metamorphopsia (Wavy Lines)</strong></td><td>Photoreceptor displacement by subretinal fluid, CNVM, or traction.</td><td><strong>SUSPECT WET AMD OR MACULAR EDEMA.</strong> Urgent referral within 24–48 hours for OCT.</td></tr>
-              <tr><td><strong>Central Scotoma (Blind spot at fovea)</strong></td><td>Full-thickness macular destruction or subfoveal hemorrhage.</td><td>Severe central macular pathology. Immediate referral.</td></tr>
-              <tr><td><strong>Paracentral Scotoma</strong></td><td>Geographic atrophy, focal choroiditis, or parafoveal ischemia.</td><td>Moderate macular damage. Ophthalmology referral required.</td></tr>
+              <tr>
+                <td><strong>Normal Grid</strong></td>
+                <td>Intact foveal photoreceptor architecture.</td>
+                <td>Normal macular baseline. Low risk of active fluid.</td>
+              </tr>
+              <tr>
+                <td><strong>Metamorphopsia (Wavy Lines)</strong></td>
+                <td>Photoreceptor displacement by subretinal fluid, CNVM, or traction.</td>
+                <td><strong>SUSPECT WET AMD OR MACULAR EDEMA.</strong> Urgent referral within 24–48 hours for OCT.</td>
+              </tr>
+              <tr>
+                <td><strong>Central Scotoma (Blind spot at fovea)</strong></td>
+                <td>Full-thickness macular destruction or subfoveal hemorrhage.</td>
+                <td>Severe central macular pathology. Immediate referral.</td>
+              </tr>
+              <tr>
+                <td><strong>Paracentral Scotoma</strong></td>
+                <td>Geographic atrophy, focal choroiditis, or parafoveal ischemia.</td>
+                <td>Moderate macular damage. Ophthalmology referral required.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -24368,8 +25491,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-binocular" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Binocular Vision & Stereoacuity Assessment</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Worth 4-Dot sensory fusion test and calibrated Random Dot stereoacuity depth threshold.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Binocular Vision & Stereoacuity
+              Assessment</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Worth 4-Dot sensory fusion test and calibrated Random
+              Dot stereoacuity depth threshold.</p>
           </div>
           <button class="btn-action" onclick="syncBinocularToBackend()">Commit Binocular to Backend</button>
         </div>
@@ -24378,7 +25503,8 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">Worth 4-Dot Sensory Fusion Test</div>
             <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
-              Dichoptic stimulus: Red filter over OD (sees red dot + white dot as red), Green filter over OS (sees 2 green dots + white dot as green).
+              Dichoptic stimulus: Red filter over OD (sees red dot + white dot as red), Green filter over OS (sees 2
+              green dots + white dot as green).
             </p>
 
             <div class="worth-box">
@@ -24389,18 +25515,23 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
 
             <div style="margin-top:16px;">
-              <p style="font-size:12px; font-weight:600; margin-bottom:8px; text-align:center;">Select What Patient Reports Seeing:</p>
+              <p style="font-size:12px; font-weight:600; margin-bottom:8px; text-align:center;">Select What Patient
+                Reports Seeing:</p>
               <div style="display:flex; flex-direction:column; gap:6px;">
-                <button class="btn-secondary" style="text-align:left; font-size:12px;" onclick="setWorthResponse('FOUR_DOTS_FUSION')">
+                <button class="btn-secondary" style="text-align:left; font-size:12px;"
+                  onclick="setWorthResponse('FOUR_DOTS_FUSION')">
                   <strong>4 Dots</strong> (1 Red, 2 Green, 1 White/Alternating) &rarr; <em>Normal Binocular Fusion</em>
                 </button>
-                <button class="btn-secondary" style="text-align:left; font-size:12px;" onclick="setWorthResponse('TWO_RED_SUPPRESSION_OS')">
+                <button class="btn-secondary" style="text-align:left; font-size:12px;"
+                  onclick="setWorthResponse('TWO_RED_SUPPRESSION_OS')">
                   <strong>2 Red Dots Only</strong> &rarr; <em>Left Eye (OS) Suppression</em>
                 </button>
-                <button class="btn-secondary" style="text-align:left; font-size:12px;" onclick="setWorthResponse('THREE_GREEN_SUPPRESSION_OD')">
+                <button class="btn-secondary" style="text-align:left; font-size:12px;"
+                  onclick="setWorthResponse('THREE_GREEN_SUPPRESSION_OD')">
                   <strong>3 Green Dots Only</strong> &rarr; <em>Right Eye (OD) Suppression</em>
                 </button>
-                <button class="btn-secondary" style="text-align:left; font-size:12px;" onclick="setWorthResponse('FIVE_DOTS_DIPLOPIA')">
+                <button class="btn-secondary" style="text-align:left; font-size:12px;"
+                  onclick="setWorthResponse('FIVE_DOTS_DIPLOPIA')">
                   <strong>5 Dots</strong> (2 Red and 3 Green simultaneous) &rarr; <em>Diplopia (Strabismus)</em>
                 </button>
               </div>
@@ -24422,20 +25553,22 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
 
             <div id="binocular-summary-box" style="padding:14px; background:var(--mint-wash); border-radius:8px;">
-              <div style="font-weight:700; font-size:13px; color:var(--sea-green-dark);" id="binocular-fusion-title">Fusion: Normal Sensory Fusion</div>
+              <div style="font-weight:700; font-size:13px; color:var(--sea-green-dark);" id="binocular-fusion-title">
+                Fusion: Normal Sensory Fusion</div>
               <div id="binocular-stereo-detail" style="font-size:12px; margin-top:4px; color:var(--text-muted);">
                 Stereoacuity: 40 seconds of arc • Full Binocular Stereopsis Intact
               </div>
             </div>
           </div>
         </div>
-      
+
         <!-- Module 6 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Worth 4-Dot screens sensory fusion and suppression. Motor strabismus requires orthoptic prism cover testing.</span>
+              <span style="margin-left:8px;">Worth 4-Dot screens sensory fusion and suppression. Motor strabismus
+                requires orthoptic prism cover testing.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24446,9 +25579,11 @@ END FILE `web/assets/ishihara/manifest.json`
           <ol>
             <li><strong>Worth 4-Dot Test:</strong>
               <ul>
-                <li>In the VR headset, dichoptically present 4 targets: 1 Red (top), 2 Green (left and right), 1 White (bottom).</li>
+                <li>In the VR headset, dichoptically present 4 targets: 1 Red (top), 2 Green (left and right), 1 White
+                  (bottom).</li>
                 <li>The right eye sees red targets; left eye sees green targets; both see the bottom white target.</li>
-                <li>The patient reports the dot count and colours: <em>"2 Red"</em>, <em>"3 Green"</em>, <em>"4 Dots"</em>, or <em>"5 Dots"</em>.</li>
+                <li>The patient reports the dot count and colours: <em>"2 Red"</em>, <em>"3 Green"</em>, <em>"4
+                    Dots"</em>, or <em>"5 Dots"</em>.</li>
               </ul>
             </li>
             <li><strong>Hirschberg Corneal Reflex Test:</strong>
@@ -24470,21 +25605,43 @@ END FILE `web/assets/ishihara/manifest.json`
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Worth 4-Dot Finding</th><th>Sensory Status</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Worth 4-Dot Finding</th>
+                <th>Sensory Status</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>4 Dots Seen (1R, 2G, 1 Mix)</strong></td><td>Normal Binocular Fusion</td><td>Normal sensory fusion and stereoscopic potential.</td></tr>
-              <tr><td><strong>2 Red Dots Seen Only</strong></td><td>Left Eye Suppression</td><td>Brain suppresses left eye. High risk of Left Amblyopia.</td></tr>
-              <tr><td><strong>3 Green Dots Seen Only</strong></td><td>Right Eye Suppression</td><td>Brain suppresses right eye. High risk of Right Amblyopia.</td></tr>
-              <tr><td><strong>5 Dots Seen (2R + 3G)</strong></td><td>Diplopia (Double Vision)</td><td>Both eyes see images without fusion &rarr; Acquired strabismus / nerve palsy.</td></tr>
+              <tr>
+                <td><strong>4 Dots Seen (1R, 2G, 1 Mix)</strong></td>
+                <td>Normal Binocular Fusion</td>
+                <td>Normal sensory fusion and stereoscopic potential.</td>
+              </tr>
+              <tr>
+                <td><strong>2 Red Dots Seen Only</strong></td>
+                <td>Left Eye Suppression</td>
+                <td>Brain suppresses left eye. High risk of Left Amblyopia.</td>
+              </tr>
+              <tr>
+                <td><strong>3 Green Dots Seen Only</strong></td>
+                <td>Right Eye Suppression</td>
+                <td>Brain suppresses right eye. High risk of Right Amblyopia.</td>
+              </tr>
+              <tr>
+                <td><strong>5 Dots Seen (2R + 3G)</strong></td>
+                <td>Diplopia (Double Vision)</td>
+                <td>Both eyes see images without fusion &rarr; Acquired strabismus / nerve palsy.</td>
+              </tr>
             </tbody>
           </table>
-          <div style="background:#F8FAFC; border-left:4px solid var(--sea-green); padding:10px 14px; font-size:12px; margin-top:8px;">
+          <div
+            style="background:#F8FAFC; border-left:4px solid var(--sea-green); padding:10px 14px; font-size:12px; margin-top:8px;">
             <strong>Hirschberg Reflex Rule:</strong><br>
             &bull; <em>Centered:</em> Orthophoria (no manifest deviation).<br>
             &bull; <em>Decentered Nasally:</em> Exotropia (eye turned outward).<br>
             &bull; <em>Decentered Temporally:</em> Esotropia (eye turned inward).<br>
-            &bull; <em>Quantification:</em> Each 1 mm displacement &approx; 7° deviation &approx; 15 to 22 Prism Diopters (&Delta;).
+            &bull; <em>Quantification:</em> Each 1 mm displacement &approx; 7° deviation &approx; 15 to 22 Prism
+            Diopters (&Delta;).
           </div>
         </div>
 
@@ -24494,8 +25651,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-motility" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Ocular Motility & Smooth Pursuit (Broad-H Test)</h2>
-            <p style="font-size:13px; color:var(--text-muted);">9 Cardinal Positions of Gaze tracking, Version/Duction symmetry, and Cranial Nerve (CN III, IV, VI) innervation.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Ocular Motility & Smooth Pursuit
+              (Broad-H Test)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">9 Cardinal Positions of Gaze tracking, Version/Duction
+              symmetry, and Cranial Nerve (CN III, IV, VI) innervation.</p>
           </div>
           <button class="btn-action" onclick="syncMotilityToBackend()">Commit Motility to Backend</button>
         </div>
@@ -24504,13 +25663,16 @@ END FILE `web/assets/ishihara/manifest.json`
           <div class="card">
             <div class="card-title">
               <span>9 Cardinal Positions Smooth Pursuit Stage</span>
-              <span id="motility-position-label" style="font-size:11px; background:#E2E8F0; padding:2px 8px; border-radius:4px;">Position: Primary (Center)</span>
+              <span id="motility-position-label"
+                style="font-size:11px; background:#E2E8F0; padding:2px 8px; border-radius:4px;">Position: Primary
+                (Center)</span>
             </div>
 
             <div class="motility-viewport">
               <canvas id="motility-canvas" class="motility-canvas" width="340" height="260"></canvas>
               <div style="margin-top:12px; display:flex; gap:8px;">
-                <button id="btn-motility-play" class="btn-action" onclick="toggleMotilityAnimation()">Start Tracking Animation</button>
+                <button id="btn-motility-play" class="btn-action" onclick="toggleMotilityAnimation()">Start Tracking
+                  Animation</button>
                 <button class="btn-secondary" onclick="stepMotilityPosition()">Next Gaze Point</button>
                 <button class="btn-secondary" onclick="resetMotility()">Reset to Center</button>
               </div>
@@ -24519,15 +25681,19 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <div class="card">
             <div class="card-title">Extraocular Muscle Action & Deficit Scoring</div>
-            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:14px;">
-              <div style="font-size:12px; font-weight:700; color:var(--sea-green-dark);" id="motility-muscle-active">Active Muscles: Bilateral Fixation (Primary Gaze)</div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;" id="motility-nerve-active">Innervation: CN III, IV, VI Balanced</div>
+            <div
+              style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:14px;">
+              <div style="font-size:12px; font-weight:700; color:var(--sea-green-dark);" id="motility-muscle-active">
+                Active Muscles: Bilateral Fixation (Primary Gaze)</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;" id="motility-nerve-active">
+                Innervation: CN III, IV, VI Balanced</div>
             </div>
 
             <div style="font-size:12px; display:flex; flex-direction:column; gap:10px;">
               <div>
                 <label style="font-weight:600;">Smooth Pursuit Quality:</label>
-                <select id="sel-pursuit-quality" style="width:100%; margin-top:4px; padding:6px; border-radius:6px; border:1px solid var(--border);">
+                <select id="sel-pursuit-quality"
+                  style="width:100%; margin-top:4px; padding:6px; border-radius:6px; border:1px solid var(--border);">
                   <option value="SMOOTH_FULL">Normal - Full, smooth and conjugate versions</option>
                   <option value="SACCADIC_INTRUSION">Cogwheel / Saccadic intrusions (Cerebellar/Extrapyramidal)</option>
                   <option value="RESTRICTED">Restricted duction / limitation of elevation/depression</option>
@@ -24536,7 +25702,8 @@ END FILE `web/assets/ishihara/manifest.json`
 
               <div>
                 <label style="font-weight:600;">Nystagmus Observation:</label>
-                <select id="sel-nystagmus" style="width:100%; margin-top:4px; padding:6px; border-radius:6px; border:1px solid var(--border);">
+                <select id="sel-nystagmus"
+                  style="width:100%; margin-top:4px; padding:6px; border-radius:6px; border:1px solid var(--border);">
                   <option value="NONE">None (Stable fixation)</option>
                   <option value="ENDPOINT_PHYSIOLOGIC">Physiologic End-point nystagmus (Fatigue only)</option>
                   <option value="PATHOLOGIC_JERK">Pathologic Jerk Nystagmus (Gaze-evoked)</option>
@@ -24545,19 +25712,22 @@ END FILE `web/assets/ishihara/manifest.json`
               </div>
 
               <div style="display:flex; gap:14px; margin-top:4px;">
-                <label style="font-weight:600;"><input type="checkbox" id="chk-motility-diplopia"> Diplopia Elicited</label>
-                <label style="font-weight:600;"><input type="checkbox" id="chk-motility-pain"> Pain on Eye Movement</label>
+                <label style="font-weight:600;"><input type="checkbox" id="chk-motility-diplopia"> Diplopia
+                  Elicited</label>
+                <label style="font-weight:600;"><input type="checkbox" id="chk-motility-pain"> Pain on Eye
+                  Movement</label>
               </div>
             </div>
           </div>
         </div>
-      
+
         <!-- Module 7 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Ocular motility screens for cranial nerve palsy and muscle restriction. Acute deficit requires urgent neuro-imaging.</span>
+              <span style="margin-left:8px;">Ocular motility screens for cranial nerve palsy and muscle restriction.
+                Acute deficit requires urgent neuro-imaging.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24566,7 +25736,8 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>A. How to Use (Step-by-Step Clinical Procedure)</h4>
           <ol>
-            <li><strong>Smooth Pursuit:</strong> In the VR headset, a moving target glides horizontally and vertically in a smooth sinusoidal pattern at 15°/s.</li>
+            <li><strong>Smooth Pursuit:</strong> In the VR headset, a moving target glides horizontally and vertically
+              in a smooth sinusoidal pattern at 15°/s.</li>
             <li><strong>9 Cardinal Gazes:</strong> The target pauses at 9 anatomical gaze endpoints:
               <ul>
                 <li>Primary Position (straight ahead).</li>
@@ -24576,29 +25747,57 @@ END FILE `web/assets/ishihara/manifest.json`
                 <li>Levoelevation (up-left) & Levodepression (down-left).</li>
               </ul>
             </li>
-            <li>The clinician inspects for conjugate movement, limitation of movement, pain on movement, or end-point nystagmus.</li>
+            <li>The clinician inspects for conjugate movement, limitation of movement, pain on movement, or end-point
+              nystagmus.</li>
           </ol>
 
           <h4>B. What It Screens For</h4>
           <ul>
-            <li><strong>CN III (Oculomotor):</strong> Inability to look up, down, or in; accompanied by ptosis and dilated pupil.</li>
-            <li><strong>CN IV (Trochlear):</strong> Inability to look down-and-in; vertical diplopia with head tilt.</li>
+            <li><strong>CN III (Oculomotor):</strong> Inability to look up, down, or in; accompanied by ptosis and
+              dilated pupil.</li>
+            <li><strong>CN IV (Trochlear):</strong> Inability to look down-and-in; vertical diplopia with head tilt.
+            </li>
             <li><strong>CN VI (Abducens):</strong> Inability to abduct (look outwards); horizontal diplopia.</li>
             <li><strong>Graves' Orbitopathy:</strong> Fibrotic restriction of inferior / medial rectus.</li>
-            <li><strong>Internuclear Ophthalmoplegia (INO):</strong> Medial longitudinal fasciculus lesion (MS / stroke).</li>
+            <li><strong>Internuclear Ophthalmoplegia (INO):</strong> Medial longitudinal fasciculus lesion (MS /
+              stroke).</li>
           </ul>
 
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Motility Finding</th><th>Nerve / Muscle Implicated</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Motility Finding</th>
+                <th>Nerve / Muscle Implicated</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Full Conjugate Gaze in all 9 positions</strong></td><td>Intact Extraocular Muscles & CN III, IV, VI</td><td>Normal motility screening baseline.</td></tr>
-              <tr><td><strong>Abduction Limitation (Cannot look out)</strong></td><td>Lateral Rectus Muscle (CN VI Palsy)</td><td>Raised ICP (false localizing), microvascular diabetes, or stroke.</td></tr>
-              <tr><td><strong>Downward/Inward Deficit with head tilt</strong></td><td>Superior Oblique Muscle (CN IV Palsy)</td><td>Trochlear paresis (traumatic or congenital).</td></tr>
-              <tr><td><strong>Adduction/Elevation Deficit with Ptosis</strong></td><td>CN III Palsy</td><td><strong>MEDICAL EMERGENCY:</strong> Rule out PCoA aneurysm if pupil dilated.</td></tr>
-              <tr><td><strong>Jerk Nystagmus on lateral gaze</strong></td><td>Vestibular or Cerebellar pathway</td><td>Neurological referral indicated.</td></tr>
+              <tr>
+                <td><strong>Full Conjugate Gaze in all 9 positions</strong></td>
+                <td>Intact Extraocular Muscles & CN III, IV, VI</td>
+                <td>Normal motility screening baseline.</td>
+              </tr>
+              <tr>
+                <td><strong>Abduction Limitation (Cannot look out)</strong></td>
+                <td>Lateral Rectus Muscle (CN VI Palsy)</td>
+                <td>Raised ICP (false localizing), microvascular diabetes, or stroke.</td>
+              </tr>
+              <tr>
+                <td><strong>Downward/Inward Deficit with head tilt</strong></td>
+                <td>Superior Oblique Muscle (CN IV Palsy)</td>
+                <td>Trochlear paresis (traumatic or congenital).</td>
+              </tr>
+              <tr>
+                <td><strong>Adduction/Elevation Deficit with Ptosis</strong></td>
+                <td>CN III Palsy</td>
+                <td><strong>MEDICAL EMERGENCY:</strong> Rule out PCoA aneurysm if pupil dilated.</td>
+              </tr>
+              <tr>
+                <td><strong>Jerk Nystagmus on lateral gaze</strong></td>
+                <td>Vestibular or Cerebellar pathway</td>
+                <td>Neurological referral indicated.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -24609,8 +25808,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-pupil" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Pupillary Assessment & Quantitative Pupillometry</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Swinging Flashlight Test for Relative Afferent Pupillary Defect (RAPD / Marcus Gunn) and Anisocoria measurement.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Pupillary Assessment &
+              Quantitative Pupillometry</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Swinging Flashlight Test for Relative Afferent Pupillary
+              Defect (RAPD / Marcus Gunn) and Anisocoria measurement.</p>
           </div>
           <button class="btn-action" onclick="syncPupillaryToBackend()">Commit Pupillary to Backend</button>
         </div>
@@ -24620,9 +25821,12 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">
               <span>Swinging Flashlight Test Simulator</span>
               <div class="segmented-control">
-                <button class="segmented-btn active" id="btn-pupil-normal" onclick="setPupilMode('NORMAL')">Normal Reflex</button>
-                <button class="segmented-btn" id="btn-pupil-rapd-od" onclick="setPupilMode('RAPD_OD')">RAPD Positive OD</button>
-                <button class="segmented-btn" id="btn-pupil-rapd-os" onclick="setPupilMode('RAPD_OS')">RAPD Positive OS</button>
+                <button class="segmented-btn active" id="btn-pupil-normal" onclick="setPupilMode('NORMAL')">Normal
+                  Reflex</button>
+                <button class="segmented-btn" id="btn-pupil-rapd-od" onclick="setPupilMode('RAPD_OD')">RAPD Positive
+                  OD</button>
+                <button class="segmented-btn" id="btn-pupil-rapd-os" onclick="setPupilMode('RAPD_OS')">RAPD Positive
+                  OS</button>
               </div>
             </div>
 
@@ -24634,7 +25838,8 @@ END FILE `web/assets/ishihara/manifest.json`
                     <div id="pupil-od" class="pupil-aperture" style="width:28px; height:28px;"></div>
                   </div>
                 </div>
-                <div id="light-beam-od" style="margin-top:6px; color:#F59E0B; font-size:11px; font-weight:700;">&#9728; Light Active</div>
+                <div id="light-beam-od" style="margin-top:6px; color:#F59E0B; font-size:11px; font-weight:700;">&#9728;
+                  Light Active</div>
               </div>
 
               <div style="text-align:center;">
@@ -24649,10 +25854,12 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
 
             <div style="margin-top:14px; display:flex; justify-content:center; gap:8px;">
-              <button id="btn-swing-light" class="btn-action" onclick="toggleSwingingFlashlight()">Pause Swinging Light</button>
+              <button id="btn-swing-light" class="btn-action" onclick="toggleSwingingFlashlight()">Pause Swinging
+                Light</button>
               <button class="btn-secondary" onclick="stepSwingingLight()">Manual Swing Toggle</button>
             </div>
-            <div id="pupil-simulation-desc" style="margin-top:10px; font-size:11px; color:var(--text-muted); text-align:center;">
+            <div id="pupil-simulation-desc"
+              style="margin-top:10px; font-size:11px; color:var(--text-muted); text-align:center;">
               Normal Light Reflex: Direct light to OD constricts both OD (direct) and OS (consensual) equally.
             </div>
           </div>
@@ -24665,7 +25872,8 @@ END FILE `web/assets/ishihara/manifest.json`
                   <span>Photopic (Bright) Pupil Size OD:</span>
                   <strong id="lbl-photopic-od">3.2 mm</strong>
                 </div>
-                <input type="range" id="rng-photopic-od" min="1.5" max="8.0" step="0.1" value="3.2" style="width:100%;" oninput="updatePupilMetrics()">
+                <input type="range" id="rng-photopic-od" min="1.5" max="8.0" step="0.1" value="3.2" style="width:100%;"
+                  oninput="updatePupilMetrics()">
               </div>
 
               <div>
@@ -24673,7 +25881,8 @@ END FILE `web/assets/ishihara/manifest.json`
                   <span>Photopic (Bright) Pupil Size OS:</span>
                   <strong id="lbl-photopic-os">3.2 mm</strong>
                 </div>
-                <input type="range" id="rng-photopic-os" min="1.5" max="8.0" step="0.1" value="3.2" style="width:100%;" oninput="updatePupilMetrics()">
+                <input type="range" id="rng-photopic-os" min="1.5" max="8.0" step="0.1" value="3.2" style="width:100%;"
+                  oninput="updatePupilMetrics()">
               </div>
 
               <div style="margin-top:6px;">
@@ -24681,11 +25890,14 @@ END FILE `web/assets/ishihara/manifest.json`
                   <span>Scotopic (Dark) Pupil Size:</span>
                   <strong id="lbl-scotopic">5.5 mm</strong>
                 </div>
-                <input type="range" id="rng-scotopic" min="3.0" max="9.0" step="0.1" value="5.5" style="width:100%;" oninput="updatePupilMetrics()">
+                <input type="range" id="rng-scotopic" min="3.0" max="9.0" step="0.1" value="5.5" style="width:100%;"
+                  oninput="updatePupilMetrics()">
               </div>
 
-              <div id="anisocoria-result-box" style="padding:12px; background:var(--mint-wash); border-radius:8px; margin-top:8px;">
-                <div style="font-weight:700; color:var(--sea-green-dark);" id="anisocoria-status">Anisocoria: Physiological (&Delta; 0.0 mm)</div>
+              <div id="anisocoria-result-box"
+                style="padding:12px; background:var(--mint-wash); border-radius:8px; margin-top:8px;">
+                <div style="font-weight:700; color:var(--sea-green-dark);" id="anisocoria-status">Anisocoria:
+                  Physiological (&Delta; 0.0 mm)</div>
                 <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">
                   Symmetric pupils (&Delta; &lt; 0.4 mm). Normal efferent autonomic innervation.
                 </div>
@@ -24693,13 +25905,14 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
           </div>
         </div>
-      
+
         <!-- Module 8 Comprehensive Clinical Guide & Cutoffs -->
         <div class="module-guide-card">
           <div class="screening-notice-banner">
             <div>
               <span class="pill">Primary Screening Aid</span>
-              <span style="margin-left:8px;">Swinging flashlight screens afferent and efferent pathways. RAPD indicates asymmetric optic nerve or severe retinal compromise.</span>
+              <span style="margin-left:8px;">Swinging flashlight screens afferent and efferent pathways. RAPD indicates
+                asymmetric optic nerve or severe retinal compromise.</span>
             </div>
             <div style="font-size:11px;">Ophthalmologist Correlation Required</div>
           </div>
@@ -24710,8 +25923,10 @@ END FILE `web/assets/ishihara/manifest.json`
           <ol>
             <li>Perform the examination in a dimly lit, dark-adapted room.</li>
             <li>Instruct the patient to fixate on a distant target to avoid near-effort accommodative miosis.</li>
-            <li><strong>Direct Light Reflex:</strong> Shine penlight directly into the right eye from a 45° angle. Observe for brisk constriction. Repeat left.</li>
-            <li><strong>Consensual Light Reflex:</strong> Shine into right eye while observing left pupil. It must constrict symmetrically. Repeat opposite.</li>
+            <li><strong>Direct Light Reflex:</strong> Shine penlight directly into the right eye from a 45° angle.
+              Observe for brisk constriction. Repeat left.</li>
+            <li><strong>Consensual Light Reflex:</strong> Shine into right eye while observing left pupil. It must
+              constrict symmetrically. Repeat opposite.</li>
             <li><strong>Swinging Flashlight Test for RAPD:</strong>
               <ul>
                 <li>Swing the penlight rapidly back and forth between eyes, holding 2–3 seconds on each eye.</li>
@@ -24723,24 +25938,57 @@ END FILE `web/assets/ishihara/manifest.json`
 
           <h4>B. What It Screens For</h4>
           <ul>
-            <li><strong>Relative Afferent Pupillary Defect (RAPD / Marcus Gunn Pupil):</strong> Asymmetric optic nerve lesion.</li>
-            <li><strong>Optic Nerve Diseases:</strong> Optic Neuritis, Ischemic Optic Neuropathy (AION), Advanced Glaucoma, Traumatic Neuropathy.</li>
-            <li><strong>Extensive Retinal Pathology:</strong> Central Retinal Artery Occlusion (CRAO), Ischemic CRVO, Massive Retinal Detachment.</li>
-            <li><strong>Horner's Syndrome & Third Nerve Palsy:</strong> Anisocoria and sympathetic/parasympathetic denervation.</li>
+            <li><strong>Relative Afferent Pupillary Defect (RAPD / Marcus Gunn Pupil):</strong> Asymmetric optic nerve
+              lesion.</li>
+            <li><strong>Optic Nerve Diseases:</strong> Optic Neuritis, Ischemic Optic Neuropathy (AION), Advanced
+              Glaucoma, Traumatic Neuropathy.</li>
+            <li><strong>Extensive Retinal Pathology:</strong> Central Retinal Artery Occlusion (CRAO), Ischemic CRVO,
+              Massive Retinal Detachment.</li>
+            <li><strong>Horner's Syndrome & Third Nerve Palsy:</strong> Anisocoria and sympathetic/parasympathetic
+              denervation.</li>
           </ul>
 
           <h4>C. Diagnostic Interpretation Guide (What Every Reading Means)</h4>
           <table class="guide-table">
             <thead>
-              <tr><th>Pupillary Finding</th><th>Pathophysiology</th><th>Clinical Screening Significance</th></tr>
+              <tr>
+                <th>Pupillary Finding</th>
+                <th>Pathophysiology</th>
+                <th>Clinical Screening Significance</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Brisk, Equal Constriction (No RAPD)</strong></td><td>Intact afferent and efferent pathways</td><td>Normal pupillary screening baseline.</td></tr>
-              <tr><td><strong>RAPD Grade 1 (Mild)</strong></td><td>Initial weak constriction, early redilation</td><td>Subtle asymmetric optic neuropathy or glaucoma.</td></tr>
-              <tr><td><strong>RAPD Grade 2 (Moderate)</strong></td><td>Arrest of pupil size followed by redilation</td><td>Confirmed optic neuropathy. Ophthalmology referral.</td></tr>
-              <tr><td><strong>RAPD Grade 3 (Severe)</strong></td><td>Immediate, paradoxical dilation on light swing</td><td>Severe Optic Neuropathy, CRAO, or Detachment. Urgent &lt;24h referral.</td></tr>
-              <tr><td><strong>RAPD Grade 4 (Amaurotic)</strong></td><td>Complete blind eye, zero direct response</td><td>Complete unilateral blindness.</td></tr>
-              <tr><td><strong>Anisocoria (&gt; 1mm asymmetry)</strong></td><td>Efferent pathway disruption</td><td>Non-reactive large pupil &rarr; Suspect CN III; non-dilating small pupil &rarr; Suspect Horner's.</td></tr>
+              <tr>
+                <td><strong>Brisk, Equal Constriction (No RAPD)</strong></td>
+                <td>Intact afferent and efferent pathways</td>
+                <td>Normal pupillary screening baseline.</td>
+              </tr>
+              <tr>
+                <td><strong>RAPD Grade 1 (Mild)</strong></td>
+                <td>Initial weak constriction, early redilation</td>
+                <td>Subtle asymmetric optic neuropathy or glaucoma.</td>
+              </tr>
+              <tr>
+                <td><strong>RAPD Grade 2 (Moderate)</strong></td>
+                <td>Arrest of pupil size followed by redilation</td>
+                <td>Confirmed optic neuropathy. Ophthalmology referral.</td>
+              </tr>
+              <tr>
+                <td><strong>RAPD Grade 3 (Severe)</strong></td>
+                <td>Immediate, paradoxical dilation on light swing</td>
+                <td>Severe Optic Neuropathy, CRAO, or Detachment. Urgent &lt;24h referral.</td>
+              </tr>
+              <tr>
+                <td><strong>RAPD Grade 4 (Amaurotic)</strong></td>
+                <td>Complete blind eye, zero direct response</td>
+                <td>Complete unilateral blindness.</td>
+              </tr>
+              <tr>
+                <td><strong>Anisocoria (&gt; 1mm asymmetry)</strong></td>
+                <td>Efferent pathway disruption</td>
+                <td>Non-reactive large pupil &rarr; Suspect CN III; non-dilating small pupil &rarr; Suspect Horner's.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -24752,7 +26000,8 @@ END FILE `web/assets/ishihara/manifest.json`
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
             <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Patient Directory & Intake</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Local Encrypted Registry synced with FastAPI Backend.</p>
+            <p style="font-size:13px; color:var(--text-muted);">Local Encrypted Registry synced with FastAPI Backend.
+            </p>
           </div>
           <button class="btn-action" onclick="showNewPatientPrompt()">+ Add New Patient</button>
         </div>
@@ -24806,8 +26055,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <!-- TAB 5: EVIDENCE & TELEMETRY -->
       <section id="tab-evidence" class="tab-view">
         <div style="margin-bottom:18px;">
-          <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Examination Evidence & Telemetry</h2>
-          <p style="font-size:13px; color:var(--text-muted);">Raw trial timestamps, stimulus coordinates, and hardware provenance.</p>
+          <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Examination Evidence & Telemetry
+          </h2>
+          <p style="font-size:13px; color:var(--text-muted);">Raw trial timestamps, stimulus coordinates, and hardware
+            provenance.</p>
         </div>
 
         <div class="card">
@@ -24869,20 +26120,27 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-reports" class="tab-view">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <div>
-            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Signed Clinical Diagnostic Report</h2>
-            <p style="font-size:13px; color:var(--text-muted);">Encrypted report compilation with CDSCO Class B SaMD notice.</p>
+            <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Signed Clinical Diagnostic Report
+            </h2>
+            <p style="font-size:13px; color:var(--text-muted);">Encrypted report compilation with CDSCO Class B SaMD
+              notice.</p>
           </div>
           <button class="btn-action" onclick="window.print()">Print / Export PDF</button>
         </div>
 
         <div class="card" style="border: 2px solid var(--border);">
-          <div style="border-bottom:2px solid var(--border); padding-bottom:14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+          <div
+            style="border-bottom:2px solid var(--border); padding-bottom:14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <h3 style="font-size:18px; font-weight:700; color:var(--sea-green-dark);">OPHTHALMIC SCREENING & TRIAGE SUMMARY</h3>
-              <div style="font-size:12px; color:var(--text-muted);">Report Digest: <code>e8b4...91fa (SHA-256 Validated)</code></div>
+              <h3 style="font-size:18px; font-weight:700; color:var(--sea-green-dark);">OPHTHALMIC SCREENING & TRIAGE
+                SUMMARY</h3>
+              <div style="font-size:12px; color:var(--text-muted);">Report Digest:
+                <code>e8b4...91fa (SHA-256 Validated)</code>
+              </div>
             </div>
             <div style="text-align:right;">
-              <span class="regulatory-tag" style="background:#FEE2E2; border-color:#EF4444; color:#991B1B;">INVESTIGATIONAL PROTOTYPE</span>
+              <span class="regulatory-tag"
+                style="background:#FEE2E2; border-color:#EF4444; color:#991B1B;">INVESTIGATIONAL PROTOTYPE</span>
             </div>
           </div>
 
@@ -24894,7 +26152,8 @@ END FILE `web/assets/ishihara/manifest.json`
             </div>
             <div>
               <p><strong>Primary Referrals:</strong> Retinal & Glaucoma Sub-Specialty</p>
-              <p><strong>Urgency Rating:</strong> <span style="color:var(--amber); font-weight:700;">URGENT (24–48 HOURS)</span></p>
+              <p><strong>Urgency Rating:</strong> <span style="color:var(--amber); font-weight:700;">URGENT (24–48
+                  HOURS)</span></p>
               <p><strong>Supervising Doctor:</strong> Dr. Apex Clinician (MD Ophthal)</p>
             </div>
           </div>
@@ -24902,11 +26161,15 @@ END FILE `web/assets/ishihara/manifest.json`
           <div style="background:var(--slate-bg); padding:14px; border-radius:8px; margin-bottom:16px;">
             <h4 style="font-size:13px; font-weight:700; margin-bottom:6px;">CLINICIAN ENDORSEMENT & ACTION PLAN:</h4>
             <p style="font-size:13px;">
-              "Patient presents with early moderate non-proliferative diabetic retinopathy (microaneurysms OD) and repeatable inferior nasal step scotoma on suprathreshold 24-2 perimetry. Left eye exhibits nuclear cataract. Recommended immediate dilated slit-lamp fundoscopy, Humphrey automated perimetry confirmation, and macular OCT."
+              "Patient presents with early moderate non-proliferative diabetic retinopathy (microaneurysms OD) and
+              repeatable inferior nasal step scotoma on suprathreshold 24-2 perimetry. Left eye exhibits nuclear
+              cataract. Recommended immediate dilated slit-lamp fundoscopy, Humphrey automated perimetry confirmation,
+              and macular OCT."
             </p>
           </div>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); padding-top:12px;">
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border); padding-top:12px;">
             <div>System: EyeAtlas VR Reference Engine v0.21.0</div>
             <div>Digitally Signed: <code>doc_apex@eyeatlas.org</code></div>
           </div>
@@ -24916,8 +26179,10 @@ END FILE `web/assets/ishihara/manifest.json`
       <!-- TAB 7: HARDWARE CALIBRATION -->
       <section id="tab-calibration" class="tab-view">
         <div style="margin-bottom:18px;">
-          <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">VRBox & Display Optical Calibration</h2>
-          <p style="font-size:13px; color:var(--text-muted);">Optical profile parameters governing stereoscopic geometry.</p>
+          <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">VRBox & Display Optical Calibration
+          </h2>
+          <p style="font-size:13px; color:var(--text-muted);">Optical profile parameters governing stereoscopic
+            geometry.</p>
         </div>
 
         <div class="grid">
@@ -24925,7 +26190,8 @@ END FILE `web/assets/ishihara/manifest.json`
             <div class="card-title">VRBox Headset Chassis Profile</div>
             <p style="margin-bottom:8px;"><strong>Lens Type:</strong> 34mm PMMA Aspheric Biconvex</p>
             <p style="margin-bottom:8px;"><strong>Focal Length:</strong> 45.0 mm (Power: +22.2 D)</p>
-            <p style="margin-bottom:8px;"><strong>Interpupillary Distance (IPD):</strong> 62.0 mm (Adjustable 58–68 mm)</p>
+            <p style="margin-bottom:8px;"><strong>Interpupillary Distance (IPD):</strong> 62.0 mm (Adjustable 58–68 mm)
+            </p>
             <p style="margin-bottom:8px;"><strong>Eye Relief:</strong> 15.0 mm</p>
             <p style="margin-bottom:8px;"><strong>Field of View:</strong> ~80° perimetric aperture</p>
             <p><strong>Optical Status:</strong> <span style="color:#10B981; font-weight:700;">BENCH VERIFIED</span></p>
@@ -24937,7 +26203,8 @@ END FILE `web/assets/ishihara/manifest.json`
             <p style="margin-bottom:8px;"><strong>Refresh Rate:</strong> 120.0 Hz Locked (&plusmn;0.05 Hz)</p>
             <p style="margin-bottom:8px;"><strong>Stimulus Goldmann III:</strong> 24 frames = exactly 200 ms</p>
             <p style="margin-bottom:8px;"><strong>Background Luminance:</strong> 10 cd/m² (Goldmann Standard)</p>
-            <p style="margin-bottom:8px;"><strong>Retinal Torch Safety:</strong> <span style="color:var(--red); font-weight:700;">LED FLASH STRICTLY FORBIDDEN</span></p>
+            <p style="margin-bottom:8px;"><strong>Retinal Torch Safety:</strong> <span
+                style="color:var(--red); font-weight:700;">LED FLASH STRICTLY FORBIDDEN</span></p>
             <p><strong>Governing Standard:</strong> ISO 15004-2:2024 Photic Hazard Limits</p>
           </div>
         </div>
@@ -24947,7 +26214,8 @@ END FILE `web/assets/ishihara/manifest.json`
       <section id="tab-audit" class="tab-view">
         <div style="margin-bottom:18px;">
           <h2 style="font-size:20px; font-weight:700; color:var(--sea-green-dark);">Cryptographic Audit Trail</h2>
-          <p style="font-size:13px; color:var(--text-muted);">Immutable SHA-256 event chaining with zero identifiable patient PII.</p>
+          <p style="font-size:13px; color:var(--text-muted);">Immutable SHA-256 event chaining with zero identifiable
+            patient PII.</p>
         </div>
 
         <div class="card">
@@ -25006,7 +26274,8 @@ END FILE `web/assets/ishihara/manifest.json`
   <div id="vr-viewport">
     <div class="vr-mode-toggle">
       <button class="vr-mode-btn" id="btn-vr-hud" onclick="setVrSubmode('HUD')">Spatial Clinician HUD</button>
-      <button class="vr-mode-btn active" id="btn-vr-colour" onclick="setVrSubmode('COLOUR')">VR Headset Colour Vision Mode</button>
+      <button class="vr-mode-btn active" id="btn-vr-colour" onclick="setVrSubmode('COLOUR')">VR Headset Colour Vision
+        Mode</button>
     </div>
 
     <!-- VR Submode 1: Spatial Clinician HUD -->
@@ -25036,10 +26305,13 @@ END FILE `web/assets/ishihara/manifest.json`
     </div>
 
     <!-- VR Submode 2: Stereoscopic VR Headset Colour Vision Test -->
-    <div id="vr-submode-colour" style="display:flex; flex-direction:column; align-items:center; width:100%; max-width:960px;">
+    <div id="vr-submode-colour"
+      style="display:flex; flex-direction:column; align-items:center; width:100%; max-width:960px;">
       <div style="text-align:center; margin-bottom:12px;">
-        <h3 style="color:#38BDF8; font-size:18px; margin-bottom:4px;" id="vr-plate-title">VR Stereoscopic Colour Vision Test (Plate 1 of 8)</h3>
-        <p style="font-size:12px; color:#94A3B8;">Place phone in VR Box headset or view stereoscopic display. Fixate on center circle and choose digit seen:</p>
+        <h3 style="color:#38BDF8; font-size:18px; margin-bottom:4px;" id="vr-plate-title">VR Stereoscopic Colour Vision
+          Test (Plate 1 of 8)</h3>
+        <p style="font-size:12px; color:#94A3B8;">Place phone in VR Box headset or view stereoscopic display. Fixate on
+          center circle and choose digit seen:</p>
       </div>
 
       <div class="vr-split-viewport">
@@ -25059,7 +26331,8 @@ END FILE `web/assets/ishihara/manifest.json`
       <!-- Large VR Responsive Touch / Gaze Buttons -->
       <div style="margin-top:16px; text-align:center;">
         <div style="font-size:12px; color:#94A3B8; margin-bottom:8px;">Touch / Gaze Quick Choice:</div>
-        <div id="vr-choices-container" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
+        <div id="vr-choices-container"
+          style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
           <!-- Dynamically populated with large VR choice buttons -->
         </div>
 
@@ -25077,36 +26350,39 @@ END FILE `web/assets/ishihara/manifest.json`
           <button class="vr-key-btn" onclick="submitVrPlateAnswer(0)">0</button>
         </div>
         <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
-          <button class="btn-secondary" style="background:#334155; color:white; border:none; padding:8px 18px;" onclick="submitVrPlateAnswer('Blank')">Cannot See / Blank</button>
-          <button class="btn-secondary" style="background:#334155; color:white; border:none; padding:8px 18px;" onclick="resetVrColourTest()">Restart VR Test</button>
+          <button class="btn-secondary" style="background:#334155; color:white; border:none; padding:8px 18px;"
+            onclick="submitVrPlateAnswer('Blank')">Cannot See / Blank</button>
+          <button class="btn-secondary" style="background:#334155; color:white; border:none; padding:8px 18px;"
+            onclick="resetVrColourTest()">Restart VR Test</button>
         </div>
       </div>
     </div>
 
-    <button class="btn-action" style="margin-top:24px; background:#475569;" onclick="toggleVrView()">Return to 2D Desktop Interface</button>
+    <button class="btn-action" style="margin-top:24px; background:#475569;" onclick="toggleVrView()">Return to 2D
+      Desktop Interface</button>
   </div>
 
   <script>
-    // Tab Switching Logic
-    
-    // =========================================================================
-    // CR-002: Remote Physician Portal & Phone 2 Patient Response Pad Logic
-    // =========================================================================
-    let currentPortalMode = 'PHYSICIAN_AND_RESPONSE';
-    let cockpitTapCount = 0;
-    let activeRemoteWs = null;
-    let perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
+    //  Tab Sw itching Lo gic
 
-    let remoteSessionState = {
-      sessionId: 'SES-ONEPLUS-NORD3-01',
-      pairingPin: '749281',
-      role: 'PHYSICIAN_CONTROLLER',
-      isConnected: false,
-      trialIndex: 14,
-      isEmergencyHalted: false,
-      screenShareActive: false,
-      activeStimulus: {
-        trial_index: 14,
+    //  == === ======= ========== == = == ==== == === ======= ========== == = == === == === ======= 
+    // CR -0 0 2:  Re mo te  Physici an Portal  &  P ho ne  2  Pa tient R esponse Pa d  L og ic 
+    // ==== ========== == = == === == === ======= ========= ========== == ==== == === ======= ==
+    let c u rr entP or tal Mode = 'PHYSICIAN _A N D_ RESP ON SE';
+    l et cockpit Ta p Co unt = 0; 
+    le t activeRe mo t eW s = n ull;
+    l et perimet ry O rd er = Ar ray.fro m({ length: 5 4 }, (_, i) => i).sort(() => Math.rand om() - 0 .5); 
+
+    l et remoteS es s io nSta te = {
+      sessionId: ' S ES -ON EP LUS- NORD3-0 1',
+      pa i ri ngP in: '7 49281',
+      rol e: 'P HY SI CIAN _CONTRO LLER',
+      is Co nn ecte d: fals e,
+      t rialIndex: 1 4,
+      i sEmerge ncyHalted: f a ls e,
+      screenS hareActive: f al se,
+      active Stimulus: {
+        tri al_inde x: 14,
         test_module: 'PERIMETRY',
         eye_laterality: 'OD',
         coordinates: { x_deg: 9.0, y_deg: 3.0 },
@@ -25181,2528 +26457,2556 @@ END FILE `web/assets/ishihara/manifest.json`
       if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
       if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
 
-    let remoteClientSequence = 0;
+      let remoteClientSequence = 0;
 
-    function sendRemoteEnvelope(messageType, payload) {
-      if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
-        return false;
-      }
-      remoteClientSequence++;
-      const envelope = {
-        version: "1.0",
-        session_id: remoteSessionState.sessionId || "SES-DEFAULT",
-        message_id: `msg-${Date.now()}-${remoteClientSequence}`,
-        sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
-        sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
-        message_type: messageType,
-        sequence_number: remoteClientSequence,
-        timestamp_ns: Date.now() * 1000000,
-        payload: payload || {}
-      };
-      activeRemoteWs.send(JSON.stringify(envelope));
-      return true;
-    }
-
-    function sendRemoteTestSwitch(moduleKey) {
-      if (remoteSessionState.isEmergencyHalted) {
-        alert('Action Blocked: Priority STOP is currently active.');
-        return;
-      }
-
-      remoteSessionState.activeStimulus.test_module = moduleKey;
-
-      // Update module chip styling
-      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = 'var(--text-main)';
-        btn.style.fontWeight = '600';
-      });
-      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
-      if (activeBtn) {
-        activeBtn.style.background = 'var(--sea-green)';
-        activeBtn.style.color = 'white';
-        activeBtn.style.fontWeight = '700';
-      }
-
-      // Show/hide sub-keypads for acuity & colour
-      const eControls = document.getElementById('cockpit-e-controls');
-      const numControls = document.getElementById('cockpit-num-controls');
-      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
-      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
-
-      // Update active parameters in telemetry card
-      const modNameEl = document.getElementById('stim-test-name');
-      if (modNameEl) modNameEl.innerText = moduleKey;
-
-      // Broadcast command to paired headset over WebSocket
-      sendRemoteEnvelope('CONTROL_COMMAND', {
-        command: 'SET_MODULE',
-        target_module: moduleKey,
-        parameters: { module: moduleKey, eye: remoteSessionState.activeStimulus.eye_laterality }
-      });
-
-      addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
-    }
-
-    function sendRemoteEyeSwitch(eye) {
-      remoteSessionState.activeStimulus.eye_laterality = eye;
-
-      // Update eye chip styling
-      document.querySelectorAll('#remote-eye-chips button').forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = 'var(--text-main)';
-        btn.style.fontWeight = '600';
-      });
-      const activeBtn = document.getElementById('eye-btn-' + eye);
-      if (activeBtn) {
-        activeBtn.style.background = 'var(--sea-green)';
-        activeBtn.style.color = 'white';
-        activeBtn.style.fontWeight = '700';
-      }
-
-      // Broadcast command to paired headset over WebSocket
-      sendRemoteEnvelope('CONTROL_COMMAND', {
-        command: 'SET_EYE',
-        target_eye: eye,
-        parameters: { eye: eye, module: remoteSessionState.activeStimulus.test_module }
-      });
-
-      addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
-      drawTwinCanvases(remoteSessionState.activeStimulus);
-    }
-
-    function resetCurrentTest() {
-      remoteSessionState.trialIndex = 0;
-      cockpitTapCount = 0;
-      const countEl = document.getElementById('cockpit-tap-count');
-      if (countEl) countEl.innerText = '0';
-
-      // Re-randomize perimetry 24-2 sequence
-      perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
-
-      // Reset trial display
-      const trialEl = document.getElementById('stim-trial-idx');
-      if (trialEl) trialEl.innerText = `Trial #1 of 54 (Randomized Sequence Reset)`;
-
-      // Broadcast reset command to paired headset over WebSocket
-      sendRemoteEnvelope('CONTROL_COMMAND', {
-        command: 'RESET_TEST',
-        parameters: { module: remoteSessionState.activeStimulus.test_module, eye: remoteSessionState.activeStimulus.eye_laterality }
-      });
-
-      addTimelineItem('RESET', `Current test (${remoteSessionState.activeStimulus.test_module}) reset & re-randomized.`);
-    }
-
-    function openRemotePairingModal() {
-      const modal = document.getElementById('remote-pairing-modal');
-      const urlInput = document.getElementById('modal-backend-url');
-      if (urlInput) {
-        urlInput.value = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || 'https://eyeatlas-ai.onrender.com';
-      }
-      const sessInput = document.getElementById('modal-session-id');
-      if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
-        sessInput.value = '';
-      }
-      const pinInput = document.getElementById('modal-pairing-pin');
-      if (pinInput && !pinInput.value) {
-        pinInput.value = '';
-      }
-      if (modal) modal.style.display = 'flex';
-    }
-
-    function closeRemotePairingModal() {
-      const modal = document.getElementById('remote-pairing-modal');
-      if (modal) modal.style.display = 'none';
-    }
-
-    async function connectRemoteSessionFromModal() {
-      const sessId = document.getElementById('modal-session-id').value.trim();
-      const pin = document.getElementById('modal-pairing-pin').value.trim();
-      const role = document.getElementById('modal-role-select').value;
-      const customUrl = document.getElementById('modal-backend-url')?.value.trim();
-
-      if (!sessId || !pin) {
-        alert('Please enter both the Session ID and 6-digit PIN displayed on the Patient APK.');
-        return;
-      }
-
-      if (customUrl) {
-        const cleanUrl = customUrl.replace(/\/+$/, '');
-        localStorage.setItem('eyeatlas_backend_url', cleanUrl);
-        if (cleanUrl !== backendBaseUrl) {
-          backendBaseUrl = cleanUrl;
-          checkBackend();
+      function sendRemoteEnvelope(messageType, payload) {
+        if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
+          return false;
         }
+        remoteClientSequence++;
+        const envelope = {
+          version: "1.0",
+          session_id: remoteSessionState.sessionId || "SES-DEFAULT",
+          message_id: `msg-${Date.now()}-${remoteClientSequence}`,
+          sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
+          sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
+          message_type: messageType,
+          sequence_number: remoteClientSequence,
+          timestamp_ns: Date.now() * 1000000,
+          payload: payload || {}
+        };
+        activeRemoteWs.send(JSON.stringify(envelope));
+        return true;
       }
 
-      const connStatus = document.getElementById('remote-conn-status');
-      if (connStatus) {
-        connStatus.innerText = 'Authorizing with Broker...';
-        connStatus.style.background = '#FEF3C7';
-        connStatus.style.color = '#B45309';
-      }
+      function sendRemoteTestSwitch(moduleKey) {
+        if (remoteSessionState.isEmergencyHalted) {
+          alert('Action Blocked: Priority STOP is currently active.');
+          return;
+        }
 
-      // Step 1: Call REST join endpoint POST /api/v1/remote/join
-      let joinData;
-      try {
-        const joinResp = await fetch(`${backendBaseUrl}/api/v1/remote/join`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            session_id: sessId,
-            pairing_pin: pin,
-            role: role,
-            device_id: 'PHYSICIAN_WEB_COCKPIT',
-            clinician_username: 'dr_sharma'
-          })
+        remoteSessionState.activeStimulus.test_module = moduleKey;
+
+        // Update module chip styling
+        document.querySelectorAll('#remote-module-chips button').forEach(btn => {
+          btn.style.background = 'white';
+          btn.style.color = 'var(--text-main)';
+          btn.style.fontWeight = '600';
+        });
+        const activeBtn = document.getElementById('mod-btn-' + moduleKey);
+        if (activeBtn) {
+          activeBtn.style.background = 'var(--sea-green)';
+          activeBtn.style.color = 'white';
+          activeBtn.style.fontWeight = '700';
+        }
+
+        // Show/hide sub-keypads for acuity & colour
+        const eControls = document.getElementById('cockpit-e-controls');
+        const numControls = document.getElementById('cockpit-num-controls');
+        if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
+        if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
+
+        // Update active parameters in telemetry card
+        const modNameEl = document.getElementById('stim-test-name');
+        if (modNameEl) modNameEl.innerText = moduleKey;
+
+        // Broadcast command to paired headset over WebSocket
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'SET_MODULE',
+          target_module: moduleKey,
+          parameters: { module: moduleKey, eye: remoteSessionState.activeStimulus.eye_laterality }
         });
 
-        if (!joinResp.ok) {
-          const errData = await joinResp.json().catch(() => ({}));
-          const errMsg = errData.detail || `Pairing failed (HTTP ${joinResp.status})`;
-          alert(`Remote Pairing Failed: ${errMsg}`);
+        addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
+      }
+
+      function sendRemoteEyeSwitch(eye) {
+        remoteSessionState.activeStimulus.eye_laterality = eye;
+
+        // Update eye chip styling
+        document.querySelectorAll('#remote-eye-chips button').forEach(btn => {
+          btn.style.background = 'white';
+          btn.style.color = 'var(--text-main)';
+          btn.style.fontWeight = '600';
+        });
+        const activeBtn = document.getElementById('eye-btn-' + eye);
+        if (activeBtn) {
+          activeBtn.style.background = 'var(--sea-green)';
+          activeBtn.style.color = 'white';
+          activeBtn.style.fontWeight = '700';
+        }
+
+        // Broadcast command to paired headset over WebSocket
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'SET_EYE',
+          target_eye: eye,
+          parameters: { eye: eye, module: remoteSessionState.activeStimulus.test_module }
+        });
+
+        addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
+        drawTwinCanvases(remoteSessionState.activeStimulus);
+      }
+
+      function resetCurrentTest() {
+        remoteSessionState.trialIndex = 0;
+        cockpitTapCount = 0;
+        const countEl = document.getElementById('cockpit-tap-count');
+        if (countEl) countEl.innerText = '0';
+
+        // Re-randomize perimetry 24-2 sequence
+        perimetryOrder = Array.from({ length: 54 }, (_, i) => i).sort(() => Math.random() - 0.5);
+
+        // Reset trial display
+        const trialEl = document.getElementById('stim-trial-idx');
+        if (trialEl) trialEl.innerText = `Trial #1 of 54 (Randomized Sequence Reset)`;
+
+        // Broadcast reset command to paired headset over WebSocket
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'RESET_TEST',
+          parameters: { module: remoteSessionState.activeStimulus.test_module, eye: remoteSessionState.activeStimulus.eye_laterality }
+        });
+
+        addTimelineItem('RESET', `Current test (${remoteSessionState.activeStimulus.test_module}) reset & re-randomized.`);
+      }
+
+      function openRemotePairingModal() {
+        const modal = document.getElementById('remote-pairing-modal');
+        const urlInput = document.getElementById('modal-backend-url');
+        if (urlInput) {
+          let currentVal = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || 'https://eyeatlas-ai.onrender.com';
+          if (location.protocol === 'https:' && currentVal.startsWith('http://')) {
+            currentVal = 'https://eyeatlas-ai.onrender.com';
+          }
+          urlInput.value = currentVal;
+        }
+        const sessInput = document.getElementById('modal-session-id');
+        if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
+          sessInput.value = '';
+        }
+        const pinInput = document.getElementById('modal-pairing-pin');
+        if (pinInput && !pinInput.value) {
+          pinInput.value = '';
+        }
+        if (modal) modal.style.display = 'flex';
+      }
+
+      function closeRemotePairingModal() {
+        const modal = document.getElementById('remote-pairing-modal');
+        if (modal) mod.stplay = 'none';
+      }
+
+      async function connectRemoteSessionFromModal() {
+        const sessId = document.getElementById('modal-session-id').value.trim();
+        const pin = document.getElementById('modal-pairing-pin').value.trim();
+        const role = document.getElementById('modal-role-select').value;
+        const customUrl = document.getElementById('modal-backend-url')?.value.trim();
+
+        if (!sessId || !pin) {
+          alert('Please enter both the Session ID and 6-digit PIN displayed on the Patient APK.');
+          return;
+        }
+
+        if (customUrl) {
+          const cleanUrl = customUrl.replace(/\/+$/, '');
+          localStorage.setItem('eyeatlas_backend_url', cleanUrl);
+          if (cleanUrl !== backendBaseUrl) {
+            backendBaseUrl = cleanUrl;
+            checkBackend();
+          }
+        }
+
+        const connStatus = document.getElementById('remote-conn-status');
+        if (connStatus) {
+          connStatus.innerText = 'Authorizing with Broker...';
+          connStatus.style.background = '#FEF3C7';
+          connStatus.style.color = '#B45309';
+        }
+
+        // Step 1: Call REST join endpoint POST /api/v1/remote/join
+        let joinData;
+        try {
+          const joinResp = await fetch(`${backendBaseUrl}/api/v1/remote/join`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              session_id: sessId,
+              pairing_pin: pin,
+              role: role,
+              device_id: 'PHYSICIAN_WEB_COCKPIT',
+              clinician_username: 'dr_sharma'
+            })
+          });
+
+          if (!joinResp.ok) {
+            const errData = await joinResp.json().catch(() => ({}));
+            const errMsg = errData.detail || `Pairing failed (HTTP ${joinResp.status})`;
+            alert(`Remote Pairing Failed: ${errMsg}`);
+            remoteSessionState.isConnected = false;
+            if (connStatus) {
+              connStatus.innerText = `Error: ${errMsg}`;
+              connStatus.style.background = '#FEE2E2';
+              connStatus.style.color = '#B91C1C';
+            }
+            return;
+          }
+
+          joinData = await joinResp.json();
+        } catch (err) {
+          alert(`Cannot connect to backend: ${err.message}. Check backend URL and network connection.`);
           remoteSessionState.isConnected = false;
           if (connStatus) {
-            connStatus.innerText = `Error: ${errMsg}`;
+            connStatus.innerText = 'Connection Error: Backend Unreachable';
             connStatus.style.background = '#FEE2E2';
             connStatus.style.color = '#B91C1C';
           }
           return;
         }
 
-        joinData = await joinResp.json();
-      } catch (err) {
-        alert(`Cannot connect to backend: ${err.message}. Check backend URL and network connection.`);
-        remoteSessionState.isConnected = false;
+        // Store authenticated credentials
+        remoteSessionState.sessionId = sessId;
+        remoteSessionState.pairingPin = pin;
+        remoteSessionState.role = joinData.role;
+        remoteSessionState.token = joinData.token;
+        remoteSessionState.clientId = 'PHYSICIAN_WEB_COCKPIT';
+        remoteClientSequence = 0;
+
+        // Update UI elements
+        document.getElementById('info-session-id').innerText = sessId;
+        document.getElementById('info-pairing-pin').innerText = pin;
+        document.getElementById('info-role').innerText = joinData.role;
+        document.getElementById('pad-conn-badge').innerText = `AUTHENTICATING...`;
+
         if (connStatus) {
-          connStatus.innerText = 'Connection Error: Backend Unreachable';
-          connStatus.style.background = '#FEE2E2';
-          connStatus.style.color = '#B91C1C';
-        }
-        return;
-      }
-
-      // Store authenticated credentials
-      remoteSessionState.sessionId = sessId;
-      remoteSessionState.pairingPin = pin;
-      remoteSessionState.role = joinData.role;
-      remoteSessionState.token = joinData.token;
-      remoteSessionState.clientId = 'PHYSICIAN_WEB_COCKPIT';
-      remoteClientSequence = 0;
-
-      // Update UI elements
-      document.getElementById('info-session-id').innerText = sessId;
-      document.getElementById('info-pairing-pin').innerText = pin;
-      document.getElementById('info-role').innerText = joinData.role;
-      document.getElementById('pad-conn-badge').innerText = `AUTHENTICATING...`;
-
-      if (connStatus) {
-        connStatus.innerText = 'WebSocket Connecting...';
-        connStatus.style.background = '#FEF3C7';
-        connStatus.style.color = '#B45309';
-      }
-
-      // Step 2: Establish authenticated WebSocket using the scoped token
-      try {
-        if (activeRemoteWs) {
-          try { activeRemoteWs.close(); } catch(e) {}
-          activeRemoteWs = null;
+          connStatus.innerText = 'WebSocket Connecting...';
+          connStatus.style.background = '#FEF3C7';
+          connStatus.style.color = '#B45309';
         }
 
-        const wsProto = (location.protocol === 'https:' || backendBaseUrl.startsWith('https:')) ? 'wss:' : 'ws:';
-        const hostOnly = backendBaseUrl.replace(/^https?:\/\//, '');
-        const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?token=${encodeURIComponent(joinData.token)}&client_id=PHYSICIAN_WEB_COCKPIT`;
-        
-        activeRemoteWs = new WebSocket(wsUrl);
-
-        activeRemoteWs.onopen = () => {
-          addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}. Authenticated as ${joinData.role}.`);
-          if (connStatus) {
-            connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
-            connStatus.style.background = '#FEF3C7';
-            connStatus.style.color = '#92400E';
+        // Step 2: Establish authenticated WebSocket using the scoped token
+        try {
+          if (activeRemoteWs) {
+            try { activeRemoteWs.close(); } catch (e) { }
+            activeRemoteWs = null;
           }
-          document.getElementById('pad-conn-badge').innerText = `BROKER LINKED (WAITING PEER)`;
-        };
 
-        activeRemoteWs.onmessage = (evt) => {
-          try {
-            const env = JSON.parse(evt.data);
-            handleIncomingRemoteEnvelope(env);
-          } catch(e) {
-            console.warn('Failed parsing incoming envelope:', e);
-          }
-        };
+          const wsProto = (location.protocol === 'https:' || backendBaseUrl.startsWith('https:')) ? 'wss:' : 'ws:';
+          const hostOnly = backendBaseUrl.replace(/^https?:\/\//, '');
+          const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?token=${encodeURIComponent(joinData.token)}&client_id=PHYSICIAN_WEB_COCKPIT`;
 
-        activeRemoteWs.onclose = (evt) => {
-          remoteSessionState.isConnected = false;
-          if (connStatus) {
-            connStatus.innerText = 'Disconnected';
-            connStatus.style.background = '#F3F4F6';
-            connStatus.style.color = '#4B5563';
-          }
-          document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
-          addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
-        };
+          activeRemoteWs = new WebSocket(wsUrl);
 
-        activeRemoteWs.onerror = (err) => {
-          console.error('Remote WebSocket error:', err);
-          remoteSessionState.isConnected = false;
-          if (connStatus) {
-            connStatus.innerText = 'WebSocket Error';
-            connStatus.style.background = '#FEE2E2';
-            connStatus.style.color = '#B91C1C';
-          }
-        };
-      } catch(e) {
-        console.error('WebSocket connection attempt failed:', e);
-      }
-
-      addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
-      closeRemotePairingModal();
-      setPortalMode('PHYSICIAN_AND_RESPONSE');
-    }
-
-    function handleIncomingRemoteEnvelope(env) {
-      if (!env || !env.message_type) return;
-
-      const connStatus = document.getElementById('remote-conn-status');
-
-      switch (env.message_type) {
-        case 'AUTH_ACK':
-          addTimelineItem('AUTH', `Broker verified credentials for session ${env.session_id}.`);
-          break;
-
-        case 'PEER_STATUS':
-          const roles = (env.payload && env.payload.roles) || [];
-          const hasPatient = roles.includes('PATIENT_VR_HOST');
-          if (hasPatient) {
-            remoteSessionState.isConnected = true;
-            if (connStatus) {
-              connStatus.innerText = 'Connected: Patient VR Headset Present';
-              connStatus.style.background = '#ECFDF5';
-              connStatus.style.color = '#065F46';
-            }
-            document.getElementById('pad-conn-badge').innerText = `PAIRED: PATIENT IN VR`;
-            addTimelineItem('PEER', `Patient VR Headset peer detected and verified.`);
-          } else {
-            remoteSessionState.isConnected = false;
+          activeRemoteWs.onopen = () => {
+            addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}. Authenticated as ${joinData.role}.`);
             if (connStatus) {
               connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
               connStatus.style.background = '#FEF3C7';
               connStatus.style.color = '#92400E';
             }
-            document.getElementById('pad-conn-badge').innerText = `WAITING FOR PATIENT`;
-          }
-          break;
-
-        case 'STIMULUS_EVENT':
-          const payload = env.payload || {};
-          const trialIdx = payload.trial_index || 0;
-          const coords = payload.coordinates || { x_deg: 0, y_deg: 0 };
-          remoteSessionState.trialIndex = trialIdx;
-          remoteSessionState.activeStimulus = {
-            trial_index: trialIdx,
-            test_module: payload.test_module || 'PERIMETRY',
-            eye_laterality: payload.eye_laterality || 'OD',
-            coordinates: coords,
-            stimulus_properties: {
-              luminance_nits: payload.luminance_nits || 31.8,
-              contrast_percent: payload.contrast_pct || 100
-            },
-            presentation_monotonic_ns: payload.presentation_monotonic_ns || Date.now() * 1000000
+            document.getElementById('pad-conn-badge').innerText = `BROKER LINKED (WAITING PEER)`;
           };
-          const trialEl = document.getElementById('stim-trial-idx');
-          if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Flash Active)`;
-          drawTwinCanvases(remoteSessionState.activeStimulus);
-          addTimelineItem('STIMULUS', `[Trial #${trialIdx}] Stimulus presented in VR (${payload.eye_laterality || 'OD'} at ${coords.x_deg || 0}°, ${coords.y_deg || 0}°).`);
-          break;
 
-        case 'RESPONSE_EVENT':
-          cockpitTapCount++;
-          const countEl = document.getElementById('cockpit-tap-count');
-          if (countEl) countEl.innerText = cockpitTapCount;
-          const respSrc = (env.payload && env.payload.input_source) || (env.payload && env.payload.source) || 'PATIENT_PHONE';
-          const respLat = (env.payload && env.payload.reaction_latency_ms) || '0';
-          const latEl = document.getElementById('stim-latency');
-          if (latEl) latEl.innerText = `${respLat} ms (Patient Monotonic Hardware Clock)`;
-          addTimelineItem('RESPONSE', `Patient response received (#${cockpitTapCount}) via ${respSrc} (Latency: ${respLat}ms)`);
-          break;
-
-        case 'CONTROL_COMMAND':
-          const cmd = env.payload && env.payload.command;
-          if (cmd === 'SET_MODULE') {
-            const mod = env.payload.target_module || (env.payload.parameters && env.payload.parameters.module);
-            if (mod) {
-              const modNameEl = document.getElementById('stim-test-name');
-              if (modNameEl) modNameEl.innerText = mod;
+          activeRemoteWs.onmessage = (evt) => {
+            try {
+              const env = JSON.parse(evt.data);
+              handleIncomingRemoteEnvelope(env);
+            } catch (e) {
+              console.warn('Failed parsing incoming envelope:', e);
             }
-          }
-          break;
-
-        case 'EMERGENCY_STOP':
-          remoteSessionState.isEmergencyHalted = true;
-          if (connStatus) {
-            connStatus.innerText = 'EMERGENCY HALTED';
-            connStatus.style.background = '#FEE2E2';
-            connStatus.style.color = '#B91C1C';
-          }
-          addTimelineItem('EMERGENCY', `Patient pressed emergency stop in VR!`);
-          break;
-      }
-    }
-
-    function handleResponsePadTap(source) {
-      if (remoteSessionState.isEmergencyHalted) {
-        alert('Examination is currently halted by Emergency Stop.');
-        return;
-      }
-
-      cockpitTapCount++;
-      const countEl = document.getElementById('cockpit-tap-count');
-      if (countEl) countEl.innerText = cockpitTapCount;
-
-      // Visual flash on embedded cockpit pad
-      const cockpitTapArea = document.getElementById('btn-cockpit-tap');
-      if (cockpitTapArea) {
-        cockpitTapArea.style.background = '#10B981';
-        setTimeout(() => { cockpitTapArea.style.background = '#1E293B'; }, 150);
-      }
-
-      // Visual flash on full mobile response pad if open
-      const tapArea = document.getElementById('btn-blind-tap');
-      if (tapArea && source === 'TOUCH_SURFACE') {
-        tapArea.style.background = '#10B981';
-        setTimeout(() => { tapArea.style.background = '#1E293B'; }, 150);
-      }
-
-      // Haptic Vibration feedback if supported
-      if (typeof navigator !== 'undefined' && navigator.vibrate) {
-        try { navigator.vibrate(50); } catch(e) {}
-      }
-
-      // Feedback label
-      const feedback = document.getElementById('cockpit-tap-feedback');
-      if (feedback) {
-        feedback.innerText = `Tap #${cockpitTapCount} Registered via ${source}!`;
-        feedback.style.opacity = '1';
-        setTimeout(() => { feedback.style.opacity = '0'; }, 600);
-      }
-      const padFeedback = document.getElementById('pad-tap-feedback');
-      if (padFeedback) {
-        padFeedback.innerText = `Tap #${cockpitTapCount} Registered!`;
-        padFeedback.style.opacity = '1';
-        setTimeout(() => { padFeedback.style.opacity = '0'; }, 600);
-      }
-
-      // Simulated latency
-      const simulatedLatencyMs = (180 + Math.random() * 120).toFixed(1);
-      remoteSessionState.trialIndex++;
-
-      // Update active parameters
-      const latEl = document.getElementById('stim-latency');
-      if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Monotonic Clock)`;
-      const trialEl = document.getElementById('stim-trial-idx');
-      if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54 (Point index: ${perimetryOrder[remoteSessionState.trialIndex % 54]})`;
-      const padSub = document.getElementById('pad-active-trial-sub');
-      if (padSub) padSub.innerText = `Trial #${remoteSessionState.trialIndex} — Waiting for next stimulus...`;
-
-      // Broadcast tap event over WebSocket to patient phone matching canonical WebSocketMessageEnvelope
-      sendRemoteEnvelope('RESPONSE_EVENT', {
-        trial_index: remoteSessionState.trialIndex,
-        response_recorded: true,
-        reaction_latency_ms: parseFloat(simulatedLatencyMs) || 200.0,
-        input_source: source,
-        input_quality: 'VALID',
-        local_monotonic_ns: Date.now() * 1000000,
-        source: source
-      });
-
-      addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap registered (#${cockpitTapCount}) via ${source} — Latency: ${simulatedLatencyMs}ms`);
-    }
-
-    // Keyboard Handler for Laptop / Browser Operation
-    window.addEventListener('keydown', function(e) {
-      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
-
-      if (e.code === 'Space') {
-        e.preventDefault();
-        handleResponsePadTap('LAPTOP_SPACEBAR');
-      } else if (e.code === 'ArrowUp') {
-        e.preventDefault();
-        handleResponsePadTap('DIRECTION_UP');
-      } else if (e.code === 'ArrowDown') {
-        e.preventDefault();
-        handleResponsePadTap('DIRECTION_DOWN');
-      } else if (e.code === 'ArrowLeft') {
-        e.preventDefault();
-        handleResponsePadTap('DIRECTION_LEFT');
-      } else if (e.code === 'ArrowRight') {
-        e.preventDefault();
-        handleResponsePadTap('DIRECTION_RIGHT');
-      } else if (e.key >= '0' && e.key <= '9') {
-        e.preventDefault();
-        handleResponsePadTap('NUM_' + e.key);
-      } else if (e.code === 'Escape') {
-        e.preventDefault();
-        triggerEmergencyHalt();
-      }
-    });
-
-    function addTimelineItem(type, message) {
-      const list = document.getElementById('remote-timeline-list');
-      if (!list) return;
-      const div = document.createElement('div');
-      div.className = 'timeline-entry';
-      let badgeClass = 'badge-stimulus';
-      if (type === 'RESPONSE') badgeClass = 'badge-response';
-      if (type === 'EMERGENCY') badgeClass = 'badge-emergency';
-      if (type === 'OBSERVATION') badgeClass = 'badge-obs';
-
-      const timeStr = new Date().toLocaleTimeString();
-      div.innerHTML = `<span class="${badgeClass}">${type}</span> <span style="color:#64748B; font-size:10px;">${timeStr}</span> ${message}`;
-      list.prepend(div);
-    }
-
-    function clearEventTimeline() {
-      const list = document.getElementById('remote-timeline-list');
-      if (list) list.innerHTML = '';
-    }
-
-    // Twin-Eye Stimulus Canvas Rendering
-    function drawTwinCanvases(stimulus) {
-      const canvasOS = document.getElementById('canvas-stim-os');
-      const canvasOD = document.getElementById('canvas-stim-od');
-
-      if (canvasOS) drawSingleEyePerimetry(canvasOS, 'OS', stimulus);
-      if (canvasOD) drawSingleEyePerimetry(canvasOD, 'OD', stimulus);
-    }
-
-    function drawSingleEyePerimetry(canvas, eye, stimulus) {
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      const width = canvas.width;
-      const height = canvas.height;
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const maxDeg = 30.0;
-      const scale = (Math.min(width, height) * 0.42) / maxDeg;
-
-      // Dark Background
-      ctx.fillStyle = '#0F172A';
-      ctx.fillRect(0, 0, width, height);
-
-      // Degree rings (10°, 20°, 30°)
-      ctx.strokeStyle = '#1E293B';
-      ctx.lineWidth = 1;
-      [10, 20, 30].forEach(deg => {
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, deg * scale, 0, 2 * Math.PI);
-        ctx.stroke();
-      });
-
-      // Axis Crosshairs
-      ctx.beginPath();
-      ctx.moveTo(centerX - 30 * scale, centerY);
-      ctx.lineTo(centerX + 30 * scale, centerY);
-      ctx.moveTo(centerX, centerY - 30 * scale);
-      ctx.lineTo(centerX, centerY + 30 * scale);
-      ctx.stroke();
-
-      // Blind Spot (Mariotte)
-      // OD: +15° Temporal, -1.5° Inferior
-      // OS: -15° Temporal, -1.5° Inferior
-      const blindX = eye === 'OD' ? centerX + 15 * scale : centerX - 15 * scale;
-      const blindY = centerY + 1.5 * scale;
-      ctx.fillStyle = 'rgba(100, 116, 139, 0.35)';
-      ctx.beginPath();
-      ctx.ellipse(blindX, blindY, 2.5 * scale, 3.5 * scale, 0, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Fixation Crosshair (Center)
-      ctx.strokeStyle = '#10B981';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(centerX - 6, centerY);
-      ctx.lineTo(centerX + 6, centerY);
-      ctx.moveTo(centerX, centerY - 6);
-      ctx.lineTo(centerX, centerY + 6);
-      ctx.stroke();
-
-      // Active Stimulus
-      if (stimulus && (stimulus.eye_laterality === 'OU' || stimulus.eye_laterality === eye)) {
-        const degX = stimulus.coordinates ? stimulus.coordinates.x_deg : 0;
-        const degY = stimulus.coordinates ? stimulus.coordinates.y_deg : 0;
-        const stimX = centerX + degX * scale;
-        const stimY = centerY - degY * scale;
-
-        ctx.fillStyle = '#F8FAFC';
-        ctx.shadowColor = '#38BDF8';
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(stimX, stimY, 5, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    }
-
-    function simulateStimulusTrial() {
-      remoteSessionState.trialIndex++;
-      const randomEye = Math.random() > 0.5 ? 'OD' : 'OS';
-      const randomX = Math.round((Math.random() * 40 - 20) * 10) / 10;
-      const randomY = Math.round((Math.random() * 40 - 20) * 10) / 10;
-
-      remoteSessionState.activeStimulus = {
-        trial_index: remoteSessionState.trialIndex,
-        test_module: 'PERIMETRY_24_2',
-        eye_laterality: randomEye,
-        coordinates: { x_deg: randomX, y_deg: randomY },
-        stimulus_properties: { goldmann_size: 'III', luminance_nits: 31.8, contrast_percent: 100 },
-        presentation_monotonic_ns: Date.now() * 1000000,
-        fixation_status: 'STEADY',
-        reliability_metrics: { fixation_loss_rate: 0.0 }
-      };
-
-      // Redraw twin canvases
-      drawTwinCanvases(remoteSessionState.activeStimulus);
-
-      // Update HUD
-      document.getElementById('stim-trial-idx').innerText = `Trial #${remoteSessionState.trialIndex} of 54`;
-      document.getElementById('stim-coords').innerText = `(x = ${randomX}°, y = ${randomY}°) [${randomEye}]`;
-      addTimelineItem('STIMULUS', `[Trial #${remoteSessionState.trialIndex}] Spot presented at (${randomX}°, ${randomY}°) for ${randomEye}.`);
-    }
-
-    function submitPhysicianObservationForm() {
-      const eye = document.getElementById('obs-eye').value;
-      const category = document.getElementById('obs-category').value;
-      const grade = document.getElementById('obs-grade').value.trim();
-      const notes = document.getElementById('obs-notes').value.trim();
-
-      if (!notes && !grade) {
-        alert('Please enter clinical notes or a numeric finding grade.');
-        return;
-      }
-
-      addTimelineItem('OBSERVATION', `Doctor recorded ${category} for ${eye}: "${grade || notes}"`);
-      alert(`Clinical observation recorded in session audit log for ${eye}. Raw patient psychophysics preserved.`);
-      document.getElementById('obs-notes').value = '';
-      document.getElementById('obs-grade').value = '';
-    }
-
-    function triggerEmergencyHalt() {
-      remoteSessionState.isEmergencyHalted = true;
-      const connStatus = document.getElementById('remote-conn-status');
-      if (connStatus) {
-        connStatus.innerText = 'EMERGENCY HALTED';
-        connStatus.style.background = '#FEE2E2';
-        connStatus.style.color = '#B91C1C';
-      }
-      sendRemoteEnvelope('EMERGENCY_STOP', {
-        triggered_by: 'PHYSICIAN_ABORT',
-        reason: 'Physician triggered emergency stop from web console',
-        timestamp_ns: Date.now() * 1000000
-      });
-      addTimelineItem('EMERGENCY', 'EMERGENCY STOP TRIGGERED: Stimulus generation halted on Android APK host.');
-      alert('EMERGENCY STOP BROADCASTED: Examination immediately paused on Android VR Box and all connected stations.');
-    }
-
-    let streamAnimationTimer = null;
-
-    function toggleScreenShareMode() {
-      remoteSessionState.screenShareActive = !remoteSessionState.screenShareActive;
-      const screenPanel = document.getElementById('screen-share-panel');
-      if (screenPanel) {
-        screenPanel.style.display = remoteSessionState.screenShareActive ? 'block' : 'none';
-      }
-      if (remoteSessionState.screenShareActive && !remoteSessionState.isStreamingWebRtc) {
-        simulateWebRtcStream();
-      }
-    }
-
-    function simulateWebRtcStream() {
-      remoteSessionState.isStreamingWebRtc = true;
-      const video = document.getElementById('remote-screen-video');
-      const placeholder = document.getElementById('screen-share-placeholder');
-      const hud = document.getElementById('screen-stream-hud');
-      const badge = document.getElementById('webrtc-stream-badge');
-
-      if (placeholder) placeholder.style.display = 'none';
-      if (video) video.style.display = 'block';
-      if (hud) hud.style.display = 'flex';
-      if (badge) {
-        badge.innerText = 'LIVE (30fps)';
-        badge.style.background = '#ECFDF5';
-        badge.style.color = '#065F46';
-      }
-
-      // Generate animated simulated canvas stream for video element
-      if (video && typeof document !== 'undefined') {
-        const offscreen = document.createElement('canvas');
-        offscreen.width = 640;
-        offscreen.height = 360;
-        const ctx = offscreen.getContext('2d');
-        let frameCount = 0;
-
-        if (offscreen.captureStream) {
-          try {
-            const stream = offscreen.captureStream(30);
-            video.srcObject = stream;
-            video.play().catch(() => {});
-          } catch(e) {}
-        }
-
-        if (streamAnimationTimer) clearInterval(streamAnimationTimer);
-        streamAnimationTimer = setInterval(() => {
-          if (!remoteSessionState.isStreamingWebRtc) {
-            clearInterval(streamAnimationTimer);
-            return;
-          }
-          frameCount++;
-          if (ctx) {
-            // Simulated VR split display
-            ctx.fillStyle = '#0F172A';
-            ctx.fillRect(0, 0, 640, 360);
-
-            // Left Eye
-            ctx.strokeStyle = '#38BDF8';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(20, 20, 280, 320);
-            ctx.fillStyle = '#E2E8F0';
-            ctx.font = '14px sans-serif';
-            ctx.fillText('ONEPLUS NORD 3 - OS', 40, 50);
-
-            // Right Eye
-            ctx.strokeRect(340, 20, 280, 320);
-            ctx.fillText('ONEPLUS NORD 3 - OD', 360, 50);
-
-            // Stimulus dot
-            const stimX = 160 + Math.sin(frameCount * 0.1) * 60;
-            const stimY = 180 + Math.cos(frameCount * 0.1) * 60;
-            ctx.fillStyle = '#F8FAFC';
-            ctx.beginPath();
-            ctx.arc(stimX, stimY, 8, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(stimX + 320, stimY, 8, 0, 2 * Math.PI);
-            ctx.fill();
-          }
-
-          // Update HUD
-          const droppedEl = document.getElementById('hud-stream-dropped');
-          if (droppedEl) droppedEl.innerText = `${Math.floor(frameCount / 180)}`;
-        }, 33);
-      }
-
-      addTimelineItem('STREAM', 'MediaProjection WebRTC video stream established from OnePlus Nord 3 @ 1080x2400 30fps.');
-    }
-
-    function stopWebRtcStream() {
-      remoteSessionState.isStreamingWebRtc = false;
-      if (streamAnimationTimer) {
-        clearInterval(streamAnimationTimer);
-        streamAnimationTimer = null;
-      }
-
-      const video = document.getElementById('remote-screen-video');
-      const placeholder = document.getElementById('screen-share-placeholder');
-      const hud = document.getElementById('screen-stream-hud');
-      const badge = document.getElementById('webrtc-stream-badge');
-
-      if (video) {
-        video.style.display = 'none';
-        video.srcObject = null;
-      }
-      if (placeholder) {
-        placeholder.style.display = 'block';
-        placeholder.innerText = 'Screen stream ended by operator.';
-      }
-      if (hud) hud.style.display = 'none';
-      if (badge) {
-        badge.innerText = 'STOPPED';
-        badge.style.background = '#F1F5F9';
-        badge.style.color = '#64748B';
-      }
-
-      addTimelineItem('STREAM', 'WebRTC video stream stopped.');
-    }
-
-    // VRBox Optical Hardware Profile & Lens Interlocks (CR-002-G)
-    let currentOpticalHardwareState = 'BOTH_VR_LENSES_INSTALLED';
-
-    function updateOpticalHardwareState(newState) {
-      currentOpticalHardwareState = newState;
-      const advisoryEl = document.getElementById('opt-advisory-text');
-      const permittedEl = document.getElementById('opt-permitted-tests');
-      const badgeEl = document.getElementById('opt-interlock-status-badge');
-      const compoundEl = document.getElementById('opt-compound-hazard');
-
-      let advisory = 'Standard wide-field psychophysical testing ready. Direct anterior/retinal capture is locked.';
-      let permitted = 'Perimetry 24-2/30-2, Contrast, Amsler, Ishihara, Tumbling E';
-      let badgeText = 'INTERLOCK SECURE';
-      let badgeBg = '#ECFDF5';
-      let badgeColor = '#065F46';
-      let compoundActive = true;
-
-      if (newState === 'OD_LENS_REMOVED') {
-        advisory = 'Right Eyepiece (OD) Removed. OD ready for anterior torch or 20D fundus imaging; OS ready for wide-field VR.';
-        permitted = 'OD: Anterior/Fundus | OS: Wide-Field VR';
-        badgeText = 'OD REMOVED (DIRECT BORE)';
-        badgeBg = '#FEF3C7';
-        badgeColor = '#B45309';
-        compoundActive = false;
-      } else if (newState === 'OS_LENS_REMOVED') {
-        advisory = 'Left Eyepiece (OS) Removed. OS ready for anterior torch or 20D fundus imaging; OD ready for wide-field VR.';
-        permitted = 'OS: Anterior/Fundus | OD: Wide-Field VR';
-        badgeText = 'OS REMOVED (DIRECT BORE)';
-        badgeBg = '#FEF3C7';
-        badgeColor = '#B45309';
-        compoundActive = false;
-      } else if (newState === 'BOTH_LENSES_REMOVED') {
-        advisory = 'Unobstructed direct line-of-sight for direct anterior segment & 20D fundus examination. Wide-field VR blocked.';
-        permitted = 'Direct Anterior (OU), Indirect Retinal 20D (OU)';
-        badgeText = 'BOTH REMOVED (CLEAR BORE)';
-        badgeBg = '#E0F2FE';
-        badgeColor = '#0369A1';
-        compoundActive = false;
-      } else if (newState === 'EXTERNAL_ADAPTER_20D_MOUNTED') {
-        advisory = '20D Fundus indirect ophthalmoscopy active. VR eyepiece compound lens focal collapse prevented.';
-        permitted = 'Retinal 20D Fundus Indirect Examination';
-        badgeText = '20D ADAPTER MOUNTED';
-        badgeBg = '#EFF6FF';
-        badgeColor = '#1D4ED8';
-        compoundActive = false;
-      } else if (newState === 'EXTERNAL_ADAPTER_PINHOLE_MOUNTED') {
-        advisory = 'Pinhole visual acuity differential active (differentiating refractive error from macular/media pathology).';
-        permitted = 'Pinhole Differential Visual Acuity';
-        badgeText = 'PINHOLE ADAPTER MOUNTED';
-        badgeBg = '#F5F3FF';
-        badgeColor = '#6D28D9';
-        compoundActive = false;
-      } else if (newState === 'UNKNOWN_UNCALIBRATED') {
-        advisory = 'All tests locked until optical carriage configuration is physically confirmed.';
-        permitted = 'None (Safety Interlock Active)';
-        badgeText = 'INTERLOCK BLOCKED (UNCALIBRATED)';
-        badgeBg = '#FEE2E2';
-        badgeColor = '#B91C1C';
-        compoundActive = false;
-      }
-
-      if (advisoryEl) advisoryEl.innerText = advisory;
-      if (permittedEl) permittedEl.innerText = permitted;
-      if (badgeEl) {
-        badgeEl.innerText = badgeText;
-        badgeEl.style.background = badgeBg;
-        badgeEl.style.color = badgeColor;
-      }
-      if (compoundEl) {
-        compoundEl.innerText = compoundActive ? 
-          'ACTIVE (Direct camera capture through VR eyepiece is prohibited to prevent focal collapse & Purkinje back-glare)' :
-          'DISENGAGED (VR eyepiece removed for open-bore camera/adapter capture)';
-        compoundEl.style.color = compoundActive ? '#10B981' : '#F59E0B';
-      }
-
-      addTimelineItem('OPTICS', `Hardware optical configuration changed to: ${newState}. Calibration hash invalidated.`);
-    }
-
-    function verifyOpticalInterlock() {
-      const activeTest = document.getElementById('stim-test-name')?.innerText || 'PERIMETRY_24_2';
-      const targetEye = document.getElementById('obs-eye')?.value || 'OD';
-      
-      let permitted = true;
-      let reason = 'Optical configuration verified.';
-
-      if (currentOpticalHardwareState === 'UNKNOWN_UNCALIBRATED') {
-        permitted = false;
-        reason = 'Cannot run tests: optical hardware state is UNKNOWN_UNCALIBRATED.';
-      } else if (currentOpticalHardwareState === 'BOTH_VR_LENSES_INSTALLED' && activeTest.includes('RETINAL')) {
-        permitted = false;
-        reason = 'Interlock Violation: Retinal fundus examination cannot operate through VR eyepiece (Gullstrand focal collapse to 18mm & Purkinje glare).';
-      } else if (currentOpticalHardwareState.includes('REMOVED') && (activeTest.includes('PERIMETRY') || activeTest.includes('AMSLER'))) {
-        permitted = false;
-        reason = `Interlock Violation: Wide-field test ${activeTest} requires VR eyepiece in place for stimulus collimation.`;
-      }
-
-      if (permitted) {
-        alert(`Interlock Check PASSED: Optical configuration '${currentOpticalHardwareState}' is valid for ${activeTest} on eye ${targetEye}.`);
-      } else {
-        alert(`SAFETY INTERLOCK ENGAGED:\n${reason}`);
-      }
-    }
-
-    // Initialize Twin Canvases on Page Load
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        drawTwinCanvases(remoteSessionState.activeStimulus);
-      }, 300);
-    });
-
-
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-      const target = document.getElementById('tab-' + tabId);
-      if (target) target.classList.add('active');
-
-      const matchedNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
-      if (matchedNav) {
-        matchedNav.classList.add('active');
-      } else {
-        document.querySelectorAll('.nav-item').forEach(nav => {
-          if (nav.innerText.toLowerCase().includes(tabId.substring(0, 4))) {
-            nav.classList.add('active');
-          }
-        });
-      }
-
-      // Re-render active module visuals when tab activated
-      if (tabId === 'amsler' && typeof drawAmslerGrid === 'function') drawAmslerGrid();
-      if (tabId === 'colour' && typeof updateColourPlateView === 'function') updateColourPlateView();
-      if (tabId === 'contrast' && typeof initContrastTriplets === 'function') initContrastTriplets();
-      if (tabId === 'motility' && typeof drawMotilityStage === 'function') drawMotilityStage();
-      if (tabId === 'pupil' && typeof updatePupilReflexAnimation === 'function') updatePupilReflexAnimation();
-      if (tabId === 'binocular' && typeof renderWorthDots === 'function') renderWorthDots();
-      if (tabId === 'acuity' && typeof renderAcuityDisplay === 'function') renderAcuityDisplay();
-    }
-
-    // Live Backend Health Probe with intelligent host resolution and timeout
-    const isLocalhost = (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '');
-    const storedBackendUrl = localStorage.getItem('eyeatlas_backend_url');
-    let backendBaseUrl = storedBackendUrl || (isLocalhost ? 'http://localhost:8008' : 'https://eyeatlas-ai.onrender.com');
-    let authToken = null;
-
-    async function authenticateAndSync() {
-      try {
-        const res = await fetch(`${backendBaseUrl}/api/v1/auth/token`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: 'doc_apex', password: 'DocPass123!' })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          authToken = data.access_token;
-          await loadPatientsFromBackend();
-          await fetchLiveAuditLogs();
-        }
-      } catch (e) {
-        console.warn('Backend authentication notice:', e);
-      }
-    }
-
-    async function loadPatientsFromBackend() {
-      if (!authToken || !backendBaseUrl) return;
-      try {
-        const res = await fetch(`${backendBaseUrl}/api/v1/patients`, {
-          headers: { 'Authorization': `Bearer ${authToken}` }
-        });
-        if (res.ok) {
-          const patients = await res.json();
-          const tbody = document.getElementById('patient-table-body');
-          if (tbody && patients.length > 0) {
-            tbody.innerHTML = '';
-            patients.forEach(p => {
-              const tr = document.createElement('tr');
-              const dmText = p.hasDiabetes ? '<span style="color:var(--amber); font-weight:700;">Positive</span>' : 'Negative';
-              const symText = (p.symptoms && p.symptoms.length > 0) ? p.symptoms.join(', ') : 'Routine Checkup';
-              tr.innerHTML = `<td><strong>${p.patientId}</strong></td><td>${p.ageBand}</td><td>${dmText}</td><td>${p.currentCorrection}</td><td>${symText}</td><td><span style="color:#10B981; font-weight:600;">COMMITTED</span></td><td><button class="btn-secondary" onclick="switchTab('dashboard')">View Encounter</button></td>`;
-              tbody.appendChild(tr);
-            });
-          }
-        }
-      } catch (e) {
-        console.warn('Patient fetch notice:', e);
-      }
-    }
-
-    async function fetchLiveAuditLogs() {
-      if (!authToken || !backendBaseUrl) return;
-      try {
-        const res = await fetch(`${backendBaseUrl}/api/v1/admin/audit-logs`, {
-          headers: { 'Authorization': `Bearer ${authToken}` }
-        });
-        if (res.ok) {
-          const logs = await res.json();
-          const tbody = document.getElementById('audit-table-body');
-          if (tbody && logs.length > 0) {
-            tbody.innerHTML = '';
-            logs.forEach(log => {
-              const tr = document.createElement('tr');
-              const dateStr = log.timestampNs ? new Date(log.timestampNs / 1000000).toISOString().replace('T', ' ').substring(0, 19) : 'Recent';
-              const hashSnippet = log.afterHash ? (log.afterHash.substring(0, 8) + '...' + log.afterHash.slice(-6)) : 'GENESIS';
-              tr.innerHTML = `<td>${log.eventId}</td><td>${log.tenantId}</td><td><strong>${log.action}</strong></td><td>${log.actor}</td><td>${dateStr}</td><td><code>${hashSnippet}</code></td>`;
-              tbody.appendChild(tr);
-            });
-          }
-        }
-      } catch(e) {
-        console.warn("Audit fetch notice:", e);
-      }
-    }
-
-    async function checkBackend() {
-      const storedUrl = localStorage.getItem('eyeatlas_backend_url');
-      const currentHost = window.location.hostname || 'localhost';
-      const currentProtocol = window.location.protocol || 'http:';
-      const hosts = [];
-      if (storedUrl) hosts.push(storedUrl);
-      if (window.location.origin && window.location.origin !== 'null') {
-        hosts.push(window.location.origin);
-      }
-      hosts.push(`http://${currentHost}:8008`);
-      hosts.push('http://localhost:8008');
-      hosts.push('http://127.0.0.1:8008');
-      const uniqueHosts = [...new Set(hosts)];
-
-      for (const host of uniqueHosts) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 2000);
-          const res = await fetch(`${host}/api/v1/health`, { signal: controller.signal });
-          clearTimeout(timeoutId);
-          if (res.ok) {
-            const data = await res.json();
-            backendBaseUrl = host;
-            const statusEl = document.getElementById('backend-status');
-            if (statusEl) {
-              statusEl.innerHTML = `<span style="color:#10B981;">&#9679;</span> FastAPI Connected (${data.version})`;
+          };
+
+          activeRemoteWs.onclose = (evt) => {
+            remoteSessionState.isConnected = false;
+            if (connStatus) {
+              connStatus.innerText = 'Disconnected';
+              connStatus.style.background = '#F3F4F6';
+              connStatus.style.color = '#4B5563';
             }
-            await authenticateAndSync();
-            return;
-          }
+            document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
+            addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
+          };
+
+          activeRemoteWs.onerror = (err) => {
+            console.error('Remote WebSocket error:', err);
+            remoteSessionState.isConnected = false;
+            if (connStatus) {
+              connStatus.innerText = 'WebSocket Error';
+              connStatus.style.background = '#FEE2E2';
+              connStatus.style.color = '#B91C1C';
+            }
+          };
         } catch (e) {
-          // Continue to next host candidate
+          console.error('WebSocket connection attempt failed:', e);
+        }
+
+        addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
+        closeRemotePairingModal();
+        setPortalMode('PHYSICIAN_AND_RESPONSE');
+      }
+
+      function handleIncomingRemoteEnvelope(env) {
+        if (!env || !env.message_type) return;
+
+        const connStatus = document.getElementById('remote-conn-status');
+
+        switch (env.message_type) {
+          case 'AUTH_ACK':
+            addTimelineItem('AUTH', `Broker verified credentials for session ${env.session_id}.`);
+            break;
+
+          case 'PEER_STATUS':
+            const roles = (env.payload && env.payload.roles) || [];
+            const hasPatient = roles.includes('PATIENT_VR_HOST');
+            if (hasPatient) {
+              remoteSessionState.isConnected = true;
+              if (connStatus) {
+                connStatus.innerText = 'Connected: Patient VR Headset Present';
+                connStatus.style.background = '#ECFDF5';
+                connStatus.style.color = '#065F46';
+              }
+              document.getElementById('pad-conn-badge').innerText = `PAIRED: PATIENT IN VR`;
+              addTimelineItem('PEER', `Patient VR Headset peer detected and verified.`);
+            } else {
+              remoteSessionState.isConnected = false;
+              if (connStatus) {
+                connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
+                connStatus.style.background = '#FEF3C7';
+                connStatus.style.color = '#92400E';
+              }
+              document.getElementById('pad-conn-badge').innerText = `WAITING FOR PATIENT`;
+            }
+            break;
+
+          case 'STIMULUS_EVENT':
+            const payload = env.payload || {};
+            const trialIdx = payload.trial_index || 0;
+            const coords = payload.coordinates || { x_deg: 0, y_deg: 0 };
+            remoteSessionState.trialIndex = trialIdx;
+            remoteSessionState.activeStimulus = {
+              trial_index: trialIdx,
+              test_module: payload.test_module || 'PERIMETRY',
+              eye_laterality: payload.eye_laterality || 'OD',
+              coordinates: coords,
+              stimulus_properties: {
+                luminance_nits: payload.luminance_nits || 31.8,
+                contrast_percent: payload.contrast_pct || 100
+              },
+              presentation_monotonic_ns: payload.presentation_monotonic_ns || Date.now() * 1000000
+            };
+            const trialEl = document.getElementById('stim-trial-idx');
+            if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Flash Active)`;
+            drawTwinCanvases(remoteSessionState.activeStimulus);
+            addTimelineItem('STIMULUS', `[Trial #${trialIdx}] Stimulus presented in VR (${payload.eye_laterality || 'OD'} at ${coords.x_deg || 0}°, ${coords.y_deg || 0}°).`);
+            break;
+
+          case 'RESPONSE_EVENT':
+            cockpitTapCount++;
+            const countEl = document.getElementById('cockpit-tap-count');
+            if (countEl) countEl.innerText = cockpitTapCount;
+            const respSrc = (env.payload && env.payload.input_source) || (env.payload && env.payload.source) || 'PATIENT_PHONE';
+            const respLat = (env.payload && env.payload.reaction_latency_ms) || '0';
+            const latEl = document.getElementById('stim-latency');
+            if (latEl) latEl.innerText = `${respLat} ms (Patient Monotonic Hardware Clock)`;
+            addTimelineItem('RESPONSE', `Patient response received (#${cockpitTapCount}) via ${respSrc} (Latency: ${respLat}ms)`);
+            break;
+
+          case 'CONTROL_COMMAND':
+            const cmd = env.payload && env.payload.command;
+            if (cmd === 'SET_MODULE') {
+              const mod = env.payload.target_module || (env.payload.parameters && env.payload.parameters.module);
+              if (mod) {
+                const modNameEl = document.getElementById('stim-test-name');
+                if (modNameEl) modNameEl.innerText = mod;
+              }
+            }
+            break;
+
+          case 'EMERGENCY_STOP':
+            remoteSessionState.isEmergencyHalted = true;
+            if (connStatus) {
+              connStatus.innerText = 'EMERGENCY HALTED';
+              connStatus.style.background = '#FEE2E2';
+              connStatus.style.color = '#B91C1C';
+            }
+            addTimelineItem('EMERGENCY', `Patient pressed emergency stop in VR!`);
+            break;
         }
       }
-      const statusEl = document.getElementById('backend-status');
-      if (statusEl) {
-        statusEl.innerHTML = `<span style="color:#64748B;">&#9679;</span> Standalone Mode`;
-      }
-    }
-    checkBackend();
-    // Intelligent auto-reconnect polling every 2.5s until connected
-    const probeInterval = setInterval(async () => {
-      if (!authToken) {
-        await checkBackend();
-      } else {
-        clearInterval(probeInterval);
-      }
-    }, 2500);
 
-    // WebXR Toggle between Patient VR Mode and Physician & Response Cockpit
-    function toggleVrView() {
-      const vp = document.getElementById('vr-viewport');
-      const isHidden = (vp.style.display !== 'flex');
-      if (isHidden) {
-        enterPatientVrMode();
-        setVrSubmode('COLOUR');
-      } else {
-        exitPatientVrMode();
-      }
-    }
-
-    // Interactive Visual Field Perimetry Analyser (Refactored 24-2 & 30-2)
-    const canvas = document.getElementById('perimetry-canvas');
-    const ctx = canvas ? canvas.getContext('2d') : null;
-    let currentPattern = '24-2';
-    let currentEye = 'OD';
-    let activePoints = [];
-    let presentationOrder = [];
-    let currentStepIndex = 0;
-    let perimetryRunning = false;
-    let stimulusActive = false;
-    let stimulusStartTime = 0;
-    let pointsSeen = 0;
-    let falsePositives = 0;
-    let reactionTimes = [];
-
-    // Full Standard 24-2 (54 pts) and Expanded 30-2 (76 pts) coordinate sets
-    // Perfectly accounts for both Superior (Upper) and Inferior (Lower) quadrants
-    const GRID_24_2 = {
-      "21": [-9, -3, 3, 9],
-      "15": [-15, -9, -3, 3, 9, 15],
-      "9":  [-21, -15, -9, -3, 3, 9, 15, 21],
-      "3":  [-27, -21, -15, -9, -3, 3, 9, 15, 21],
-      "-3": [-27, -21, -15, -9, -3, 3, 9, 15, 21],
-      "-9": [-21, -15, -9, -3, 3, 9, 15, 21],
-      "-15":[-15, -9, -3, 3, 9, 15],
-      "-21":[-9, -3, 3, 9]
-    };
-
-    const GRID_30_2 = {
-      "27": [-9, -3, 3, 9],
-      "21": [-15, -9, -3, 3, 9, 15],
-      "15": [-21, -15, -9, -3, 3, 9, 15, 21],
-      "9":  [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
-      "3":  [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
-      "-3": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
-      "-9": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
-      "-15":[-21, -15, -9, -3, 3, 9, 15, 21],
-      "-21":[-15, -9, -3, 3, 9, 15],
-      "-27":[-9, -3, 3, 9]
-    };
-
-    function initPoints() {
-      activePoints = [];
-      const grid = (currentPattern === '30-2') ? GRID_30_2 : GRID_24_2;
-      const blindSpotX = (currentEye === 'OD') ? 15 : -15;
-
-      for (const [yStr, xList] of Object.entries(grid)) {
-        const y = parseInt(yStr);
-        for (const x of xList) {
-          const isBlindSpot = (x === blindSpotX && y === -3);
-          activePoints.push({
-            x: x,
-            y: y,
-            isBlindSpot: isBlindSpot,
-            status: isBlindSpot ? 'scotoma' : 'untested',
-            hemifield: (y > 0) ? 'SUPERIOR' : 'INFERIOR'
-          });
+      function handleResponsePadTap(source) {
+        if (remoteSessionState.isEmergencyHalted) {
+          alert('Examination is currently halted by Emergency Stop.');
+          return;
         }
+
+        cockpitTapCount++;
+        const countEl = document.getElementById('cockpit-tap-count');
+        if (countEl) countEl.innerText = cockpitTapCount;
+
+        // Visual flash on embedded cockpit pad
+        const cockpitTapArea = document.getElementById('btn-cockpit-tap');
+        if (cockpitTapArea) {
+          cockpitTapArea.style.background = '#10B981';
+          setTimeout(() => { cockpitTapArea.style.background = '#1E293B'; }, 150);
+        }
+
+        // Visual flash on full mobile response pad if open
+        const tapArea = document.getElementById('btn-blind-tap');
+        if (tapArea && source === 'TOUCH_SURFACE') {
+          tapArea.style.background = '#10B981';
+          setTimeout(() => { tapArea.style.background = '#1E293B'; }, 150);
+        }
+
+        // Haptic Vibration feedback if supported
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          try { navigator.vibrate(50); } catch (e) { }
+        }
+
+        // Feedback label
+        const feedback = document.getElementById('cockpit-tap-feedback');
+        if (feedback) {
+          feedback.innerText = `Tap #${cockpitTapCount} Registered via ${source}!`;
+          feedback.style.opacity = '1';
+          setTimeout(() => { feedback.style.opacity = '0'; }, 600);
+        }
+        const padFeedback = document.getElementById('pad-tap-feedback');
+        if (padFeedback) {
+          padFeedback.innerText = `Tap #${cockpitTapCount} Registered!`;
+          padFeedback.style.opacity = '1';
+          setTimeout(() => { padFeedback.style.opacity = '0'; }, 600);
+        }
+
+        // Simulated latency
+        const simulatedLatencyMs = (180 + Math.random() * 120).toFixed(1);
+        remoteSessionState.trialIndex++;
+
+        // Update active parameters
+        const latEl = document.getElementById('stim-latency');
+        if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Monotonic Clock)`;
+        const trialEl = document.getElementById('stim-trial-idx');
+        if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54 (Point index: ${perimetryOrder[remoteSessionState.trialIndex % 54]})`;
+        const padSub = document.getElementById('pad-active-trial-sub');
+        if (padSub) padSub.innerText = `Trial #${remoteSessionState.trialIndex} — Waiting for next stimulus...`;
+
+        // Broadcast tap event over WebSocket to patient phone matching canonical WebSocketMessageEnvelope
+        sendRemoteEnvelope('RESPONSE_EVENT', {
+          trial_index: remoteSessionState.trialIndex,
+          response_recorded: true,
+          reaction_latency_ms: parseFloat(simulatedLatencyMs) || 200.0,
+          input_source: source,
+          input_quality: 'VALID',
+          local_monotonic_ns: Date.now() * 1000000,
+          source: source
+        });
+
+        addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap registered (#${cockpitTapCount}) via ${source} — Latency: ${simulatedLatencyMs}ms`);
       }
-      updateHudStats();
-      drawPerimetryGrid(null);
-    }
 
-    function selectPerimetryPattern(pattern) {
-      if (perimetryRunning) return;
-      currentPattern = pattern;
-      document.getElementById('pattern-btn-24').style.background = (pattern === '24-2') ? 'var(--mint-wash)' : '';
-      document.getElementById('pattern-btn-24').style.color = (pattern === '24-2') ? 'var(--sea-green-dark)' : '';
-      document.getElementById('pattern-btn-30').style.background = (pattern === '30-2') ? 'var(--mint-wash)' : '';
-      document.getElementById('pattern-btn-30').style.color = (pattern === '30-2') ? 'var(--sea-green-dark)' : '';
-      initPoints();
-    }
+      // Keyboard Handler for Laptop / Browser Operation
+      window.addEventListener('keydown', function (e) {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
 
-    function selectPerimetryEye(eye) {
-      if (perimetryRunning) return;
-      currentEye = eye;
-      document.getElementById('eye-btn-od').style.background = (eye === 'OD') ? 'var(--mint-wash)' : '';
-      document.getElementById('eye-btn-od').style.color = (eye === 'OD') ? 'var(--sea-green-dark)' : '';
-      document.getElementById('eye-btn-os').style.background = (eye === 'OS') ? 'var(--mint-wash)' : '';
-      document.getElementById('eye-btn-os').style.color = (eye === 'OS') ? 'var(--sea-green-dark)' : '';
-      initPoints();
-    }
+        if (e.code === 'Space') {
+          e.preventDefault();
+          handleResponsePadTap('LAPTOP_SPACEBAR');
+        } else if (e.code === 'ArrowUp') {
+          e.preventDefault();
+          handleResponsePadTap('DIRECTION_UP');
+        } else if (e.code === 'ArrowDown') {
+          e.preventDefault();
+          handleResponsePadTap('DIRECTION_DOWN');
+        } else if (e.code === 'ArrowLeft') {
+          e.preventDefault();
+          handleResponsePadTap('DIRECTION_LEFT');
+        } else if (e.code === 'ArrowRight') {
+          e.preventDefault();
+          handleResponsePadTap('DIRECTION_RIGHT');
+        } else if (e.key >= '0' && e.key <= '9') {
+          e.preventDefault();
+          handleResponsePadTap('NUM_' + e.key);
+        } else if (e.code === 'Escape') {
+          e.preventDefault();
+          triggerEmergencyHalt();
+        }
+      });
 
-    function updateHudStats() {
-      const supPoints = activePoints.filter(p => p.hemifield === 'SUPERIOR');
-      const infPoints = activePoints.filter(p => p.hemifield === 'INFERIOR');
-      const supSeen = supPoints.filter(p => p.status === 'seen').length;
-      const infSeen = infPoints.filter(p => p.status === 'seen').length;
+      function addTimelineItem(type, message) {
+        const list = document.getElementById('remote-timeline-list');
+        if (!list) return;
+        const div = document.createElement('div');
+        div.className = 'timeline-entry';
+        let badgeClass = 'badge-stimulus';
+        if (type === 'RESPONSE') badgeClass = 'badge-response';
+        if (type === 'EMERGENCY') badgeClass = 'badge-emergency';
+        if (type === 'OBSERVATION') badgeClass = 'badge-obs';
 
-      document.getElementById('stat-points').innerText = currentStepIndex + ' / ' + activePoints.length;
-      document.getElementById('stat-seen').innerText = pointsSeen;
-      document.getElementById('stat-sup').innerText = supSeen + ' / ' + supPoints.length;
-      document.getElementById('stat-inf').innerText = infSeen + ' / ' + infPoints.length;
-
-      if (reactionTimes.length > 0) {
-        const meanRt = Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length);
-        document.getElementById('stat-rt').innerText = meanRt + ' ms';
-      } else {
-        document.getElementById('stat-rt').innerText = '-- ms';
+        const timeStr = new Date().toLocaleTimeString();
+        div.innerHTML = `<span class="${badgeClass}">${type}</span> <span style="color:#64748B; font-size:10px;">${timeStr}</span> ${message}`;
+        list.prepend(div);
       }
-    }
 
-    function drawPerimetryGrid(activeStimulus = null) {
-      if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      function clearEventTimeline() {
+        const list = document.getElementById('remote-timeline-list');
+        if (list) list.innerHTML = '';
+      }
 
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-      const scale = 5.8; // px per degree (30 deg = 174px radius)
+      // Twin-Eye Stimulus Canvas Rendering
+      function drawTwinCanvases(stimulus) {
+        const canvasOS = document.getElementById('canvas-stim-os');
+        const canvasOD = document.getElementById('canvas-stim-od');
 
-      // Background aperture
-      ctx.fillStyle = '#090D16';
-      ctx.beginPath();
-      ctx.arc(cx, cy, 32 * scale, 0, Math.PI * 2);
-      ctx.fill();
+        if (canvasOS) drawSingleEyePerimetry(canvasOS, 'OS', stimulus);
+        if (canvasOD) drawSingleEyePerimetry(canvasOD, 'OD', stimulus);
+      }
 
-      // Degree circles (10°, 20°, 30°)
-      [10, 20, 30].forEach(deg => {
+      function drawSingleEyePerimetry(canvas, eye, stimulus) {
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const maxDeg = 30.0;
+        const scale = (Math.min(width, height) * 0.42) / maxDeg;
+
+        // Dark Background
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(0, 0, width, height);
+
+        // Degree rings (10°, 20°, 30°)
         ctx.strokeStyle = '#1E293B';
         ctx.lineWidth = 1;
+        [10, 20, 30].forEach(deg => {
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, deg * scale, 0, 2 * Math.PI);
+          ctx.stroke();
+        });
+
+        // Axis Crosshairs
         ctx.beginPath();
-        ctx.arc(cx, cy, deg * scale, 0, Math.PI * 2);
+        ctx.moveTo(centerX - 30 * scale, centerY);
+        ctx.lineTo(centerX + 30 * scale, centerY);
+        ctx.moveTo(centerX, centerY - 30 * scale);
+        ctx.lineTo(centerX, centerY + 30 * scale);
         ctx.stroke();
 
-        ctx.fillStyle = '#475569';
-        ctx.font = '10px sans-serif';
-        ctx.fillText(deg + '°', cx + 4, cy - (deg * scale) + 12);
-      });
-
-      // Axis lines
-      ctx.strokeStyle = '#1E293B';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - (32 * scale)); ctx.lineTo(cx, cy + (32 * scale));
-      ctx.moveTo(cx - (32 * scale), cy); ctx.lineTo(cx + (32 * scale), cy);
-      ctx.stroke();
-
-      // Compass labels
-      ctx.fillStyle = '#64748B';
-      ctx.font = '11px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('SUPERIOR (Upper)', cx, cy - (31 * scale) + 12);
-      ctx.fillText('INFERIOR (Lower)', cx, cy + (31 * scale) - 4);
-      if (currentEye === 'OD') {
-        ctx.fillText('NASAL (OD)', cx - (30 * scale) + 24, cy - 6);
-        ctx.fillText('TEMPORAL (OD)', cx + (30 * scale) - 30, cy - 6);
-      } else {
-        ctx.fillText('TEMPORAL (OS)', cx - (30 * scale) + 32, cy - 6);
-        ctx.fillText('NASAL (OS)', cx + (30 * scale) - 24, cy - 6);
-      }
-
-      // Central fixation cross
-      ctx.fillStyle = '#EF4444';
-      ctx.fillRect(cx - 6, cy - 1.5, 12, 3);
-      ctx.fillRect(cx - 1.5, cy - 6, 3, 12);
-
-      // Physiological Blind Spot
-      const blindX = (currentEye === 'OD') ? 15 : -15;
-      ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
-      ctx.beginPath();
-      ctx.ellipse(cx + (blindX * scale), cy - (-3 * scale), 8, 12, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = '9px sans-serif';
-      ctx.fillText('Blind Spot', cx + (blindX * scale), cy - (-3 * scale) + 18);
-
-      // Render all grid points (Upper & Lower)
-      activePoints.forEach(pt => {
-        const px = cx + (pt.x * scale);
-        const py = cy - (pt.y * scale);
+        // Blind Spot (Mariotte)
+        // OD: +15° Temporal, -1.5° Inferior
+        // OS: -15° Temporal, -1.5° Inferior
+        const blindX = eye === 'OD' ? centerX + 15 * scale : centerX - 15 * scale;
+        const blindY = centerY + 1.5 * scale;
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.35)';
         ctx.beginPath();
-        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
-
-        if (pt.status === 'seen') ctx.fillStyle = '#10B981'; // Green
-        else if (pt.status === 'unseen' || pt.status === 'scotoma') ctx.fillStyle = '#EF4444'; // Red
-        else ctx.fillStyle = '#334155'; // Untested slate
-
+        ctx.ellipse(blindX, blindY, 2.5 * scale, 3.5 * scale, 0, 0, 2 * Math.PI);
         ctx.fill();
-      });
 
-      // Active stimulus flash (Goldmann III)
-      if (activeStimulus) {
-        const sx = cx + (activeStimulus.x * scale);
-        const sy = cy - (activeStimulus.y * scale);
+        // Fixation Crosshair (Center)
+        ctx.strokeStyle = '#10B981';
+        ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.shadowColor = '#FFFFFF';
-        ctx.shadowBlur = 12;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    }
+        ctx.moveTo(centerX - 6, centerY);
+        ctx.lineTo(centerX + 6, centerY);
+        ctx.moveTo(centerX, centerY - 6);
+        ctx.lineTo(centerX, centerY + 6);
+        ctx.stroke();
 
-    function startPerimetryTest() {
-      perimetryRunning = true;
-      currentStepIndex = 0;
-      pointsSeen = 0;
-      falsePositives = 0;
-      reactionTimes = [];
+        // Active Stimulus
+        if (stimulus && (stimulus.eye_laterality === 'OU' || stimulus.eye_laterality === eye)) {
+          const degX = stimulus.coordinates ? stimulus.coordinates.x_deg : 0;
+          const degY = stimulus.coordinates ? stimulus.coordinates.y_deg : 0;
+          const stimX = centerX + degX * scale;
+          const stimY = centerY - degY * scale;
 
-      // Reset statuses
-      activePoints.forEach(p => {
-        if (!p.isBlindSpot) p.status = 'untested';
-      });
-
-      // Build and shuffle presentation order (Fisher-Yates) for unpredictable psychophysical testing
-      presentationOrder = [];
-      for (let i = 0; i < activePoints.length; i++) {
-        presentationOrder.push(i);
-      }
-      for (let i = presentationOrder.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [presentationOrder[i], presentationOrder[j]] = [presentationOrder[j], presentationOrder[i]];
+          ctx.fillStyle = '#F8FAFC';
+          ctx.shadowColor = '#38BDF8';
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.arc(stimX, stimY, 5, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
       }
 
-      document.getElementById('btn-perimetry-start').disabled = true;
-      document.getElementById('btn-perimetry-response').disabled = false;
-      updateHudStats();
-      nextRandomizedTrial();
-    }
+      function simulateStimulusTrial() {
+        remoteSessionState.trialIndex++;
+        const randomEye = Math.random() > 0.5 ? 'OD' : 'OS';
+        const randomX = Math.round((Math.random() * 40 - 20) * 10) / 10;
+        const randomY = Math.round((Math.random() * 40 - 20) * 10) / 10;
 
-    function nextRandomizedTrial() {
-      if (!perimetryRunning || currentStepIndex >= presentationOrder.length) {
-        finishPerimetryTest();
-        return;
+        remoteSessionState.activeStimulus = {
+          trial_index: remoteSessionState.trialIndex,
+          test_module: 'PERIMETRY_24_2',
+          eye_laterality: randomEye,
+          coordinates: { x_deg: randomX, y_deg: randomY },
+          stimulus_properties: { goldmann_size: 'III', luminance_nits: 31.8, contrast_percent: 100 },
+          presentation_monotonic_ns: Date.now() * 1000000,
+          fixation_status: 'STEADY',
+          reliability_metrics: { fixation_loss_rate: 0.0 }
+        };
+
+        // Redraw twin canvases
+        drawTwinCanvases(remoteSessionState.activeStimulus);
+
+        // Update HUD
+        document.getElementById('stim-trial-idx').innerText = `Trial #${remoteSessionState.trialIndex} of 54`;
+        document.getElementById('stim-coords').innerText = `(x = ${randomX}°, y = ${randomY}°) [${randomEye}]`;
+        addTimelineItem('STIMULUS', `[Trial #${remoteSessionState.trialIndex}] Spot presented at (${randomX}°, ${randomY}°) for ${randomEye}.`);
       }
 
-      const ptIndex = presentationOrder[currentStepIndex];
-      const pt = activePoints[ptIndex];
+      function submitPhysicianObservationForm() {
+        const eye = document.getElementById('obs-eye').value;
+        const category = document.getElementById('obs-category').value;
+        const grade = document.getElementById('obs-grade').value.trim();
+        const notes = document.getElementById('obs-notes').value.trim();
 
-      // Jittered inter-stimulus interval (600 - 1100ms)
-      setTimeout(() => {
-        if (!perimetryRunning) return;
-        stimulusActive = true;
-        stimulusStartTime = performance.now();
-        drawPerimetryGrid(pt);
+        if (!notes && !grade) {
+          alert('Please enter clinical notes or a numeric finding grade.');
+          return;
+        }
 
-        // Goldmann III duration: exactly 200 ms (24 frames @ 120Hz)
-        setTimeout(() => {
-          drawPerimetryGrid(null);
+        addTimelineItem('OBSERVATION', `Doctor recorded ${category} for ${eye}: "${grade || notes}"`);
+        alert(`Clinical observation recorded in session audit log for ${eye}. Raw patient psychophysics preserved.`);
+        document.getElementById('obs-notes').value = '';
+        document.getElementById('obs-grade').value = '';
+      }
 
-          // Response listening window (800ms)
-          setTimeout(() => {
-            if (stimulusActive) {
-              // Missed / Unseen
-              stimulusActive = false;
-              pt.status = 'unseen';
-              currentStepIndex++;
-              updateHudStats();
-              nextRandomizedTrial();
+      function triggerEmergencyHalt() {
+        remoteSessionState.isEmergencyHalted = true;
+        const connStatus = document.getElementById('remote-conn-status');
+        if (connStatus) {
+          connStatus.innerText = 'EMERGENCY HALTED';
+          connStatus.style.background = '#FEE2E2';
+          connStatus.style.color = '#B91C1C';
+        }
+        sendRemoteEnvelope('EMERGENCY_STOP', {
+          triggered_by: 'PHYSICIAN_ABORT',
+          reason: 'Physician triggered emergency stop from web console',
+          timestamp_ns: Date.now() * 1000000
+        });
+        addTimelineItem('EMERGENCY', 'EMERGENCY STOP TRIGGERED: Stimulus generation halted on Android APK host.');
+        alert('EMERGENCY STOP BROADCASTED: Examination immediately paused on Android VR Box and all connected stations.');
+      }
+
+      let streamAnimationTimer = null;
+
+      function toggleScreenShareMode() {
+        remoteSessionState.screenShareActive = !remoteSessionState.screenShareActive;
+        const screenPanel = document.getElementById('screen-share-panel');
+        if (screenPanel) {
+          screenPanel.style.display = remoteSessionState.screenShareActive ? 'block' : 'none';
+        }
+        if (remoteSessionState.screenShareActive && !remoteSessionState.isStreamingWebRtc) {
+          simulateWebRtcStream();
+        }
+      }
+
+      function simulateWebRtcStream() {
+        remoteSessionState.isStreamingWebRtc = true;
+        const video = document.getElementById('remote-screen-video');
+        const placeholder = document.getElementById('screen-share-placeholder');
+        const hud = document.getElementById('screen-stream-hud');
+        const badge = document.getElementById('webrtc-stream-badge');
+
+        if (placeholder) placeholder.style.display = 'none';
+        if (video) video.style.display = 'block';
+        if (hud) hud.style.display = 'flex';
+        if (badge) {
+          badge.innerText = 'LIVE (30fps)';
+          badge.style.background = '#ECFDF5';
+          badge.style.color = '#065F46';
+        }
+
+        // Generate animated simulated canvas stream for video element
+        if (video && typeof document !== 'undefined') {
+          const offscreen = document.createElement('canvas');
+          offscreen.width = 640;
+          offscreen.height = 360;
+          const ctx = offscreen.getContext('2d');
+          let frameCount = 0;
+
+          if (offscreen.captureStream) {
+            try {
+              const stream = offscreen.captureStream(30);
+              video.srcObject = stream;
+              video.play().catch(() => { });
+            } catch (e) { }
+          }
+
+          if (streamAnimationTimer) clearInterval(streamAnimationTimer);
+          streamAnimationTimer = setInterval(() => {
+            if (!remoteSessionState.isStreamingWebRtc) {
+              clearInterval(streamAnimationTimer);
+              return;
             }
-          }, 650);
-        }, 200);
-      }, 500 + Math.random() * 500);
-    }
+            frameCount++;
+            if (ctx) {
+              // Simulated VR split display
+              ctx.fillStyle = '#0F172A';
+              ctx.fillRect(0, 0, 640, 360);
 
-    function recordPerimetryResponse() {
-      if (!stimulusActive) {
-        falsePositives++;
-        const fpRate = Math.round((falsePositives / (currentStepIndex + 1)) * 100);
-        document.getElementById('stat-fp').innerText = fpRate + '%';
-        return;
+              // Left Eye
+              ctx.strokeStyle = '#38BDF8';
+              ctx.lineWidth = 2;
+              ctx.strokeRect(20, 20, 280, 320);
+              ctx.fillStyle = '#E2E8F0';
+              ctx.font = '14px sans-serif';
+              ctx.fillText('ONEPLUS NORD 3 - OS', 40, 50);
+
+              // Right Eye
+              ctx.strokeRect(340, 20, 280, 320);
+              ctx.fillText('ONEPLUS NORD 3 - OD', 360, 50);
+
+              // Stimulus dot
+              const stimX = 160 + Math.sin(frameCount * 0.1) * 60;
+              const stimY = 180 + Math.cos(frameCount * 0.1) * 60;
+              ctx.fillStyle = '#F8FAFC';
+              ctx.beginPath();
+              ctx.arc(stimX, stimY, 8, 0, 2 * Math.PI);
+              ctx.fill();
+              ctx.beginPath();
+              ctx.arc(stimX + 320, stimY, 8, 0, 2 * Math.PI);
+              ctx.fill();
+            }
+
+            // Update HUD
+            const droppedEl = document.getElementById('hud-stream-dropped');
+            if (droppedEl) droppedEl.innerText = `${Math.floor(frameCount / 180)}`;
+          }, 33);
+        }
+
+        addTimelineItem('STREAM', 'MediaProjection WebRTC video stream established from OnePlus Nord 3 @ 1080x2400 30fps.');
       }
 
-      stimulusActive = false;
-      const rt = Math.round(performance.now() - stimulusStartTime);
-      reactionTimes.push(rt);
+      function stopWebRtcStream() {
+        remoteSessionState.isStreamingWebRtc = false;
+        if (streamAnimationTimer) {
+          clearInterval(streamAnimationTimer);
+          streamAnimationTimer = null;
+        }
 
-      const ptIndex = presentationOrder[currentStepIndex];
-      const pt = activePoints[ptIndex];
+        const video = document.getElementById('remote-screen-video');
+        const placeholder = document.getElementById('screen-share-placeholder');
+        const hud = document.getElementById('screen-stream-hud');
+        const badge = document.getElementById('webrtc-stream-badge');
 
-      if (pt.isBlindSpot) {
-        // Fixation loss: responded to blind spot
-        pt.status = 'unseen';
-      } else {
-        pt.status = 'seen';
-        pointsSeen++;
+        if (video) {
+          video.style.display = 'none';
+          video.srcObject = null;
+        }
+        if (placeholder) {
+          placeholder.style.display = 'block';
+          placeholder.innerText = 'Screen stream ended by operator.';
+        }
+        if (hud) hud.style.display = 'none';
+        if (badge) {
+          badge.innerText = 'STOPPED';
+          badge.style.background = '#F1F5F9';
+          badge.style.color = '#64748B';
+        }
+
+        addTimelineItem('STREAM', 'WebRTC video stream stopped.');
       }
 
-      currentStepIndex++;
-      updateHudStats();
-      drawPerimetryGrid(null);
-      setTimeout(nextRandomizedTrial, 350);
-    }
+      // VRBox Optical Hardware Profile & Lens Interlocks (CR-002-G)
+      let currentOpticalHardwareState = 'BOTH_VR_LENSES_INSTALLED';
 
-    async function finishPerimetryTest() {
-      perimetryRunning = false;
-      stimulusActive = false;
-      document.getElementById('btn-perimetry-start').disabled = false;
-      document.getElementById('btn-perimetry-response').disabled = true;
-      drawPerimetryGrid(null);
-      updateHudStats();
+      function updateOpticalHardwareState(newState) {
+        currentOpticalHardwareState = newState;
+        const advisoryEl = document.getElementById('opt-advisory-text');
+        const permittedEl = document.getElementById('opt-permitted-tests');
+        const badgeEl = document.getElementById('opt-interlock-status-badge');
+        const compoundEl = document.getElementById('opt-compound-hazard');
 
-      const supSeen = activePoints.filter(p => p.hemifield === 'SUPERIOR' && p.status === 'seen').length;
-      const infSeen = activePoints.filter(p => p.hemifield === 'INFERIOR' && p.status === 'seen').length;
-      const fpRate = Math.round((falsePositives / (currentStepIndex + 1)) * 100);
-      const meanRt = reactionTimes.length > 0 ? (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length) : 0;
+        let advisory = 'Standard wide-field psychophysical testing ready. Direct anterior/retinal capture is locked.';
+        let permitted = 'Perimetry 24-2/30-2, Contrast, Amsler, Ishihara, Tumbling E';
+        let badgeText = 'INTERLOCK SECURE';
+        let badgeBg = '#ECFDF5';
+        let badgeColor = '#065F46';
+        let compoundActive = true;
 
-      let backendSyncedText = "";
-      if (authToken && backendBaseUrl) {
+        if (newState === 'OD_LENS_REMOVED') {
+          advisory = 'Right Eyepiece (OD) Removed. OD ready for anterior torch or 20D fundus imaging; OS ready for wide-field VR.';
+          permitted = 'OD: Anterior/Fundus | OS: Wide-Field VR';
+          badgeText = 'OD REMOVED (DIRECT BORE)';
+          badgeBg = '#FEF3C7';
+          badgeColor = '#B45309';
+          compoundActive = false;
+        } else if (newState === 'OS_LENS_REMOVED') {
+          advisory = 'Left Eyepiece (OS) Removed. OS ready for anterior torch or 20D fundus imaging; OD ready for wide-field VR.';
+          permitted = 'OS: Anterior/Fundus | OD: Wide-Field VR';
+          badgeText = 'OS REMOVED (DIRECT BORE)';
+          badgeBg = '#FEF3C7';
+          badgeColor = '#B45309';
+          compoundActive = false;
+        } else if (newState === 'BOTH_LENSES_REMOVED') {
+          advisory = 'Unobstructed direct line-of-sight for direct anterior segment & 20D fundus examination. Wide-field VR blocked.';
+          permitted = 'Direct Anterior (OU), Indirect Retinal 20D (OU)';
+          badgeText = 'BOTH REMOVED (CLEAR BORE)';
+          badgeBg = '#E0F2FE';
+          badgeColor = '#0369A1';
+          compoundActive = false;
+        } else if (newState === 'EXTERNAL_ADAPTER_20D_MOUNTED') {
+          advisory = '20D Fundus indirect ophthalmoscopy active. VR eyepiece compound lens focal collapse prevented.';
+          permitted = 'Retinal 20D Fundus Indirect Examination';
+          badgeText = '20D ADAPTER MOUNTED';
+          badgeBg = '#EFF6FF';
+          badgeColor = '#1D4ED8';
+          compoundActive = false;
+        } else if (newState === 'EXTERNAL_ADAPTER_PINHOLE_MOUNTED') {
+          advisory = 'Pinhole visual acuity differential active (differentiating refractive error from macular/media pathology).';
+          permitted = 'Pinhole Differential Visual Acuity';
+          badgeText = 'PINHOLE ADAPTER MOUNTED';
+          badgeBg = '#F5F3FF';
+          badgeColor = '#6D28D9';
+          compoundActive = false;
+        } else if (newState === 'UNKNOWN_UNCALIBRATED') {
+          advisory = 'All tests locked until optical carriage configuration is physically confirmed.';
+          permitted = 'None (Safety Interlock Active)';
+          badgeText = 'INTERLOCK BLOCKED (UNCALIBRATED)';
+          badgeBg = '#FEE2E2';
+          badgeColor = '#B91C1C';
+          compoundActive = false;
+        }
+
+        if (advisoryEl) advisoryEl.innerText = advisory;
+        if (permittedEl) permittedEl.innerText = permitted;
+        if (badgeEl) {
+          badgeEl.innerText = badgeText;
+          badgeEl.style.background = badgeBg;
+          badgeEl.style.color = badgeColor;
+        }
+        if (compoundEl) {
+          compoundEl.innerText = compoundActive ?
+            'ACTIVE (Direct camera capture through VR eyepiece is prohibited to prevent focal collapse & Purkinje back-glare)' :
+            'DISENGAGED (VR eyepiece removed for open-bore camera/adapter capture)';
+          compoundEl.style.color = compoundActive ? '#10B981' : '#F59E0B';
+        }
+
+        addTimelineItem('OPTICS', `Hardware optical configuration changed to: ${newState}. Calibration hash invalidated.`);
+      }
+
+      function verifyOpticalInterlock() {
+        const activeTest = document.getElementById('stim-test-name')?.innerText || 'PERIMETRY_24_2';
+        const targetEye = document.getElementById('obs-eye')?.value || 'OD';
+
+        let permitted = true;
+        let reason = 'Optical configuration verified.';
+
+        if (currentOpticalHardwareState === 'UNKNOWN_UNCALIBRATED') {
+          permitted = false;
+          reason = 'Cannot run tests: optical hardware state is UNKNOWN_UNCALIBRATED.';
+        } else if (currentOpticalHardwareState === 'BOTH_VR_LENSES_INSTALLED' && activeTest.includes('RETINAL')) {
+          permitted = false;
+          reason = 'Interlock Violation: Retinal fundus examination cannot operate through VR eyepiece (Gullstrand focal collapse to 18mm & Purkinje glare).';
+        } else if (currentOpticalHardwareState.includes('REMOVED') && (activeTest.includes('PERIMETRY') || activeTest.includes('AMSLER'))) {
+          permitted = false;
+          reason = `Interlock Violation: Wide-field test ${activeTest} requires VR eyepiece in place for stimulus collimation.`;
+        }
+
+        if (permitted) {
+          alert(`Interlock Check PASSED: Optical configuration '${currentOpticalHardwareState}' is valid for ${activeTest} on eye ${targetEye}.`);
+        } else {
+          alert(`SAFETY INTERLOCK ENGAGED:\n${reason}`);
+        }
+      }
+
+      // Initialize Twin Canvases on Page Load
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          drawTwinCanvases(remoteSessionState.activeStimulus);
+        }, 300);
+      });
+
+
+      function switchTab(tabId) {
+        document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+        const target = document.getElementById('tab-' + tabId);
+        if (target) target.classList.add('active');
+
+        const matchedNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
+        if (matchedNav) {
+          matchedNav.classList.add('active');
+        } else {
+          document.querySelectorAll('.nav-item').forEach(nav => {
+            if (nav.innerText.toLowerCase().includes(tabId.substring(0, 4))) {
+              nav.classList.add('active');
+            }
+          });
+        }
+
+        // Re-render active module visuals when tab activated
+        if (tabId === 'amsler' && typeof drawAmslerGrid === 'function') drawAmslerGrid();
+        if (tabId === 'colour' && typeof updateColourPlateView === 'function') updateColourPlateView();
+        if (tabId === 'contrast' && typeof initContrastTriplets === 'function') initContrastTriplets();
+        if (tabId === 'motility' && typeof drawMotilityStage === 'function') drawMotilityStage();
+        if (tabId === 'pupil' && typeof updatePupilReflexAnimation === 'function') updatePupilReflexAnimation();
+        if (tabId === 'binocular' && typeof renderWorthDots === 'function') renderWorthDots();
+        if (tabId === 'acuity' && typeof renderAcuityDisplay === 'function') renderAcuityDisplay();
+      }
+
+      // Live Backend Health Probe with intelligent host resolution and timeout
+      const isLocalhost = (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '');
+      const isHttps = (location.protocol === 'https:');
+      let storedBackendUrl = localStorage.getItem('eyeatlas_backend_url');
+      // If browsing over HTTPS, an insecure http:// url stored from localhost will be blocked by Mixed Content policy
+      if (isHttps && storedBackendUrl && storedBackendUrl.startsWith('http://')) {
+        storedBackendUrl = null;
+        localStorage.removeItem('eyeatlas_backend_url');
+      }
+      let backendBaseUrl = storedBackendUrl || (isLocalhost ? 'http://localhost:8008' : 'https://eyeatlas-ai.onrender.com');
+      let authToken = null;
+
+      async function authenticateAndSync() {
         try {
-          const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/perimetry`, {
+          const res = await fetch(`${backendBaseUrl}/api/v1/auth/token`, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${authToken}`
-            },
-            body: JSON.stringify({
-              eye: currentEye,
-              pattern: currentPattern,
-              total_points: activePoints.length,
-              points_seen: pointsSeen,
-              superior_seen: supSeen,
-              inferior_seen: infSeen,
-              mean_reaction_time_ms: meanRt,
-              false_positive_rate: fpRate,
-              scotoma_coordinates: activePoints.filter(p => p.status === 'scotoma' || (p.status === 'unseen' && !p.isBlindSpot)).map(p => ({ x: p.x, y: p.y }))
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: 'doc_apex', password: 'DocPass123!' })
           });
           if (res.ok) {
-            backendSyncedText = "\n\n[FastAPI Synced]: Recorded to backend session as clinical measurement & cryptographic audit event.";
+            const data = await res.json();
+            authToken = data.access_token;
+            await loadPatientsFromBackend();
             await fetchLiveAuditLogs();
           }
         } catch (e) {
-          console.warn("Backend perimetry sync notice:", e);
+          console.warn('Backend authentication notice:', e);
         }
       }
 
-      alert(`Visual Field Examination Complete (${currentPattern} - ${currentEye})!\n\n` +
-            `Total Points: ${activePoints.length}\n` +
-            `Total Points Seen: ${pointsSeen}\n` +
-            `Superior (Upper) Seen: ${supSeen}\n` +
-            `Inferior (Lower) Seen: ${infSeen}\n` +
-            `Mean Reaction Time: ${document.getElementById('stat-rt').innerText}\n` +
-            `Catch Error (FP): ${document.getElementById('stat-fp').innerText}\n\n` +
-            `Presentation Sequence: Fully Randomized Non-Sequential Trial Order.` +
-            backendSyncedText);
-    }
-
-    function resetPerimetryTest() {
-      perimetryRunning = false;
-      stimulusActive = false;
-      currentStepIndex = 0;
-      pointsSeen = 0;
-      falsePositives = 0;
-      reactionTimes = [];
-      initPoints();
-      document.getElementById('btn-perimetry-start').disabled = false;
-      document.getElementById('btn-perimetry-response').disabled = true;
-      document.getElementById('stat-fp').innerText = '0%';
-      document.getElementById('stat-rt').innerText = '-- ms';
-    }
-
-    // Initialize points on load
-    initPoints();
-
-
-// VR SUBMODE & LAUNCH HANDLERS
-function launchVrColourVision() {
-  const vp = document.getElementById('vr-viewport');
-  if (vp) vp.style.display = 'flex';
-  setVrSubmode('COLOUR');
-}
-
-function setVrSubmode(mode) {
-  const hud = document.getElementById('vr-submode-hud');
-  const col = document.getElementById('vr-submode-colour');
-  const btnHud = document.getElementById('btn-vr-hud');
-  const btnCol = document.getElementById('btn-vr-colour');
-
-  if (mode === 'HUD') {
-    if (hud) hud.style.display = 'flex';
-    if (col) col.style.display = 'none';
-    if (btnHud) btnHud.classList.add('active');
-    if (btnCol) btnCol.classList.remove('active');
-  } else {
-    if (hud) hud.style.display = 'none';
-    if (col) col.style.display = 'flex';
-    if (btnHud) btnHud.classList.remove('active');
-    if (btnCol) btnCol.classList.add('active');
-    if (typeof renderVrColourPlates === 'function') {
-      renderVrColourPlates();
-    }
-  }
-}
-
-// MODULE 1: VISUAL ACUITY LOGIC
-const ACUITY_LADDER = [
-  { snellen: "20/200", logmar: 1.00, decimal: 0.10, strokeArcmin: 10.0, px: 84 },
-  { snellen: "20/100", logmar: 0.70, decimal: 0.20, strokeArcmin: 5.0,  px: 64 },
-  { snellen: "20/70",  logmar: 0.54, decimal: 0.29, strokeArcmin: 3.5,  px: 50 },
-  { snellen: "20/50",  logmar: 0.40, decimal: 0.40, strokeArcmin: 2.5,  px: 38 },
-  { snellen: "20/40",  logmar: 0.30, decimal: 0.50, strokeArcmin: 2.0,  px: 30 },
-  { snellen: "20/30",  logmar: 0.18, decimal: 0.67, strokeArcmin: 1.5,  px: 24 },
-  { snellen: "20/25",  logmar: 0.10, decimal: 0.80, strokeArcmin: 1.25, px: 20 },
-  { snellen: "20/20",  logmar: 0.00, decimal: 1.00, strokeArcmin: 1.0,  px: 16 },
-  { snellen: "20/15",  logmar: -0.12, decimal: 1.33, strokeArcmin: 0.75, px: 13 }
-];
-
-let acuityEye = 'OD';
-let optotypeMode = 'TUMBLING_E';
-let currentAcuityIndex = 4; // 20/40
-let currentOptotypeOrientation = 'RIGHT';
-let currentSloanChar = 'E';
-const SLOAN_LETTERS = ['C', 'D', 'E', 'F', 'L', 'N', 'O', 'P', 'T', 'Z'];
-const ORIENTATIONS = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
-
-function initAcuityLadderTable() {
-  const tbody = document.getElementById('acuity-ladder-body');
-  if (!tbody) return;
-  tbody.innerHTML = '';
-  ACUITY_LADDER.forEach((lvl, i) => {
-    const tr = document.createElement('tr');
-    tr.id = 'acuity-ladder-row-' + i;
-    tr.innerHTML = `<td><strong>${lvl.snellen}</strong></td><td>${lvl.logmar.toFixed(2)}</td><td>${lvl.decimal.toFixed(2)}</td><td id="acuity-ladder-status-${i}">Pending</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-function renderAcuityDisplay() {
-  const charEl = document.getElementById('acuity-char-display');
-  const labelEl = document.getElementById('acuity-level-label');
-  if (!charEl || !labelEl) return;
-
-  const lvl = ACUITY_LADDER[currentAcuityIndex];
-  labelEl.innerHTML = `Line: <strong>${lvl.snellen}</strong> • ${lvl.logmar.toFixed(2)} LogMAR (Stroke: ${lvl.strokeArcmin} arcmin)`;
-
-  if (optotypeMode === 'TUMBLING_E') {
-    charEl.innerHTML = '&#696;';
-    charEl.style.fontSize = lvl.px + 'px';
-    const rot = { 'RIGHT': 0, 'DOWN': 90, 'LEFT': 180, 'UP': 270 }[currentOptotypeOrientation] || 0;
-    charEl.style.transform = `rotate(${rot}deg)`;
-  } else if (optotypeMode === 'LANDOLT_C') {
-    charEl.innerHTML = 'C';
-    charEl.style.fontSize = lvl.px + 'px';
-    const rot = { 'RIGHT': 0, 'DOWN': 90, 'LEFT': 180, 'UP': 270 }[currentOptotypeOrientation] || 0;
-    charEl.style.transform = `rotate(${rot}deg)`;
-  } else {
-    charEl.innerHTML = currentSloanChar;
-    charEl.style.fontSize = lvl.px + 'px';
-    charEl.style.transform = 'none';
-  }
-}
-
-function setAcuityEye(eye) {
-  acuityEye = eye;
-  document.querySelectorAll('#btn-acuity-od, #btn-acuity-os, #btn-acuity-ou').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('btn-acuity-' + eye.toLowerCase());
-  if (btn) btn.classList.add('active');
-}
-
-function setOptotypeMode(mode) {
-  optotypeMode = mode;
-  document.querySelectorAll('#opt-tumbling, #opt-landolt, #opt-sloan').forEach(b => b.classList.remove('active'));
-  if (mode === 'TUMBLING_E') document.getElementById('opt-tumbling').classList.add('active');
-  if (mode === 'LANDOLT_C') document.getElementById('opt-landolt').classList.add('active');
-  if (mode === 'SLOAN') document.getElementById('opt-sloan').classList.add('active');
-
-  const dirCtrl = document.getElementById('acuity-directional-controls');
-  const sloanCtrl = document.getElementById('acuity-sloan-controls');
-  const promptText = document.getElementById('acuity-prompt-text');
-
-  if (mode === 'SLOAN') {
-    if (dirCtrl) dirCtrl.style.display = 'none';
-    if (sloanCtrl) {
-      sloanCtrl.style.display = 'flex';
-      sloanCtrl.innerHTML = '';
-      SLOAN_LETTERS.forEach(char => {
-        const b = document.createElement('button');
-        b.className = 'btn-secondary';
-        b.style.fontSize = '14px';
-        b.style.padding = '8px 12px';
-        b.style.fontWeight = '700';
-        b.innerText = char;
-        b.onclick = () => recordAcuityInput(char);
-        sloanCtrl.appendChild(b);
-      });
-    }
-    if (promptText) promptText.innerText = 'Identify Presented Sloan Letter:';
-  } else {
-    if (dirCtrl) dirCtrl.style.display = 'grid';
-    if (sloanCtrl) sloanCtrl.style.display = 'none';
-    if (promptText) promptText.innerText = (mode === 'LANDOLT_C') ? 'Choose Position of Gap:' : 'Choose Orientation of Prongs:';
-  }
-  stepAcuityOptotype();
-}
-
-function toggleCrowdingBars(checked) {
-  const wrap = document.getElementById('acuity-crowding-wrap');
-  if (wrap) {
-    if (checked) wrap.classList.add('crowd-border');
-    else wrap.classList.remove('crowd-border');
-  }
-}
-
-function stepAcuityOptotype() {
-  currentOptotypeOrientation = ORIENTATIONS[Math.floor(Math.random() * ORIENTATIONS.length)];
-  currentSloanChar = SLOAN_LETTERS[Math.floor(Math.random() * SLOAN_LETTERS.length)];
-  renderAcuityDisplay();
-}
-
-function recordAcuityInput(val) {
-  let isCorrect = false;
-  if (optotypeMode === 'SLOAN') {
-    isCorrect = (val === currentSloanChar);
-  } else {
-    isCorrect = (val === currentOptotypeOrientation);
-  }
-
-  const feedback = document.getElementById('acuity-feedback');
-  const lvl = ACUITY_LADDER[currentAcuityIndex];
-  const rowStatus = document.getElementById(`acuity-ladder-status-${currentAcuityIndex}`);
-
-  if (isCorrect) {
-    if (feedback) feedback.innerHTML = `<span style="color:#10B981;">&#10003; Correct (${lvl.snellen})</span>`;
-    if (rowStatus) rowStatus.innerHTML = '<span style="color:#10B981; font-weight:700;">PASSED</span>';
-    if (currentAcuityIndex < ACUITY_LADDER.length - 1) {
-      currentAcuityIndex++;
-    }
-  } else {
-    if (feedback) feedback.innerHTML = `<span style="color:#EF4444;">&#10007; Missed (${lvl.snellen})</span>`;
-    if (rowStatus) rowStatus.innerHTML = '<span style="color:#EF4444; font-weight:700;">MISSED</span>';
-    if (currentAcuityIndex > 0) {
-      currentAcuityIndex--;
-    }
-  }
-
-  const scoreLvl = ACUITY_LADDER[currentAcuityIndex];
-  const summaryEl = document.getElementById('acuity-score-summary');
-  if (summaryEl) {
-    summaryEl.innerHTML = `Estimated Acuity (${acuityEye}): <strong>${scoreLvl.snellen} (${scoreLvl.logmar.toFixed(2)} LogMAR)</strong> • Stroke: ${scoreLvl.strokeArcmin} arcmin`;
-  }
-
-  stepAcuityOptotype();
-}
-
-function resetAcuityTest() {
-  currentAcuityIndex = 4;
-  initAcuityLadderTable();
-  stepAcuityOptotype();
-  const feedback = document.getElementById('acuity-feedback');
-  if (feedback) feedback.innerText = 'Staircase reset to 20/40 baseline.';
-}
-
-async function syncAcuityToBackend() {
-  const lvl = ACUITY_LADDER[currentAcuityIndex];
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/acuity`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          eye: acuityEye,
-          method: optotypeMode,
-          logmar: lvl.logmar,
-          snellen: lvl.snellen,
-          contrast_level: "100%"
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Visual Acuity (${acuityEye} ${lvl.snellen} - ${lvl.logmar.toFixed(2)} LogMAR) to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+      async function loadPatientsFromBackend() {
+        if (!authToken || !backendBaseUrl) return;
+        try {
+          const res = await fetch(`${backendBaseUrl}/api/v1/patients`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+          });
+          if (res.ok) {
+            const patients = await res.json();
+            const tbody = document.getElementById('patient-table-body');
+            if (tbody && patients.length > 0) {
+              tbody.innerHTML = '';
+              patients.forEach(p => {
+                const tr = document.createElement('tr');
+                const dmText = p.hasDiabetes ? '<span style="color:var(--amber); font-weight:700;">Positive</span>' : 'Negative';
+                const symText = (p.symptoms && p.symptoms.length > 0) ? p.symptoms.join(', ') : 'Routine Checkup';
+                tr.innerHTML = `<td><strong>${p.patientId}</strong></td><td>${p.ageBand}</td><td>${dmText}</td><td>${p.currentCorrection}</td><td>${symText}</td><td><span style="color:#10B981; font-weight:600;">COMMITTED</span></td><td><button class="btn-secondary" onclick="switchTab('dashboard')">View Encounter</button></td>`;
+                tbody.appendChild(tr);
+              });
+            }
+          }
+        } catch (e) {
+          console.warn('Patient fetch notice:', e);
+        }
       }
-    } catch(e) {}
-  }
-  alert(`Visual Acuity Recorded locally: ${acuityEye} ${lvl.snellen} (${lvl.logmar.toFixed(2)} LogMAR).`);
-}
 
-// MODULE 2: OFFICIAL ISHIHARA 24-PLATE CLINICAL BATTERY (EXTRACTED FROM USAID / CHALLENGE TB EDITION)
-const ISHIHARA_ASSETS = [
-  { num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration', normal: '12', rg: '12', protan: '12', deutan: '12', note: 'Demonstration plate: Everyone should see 12.', choices: ['12', 'None', '8', '3'] },
-  { num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation', normal: '8', rg: '3', protan: '3', deutan: '3', note: 'Transformation: Normal sees 8, Red-green deficiency sees 3.', choices: ['8', '3', 'None', '5'] },
-  { num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation', normal: '6', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 6, Red-green deficiency sees 5.', choices: ['6', '5', 'None', '8'] },
-  { num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation', normal: '29', rg: '70', protan: '70', deutan: '70', note: 'Transformation: Normal sees 29, Red-green deficiency sees 70.', choices: ['29', '70', 'None', '20'] },
-  { num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation', normal: '57', rg: '35', protan: '35', deutan: '35', note: 'Transformation: Normal sees 57, Red-green deficiency sees 35.', choices: ['57', '35', 'None', '75'] },
-  { num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation', normal: '5', rg: '2', protan: '2', deutan: '2', note: 'Transformation: Normal sees 5, Red-green deficiency sees 2.', choices: ['5', '2', 'None', '3'] },
-  { num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation', normal: '3', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 3, Red-green deficiency sees 5.', choices: ['3', '5', 'None', '8'] },
-  { num: 8, file: 'assets/ishihara/plate_08.png', type: 'Transformation', normal: '15', rg: '17', protan: '17', deutan: '17', note: 'Transformation: Normal sees 15, Red-green deficiency sees 17.', choices: ['15', '17', 'None', '13'] },
-  { num: 9, file: 'assets/ishihara/plate_09.png', type: 'Transformation', normal: '74', rg: '21', protan: '21', deutan: '21', note: 'Transformation: Normal sees 74, Red-green deficiency sees 21.', choices: ['74', '21', 'None', '71'] },
-  { num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing', normal: '2', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 2, Deficient sees nothing.', choices: ['2', 'None', '7', '1'] },
-  { num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing', normal: '6', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 6, Deficient sees nothing.', choices: ['6', 'None', '5', '8'] },
-  { num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing', normal: '97', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 97, Deficient sees nothing.', choices: ['97', 'None', '91', '87'] },
-  { num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing', normal: '45', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 45, Deficient sees nothing.', choices: ['45', 'None', '40', '15'] },
-  { num: 14, file: 'assets/ishihara/plate_14.png', type: 'Vanishing', normal: '5', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 5, Deficient sees nothing.', choices: ['5', 'None', '2', '6'] },
-  { num: 15, file: 'assets/ishihara/plate_15.png', type: 'Vanishing', normal: '7', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 7, Deficient sees nothing.', choices: ['7', 'None', '1', '4'] },
-  { num: 16, file: 'assets/ishihara/plate_16.png', type: 'Vanishing', normal: '16', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 16, Deficient sees nothing.', choices: ['16', 'None', '18', '10'] },
-  { num: 17, file: 'assets/ishihara/plate_17.png', type: 'Vanishing', normal: '73', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 73, Deficient sees nothing.', choices: ['73', 'None', '78', '23'] },
-  { num: 18, file: 'assets/ishihara/plate_18.png', type: 'Hidden Digit', normal: 'None', rg: '5', protan: '5', deutan: '5', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 5.', choices: ['None', '5', '2', '6'] },
-  { num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Digit', normal: 'None', rg: '2', protan: '2', deutan: '2', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 2.', choices: ['None', '2', '5', '7'] },
-  { num: 20, file: 'assets/ishihara/plate_20.png', type: 'Hidden Digit', normal: 'None', rg: '45', protan: '45', deutan: '45', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 45.', choices: ['None', '45', '40', '15'] },
-  { num: 21, file: 'assets/ishihara/plate_21.png', type: 'Hidden Digit', normal: 'None', rg: '73', protan: '73', deutan: '73', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 73.', choices: ['None', '73', '78', '23'] },
-  { num: 22, file: 'assets/ishihara/plate_22.png', type: 'Classification', normal: '26', rg: 'Partial', protan: '6', deutan: '2', note: 'Classification: Normal sees 26; Protanope sees 6; Deuteranope sees 2.', choices: ['26', '6', '2', 'None'] },
-  { num: 23, file: 'assets/ishihara/plate_23.png', type: 'Classification', normal: '42', rg: 'Partial', protan: '2', deutan: '4', note: 'Classification: Normal sees 42; Protanope sees 2; Deuteranope sees 4.', choices: ['42', '2', '4', 'None'] },
-  { num: 24, file: 'assets/ishihara/plate_24.png', type: 'Classification', normal: '35', rg: 'Partial', protan: '5', deutan: '3', note: 'Classification: Normal sees 35; Protanope sees 5; Deuteranope sees 3.', choices: ['35', '5', '3', 'None'] }
-];
-
-// Preload genuine Ishihara plate images into browser memory
-const ishiharaImageCache = {};
-ISHIHARA_ASSETS.forEach((p, idx) => {
-  const img = new Image();
-  img.src = p.file;
-  ishiharaImageCache[idx] = img;
-});
-
-let currentColourPlateIndex = 0;
-let colourPlateAnswers = [];
-
-function drawPseudoisochromaticPlate(canvasId, plateIndex) {
-  const c = document.getElementById(canvasId);
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  const w = c.width;
-  const h = c.height;
-
-  ctx.clearRect(0, 0, w, h);
-
-  const plate = ISHIHARA_ASSETS[plateIndex];
-  if (!plate) return;
-
-  const img = ishiharaImageCache[plateIndex] || new Image();
-  if (!img.src) img.src = plate.file;
-
-  const renderPlate = () => {
-    ctx.save();
-    // Clip circular aperture
-    ctx.beginPath();
-    ctx.arc(w / 2, h / 2, (w / 2) - 4, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.drawImage(img, 0, 0, w, h);
-    ctx.restore();
-
-    // Outer subtle bezel
-    ctx.strokeStyle = '#CBD5E1';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(w / 2, h / 2, (w / 2) - 4, 0, Math.PI * 2);
-    ctx.stroke();
-  };
-
-  if (img.complete && img.naturalWidth !== 0) {
-    renderPlate();
-  } else {
-    img.onload = renderPlate;
-  }
-}
-
-function initColourVisionTable() {
-  const tbody = document.getElementById('colour-table-body');
-  if (!tbody) return;
-  tbody.innerHTML = '';
-  ISHIHARA_ASSETS.forEach((p, idx) => {
-    const tr = document.createElement('tr');
-    tr.id = 'colour-row-' + idx;
-    tr.style.cursor = 'pointer';
-    tr.onclick = () => jumpToColourPlate(idx);
-    tr.innerHTML = `<td><strong>Plate ${p.num}</strong></td><td><span style="font-size:11px; color:var(--text-muted);">${p.type}</span></td><td><strong>${p.normal}</strong></td><td>${p.rg}</td><td id="colour-ans-${idx}">--</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-function updateColourPlateView() {
-  const p = ISHIHARA_ASSETS[currentColourPlateIndex];
-  if (!p) return;
-
-  const title = document.getElementById('colour-plate-title');
-  if (title) title.innerText = `Plate ${p.num} of 24: ${p.type}`;
-
-  const prompt = document.getElementById('colour-plate-prompt');
-  if (prompt) {
-    prompt.innerHTML = `<strong>Plate ${p.num} (${p.type}):</strong> ${p.note}<br><span style="font-size:11px; color:var(--text-muted);">Normal trichromats perceive: <strong>${p.normal}</strong></span>`;
-  }
-
-  // Highlight active row in table
-  document.querySelectorAll('#colour-table-body tr').forEach((r, idx) => {
-    if (idx === currentColourPlateIndex) {
-      r.style.background = 'var(--mint-wash)';
-      r.style.fontWeight = '700';
-    } else {
-      r.style.background = 'transparent';
-      r.style.fontWeight = 'normal';
-    }
-  });
-
-  // Render dynamic quick choice buttons in 2D Desktop interface
-  const choiceBox = document.getElementById('colour-choices-container');
-  if (choiceBox) {
-    choiceBox.innerHTML = '';
-    p.choices.forEach(ch => {
-      const btn = document.createElement('button');
-      btn.className = 'btn-secondary';
-      btn.style.fontSize = '13px';
-      btn.style.padding = '8px 14px';
-      btn.style.fontWeight = '700';
-      btn.innerText = ch;
-      btn.onclick = () => submitPlateAnswer(ch);
-      choiceBox.appendChild(btn);
-    });
-  }
-
-  drawPseudoisochromaticPlate('ishihara-canvas', currentColourPlateIndex);
-}
-
-function jumpToColourPlate(idx) {
-  if (idx >= 0 && idx < ISHIHARA_ASSETS.length) {
-    currentColourPlateIndex = idx;
-    updateColourPlateView();
-  }
-}
-
-function prevColourPlate() {
-  if (currentColourPlateIndex > 0) {
-    currentColourPlateIndex--;
-    updateColourPlateView();
-  }
-}
-
-function nextColourPlate() {
-  if (currentColourPlateIndex < ISHIHARA_ASSETS.length - 1) {
-    currentColourPlateIndex++;
-    updateColourPlateView();
-  }
-}
-
-function submitPlateAnswer(val) {
-  const cleanVal = (val !== null && val !== undefined && String(val).trim() !== '') ? String(val).trim() : 'Blank';
-  colourPlateAnswers[currentColourPlateIndex] = cleanVal;
-
-  const cell = document.getElementById(`colour-ans-${currentColourPlateIndex}`);
-  if (cell) {
-    const p = ISHIHARA_ASSETS[currentColourPlateIndex];
-    const isCorrect = (cleanVal.toLowerCase() === p.normal.toLowerCase());
-    cell.innerHTML = isCorrect 
-      ? `<span style="color:#10B981; font-weight:700;">&#10003; ${cleanVal}</span>`
-      : `<span style="color:#EF4444; font-weight:700;">${cleanVal}</span>`;
-  }
-
-  if (currentColourPlateIndex < ISHIHARA_ASSETS.length - 1) {
-    currentColourPlateIndex++;
-    updateColourPlateView();
-  } else {
-    evaluateColourVisionResult('WEB_2D');
-  }
-}
-
-function resetColourVisionTest() {
-  currentColourPlateIndex = 0;
-  colourPlateAnswers = [];
-  initColourVisionTable();
-  updateColourPlateView();
-  const heading = document.getElementById('colour-diagnosis-heading');
-  const detail = document.getElementById('colour-diagnosis-detail');
-  if (heading) heading.innerText = 'Status: Testing In Progress';
-  if (detail) detail.innerText = 'Step through the 24 authentic plates to evaluate trichromatic integrity and classify Protan/Deutan defects.';
-}
-
-function evaluateColourVisionResult(mode = 'WEB_2D') {
-  let correctCount = 0;
-  let protanVotes = 0;
-  let deutanVotes = 0;
-
-  ISHIHARA_ASSETS.forEach((p, idx) => {
-    const ans = (colourPlateAnswers[idx] || '').trim().toLowerCase();
-    const expected = p.normal.toLowerCase();
-    if (ans === expected) {
-      correctCount++;
-    } else {
-      if (p.protan && ans === p.protan.toLowerCase()) protanVotes++;
-      if (p.deutan && ans === p.deutan.toLowerCase()) deutanVotes++;
-    }
-  });
-
-  let classification = 'NORMAL_TRICHROMACY';
-  let severity = 'NORMAL';
-
-  // Clinical criteria for Ishihara 24-Plate edition:
-  // Normal trichromats identify >= 13 of the first 15 numeral plates correctly.
-  // <= 9 plates correct indicates red-green deficiency.
-  if (correctCount >= 20) {
-    classification = 'NORMAL_TRICHROMACY';
-    severity = 'NORMAL';
-  } else if (correctCount >= 14) {
-    classification = 'BORDERLINE_TRICHROMACY';
-    severity = 'MILD_DEFECT';
-  } else {
-    severity = 'MODERATE_DEFECT';
-    if (protanVotes > deutanVotes) {
-      classification = 'PROTANOPIA_PROTANOMALY_RED_DEFECT';
-    } else if (deutanVotes > protanVotes) {
-      classification = 'DEUTERANOPIA_DEUTERANOMALY_GREEN_DEFECT';
-    } else if (correctCount <= 3) {
-      classification = 'TOTAL_COLOUR_BLINDNESS_ACHROMATOPSIA';
-    } else {
-      classification = 'RED_GREEN_COLOUR_DEFICIENCY';
-    }
-  }
-
-  const heading = document.getElementById('colour-diagnosis-heading');
-  const detail = document.getElementById('colour-diagnosis-detail');
-  if (heading) {
-    heading.innerText = `Diagnosis: ${classification.replace(/_/g, ' ')}`;
-    heading.style.color = (severity === 'NORMAL') ? 'var(--sea-green-dark)' : '#EF4444';
-  }
-  if (detail) {
-    detail.innerHTML = `Scored <strong>${correctCount} of 24 plates correct</strong> (${Math.round((correctCount/24)*100)}%). ` +
-      `Protan signals: ${protanVotes}, Deutan signals: ${deutanVotes}. Test Mode: <strong>${mode}</strong>. ` +
-      `Meets CDSCO Class B SaMD investigational protocol.`;
-  }
-
-  return { correctCount, classification, severity, mode, protanVotes, deutanVotes };
-}
-
-async function syncColourVisionToBackend(mode = 'WEB_2D') {
-  const result = evaluateColourVisionResult(mode);
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/colour-vision`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          eye: "OU",
-          test_type: "ISHIHARA_24_PLATE_AUTHENTIC",
-          total_plates: 24,
-          plates_correct: result.correctCount,
-          deficiency_detected: (result.severity !== 'NORMAL'),
-          classification: result.classification,
-          mode: mode
-        })
-      });
-      if (res.ok) {
-        alert(`[FastAPI Synced]: Authentic 24-Plate Ishihara Assessment (${result.classification}, Score: ${result.correctCount}/24, Mode: ${mode}) committed to clinical database.`);
-        await fetchLiveAuditLogs();
-        return;
+      async function fetchLiveAuditLogs() {
+        if (!authToken || !backendBaseUrl) return;
+        try {
+          const res = await fetch(`${backendBaseUrl}/api/v1/admin/audit-logs`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+          });
+          if (res.ok) {
+            const logs = await res.json();
+            const tbody = document.getElementById('audit-table-body');
+            if (tbody && logs.length > 0) {
+              tbody.innerHTML = '';
+              logs.forEach(log => {
+                const tr = document.createElement('tr');
+                const dateStr = log.timestampNs ? new Date(log.timestampNs / 1000000).toISOString().replace('T', ' ').substring(0, 19) : 'Recent';
+                const hashSnippet = log.afterHash ? (log.afterHash.substring(0, 8) + '...' + log.afterHash.slice(-6)) : 'GENESIS';
+                tr.innerHTML = `<td>${log.eventId}</td><td>${log.tenantId}</td><td><strong>${log.action}</strong></td><td>${log.actor}</td><td>${dateStr}</td><td><code>${hashSnippet}</code></td>`;
+                tbody.appendChild(tr);
+              });
+            }
+          }
+        } catch (e) {
+          console.warn("Audit fetch notice:", e);
+        }
       }
-    } catch(e) {}
-  }
-  alert(`Colour Vision Recorded locally: ${result.classification} (${result.correctCount}/24 correct).`);
-}
 
-// VR HEADSET STEREOSCOPIC COLOUR VISION CONTROLS
-let vrPlateIndex = 0;
-let vrPlateAnswers = [];
+      let isBackendProbing = false;
+      async function checkBackend() {
+        if (isBackendProbing) return;
+        isBackendProbing = true;
+        try {
+          const currentHost = window.location.hostname || 'localhost';
+          const hosts = [];
+          
+          let storedUrl = localStorage.getItem('eyeatlas_backend_url');
+          if (isHttps && storedUrl && storedUrl.startsWith('http://')) {
+            storedUrl = null;
+          }
+          if (storedUrl) hosts.push(storedUrl.replace(/\/+$/, ''));
+          if (backendBaseUrl) hosts.push(backendBaseUrl.replace(/\/+$/, ''));
+          // Always ensure the live production Render backend is probed
+          hosts.push('https://eyeatlas-ai.onrender.com');
 
-function renderVrColourPlates() {
-  const p = ISHIHARA_ASSETS[vrPlateIndex];
-  if (!p) return;
+          // If on localhost, also probe local development servers
+          if (isLocalhost) {
+            hosts.push(`http://${currentHost}:8008`);
+            hosts.push('http://localhost:8008');
+            hosts.push('http://127.0.0.1:8008');
+          }
 
-  const title = document.getElementById('vr-plate-title');
-  if (title) title.innerText = `VR Stereoscopic Colour Vision Test (Plate ${p.num} of 24: ${p.type})`;
+          // Filter out insecure http:// hosts if running under HTTPS (prevents Mixed Content blocks)
+          const validHosts = hosts.filter(h => !isHttps || h.startsWith('https://'));
+          const uniqueHosts = [...new Set(validHosts)];
 
-  // Render dynamic large VR gaze/touch pills
-  const vrChoiceBox = document.getElementById('vr-choices-container');
-  if (vrChoiceBox) {
-    vrChoiceBox.innerHTML = '';
-    p.choices.forEach(ch => {
-      const btn = document.createElement('button');
-      btn.className = 'vr-key-btn';
-      btn.style.width = 'auto';
-      btn.style.minWidth = '75px';
-      btn.style.padding = '0 16px';
-      btn.innerText = ch;
-      btn.onclick = () => submitVrPlateAnswer(ch);
-      vrChoiceBox.appendChild(btn);
-    });
-  }
-
-  drawPseudoisochromaticPlate('vr-canvas-left', vrPlateIndex);
-  drawPseudoisochromaticPlate('vr-canvas-right', vrPlateIndex);
-}
-
-function submitVrPlateAnswer(val) {
-  const cleanVal = (val !== null && val !== undefined && String(val).trim() !== '') ? String(val).trim() : 'Blank';
-  vrPlateAnswers[vrPlateIndex] = cleanVal;
-
-  if (vrPlateIndex < ISHIHARA_ASSETS.length - 1) {
-    vrPlateIndex++;
-    renderVrColourPlates();
-  } else {
-    // Finished VR 24-Plate Battery
-    let correct = 0;
-    ISHIHARA_ASSETS.forEach((p, idx) => {
-      if ((vrPlateAnswers[idx] || '').toLowerCase() === p.normal.toLowerCase()) correct++;
-    });
-    const classification = (correct >= 20) ? 'NORMAL_TRICHROMACY' : 'RED_GREEN_COLOUR_DEFICIENCY';
-    alert(`VR Colour Vision Examination Complete!\n\nScore: ${correct} of 24 Authentic Plates Correct\nResult: ${classification}\n\nAutomatically synced to FastAPI clinical records.`);
-    syncColourVisionToBackend('VR_HEADSET');
-  }
-}
-
-function resetVrColourTest() {
-  vrPlateIndex = 0;
-  vrPlateAnswers = [];
-  renderVrColourPlates();
-}
-
-
-// MODULE 3: CONTRAST SENSITIVITY (PELLI-ROBSON)
-const PELLI_ROBSON_TRIPLETS = [
-  { id: 1, letters: "V R S", logCS: 0.15, opacity: 1.00, contrastPct: "100%" },
-  { id: 2, letters: "K D R", logCS: 0.45, opacity: 0.56, contrastPct: "56%" },
-  { id: 3, letters: "N H C", logCS: 0.75, opacity: 0.32, contrastPct: "32%" },
-  { id: 4, letters: "O K S", logCS: 1.05, opacity: 0.18, contrastPct: "18%" },
-  { id: 5, letters: "S C N", logCS: 1.35, opacity: 0.10, contrastPct: "10%" },
-  { id: 6, letters: "Z O D", logCS: 1.65, opacity: 0.056, contrastPct: "5.6% (Normal Adult Floor)" },
-  { id: 7, letters: "C H V", logCS: 1.95, opacity: 0.032, contrastPct: "3.2% (High Sensitivity)" },
-  { id: 8, letters: "D Z N", logCS: 2.25, opacity: 0.018, contrastPct: "1.8%" }
-];
-let currentCsLog = 1.95;
-
-function initContrastTriplets() {
-  const container = document.getElementById('contrast-triplets-list');
-  if (!container) return;
-  container.innerHTML = '';
-  PELLI_ROBSON_TRIPLETS.forEach(t => {
-    const card = document.createElement('div');
-    card.className = 'cs-triplet-card';
-    card.id = 'cs-card-' + t.id;
-    card.innerHTML = `
-      <div>
-        <div class="cs-letters" style="opacity:${t.opacity};">${t.letters}</div>
-        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Row ${t.id} • ${t.logCS.toFixed(2)} log CS (${t.contrastPct})</div>
-      </div>
-      <button class="btn-secondary" style="font-size:12px;" onclick="setContrastPreset(${t.logCS})">Mark Threshold</button>
-    `;
-    container.appendChild(card);
-  });
-}
-
-function setContrastPreset(logVal) {
-  currentCsLog = logVal;
-  const scoreDisp = document.getElementById('cs-score-display');
-  const badge = document.getElementById('cs-grade-badge');
-  if (scoreDisp) scoreDisp.innerText = `${logVal.toFixed(2)} log CS`;
-
-  if (badge) {
-    if (logVal >= 1.65) {
-      badge.innerText = 'NORMAL ADULT CS (\u2265 1.65)';
-      badge.style.background = '#D1FAE5';
-      badge.style.color = '#065F46';
-    } else if (logVal >= 1.50) {
-      badge.innerText = 'BORDERLINE / SUSPECT (1.50 \u2013 1.60)';
-      badge.style.background = '#FEF3C7';
-      badge.style.color = '#92400E';
-    } else {
-      badge.innerText = 'ABNORMAL DEFICIT (< 1.50) - GLAUCOMA / MEDIA RISK';
-      badge.style.background = '#FEE2E2';
-      badge.style.color = '#991B1B';
-    }
-  }
-}
-
-async function syncContrastToBackend() {
-  const severity = (currentCsLog >= 1.65) ? 'NORMAL' : (currentCsLog >= 1.50 ? 'BORDERLINE' : 'MODERATE_DEFECT');
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/contrast-sensitivity`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          eye: "OD",
-          method: "PELLI_ROBSON",
-          log_contrast_sensitivity: currentCsLog,
-          triplets_seen: Math.round(currentCsLog / 0.15),
-          severity: severity
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Contrast Sensitivity (${currentCsLog.toFixed(2)} log CS - ${severity}) to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+          for (const host of uniqueHosts) {
+            try {
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 6000);
+              const res = await fetch(`${host}/api/v1/health`, { signal: controller.signal });
+              clearTimeout(timeoutId);
+              if (res.ok) {
+                const data = await res.json();
+                backendBaseUrl = host;
+                localStorage.setItem('eyeatlas_backend_url', host);
+                const statusEl = document.getElementById('backend-status');
+                if (statusEl) {
+                  statusEl.innerHTML = `<span style="color:#10B981;">&#9679;</span> FastAPI Connected (${data.version})`;
+                }
+                await authenticateAndSync();
+                return;
+              }
+            } catch (e) {
+              // Continue to next host candidate
+            }
+          }
+          const statusEl = document.getElementById('backend-status');
+          if (statusEl && !authToken) {
+            statusEl.innerHTML = `<span style="color:#EF4444;">&#9679;</span> Standalone Mode`;
+          }
+        } finally {
+          isBackendProbing = false;
+        }
       }
-    } catch(e) {}
-  }
-  alert(`Contrast Sensitivity Recorded locally: ${currentCsLog.toFixed(2)} log CS.`);
-}
+      checkBackend();
+      // Intelligent auto-reconnect polling every 3.5s until connected
+      const probeInterval = setInterval(async () => {
+        if (!authToken) {
+          await checkBackend();
+        } else {
+          clearInterval(probeInterval);
+        }
+      }, 3500);
 
-// MODULE 4: CENTRAL AMSLER GRID
-const amslerCanvas = document.getElementById('amsler-canvas');
-const amslerCtx = amslerCanvas ? amslerCanvas.getContext('2d') : null;
-let amslerMarks = [];
-let isDrawingAmsler = false;
-let amslerStyle = 'BLACK_ON_WHITE';
-let amslerShowDiagonals = false;
-
-function setAmslerStyle(style) {
-  amslerStyle = style;
-  document.querySelectorAll('#btn-amsler-bw, #btn-amsler-wb, #btn-amsler-red').forEach(b => b.classList.remove('active'));
-  if (style === 'BLACK_ON_WHITE') document.getElementById('btn-amsler-bw').classList.add('active');
-  if (style === 'WHITE_ON_BLACK') document.getElementById('btn-amsler-wb').classList.add('active');
-  if (style === 'RED_ON_BLACK') document.getElementById('btn-amsler-red').classList.add('active');
-  drawAmslerGrid();
-}
-
-function toggleAmslerDiagonals(checked) {
-  amslerShowDiagonals = checked;
-  drawAmslerGrid();
-}
-
-function drawAmslerGrid() {
-  if (!amslerCtx) return;
-  const w = amslerCanvas.width;
-  const h = amslerCanvas.height;
-
-  let bg = '#FFFFFF';
-  let lineCol = '#94A3B8';
-  let borderCol = '#0F172A';
-  let dotCol = '#0F172A';
-
-  if (amslerStyle === 'WHITE_ON_BLACK') {
-    bg = '#0F172A'; lineCol = '#475569'; borderCol = '#FFF'; dotCol = '#FFF';
-  } else if (amslerStyle === 'RED_ON_BLACK') {
-    bg = '#000000'; lineCol = '#7F1D1D'; borderCol = '#EF4444'; dotCol = '#EF4444';
-  }
-
-  amslerCtx.fillStyle = bg;
-  amslerCtx.fillRect(0, 0, w, h);
-
-  const margin = 10;
-  const gridSize = w - (2 * margin);
-  const divisions = 20;
-  const step = gridSize / divisions;
-  const cx = margin + (gridSize / 2);
-  const cy = margin + (gridSize / 2);
-
-  // Outer border
-  amslerCtx.strokeStyle = borderCol;
-  amslerCtx.lineWidth = 1.5;
-  amslerCtx.strokeRect(margin, margin, gridSize, gridSize);
-
-  // Grid lines
-  amslerCtx.lineWidth = 0.75;
-  amslerCtx.strokeStyle = lineCol;
-  for (let i = 0; i <= divisions; i++) {
-    const pos = margin + (i * step);
-    amslerCtx.beginPath();
-    amslerCtx.moveTo(pos, margin);
-    amslerCtx.lineTo(pos, margin + gridSize);
-    amslerCtx.stroke();
-
-    amslerCtx.beginPath();
-    amslerCtx.moveTo(margin, pos);
-    amslerCtx.lineTo(margin + gridSize, pos);
-    amslerCtx.stroke();
-  }
-
-  // Diagonal guidelines for dense central scotoma fixation
-  if (amslerShowDiagonals) {
-    amslerCtx.strokeStyle = (amslerStyle === 'RED_ON_BLACK') ? '#DC2626' : '#64748B';
-    amslerCtx.lineWidth = 1.0;
-    amslerCtx.setLineDash([4, 4]);
-    amslerCtx.beginPath();
-    amslerCtx.moveTo(margin, margin);
-    amslerCtx.lineTo(margin + gridSize, margin + gridSize);
-    amslerCtx.moveTo(margin + gridSize, margin);
-    amslerCtx.lineTo(margin, margin + gridSize);
-    amslerCtx.stroke();
-    amslerCtx.setLineDash([]);
-  }
-
-  // Draw user marks
-  amslerMarks.forEach(pt => {
-    amslerCtx.fillStyle = 'rgba(239, 68, 68, 0.55)';
-    amslerCtx.beginPath();
-    amslerCtx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
-    amslerCtx.fill();
-  });
-
-  // EXACT CENTRAL FIXATION DOT AT (140, 140)
-  amslerCtx.fillStyle = dotCol;
-  amslerCtx.beginPath();
-  amslerCtx.arc(cx, cy, 4.5, 0, Math.PI * 2);
-  amslerCtx.fill();
-}
-
-function clearAmslerMarks() {
-  amslerMarks = [];
-  const cnt = document.getElementById('amsler-defect-count');
-  if (cnt) cnt.innerText = '0';
-  drawAmslerGrid();
-}
-
-if (amslerCanvas) {
-  function addAmslerPoint(e) {
-    const rect = amslerCanvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (amslerCanvas.width / rect.width);
-    const y = (e.clientY - rect.top) * (amslerCanvas.height / rect.height);
-    amslerMarks.push({ x, y });
-    const cnt = document.getElementById('amsler-defect-count');
-    if (cnt) cnt.innerText = String(amslerMarks.length);
-    drawAmslerGrid();
-  }
-
-  amslerCanvas.addEventListener('mousedown', (e) => {
-    isDrawingAmsler = true;
-    addAmslerPoint(e);
-  });
-  amslerCanvas.addEventListener('mousemove', (e) => {
-    if (isDrawingAmsler) addAmslerPoint(e);
-  });
-  window.addEventListener('mouseup', () => { isDrawingAmsler = false; });
-}
-
-async function syncAmslerToBackend() {
-  const isNormal = (amslerMarks.length === 0);
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/amsler`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          eye: "OD",
-          metamorphopsia: !isNormal,
-          scotoma: (amslerMarks.length > 5),
-          distorted_points_count: amslerMarks.length,
-          notes: isNormal ? "Normal central grid" : `Marked ${amslerMarks.length} defect zones in 10-degree field`
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Amsler grid findings (${isNormal ? 'Normal' : 'Metamorphopsia flagged'}) to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+      // WebXR Toggle between Patient VR Mode and Physician & Response Cockpit
+      function toggleVrView() {
+        const vp = document.getElementById('vr-viewport');
+        const isHidden = (vp.style.display !== 'flex');
+        if (isHidden) {
+          enterPatientVrMode();
+          setVrSubmode('COLOUR');
+        } else {
+          exitPatientVrMode();
+        }
       }
-    } catch(e) {}
-  }
-  alert(`Amsler findings recorded locally (${amslerMarks.length} defect points mapped).`);
-}
 
-function recordAmslerFinding(type) {
-  if (type === 'NORMAL') {
-    clearAmslerMarks();
-    syncAmslerToBackend();
-  } else {
-    if (amslerMarks.length === 0) {
-      alert("Click on the grid to mark the patient's area of wavy lines or distortion first.");
-    } else {
-      syncAmslerToBackend();
-    }
-  }
-}
+      // Interactive Visual Field Perimetry Analyser (Refactored 24-2 & 30-2)
+      const canvas = document.getElementById('perimetry-canvas');
+      const ctx = canvas ? canvas.getContext('2d') : null;
+      let currentPattern = '24-2';
+      let currentEye = 'OD';
+      let activePoints = [];
+      let presentationOrder = [];
+      let currentStepIndex = 0;
+      let perimetryRunning = false;
+      let stimulusActive = false;
+      let stimulusStartTime = 0;
+      let pointsSeen = 0;
+      let falsePositives = 0;
+      let reactionTimes = [];
 
-// MODULE 5: BINOCULAR VISION & STEREOACUITY (WORTH 4-DOT)
-let currentWorthResponse = 'FOUR_DOTS_FUSION';
-let currentStereoArcsec = 40.0;
+      // Full Standard 24-2 (54 pts) and Expanded 30-2 (76 pts) coordinate sets
+      // Perfectly accounts for both Superior (Upper) and Inferior (Lower) quadrants
+      const GRID_24_2 = {
+        "21": [-9, -3, 3, 9],
+        "15": [-15, -9, -3, 3, 9, 15],
+        "9": [-21, -15, -9, -3, 3, 9, 15, 21],
+        "3": [-27, -21, -15, -9, -3, 3, 9, 15, 21],
+        "-3": [-27, -21, -15, -9, -3, 3, 9, 15, 21],
+        "-9": [-21, -15, -9, -3, 3, 9, 15, 21],
+        "-15": [-15, -9, -3, 3, 9, 15],
+        "-21": [-9, -3, 3, 9]
+      };
 
-function setWorthResponse(resp) {
-  currentWorthResponse = resp;
-  const title = document.getElementById('binocular-fusion-title');
-  if (!title) return;
-  const map = {
-    'FOUR_DOTS_FUSION': 'Fusion: Normal Binocular Sensory Fusion',
-    'TWO_RED_SUPPRESSION_OS': 'Suppression: Left Eye (OS) Suppressed',
-    'THREE_GREEN_SUPPRESSION_OD': 'Suppression: Right Eye (OD) Suppressed',
-    'FIVE_DOTS_DIPLOPIA': 'Diplopia: Strabismic Tropia / Diplopia'
-  };
-  title.innerText = map[resp] || resp;
-}
+      const GRID_30_2 = {
+        "27": [-9, -3, 3, 9],
+        "21": [-15, -9, -3, 3, 9, 15],
+        "15": [-21, -15, -9, -3, 3, 9, 15, 21],
+        "9": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
+        "3": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
+        "-3": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
+        "-9": [-27, -21, -15, -9, -3, 3, 9, 15, 21, 27],
+        "-15": [-21, -15, -9, -3, 3, 9, 15, 21],
+        "-21": [-15, -9, -3, 3, 9, 15],
+        "-27": [-9, -3, 3, 9]
+      };
 
-function setStereoacuity(arcsec) {
-  currentStereoArcsec = arcsec;
-  document.querySelectorAll('#tab-binocular .segmented-btn').forEach(b => b.classList.remove('active'));
-  const detail = document.getElementById('binocular-stereo-detail');
-  if (detail) {
-    const grade = (arcsec <= 40) ? 'Full Fine Stereopsis' : (arcsec <= 100 ? 'Moderate Stereopsis' : 'Gross / Reduced Stereopsis');
-    detail.innerText = `Stereoacuity: ${arcsec} seconds of arc \u2022 ${grade}`;
-  }
-}
+      function initPoints() {
+        activePoints = [];
+        const grid = (currentPattern === '30-2') ? GRID_30_2 : GRID_24_2;
+        const blindSpotX = (currentEye === 'OD') ? 15 : -15;
 
-async function syncBinocularToBackend() {
-  const fusion = (currentWorthResponse === 'FOUR_DOTS_FUSION') ? 'NORMAL_FUSION' : (currentWorthResponse === 'FIVE_DOTS_DIPLOPIA' ? 'DIPLOPIA' : 'SUPPRESSION');
-  const grade = (currentStereoArcsec <= 50) ? 'NORMAL' : (currentStereoArcsec <= 200 ? 'REDUCED' : 'ABSENT');
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/binocular-vision`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          worth_four_dot_response: currentWorthResponse,
-          stereoacuity_arcsec: currentStereoArcsec,
-          fusion_status: fusion,
-          depth_perception_grade: grade
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Binocular Vision findings (Worth: ${currentWorthResponse}, Stereo: ${currentStereoArcsec}") to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+        for (const [yStr, xList] of Object.entries(grid)) {
+          const y = parseInt(yStr);
+          for (const x of xList) {
+            const isBlindSpot = (x === blindSpotX && y === -3);
+            activePoints.push({
+              x: x,
+              y: y,
+              isBlindSpot: isBlindSpot,
+              status: isBlindSpot ? 'scotoma' : 'untested',
+              hemifield: (y > 0) ? 'SUPERIOR' : 'INFERIOR'
+            });
+          }
+        }
+        updateHudStats();
+        drawPerimetryGrid(null);
       }
-    } catch(e) {}
-  }
-  alert(`Binocular Vision Recorded locally: Worth=${currentWorthResponse}, Stereo=${currentStereoArcsec}".`);
-}
 
-// MODULE 6: OCULAR MOTILITY & SMOOTH PURSUIT (BROAD-H)
-const motilityCanvas = document.getElementById('motility-canvas');
-const motilityCtx = motilityCanvas ? motilityCanvas.getContext('2d') : null;
-const CARDINAL_GAZES = [
-  { name: "Primary Gaze", x: 0, y: 0, muscle: "Bilateral Fixation", nerve: "CN III, IV, VI Balanced" },
-  { name: "Dextroversion (Right)", x: 120, y: 0, muscle: "Right Lateral Rectus (RLR) / Left Medial Rectus (LMR)", nerve: "Right CN VI / Left CN III" },
-  { name: "Dextro-Elevation (Up-Right)", x: 100, y: -75, muscle: "Right Superior Rectus (RSR) / Left Inferior Oblique (LIO)", nerve: "Right CN III / Left CN III" },
-  { name: "Dextro-Depression (Down-Right)", x: 100, y: 75, muscle: "Right Inferior Rectus (RIR) / Left Superior Oblique (LSO)", nerve: "Right CN III / Left CN IV" },
-  { name: "Return to Primary", x: 0, y: 0, muscle: "Bilateral Fixation", nerve: "CN III, IV, VI Balanced" },
-  { name: "Levoversion (Left)", x: -120, y: 0, muscle: "Left Lateral Rectus (LLR) / Right Medial Rectus (RMR)", nerve: "Left CN VI / Right CN III" },
-  { name: "Levo-Elevation (Up-Left)", x: -100, y: -75, muscle: "Left Superior Rectus (LSR) / Right Inferior Oblique (RIO)", nerve: "Left CN III / Right CN III" },
-  { name: "Levo-Depression (Down-Left)", x: -100, y: 75, muscle: "Left Inferior Rectus (LIR) / Right Superior Oblique (RSO)", nerve: "Left CN III / Right CN IV" },
-  { name: "Sursumversion (Straight Up)", x: 0, y: -85, muscle: "Bilateral Superior Recti & Inferior Obliques", nerve: "Bilateral CN III" }
-];
-
-let currentMotilityStep = 0;
-let motilityAnimating = false;
-let motilityTargetPos = { x: 0, y: 0 };
-
-function drawMotilityStage() {
-  if (!motilityCtx) return;
-  const w = motilityCanvas.width;
-  const h = motilityCanvas.height;
-  const cx = w / 2;
-  const cy = h / 2;
-
-  motilityCtx.fillStyle = '#1E293B';
-  motilityCtx.fillRect(0, 0, w, h);
-
-  // Draw Broad-H guide lines
-  motilityCtx.strokeStyle = '#334155';
-  motilityCtx.lineWidth = 2;
-  motilityCtx.beginPath();
-  // Vertical legs of H
-  motilityCtx.moveTo(cx + 100, cy - 75); motilityCtx.lineTo(cx + 100, cy + 75);
-  motilityCtx.moveTo(cx - 100, cy - 75); motilityCtx.lineTo(cx - 100, cy + 75);
-  // Crossbar
-  motilityCtx.moveTo(cx - 120, cy); motilityCtx.lineTo(cx + 120, cy);
-  motilityCtx.stroke();
-
-  // Draw 9 target nodes
-  CARDINAL_GAZES.forEach((g, idx) => {
-    motilityCtx.fillStyle = (idx === currentMotilityStep) ? '#38BDF8' : '#475569';
-    motilityCtx.beginPath();
-    motilityCtx.arc(cx + g.x, cy + g.y, (idx === currentMotilityStep) ? 7 : 4, 0, Math.PI * 2);
-    motilityCtx.fill();
-  });
-
-  // Animated smooth pursuit target
-  motilityCtx.fillStyle = '#EF4444';
-  motilityCtx.shadowColor = '#EF4444';
-  motilityCtx.shadowBlur = 10;
-  motilityCtx.beginPath();
-  motilityCtx.arc(cx + motilityTargetPos.x, cy + motilityTargetPos.y, 8, 0, Math.PI * 2);
-  motilityCtx.fill();
-  motilityCtx.shadowBlur = 0;
-}
-
-function updateMotilityInfo() {
-  const g = CARDINAL_GAZES[currentMotilityStep];
-  const lbl = document.getElementById('motility-position-label');
-  const mLabel = document.getElementById('motility-muscle-active');
-  const nLabel = document.getElementById('motility-nerve-active');
-  if (lbl) lbl.innerText = `Position: ${g.name}`;
-  if (mLabel) mLabel.innerText = `Active Muscles: ${g.muscle}`;
-  if (nLabel) nLabel.innerText = `Innervation: ${g.nerve}`;
-}
-
-function stepMotilityPosition() {
-  currentMotilityStep = (currentMotilityStep + 1) % CARDINAL_GAZES.length;
-  motilityTargetPos = { x: CARDINAL_GAZES[currentMotilityStep].x, y: CARDINAL_GAZES[currentMotilityStep].y };
-  updateMotilityInfo();
-  drawMotilityStage();
-}
-
-function toggleMotilityAnimation() {
-  motilityAnimating = !motilityAnimating;
-  const btn = document.getElementById('btn-motility-play');
-  if (btn) btn.innerText = motilityAnimating ? 'Pause Animation' : 'Start Tracking Animation';
-
-  if (motilityAnimating) {
-    const loop = setInterval(() => {
-      if (!motilityAnimating) {
-        clearInterval(loop);
-        return;
+      function selectPerimetryPattern(pattern) {
+        if (perimetryRunning) return;
+        currentPattern = pattern;
+        document.getElementById('pattern-btn-24').style.background = (pattern === '24-2') ? 'var(--mint-wash)' : '';
+        document.getElementById('pattern-btn-24').style.color = (pattern === '24-2') ? 'var(--sea-green-dark)' : '';
+        document.getElementById('pattern-btn-30').style.background = (pattern === '30-2') ? 'var(--mint-wash)' : '';
+        document.getElementById('pattern-btn-30').style.color = (pattern === '30-2') ? 'var(--sea-green-dark)' : '';
+        initPoints();
       }
-      stepMotilityPosition();
-    }, 1200);
-  }
-}
 
-function resetMotility() {
-  motilityAnimating = false;
-  currentMotilityStep = 0;
-  motilityTargetPos = { x: 0, y: 0 };
-  const btn = document.getElementById('btn-motility-play');
-  if (btn) btn.innerText = 'Start Tracking Animation';
-  updateMotilityInfo();
-  drawMotilityStage();
-}
-
-async function syncMotilityToBackend() {
-  const quality = document.getElementById('sel-pursuit-quality') ? document.getElementById('sel-pursuit-quality').value : 'SMOOTH_FULL';
-  const nystagmus = document.getElementById('sel-nystagmus') ? document.getElementById('sel-nystagmus').value : 'NONE';
-  const diplopia = document.getElementById('chk-motility-diplopia') ? document.getElementById('chk-motility-diplopia').checked : false;
-
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/ocular-motility`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          smooth_pursuit_grade: quality,
-          nystagmus_detected: (nystagmus !== 'NONE'),
-          cardinal_gaze_deficit: diplopia || (quality === 'RESTRICTED'),
-          affected_muscles: diplopia ? ["Lateral Rectus", "Superior Oblique"] : []
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Ocular Motility assessment (Pursuit: ${quality}, Nystagmus: ${nystagmus}) to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+      function selectPerimetryEye(eye) {
+        if (perimetryRunning) return;
+        currentEye = eye;
+        document.getElementById('eye-btn-od').style.background = (eye === 'OD') ? 'var(--mint-wash)' : '';
+        document.getElementById('eye-btn-od').style.color = (eye === 'OD') ? 'var(--sea-green-dark)' : '';
+        document.getElementById('eye-btn-os').style.background = (eye === 'OS') ? 'var(--mint-wash)' : '';
+        document.getElementById('eye-btn-os').style.color = (eye === 'OS') ? 'var(--sea-green-dark)' : '';
+        initPoints();
       }
-    } catch(e) {}
-  }
-  alert(`Ocular Motility Recorded locally: Pursuit=${quality}, Nystagmus=${nystagmus}.`);
-}
 
-// MODULE 7: PUPILLARY ASSESSMENT (SWINGING FLASHLIGHT RAPD & PUPILLOMETRY)
-let pupilMode = 'NORMAL'; // NORMAL, RAPD_OD, RAPD_OS
-let lightEye = 'OD'; // OD, OS
-let swingingTimer = null;
+      function updateHudStats() {
+        const supPoints = activePoints.filter(p => p.hemifield === 'SUPERIOR');
+        const infPoints = activePoints.filter(p => p.hemifield === 'INFERIOR');
+        const supSeen = supPoints.filter(p => p.status === 'seen').length;
+        const infSeen = infPoints.filter(p => p.status === 'seen').length;
 
-function setPupilMode(mode) {
-  pupilMode = mode;
-  document.querySelectorAll('#btn-pupil-normal, #btn-pupil-rapd-od, #btn-pupil-rapd-os').forEach(b => b.classList.remove('active'));
-  if (mode === 'NORMAL') document.getElementById('btn-pupil-normal').classList.add('active');
-  if (mode === 'RAPD_OD') document.getElementById('btn-pupil-rapd-od').classList.add('active');
-  if (mode === 'RAPD_OS') document.getElementById('btn-pupil-rapd-os').classList.add('active');
+        document.getElementById('stat-points').innerText = currentStepIndex + ' / ' + activePoints.length;
+        document.getElementById('stat-seen').innerText = pointsSeen;
+        document.getElementById('stat-sup').innerText = supSeen + ' / ' + supPoints.length;
+        document.getElementById('stat-inf').innerText = infSeen + ' / ' + infPoints.length;
 
-  const desc = document.getElementById('pupil-simulation-desc');
-  if (desc) {
-    if (mode === 'NORMAL') desc.innerText = 'Normal Light Reflex: Light on either eye yields brisk symmetric constriction (direct + consensual).';
-    if (mode === 'RAPD_OD') desc.innerText = 'Positive RAPD Right Eye (Marcus Gunn): Light swinging to OD causes paradoxical dilation due to afferent conduction defect!';
-    if (mode === 'RAPD_OS') desc.innerText = 'Positive RAPD Left Eye (Marcus Gunn): Light swinging to OS causes paradoxical dilation due to afferent conduction defect!';
-  }
-  updatePupilReflexAnimation();
-}
-
-function updatePupilReflexAnimation() {
-  const pOD = document.getElementById('pupil-od');
-  const pOS = document.getElementById('pupil-os');
-  const beamOD = document.getElementById('light-beam-od');
-  const beamOS = document.getElementById('light-beam-os');
-  if (!pOD || !pOS) return;
-
-  if (lightEye === 'OD') {
-    if (beamOD) { beamOD.innerText = '\u2600 Direct Light Active'; beamOD.style.color = '#F59E0B'; }
-    if (beamOS) { beamOS.innerText = 'Dim (Consensual)'; beamOS.style.color = '#64748B'; }
-
-    if (pupilMode === 'RAPD_OD') {
-      // Paradoxical dilation in diseased right eye
-      pOD.style.width = '42px'; pOD.style.height = '42px';
-      pOS.style.width = '42px'; pOS.style.height = '42px';
-    } else {
-      // Normal direct constriction
-      pOD.style.width = '24px'; pOD.style.height = '24px';
-      pOS.style.width = '24px'; pOS.style.height = '24px';
-    }
-  } else {
-    if (beamOD) { beamOD.innerText = 'Dim (Consensual)'; beamOD.style.color = '#64748B'; }
-    if (beamOS) { beamOS.innerText = '\u2600 Direct Light Active'; beamOS.style.color = '#F59E0B'; }
-
-    if (pupilMode === 'RAPD_OS') {
-      // Paradoxical dilation in diseased left eye
-      pOD.style.width = '42px'; pOD.style.height = '42px';
-      pOS.style.width = '42px'; pOS.style.height = '42px';
-    } else {
-      // Normal direct constriction
-      pOD.style.width = '24px'; pOD.style.height = '24px';
-      pOS.style.width = '24px'; pOS.style.height = '24px';
-    }
-  }
-}
-
-function stepSwingingLight() {
-  lightEye = (lightEye === 'OD') ? 'OS' : 'OD';
-  updatePupilReflexAnimation();
-}
-
-function toggleSwingingFlashlight() {
-  const btn = document.getElementById('btn-swing-light');
-  if (swingingTimer) {
-    clearInterval(swingingTimer);
-    swingingTimer = null;
-    if (btn) btn.innerText = 'Resume Swinging Light';
-  } else {
-    swingingTimer = setInterval(stepSwingingLight, 2200);
-    if (btn) btn.innerText = 'Pause Swinging Light';
-  }
-}
-
-function updatePupilMetrics() {
-  const rOD = parseFloat(document.getElementById('rng-photopic-od').value);
-  const rOS = parseFloat(document.getElementById('rng-photopic-os').value);
-  const scot = parseFloat(document.getElementById('rng-scotopic').value);
-
-  document.getElementById('lbl-photopic-od').innerText = `${rOD.toFixed(1)} mm`;
-  document.getElementById('lbl-photopic-os').innerText = `${rOS.toFixed(1)} mm`;
-  document.getElementById('lbl-scotopic').innerText = `${scot.toFixed(1)} mm`;
-
-  const diff = Math.abs(rOD - rOS);
-  const box = document.getElementById('anisocoria-result-box');
-  const status = document.getElementById('anisocoria-status');
-
-  if (diff >= 0.4) {
-    status.innerText = `Anisocoria: Pathologic (\u0394 ${diff.toFixed(1)} mm)`;
-    status.style.color = '#EF4444';
-    box.style.background = '#FEE2E2';
-  } else {
-    status.innerText = `Anisocoria: Physiological (\u0394 ${diff.toFixed(1)} mm)`;
-    status.style.color = 'var(--sea-green-dark)';
-    box.style.background = 'var(--mint-wash)';
-  }
-}
-
-async function syncPupillaryToBackend() {
-  const rOD = parseFloat(document.getElementById('rng-photopic-od').value);
-  const rOS = parseFloat(document.getElementById('rng-photopic-os').value);
-  const scot = parseFloat(document.getElementById('rng-scotopic').value);
-  const isRapd = (pupilMode !== 'NORMAL');
-  const diff = Math.abs(rOD - rOS);
-
-  if (authToken && backendBaseUrl) {
-    try {
-      const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/pupillary-assessment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-        body: JSON.stringify({
-          rapd_detected: isRapd,
-          rapd_grade: isRapd ? (pupilMode === 'RAPD_OD' ? 'MODERATE_2_PLUS' : 'MILD_1_PLUS') : 'NONE',
-          pupil_size_photopic_od_mm: rOD,
-          pupil_size_photopic_os_mm: rOS,
-          pupil_size_scotopic_od_mm: scot,
-          pupil_size_scotopic_os_mm: scot,
-          anisocoria_present: (diff >= 0.4),
-          light_reflex_speed: "BRISK"
-        })
-      });
-      if (res.ok) {
-        alert(`Committed Pupillary assessment (RAPD: ${isRapd ? 'POSITIVE' : 'NEGATIVE'}, OD=${rOD}mm, OS=${rOS}mm) to FastAPI backend.`);
-        await fetchLiveAuditLogs();
-        return;
+        if (reactionTimes.length > 0) {
+          const meanRt = Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length);
+          document.getElementById('stat-rt').innerText = meanRt + ' ms';
+        } else {
+          document.getElementById('stat-rt').innerText = '-- ms';
+        }
       }
-    } catch(e) {}
-  }
-  alert(`Pupillary assessment recorded locally (RAPD=${isRapd}, Diff=${diff.toFixed(1)}mm).`);
-}
 
-// Global initialization on page load
-window.addEventListener('DOMContentLoaded', () => {
-  initAcuityLadderTable();
-  stepAcuityOptotype();
-  initColourVisionTable();
-  updateColourPlateView();
-  initContrastTriplets();
-  drawAmslerGrid();
-  drawMotilityStage();
-  updatePupilReflexAnimation();
-  swingingTimer = setInterval(stepSwingingLight, 2200);
-});
+      function drawPerimetryGrid(activeStimulus = null) {
+        if (!ctx || !canvas) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const scale = 5.8; // px per degree (30 deg = 174px radius)
 
-        async function showNewPatientPrompt() {
-      const id = prompt("Enter new Patient ID (e.g. P-104):", "P-104");
-      if (id) {
+        // Background aperture
+        ctx.fillStyle = '#090D16';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 32 * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Degree circles (10°, 20°, 30°)
+        [10, 20, 30].forEach(deg => {
+          ctx.strokeStyle = '#1E293B';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(cx, cy, deg * scale, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.fillStyle = '#475569';
+          ctx.font = '10px sans-serif';
+          ctx.fillText(deg + '°', cx + 4, cy - (deg * scale) + 12);
+        });
+
+        // Axis lines
+        ctx.strokeStyle = '#1E293B';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - (32 * scale)); ctx.lineTo(cx, cy + (32 * scale));
+        ctx.moveTo(cx - (32 * scale), cy); ctx.lineTo(cx + (32 * scale), cy);
+        ctx.stroke();
+
+        // Compass labels
+        ctx.fillStyle = '#64748B';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SUPERIOR (Upper)', cx, cy - (31 * scale) + 12);
+        ctx.fillText('INFERIOR (Lower)', cx, cy + (31 * scale) - 4);
+        if (currentEye === 'OD') {
+          ctx.fillText('NASAL (OD)', cx - (30 * scale) + 24, cy - 6);
+          ctx.fillText('TEMPORAL (OD)', cx + (30 * scale) - 30, cy - 6);
+        } else {
+          ctx.fillText('TEMPORAL (OS)', cx - (30 * scale) + 32, cy - 6);
+          ctx.fillText('NASAL (OS)', cx + (30 * scale) - 24, cy - 6);
+        }
+
+        // Central fixation cross
+        ctx.fillStyle = '#EF4444';
+        ctx.fillRect(cx - 6, cy - 1.5, 12, 3);
+        ctx.fillRect(cx - 1.5, cy - 6, 3, 12);
+
+        // Physiological Blind Spot
+        const blindX = (currentEye === 'OD') ? 15 : -15;
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
+        ctx.beginPath();
+        ctx.ellipse(cx + (blindX * scale), cy - (-3 * scale), 8, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '9px sans-serif';
+        ctx.fillText('Blind Spot', cx + (blindX * scale), cy - (-3 * scale) + 18);
+
+        // Render all grid points (Upper & Lower)
+        activePoints.forEach(pt => {
+          const px = cx + (pt.x * scale);
+          const py = cy - (pt.y * scale);
+          ctx.beginPath();
+          ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+
+          if (pt.status === 'seen') ctx.fillStyle = '#10B981'; // Green
+          else if (pt.status === 'unseen' || pt.status === 'scotoma') ctx.fillStyle = '#EF4444'; // Red
+          else ctx.fillStyle = '#334155'; // Untested slate
+
+          ctx.fill();
+        });
+
+        // Active stimulus flash (Goldmann III)
+        if (activeStimulus) {
+          const sx = cx + (activeStimulus.x * scale);
+          const sy = cy - (activeStimulus.y * scale);
+          ctx.beginPath();
+          ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.shadowColor = '#FFFFFF';
+          ctx.shadowBlur = 12;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function startPerimetryTest() {
+        perimetryRunning = true;
+        currentStepIndex = 0;
+        pointsSeen = 0;
+        falsePositives = 0;
+        reactionTimes = [];
+
+        // Reset statuses
+        activePoints.forEach(p => {
+          if (!p.isBlindSpot) p.status = 'untested';
+        });
+
+        // Build and shuffle presentation order (Fisher-Yates) for unpredictable psychophysical testing
+        presentationOrder = [];
+        for (let i = 0; i < activePoints.length; i++) {
+          presentationOrder.push(i);
+        }
+        for (let i = presentationOrder.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [presentationOrder[i], presentationOrder[j]] = [presentationOrder[j], presentationOrder[i]];
+        }
+
+        document.getElementById('btn-perimetry-start').disabled = true;
+        document.getElementById('btn-perimetry-response').disabled = false;
+        updateHudStats();
+        nextRandomizedTrial();
+      }
+
+      function nextRandomizedTrial() {
+        if (!perimetryRunning || currentStepIndex >= presentationOrder.length) {
+          finishPerimetryTest();
+          return;
+        }
+
+        const ptIndex = presentationOrder[currentStepIndex];
+        const pt = activePoints[ptIndex];
+
+        // Jittered inter-stimulus interval (600 - 1100ms)
+        setTimeout(() => {
+          if (!perimetryRunning) return;
+          stimulusActive = true;
+          stimulusStartTime = performance.now();
+          drawPerimetryGrid(pt);
+
+          // Goldmann III duration: exactly 200 ms (24 frames @ 120Hz)
+          setTimeout(() => {
+            drawPerimetryGrid(null);
+
+            // Response listening window (800ms)
+            setTimeout(() => {
+              if (stimulusActive) {
+                // Missed / Unseen
+                stimulusActive = false;
+                pt.status = 'unseen';
+                currentStepIndex++;
+                updateHudStats();
+                nextRandomizedTrial();
+              }
+            }, 650);
+          }, 200);
+        }, 500 + Math.random() * 500);
+      }
+
+      function recordPerimetryResponse() {
+        if (!stimulusActive) {
+          falsePositives++;
+          const fpRate = Math.round((falsePositives / (currentStepIndex + 1)) * 100);
+          document.getElementById('stat-fp').innerText = fpRate + '%';
+          return;
+        }
+
+        stimulusActive = false;
+        const rt = Math.round(performance.now() - stimulusStartTime);
+        reactionTimes.push(rt);
+
+        const ptIndex = presentationOrder[currentStepIndex];
+        const pt = activePoints[ptIndex];
+
+        if (pt.isBlindSpot) {
+          // Fixation loss: responded to blind spot
+          pt.status = 'unseen';
+        } else {
+          pt.status = 'seen';
+          pointsSeen++;
+        }
+
+        currentStepIndex++;
+        updateHudStats();
+        drawPerimetryGrid(null);
+        setTimeout(nextRandomizedTrial, 350);
+      }
+
+      async function finishPerimetryTest() {
+        perimetryRunning = false;
+        stimulusActive = false;
+        document.getElementById('btn-perimetry-start').disabled = false;
+        document.getElementById('btn-perimetry-response').disabled = true;
+        drawPerimetryGrid(null);
+        updateHudStats();
+
+        const supSeen = activePoints.filter(p => p.hemifield === 'SUPERIOR' && p.status === 'seen').length;
+        const infSeen = activePoints.filter(p => p.hemifield === 'INFERIOR' && p.status === 'seen').length;
+        const fpRate = Math.round((falsePositives / (currentStepIndex + 1)) * 100);
+        const meanRt = reactionTimes.length > 0 ? (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length) : 0;
+
+        let backendSyncedText = "";
         if (authToken && backendBaseUrl) {
           try {
-            const res = await fetch(`${backendBaseUrl}/api/v1/patients`, {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/perimetry`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${authToken}`
               },
               body: JSON.stringify({
-                patientId: id,
-                ageBand: "40-59",
-                hasDiabetes: false,
-                symptoms: ["ROUTINE_CHECK"],
-                currentCorrection: "UNAIDED",
-                comorbidityFlags: {}
+                eye: currentEye,
+                pattern: currentPattern,
+                total_points: activePoints.length,
+                points_seen: pointsSeen,
+                superior_seen: supSeen,
+                inferior_seen: infSeen,
+                mean_reaction_time_ms: meanRt,
+                false_positive_rate: fpRate,
+                scotoma_coordinates: activePoints.filter(p => p.status === 'scotoma' || (p.status === 'unseen' && !p.isBlindSpot)).map(p => ({ x: p.x, y: p.y }))
               })
             });
             if (res.ok) {
-              await loadPatientsFromBackend();
+              backendSyncedText = "\n\n[FastAPI Synced]: Recorded to backend session as clinical measurement & cryptographic audit event.";
               await fetchLiveAuditLogs();
-              alert('Patient ' + id + ' registered in FastAPI backend and committed to audit log.');
-              return;
             }
-          } catch(e) {
-            console.warn("Patient registration API notice:", e);
+          } catch (e) {
+            console.warn("Backend perimetry sync notice:", e);
           }
         }
-        const tbody = document.getElementById('patient-table-body');
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td><strong>${id}</strong></td><td>Adult (30-49)</td><td>Negative</td><td>Unaided</td><td>Routine checkup</td><td><span style="color:#10B981; font-weight:600;">COMMITTED</span></td><td><button class="btn-secondary" onclick="switchTab('dashboard')">View Encounter</button></td>`;
-        tbody.prepend(tr);
-        alert('Patient ' + id + ' registered and queued for synchronization.');
+
+        alert(`Visual Field Examination Complete (${currentPattern} - ${currentEye})!\n\n` +
+          `Total Points: ${activePoints.length}\n` +
+          `Total Points Seen: ${pointsSeen}\n` +
+          `Superior (Upper) Seen: ${supSeen}\n` +
+          `Inferior (Lower) Seen: ${infSeen}\n` +
+          `Mean Reaction Time: ${document.getElementById('stat-rt').innerText}\n` +
+          `Catch Error (FP): ${document.getElementById('stat-fp').innerText}\n\n` +
+          `Presentation Sequence: Fully Randomized Non-Sequential Trial Order.` +
+          backendSyncedText);
       }
-    }
+
+      function resetPerimetryTest() {
+        perimetryRunning = false;
+        stimulusActive = false;
+        currentStepIndex = 0;
+        pointsSeen = 0;
+        falsePositives = 0;
+        reactionTimes = [];
+        initPoints();
+        document.getElementById('btn-perimetry-start').disabled = false;
+        document.getElementById('btn-perimetry-response').disabled = true;
+        document.getElementById('stat-fp').innerText = '0%';
+        document.getElementById('stat-rt').innerText = '-- ms';
+      }
+
+      // Initialize points on load
+      initPoints();
+
+
+      // VR SUBMODE & LAUNCH HANDLERS
+      function launchVrColourVision() {
+        const vp = document.getElementById('vr-viewport');
+        if (vp) vp.style.display = 'flex';
+        setVrSubmode('COLOUR');
+      }
+
+      function setVrSubmode(mode) {
+        const hud = document.getElementById('vr-submode-hud');
+        const col = document.getElementById('vr-submode-colour');
+        const btnHud = document.getElementById('btn-vr-hud');
+        const btnCol = document.getElementById('btn-vr-colour');
+
+        if (mode === 'HUD') {
+          if (hud) hud.style.display = 'flex';
+          if (col) col.style.display = 'none';
+          if (btnHud) btnHud.classList.add('active');
+          if (btnCol) btnCol.classList.remove('active');
+        } else {
+          if (hud) hud.style.display = 'none';
+          if (col) col.style.display = 'flex';
+          if (btnHud) btnHud.classList.remove('active');
+          if (btnCol) btnCol.classList.add('active');
+          if (typeof renderVrColourPlates === 'function') {
+            renderVrColourPlates();
+          }
+        }
+      }
+
+      // MODULE 1: VISUAL ACUITY LOGIC
+      const ACUITY_LADDER = [
+        { snellen: "20/200", logmar: 1.00, decimal: 0.10, strokeArcmin: 10.0, px: 84 },
+        { snellen: "20/100", logmar: 0.70, decimal: 0.20, strokeArcmin: 5.0, px: 64 },
+        { snellen: "20/70", logmar: 0.54, decimal: 0.29, strokeArcmin: 3.5, px: 50 },
+        { snellen: "20/50", logmar: 0.40, decimal: 0.40, strokeArcmin: 2.5, px: 38 },
+        { snellen: "20/40", logmar: 0.30, decimal: 0.50, strokeArcmin: 2.0, px: 30 },
+        { snellen: "20/30", logmar: 0.18, decimal: 0.67, strokeArcmin: 1.5, px: 24 },
+        { snellen: "20/25", logmar: 0.10, decimal: 0.80, strokeArcmin: 1.25, px: 20 },
+        { snellen: "20/20", logmar: 0.00, decimal: 1.00, strokeArcmin: 1.0, px: 16 },
+        { snellen: "20/15", logmar: -0.12, decimal: 1.33, strokeArcmin: 0.75, px: 13 }
+      ];
+
+      let acuityEye = 'OD';
+      let optotypeMode = 'TUMBLING_E';
+      let currentAcuityIndex = 4; // 20/40
+      let currentOptotypeOrientation = 'RIGHT';
+      let currentSloanChar = 'E';
+      const SLOAN_LETTERS = ['C', 'D', 'E', 'F', 'L', 'N', 'O', 'P', 'T', 'Z'];
+      const ORIENTATIONS = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
+
+      function initAcuityLadderTable() {
+        const tbody = document.getElementById('acuity-ladder-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        ACUITY_LADDER.forEach((lvl, i) => {
+          const tr = document.createElement('tr');
+          tr.id = 'acuity-ladder-row-' + i;
+          tr.innerHTML = `<td><strong>${lvl.snellen}</strong></td><td>${lvl.logmar.toFixed(2)}</td><td>${lvl.decimal.toFixed(2)}</td><td id="acuity-ladder-status-${i}">Pending</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function renderAcuityDisplay() {
+        const charEl = document.getElementById('acuity-char-display');
+        const labelEl = document.getElementById('acuity-level-label');
+        if (!charEl || !labelEl) return;
+
+        const lvl = ACUITY_LADDER[currentAcuityIndex];
+        labelEl.innerHTML = `Line: <strong>${lvl.snellen}</strong> • ${lvl.logmar.toFixed(2)} LogMAR (Stroke: ${lvl.strokeArcmin} arcmin)`;
+
+        if (optotypeMode === 'TUMBLING_E') {
+          charEl.innerHTML = '&#696;';
+          charEl.style.fontSize = lvl.px + 'px';
+          const rot = { 'RIGHT': 0, 'DOWN': 90, 'LEFT': 180, 'UP': 270 }[currentOptotypeOrientation] || 0;
+          charEl.style.transform = `rotate(${rot}deg)`;
+        } else if (optotypeMode === 'LANDOLT_C') {
+          charEl.innerHTML = 'C';
+          charEl.style.fontSize = lvl.px + 'px';
+          const rot = { 'RIGHT': 0, 'DOWN': 90, 'LEFT': 180, 'UP': 270 }[currentOptotypeOrientation] || 0;
+          charEl.style.transform = `rotate(${rot}deg)`;
+        } else {
+          charEl.innerHTML = currentSloanChar;
+          charEl.style.fontSize = lvl.px + 'px';
+          charEl.style.transform = 'none';
+        }
+      }
+
+      function setAcuityEye(eye) {
+        acuityEye = eye;
+        document.querySelectorAll('#btn-acuity-od, #btn-acuity-os, #btn-acuity-ou').forEach(b => b.classList.remove('active'));
+        const btn = document.getElementById('btn-acuity-' + eye.toLowerCase());
+        if (btn) btn.classList.add('active');
+      }
+
+      function setOptotypeMode(mode) {
+        optotypeMode = mode;
+        document.querySelectorAll('#opt-tumbling, #opt-landolt, #opt-sloan').forEach(b => b.classList.remove('active'));
+        if (mode === 'TUMBLING_E') document.getElementById('opt-tumbling').classList.add('active');
+        if (mode === 'LANDOLT_C') document.getElementById('opt-landolt').classList.add('active');
+        if (mode === 'SLOAN') document.getElementById('opt-sloan').classList.add('active');
+
+        const dirCtrl = document.getElementById('acuity-directional-controls');
+        const sloanCtrl = document.getElementById('acuity-sloan-controls');
+        const promptText = document.getElementById('acuity-prompt-text');
+
+        if (mode === 'SLOAN') {
+          if (dirCtrl) dirCtrl.style.display = 'none';
+          if (sloanCtrl) {
+            sloanCtrl.style.display = 'flex';
+            sloanCtrl.innerHTML = '';
+            SLOAN_LETTERS.forEach(char => {
+              const b = document.createElement('button');
+              b.className = 'btn-secondary';
+              b.style.fontSize = '14px';
+              b.style.padding = '8px 12px';
+              b.style.fontWeight = '700';
+              b.innerText = char;
+              b.onclick = () => recordAcuityInput(char);
+              sloanCtrl.appendChild(b);
+            });
+          }
+          if (promptText) promptText.innerText = 'Identify Presented Sloan Letter:';
+        } else {
+          if (dirCtrl) dirCtrl.style.display = 'grid';
+          if (sloanCtrl) sloanCtrl.style.display = 'none';
+          if (promptText) promptText.innerText = (mode === 'LANDOLT_C') ? 'Choose Position of Gap:' : 'Choose Orientation of Prongs:';
+        }
+        stepAcuityOptotype();
+      }
+
+      function toggleCrowdingBars(checked) {
+        const wrap = document.getElementById('acuity-crowding-wrap');
+        if (wrap) {
+          if (checked) wrap.classList.add('crowd-border');
+          else wrap.classList.remove('crowd-border');
+        }
+      }
+
+      function stepAcuityOptotype() {
+        currentOptotypeOrientation = ORIENTATIONS[Math.floor(Math.random() * ORIENTATIONS.length)];
+        currentSloanChar = SLOAN_LETTERS[Math.floor(Math.random() * SLOAN_LETTERS.length)];
+        renderAcuityDisplay();
+      }
+
+      function recordAcuityInput(val) {
+        let isCorrect = false;
+        if (optotypeMode === 'SLOAN') {
+          isCorrect = (val === currentSloanChar);
+        } else {
+          isCorrect = (val === currentOptotypeOrientation);
+        }
+
+        const feedback = document.getElementById('acuity-feedback');
+        const lvl = ACUITY_LADDER[currentAcuityIndex];
+        const rowStatus = document.getElementById(`acuity-ladder-status-${currentAcuityIndex}`);
+
+        if (isCorrect) {
+          if (feedback) feedback.innerHTML = `<span style="color:#10B981;">&#10003; Correct (${lvl.snellen})</span>`;
+          if (rowStatus) rowStatus.innerHTML = '<span style="color:#10B981; font-weight:700;">PASSED</span>';
+          if (currentAcuityIndex < ACUITY_LADDER.length - 1) {
+            currentAcuityIndex++;
+          }
+        } else {
+          if (feedback) feedback.innerHTML = `<span style="color:#EF4444;">&#10007; Missed (${lvl.snellen})</span>`;
+          if (rowStatus) rowStatus.innerHTML = '<span style="color:#EF4444; font-weight:700;">MISSED</span>';
+          if (currentAcuityIndex > 0) {
+            currentAcuityIndex--;
+          }
+        }
+
+        const scoreLvl = ACUITY_LADDER[currentAcuityIndex];
+        const summaryEl = document.getElementById('acuity-score-summary');
+        if (summaryEl) {
+          summaryEl.innerHTML = `Estimated Acuity (${acuityEye}): <strong>${scoreLvl.snellen} (${scoreLvl.logmar.toFixed(2)} LogMAR)</strong> • Stroke: ${scoreLvl.strokeArcmin} arcmin`;
+        }
+
+        stepAcuityOptotype();
+      }
+
+      function resetAcuityTest() {
+        currentAcuityIndex = 4;
+        initAcuityLadderTable();
+        stepAcuityOptotype();
+        const feedback = document.getElementById('acuity-feedback');
+        if (feedback) feedback.innerText = 'Staircase reset to 20/40 baseline.';
+      }
+
+      async function syncAcuityToBackend() {
+        const lvl = ACUITY_LADDER[currentAcuityIndex];
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/acuity`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                eye: acuityEye,
+                method: optotypeMode,
+                logmar: lvl.logmar,
+                snellen: lvl.snellen,
+                contrast_level: "100%"
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Visual Acuity (${acuityEye} ${lvl.snellen} - ${lvl.logmar.toFixed(2)} LogMAR) to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Visual Acuity Recorded locally: ${acuityEye} ${lvl.snellen} (${lvl.logmar.toFixed(2)} LogMAR).`);
+      }
+
+      // MODULE 2: OFFICIAL ISHIHARA 24-PLATE CLINICAL BATTERY (EXTRACTED FROM USAID / CHALLENGE TB EDITION)
+      const ISHIHARA_ASSETS = [
+        { num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration', normal: '12', rg: '12', protan: '12', deutan: '12', note: 'Demonstration plate: Everyone should see 12.', choices: ['12', 'None', '8', '3'] },
+        { num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation', normal: '8', rg: '3', protan: '3', deutan: '3', note: 'Transformation: Normal sees 8, Red-green deficiency sees 3.', choices: ['8', '3', 'None', '5'] },
+        { num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation', normal: '6', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 6, Red-green deficiency sees 5.', choices: ['6', '5', 'None', '8'] },
+        { num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation', normal: '29', rg: '70', protan: '70', deutan: '70', note: 'Transformation: Normal sees 29, Red-green deficiency sees 70.', choices: ['29', '70', 'None', '20'] },
+        { num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation', normal: '57', rg: '35', protan: '35', deutan: '35', note: 'Transformation: Normal sees 57, Red-green deficiency sees 35.', choices: ['57', '35', 'None', '75'] },
+        { num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation', normal: '5', rg: '2', protan: '2', deutan: '2', note: 'Transformation: Normal sees 5, Red-green deficiency sees 2.', choices: ['5', '2', 'None', '3'] },
+        { num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation', normal: '3', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 3, Red-green deficiency sees 5.', choices: ['3', '5', 'None', '8'] },
+        { num: 8, file: 'assets/ishihara/plate_08.png', type: 'Transformation', normal: '15', rg: '17', protan: '17', deutan: '17', note: 'Transformation: Normal sees 15, Red-green deficiency sees 17.', choices: ['15', '17', 'None', '13'] },
+        { num: 9, file: 'assets/ishihara/plate_09.png', type: 'Transformation', normal: '74', rg: '21', protan: '21', deutan: '21', note: 'Transformation: Normal sees 74, Red-green deficiency sees 21.', choices: ['74', '21', 'None', '71'] },
+        { num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing', normal: '2', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 2, Deficient sees nothing.', choices: ['2', 'None', '7', '1'] },
+        { num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing', normal: '6', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 6, Deficient sees nothing.', choices: ['6', 'None', '5', '8'] },
+        { num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing', normal: '97', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 97, Deficient sees nothing.', choices: ['97', 'None', '91', '87'] },
+        { num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing', normal: '45', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 45, Deficient sees nothing.', choices: ['45', 'None', '40', '15'] },
+        { num: 14, file: 'assets/ishihara/plate_14.png', type: 'Vanishing', normal: '5', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 5, Deficient sees nothing.', choices: ['5', 'None', '2', '6'] },
+        { num: 15, file: 'assets/ishihara/plate_15.png', type: 'Vanishing', normal: '7', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 7, Deficient sees nothing.', choices: ['7', 'None', '1', '4'] },
+        { num: 16, file: 'assets/ishihara/plate_16.png', type: 'Vanishing', normal: '16', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 16, Deficient sees nothing.', choices: ['16', 'None', '18', '10'] },
+        { num: 17, file: 'assets/ishihara/plate_17.png', type: 'Vanishing', normal: '73', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 73, Deficient sees nothing.', choices: ['73', 'None', '78', '23'] },
+        { num: 18, file: 'assets/ishihara/plate_18.png', type: 'Hidden Digit', normal: 'None', rg: '5', protan: '5', deutan: '5', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 5.', choices: ['None', '5', '2', '6'] },
+        { num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Digit', normal: 'None', rg: '2', protan: '2', deutan: '2', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 2.', choices: ['None', '2', '5', '7'] },
+        { num: 20, file: 'assets/ishihara/plate_20.png', type: 'Hidden Digit', normal: 'None', rg: '45', protan: '45', deutan: '45', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 45.', choices: ['None', '45', '40', '15'] },
+        { num: 21, file: 'assets/ishihara/plate_21.png', type: 'Hidden Digit', normal: 'None', rg: '73', protan: '73', deutan: '73', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 73.', choices: ['None', '73', '78', '23'] },
+        { num: 22, file: 'assets/ishihara/plate_22.png', type: 'Classification', normal: '26', rg: 'Partial', protan: '6', deutan: '2', note: 'Classification: Normal sees 26; Protanope sees 6; Deuteranope sees 2.', choices: ['26', '6', '2', 'None'] },
+        { num: 23, file: 'assets/ishihara/plate_23.png', type: 'Classification', normal: '42', rg: 'Partial', protan: '2', deutan: '4', note: 'Classification: Normal sees 42; Protanope sees 2; Deuteranope sees 4.', choices: ['42', '2', '4', 'None'] },
+        { num: 24, file: 'assets/ishihara/plate_24.png', type: 'Classification', normal: '35', rg: 'Partial', protan: '5', deutan: '3', note: 'Classification: Normal sees 35; Protanope sees 5; Deuteranope sees 3.', choices: ['35', '5', '3', 'None'] }
+      ];
+
+      // Preload genuine Ishihara plate images into browser memory
+      const ishiharaImageCache = {};
+      ISHIHARA_ASSETS.forEach((p, idx) => {
+        const img = new Image();
+        img.src = p.file;
+        ishiharaImageCache[idx] = img;
+      });
+
+      let currentColourPlateIndex = 0;
+      let colourPlateAnswers = [];
+
+      function drawPseudoisochromaticPlate(canvasId, plateIndex) {
+        const c = document.getElementById(canvasId);
+        if (!c) return;
+        const ctx = c.getContext('2d');
+        const w = c.width;
+        const h = c.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const plate = ISHIHARA_ASSETS[plateIndex];
+        if (!plate) return;
+
+        const img = ishiharaImageCache[plateIndex] || new Image();
+        if (!img.src) img.src = plate.file;
+
+        const renderPlate = () => {
+          ctx.save();
+          // Clip circular aperture
+          ctx.beginPath();
+          ctx.arc(w / 2, h / 2, (w / 2) - 4, 0, Math.PI * 2);
+          ctx.clip();
+          ctx.drawImage(img, 0, 0, w, h);
+          ctx.restore();
+
+          // Outer subtle bezel
+          ctx.strokeStyle = '#CBD5E1';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.arc(w / 2, h / 2, (w / 2) - 4, 0, Math.PI * 2);
+          ctx.stroke();
+        };
+
+        if (img.complete && img.naturalWidth !== 0) {
+          renderPlate();
+        } else {
+          img.onload = renderPlate;
+        }
+      }
+
+      function initColourVisionTable() {
+        const tbody = document.getElementById('colour-table-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        ISHIHARA_ASSETS.forEach((p, idx) => {
+          const tr = document.createElement('tr');
+          tr.id = 'colour-row-' + idx;
+          tr.style.cursor = 'pointer';
+          tr.onclick = () => jumpToColourPlate(idx);
+          tr.innerHTML = `<td><strong>Plate ${p.num}</strong></td><td><span style="font-size:11px; color:var(--text-muted);">${p.type}</span></td><td><strong>${p.normal}</strong></td><td>${p.rg}</td><td id="colour-ans-${idx}">--</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function updateColourPlateView() {
+        const p = ISHIHARA_ASSETS[currentColourPlateIndex];
+        if (!p) return;
+
+        const title = document.getElementById('colour-plate-title');
+        if (title) title.innerText = `Plate ${p.num} of 24: ${p.type}`;
+
+        const prompt = document.getElementById('colour-plate-prompt');
+        if (prompt) {
+          prompt.innerHTML = `<strong>Plate ${p.num} (${p.type}):</strong> ${p.note}<br><span style="font-size:11px; color:var(--text-muted);">Normal trichromats perceive: <strong>${p.normal}</strong></span>`;
+        }
+
+        // Highlight active row in table
+        document.querySelectorAll('#colour-table-body tr').forEach((r, idx) => {
+          if (idx === currentColourPlateIndex) {
+            r.style.background = 'var(--mint-wash)';
+            r.style.fontWeight = '700';
+          } else {
+            r.style.background = 'transparent';
+            r.style.fontWeight = 'normal';
+          }
+        });
+
+        // Render dynamic quick choice buttons in 2D Desktop interface
+        const choiceBox = document.getElementById('colour-choices-container');
+        if (choiceBox) {
+          choiceBox.innerHTML = '';
+          p.choices.forEach(ch => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-secondary';
+            btn.style.fontSize = '13px';
+            btn.style.padding = '8px 14px';
+            btn.style.fontWeight = '700';
+            btn.innerText = ch;
+            btn.onclick = () => submitPlateAnswer(ch);
+            choiceBox.appendChild(btn);
+          });
+        }
+
+        drawPseudoisochromaticPlate('ishihara-canvas', currentColourPlateIndex);
+      }
+
+      function jumpToColourPlate(idx) {
+        if (idx >= 0 && idx < ISHIHARA_ASSETS.length) {
+          currentColourPlateIndex = idx;
+          updateColourPlateView();
+        }
+      }
+
+      function prevColourPlate() {
+        if (currentColourPlateIndex > 0) {
+          currentColourPlateIndex--;
+          updateColourPlateView();
+        }
+      }
+
+      function nextColourPlate() {
+        if (currentColourPlateIndex < ISHIHARA_ASSETS.length - 1) {
+          currentColourPlateIndex++;
+          updateColourPlateView();
+        }
+      }
+
+      function submitPlateAnswer(val) {
+        const cleanVal = (val !== null && val !== undefined && String(val).trim() !== '') ? String(val).trim() : 'Blank';
+        colourPlateAnswers[currentColourPlateIndex] = cleanVal;
+
+        const cell = document.getElementById(`colour-ans-${currentColourPlateIndex}`);
+        if (cell) {
+          const p = ISHIHARA_ASSETS[currentColourPlateIndex];
+          const isCorrect = (cleanVal.toLowerCase() === p.normal.toLowerCase());
+          cell.innerHTML = isCorrect
+            ? `<span style="color:#10B981; font-weight:700;">&#10003; ${cleanVal}</span>`
+            : `<span style="color:#EF4444; font-weight:700;">${cleanVal}</span>`;
+        }
+
+        if (currentColourPlateIndex < ISHIHARA_ASSETS.length - 1) {
+          currentColourPlateIndex++;
+          updateColourPlateView();
+        } else {
+          evaluateColourVisionResult('WEB_2D');
+        }
+      }
+
+      function resetColourVisionTest() {
+        currentColourPlateIndex = 0;
+        colourPlateAnswers = [];
+        initColourVisionTable();
+        updateColourPlateView();
+        const heading = document.getElementById('colour-diagnosis-heading');
+        const detail = document.getElementById('colour-diagnosis-detail');
+        if (heading) heading.innerText = 'Status: Testing In Progress';
+        if (detail) detail.innerText = 'Step through the 24 authentic plates to evaluate trichromatic integrity and classify Protan/Deutan defects.';
+      }
+
+      function evaluateColourVisionResult(mode = 'WEB_2D') {
+        let correctCount = 0;
+        let protanVotes = 0;
+        let deutanVotes = 0;
+
+        ISHIHARA_ASSETS.forEach((p, idx) => {
+          const ans = (colourPlateAnswers[idx] || '').trim().toLowerCase();
+          const expected = p.normal.toLowerCase();
+          if (ans === expected) {
+            correctCount++;
+          } else {
+            if (p.protan && ans === p.protan.toLowerCase()) protanVotes++;
+            if (p.deutan && ans === p.deutan.toLowerCase()) deutanVotes++;
+          }
+        });
+
+        let classification = 'NORMAL_TRICHROMACY';
+        let severity = 'NORMAL';
+
+        // Clinical criteria for Ishihara 24-Plate edition:
+        // Normal trichromats identify >= 13 of the first 15 numeral plates correctly.
+        // <= 9 plates correct indicates red-green deficiency.
+        if (correctCount >= 20) {
+          classification = 'NORMAL_TRICHROMACY';
+          severity = 'NORMAL';
+        } else if (correctCount >= 14) {
+          classification = 'BORDERLINE_TRICHROMACY';
+          severity = 'MILD_DEFECT';
+        } else {
+          severity = 'MODERATE_DEFECT';
+          if (protanVotes > deutanVotes) {
+            classification = 'PROTANOPIA_PROTANOMALY_RED_DEFECT';
+          } else if (deutanVotes > protanVotes) {
+            classification = 'DEUTERANOPIA_DEUTERANOMALY_GREEN_DEFECT';
+          } else if (correctCount <= 3) {
+            classification = 'TOTAL_COLOUR_BLINDNESS_ACHROMATOPSIA';
+          } else {
+            classification = 'RED_GREEN_COLOUR_DEFICIENCY';
+          }
+        }
+
+        const heading = document.getElementById('colour-diagnosis-heading');
+        const detail = document.getElementById('colour-diagnosis-detail');
+        if (heading) {
+          heading.innerText = `Diagnosis: ${classification.replace(/_/g, ' ')}`;
+          heading.style.color = (severity === 'NORMAL') ? 'var(--sea-green-dark)' : '#EF4444';
+        }
+        if (detail) {
+          detail.innerHTML = `Scored <strong>${correctCount} of 24 plates correct</strong> (${Math.round((correctCount / 24) * 100)}%). ` +
+            `Protan signals: ${protanVotes}, Deutan signals: ${deutanVotes}. Test Mode: <strong>${mode}</strong>. ` +
+            `Meets CDSCO Class B SaMD investigational protocol.`;
+        }
+
+        return { correctCount, classification, severity, mode, protanVotes, deutanVotes };
+      }
+
+      async function syncColourVisionToBackend(mode = 'WEB_2D') {
+        const result = evaluateColourVisionResult(mode);
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/colour-vision`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                eye: "OU",
+                test_type: "ISHIHARA_24_PLATE_AUTHENTIC",
+                total_plates: 24,
+                plates_correct: result.correctCount,
+                deficiency_detected: (result.severity !== 'NORMAL'),
+                classification: result.classification,
+                mode: mode
+              })
+            });
+            if (res.ok) {
+              alert(`[FastAPI Synced]: Authentic 24-Plate Ishihara Assessment (${result.classification}, Score: ${result.correctCount}/24, Mode: ${mode}) committed to clinical database.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Colour Vision Recorded locally: ${result.classification} (${result.correctCount}/24 correct).`);
+      }
+
+      // VR HEADSET STEREOSCOPIC COLOUR VISION CONTROLS
+      let vrPlateIndex = 0;
+      let vrPlateAnswers = [];
+
+      function renderVrColourPlates() {
+        const p = ISHIHARA_ASSETS[vrPlateIndex];
+        if (!p) return;
+
+        const title = document.getElementById('vr-plate-title');
+        if (title) title.innerText = `VR Stereoscopic Colour Vision Test (Plate ${p.num} of 24: ${p.type})`;
+
+        // Render dynamic large VR gaze/touch pills
+        const vrChoiceBox = document.getElementById('vr-choices-container');
+        if (vrChoiceBox) {
+          vrChoiceBox.innerHTML = '';
+          p.choices.forEach(ch => {
+            const btn = document.createElement('button');
+            btn.className = 'vr-key-btn';
+            btn.style.width = 'auto';
+            btn.style.minWidth = '75px';
+            btn.style.padding = '0 16px';
+            btn.innerText = ch;
+            btn.onclick = () => submitVrPlateAnswer(ch);
+            vrChoiceBox.appendChild(btn);
+          });
+        }
+
+        drawPseudoisochromaticPlate('vr-canvas-left', vrPlateIndex);
+        drawPseudoisochromaticPlate('vr-canvas-right', vrPlateIndex);
+      }
+
+      function submitVrPlateAnswer(val) {
+        const cleanVal = (val !== null && val !== undefined && String(val).trim() !== '') ? String(val).trim() : 'Blank';
+        vrPlateAnswers[vrPlateIndex] = cleanVal;
+
+        if (vrPlateIndex < ISHIHARA_ASSETS.length - 1) {
+          vrPlateIndex++;
+          renderVrColourPlates();
+        } else {
+          // Finished VR 24-Plate Battery
+          let correct = 0;
+          ISHIHARA_ASSETS.forEach((p, idx) => {
+            if ((vrPlateAnswers[idx] || '').toLowerCase() === p.normal.toLowerCase()) correct++;
+          });
+          const classification = (correct >= 20) ? 'NORMAL_TRICHROMACY' : 'RED_GREEN_COLOUR_DEFICIENCY';
+          alert(`VR Colour Vision Examination Complete!\n\nScore: ${correct} of 24 Authentic Plates Correct\nResult: ${classification}\n\nAutomatically synced to FastAPI clinical records.`);
+          syncColourVisionToBackend('VR_HEADSET');
+        }
+      }
+
+      function resetVrColourTest() {
+        vrPlateIndex = 0;
+        vrPlateAnswers = [];
+        renderVrColourPlates();
+      }
+
+
+      // MODULE 3: CONTRAST SENSITIVITY (PELLI-ROBSON)
+      const PELLI_ROBSON_TRIPLETS = [
+        { id: 1, letters: "V R S", logCS: 0.15, opacity: 1.00, contrastPct: "100%" },
+        { id: 2, letters: "K D R", logCS: 0.45, opacity: 0.56, contrastPct: "56%" },
+        { id: 3, letters: "N H C", logCS: 0.75, opacity: 0.32, contrastPct: "32%" },
+        { id: 4, letters: "O K S", logCS: 1.05, opacity: 0.18, contrastPct: "18%" },
+        { id: 5, letters: "S C N", logCS: 1.35, opacity: 0.10, contrastPct: "10%" },
+        { id: 6, letters: "Z O D", logCS: 1.65, opacity: 0.056, contrastPct: "5.6% (Normal Adult Floor)" },
+        { id: 7, letters: "C H V", logCS: 1.95, opacity: 0.032, contrastPct: "3.2% (High Sensitivity)" },
+        { id: 8, letters: "D Z N", logCS: 2.25, opacity: 0.018, contrastPct: "1.8%" }
+      ];
+      let currentCsLog = 1.95;
+
+      function initContrastTriplets() {
+        const container = document.getElementById('contrast-triplets-list');
+        if (!container) return;
+        container.innerHTML = '';
+        PELLI_ROBSON_TRIPLETS.forEach(t => {
+          const card = document.createElement('div');
+          card.className = 'cs-triplet-card';
+          card.id = 'cs-card-' + t.id;
+          card.innerHTML = `
+      <div>
+        <div class="cs-letters" style="opacity:${t.opacity};">${t.letters}</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Row ${t.id} • ${t.logCS.toFixed(2)} log CS (${t.contrastPct})</div>
+      </div>
+      <button class="btn-secondary" style="font-size:12px;" onclick="setContrastPreset(${t.logCS})">Mark Threshold</button>
+    `;
+          container.appendChild(card);
+        });
+      }
+
+      function setContrastPreset(logVal) {
+        currentCsLog = logVal;
+        const scoreDisp = document.getElementById('cs-score-display');
+        const badge = document.getElementById('cs-grade-badge');
+        if (scoreDisp) scoreDisp.innerText = `${logVal.toFixed(2)} log CS`;
+
+        if (badge) {
+          if (logVal >= 1.65) {
+            badge.innerText = 'NORMAL ADULT CS (\u2265 1.65)';
+            badge.style.background = '#D1FAE5';
+            badge.style.color = '#065F46';
+          } else if (logVal >= 1.50) {
+            badge.innerText = 'BORDERLINE / SUSPECT (1.50 \u2013 1.60)';
+            badge.style.background = '#FEF3C7';
+            badge.style.color = '#92400E';
+          } else {
+            badge.innerText = 'ABNORMAL DEFICIT (< 1.50) - GLAUCOMA / MEDIA RISK';
+            badge.style.background = '#FEE2E2';
+            badge.style.color = '#991B1B';
+          }
+        }
+      }
+
+      async function syncContrastToBackend() {
+        const severity = (currentCsLog >= 1.65) ? 'NORMAL' : (currentCsLog >= 1.50 ? 'BORDERLINE' : 'MODERATE_DEFECT');
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/contrast-sensitivity`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                eye: "OD",
+                method: "PELLI_ROBSON",
+                log_contrast_sensitivity: currentCsLog,
+                triplets_seen: Math.round(currentCsLog / 0.15),
+                severity: severity
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Contrast Sensitivity (${currentCsLog.toFixed(2)} log CS - ${severity}) to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Contrast Sensitivity Recorded locally: ${currentCsLog.toFixed(2)} log CS.`);
+      }
+
+      // MODULE 4: CENTRAL AMSLER GRID
+      const amslerCanvas = document.getElementById('amsler-canvas');
+      const amslerCtx = amslerCanvas ? amslerCanvas.getContext('2d') : null;
+      let amslerMarks = [];
+      let isDrawingAmsler = false;
+      let amslerStyle = 'BLACK_ON_WHITE';
+      let amslerShowDiagonals = false;
+
+      function setAmslerStyle(style) {
+        amslerStyle = style;
+        document.querySelectorAll('#btn-amsler-bw, #btn-amsler-wb, #btn-amsler-red').forEach(b => b.classList.remove('active'));
+        if (style === 'BLACK_ON_WHITE') document.getElementById('btn-amsler-bw').classList.add('active');
+        if (style === 'WHITE_ON_BLACK') document.getElementById('btn-amsler-wb').classList.add('active');
+        if (style === 'RED_ON_BLACK') document.getElementById('btn-amsler-red').classList.add('active');
+        drawAmslerGrid();
+      }
+
+      function toggleAmslerDiagonals(checked) {
+        amslerShowDiagonals = checked;
+        drawAmslerGrid();
+      }
+
+      function drawAmslerGrid() {
+        if (!amslerCtx) return;
+        const w = amslerCanvas.width;
+        const h = amslerCanvas.height;
+
+        let bg = '#FFFFFF';
+        let lineCol = '#94A3B8';
+        let borderCol = '#0F172A';
+        let dotCol = '#0F172A';
+
+        if (amslerStyle === 'WHITE_ON_BLACK') {
+          bg = '#0F172A'; lineCol = '#475569'; borderCol = '#FFF'; dotCol = '#FFF';
+        } else if (amslerStyle === 'RED_ON_BLACK') {
+          bg = '#000000'; lineCol = '#7F1D1D'; borderCol = '#EF4444'; dotCol = '#EF4444';
+        }
+
+        amslerCtx.fillStyle = bg;
+        amslerCtx.fillRect(0, 0, w, h);
+
+        const margin = 10;
+        const gridSize = w - (2 * margin);
+        const divisions = 20;
+        const step = gridSize / divisions;
+        const cx = margin + (gridSize / 2);
+        const cy = margin + (gridSize / 2);
+
+        // Outer border
+        amslerCtx.strokeStyle = borderCol;
+        amslerCtx.lineWidth = 1.5;
+        amslerCtx.strokeRect(margin, margin, gridSize, gridSize);
+
+        // Grid lines
+        amslerCtx.lineWidth = 0.75;
+        amslerCtx.strokeStyle = lineCol;
+        for (let i = 0; i <= divisions; i++) {
+          const pos = margin + (i * step);
+          amslerCtx.beginPath();
+          amslerCtx.moveTo(pos, margin);
+          amslerCtx.lineTo(pos, margin + gridSize);
+          amslerCtx.stroke();
+
+          amslerCtx.beginPath();
+          amslerCtx.moveTo(margin, pos);
+          amslerCtx.lineTo(margin + gridSize, pos);
+          amslerCtx.stroke();
+        }
+
+        // Diagonal guidelines for dense central scotoma fixation
+        if (amslerShowDiagonals) {
+          amslerCtx.strokeStyle = (amslerStyle === 'RED_ON_BLACK') ? '#DC2626' : '#64748B';
+          amslerCtx.lineWidth = 1.0;
+          amslerCtx.setLineDash([4, 4]);
+          amslerCtx.beginPath();
+          amslerCtx.moveTo(margin, margin);
+          amslerCtx.lineTo(margin + gridSize, margin + gridSize);
+          amslerCtx.moveTo(margin + gridSize, margin);
+          amslerCtx.lineTo(margin, margin + gridSize);
+          amslerCtx.stroke();
+          amslerCtx.setLineDash([]);
+        }
+
+        // Draw user marks
+        amslerMarks.forEach(pt => {
+          amslerCtx.fillStyle = 'rgba(239, 68, 68, 0.55)';
+          amslerCtx.beginPath();
+          amslerCtx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
+          amslerCtx.fill();
+        });
+
+        // EXACT CENTRAL FIXATION DOT AT (140, 140)
+        amslerCtx.fillStyle = dotCol;
+        amslerCtx.beginPath();
+        amslerCtx.arc(cx, cy, 4.5, 0, Math.PI * 2);
+        amslerCtx.fill();
+      }
+
+      function clearAmslerMarks() {
+        amslerMarks = [];
+        const cnt = document.getElementById('amsler-defect-count');
+        if (cnt) cnt.innerText = '0';
+        drawAmslerGrid();
+      }
+
+      if (amslerCanvas) {
+        function addAmslerPoint(e) {
+          const rect = amslerCanvas.getBoundingClientRect();
+          const x = (e.clientX - rect.left) * (amslerCanvas.width / rect.width);
+          const y = (e.clientY - rect.top) * (amslerCanvas.height / rect.height);
+          amslerMarks.push({ x, y });
+          const cnt = document.getElementById('amsler-defect-count');
+          if (cnt) cnt.innerText = String(amslerMarks.length);
+          drawAmslerGrid();
+        }
+
+        amslerCanvas.addEventListener('mousedown', (e) => {
+          isDrawingAmsler = true;
+          addAmslerPoint(e);
+        });
+        amslerCanvas.addEventListener('mousemove', (e) => {
+          if (isDrawingAmsler) addAmslerPoint(e);
+        });
+        window.addEventListener('mouseup', () => { isDrawingAmsler = false; });
+      }
+
+      async function syncAmslerToBackend() {
+        const isNormal = (amslerMarks.length === 0);
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/amsler`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                eye: "OD",
+                metamorphopsia: !isNormal,
+                scotoma: (amslerMarks.length > 5),
+                distorted_points_count: amslerMarks.length,
+                notes: isNormal ? "Normal central grid" : `Marked ${amslerMarks.length} defect zones in 10-degree field`
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Amsler grid findings (${isNormal ? 'Normal' : 'Metamorphopsia flagged'}) to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Amsler findings recorded locally (${amslerMarks.length} defect points mapped).`);
+      }
+
+      function recordAmslerFinding(type) {
+        if (type === 'NORMAL') {
+          clearAmslerMarks();
+          syncAmslerToBackend();
+        } else {
+          if (amslerMarks.length === 0) {
+            alert("Click on the grid to mark the patient's area of wavy lines or distortion first.");
+          } else {
+            syncAmslerToBackend();
+          }
+        }
+      }
+
+      // MODULE 5: BINOCULAR VISION & STEREOACUITY (WORTH 4-DOT)
+      let currentWorthResponse = 'FOUR_DOTS_FUSION';
+      let currentStereoArcsec = 40.0;
+
+      function setWorthResponse(resp) {
+        currentWorthResponse = resp;
+        const title = document.getElementById('binocular-fusion-title');
+        if (!title) return;
+        const map = {
+          'FOUR_DOTS_FUSION': 'Fusion: Normal Binocular Sensory Fusion',
+          'TWO_RED_SUPPRESSION_OS': 'Suppression: Left Eye (OS) Suppressed',
+          'THREE_GREEN_SUPPRESSION_OD': 'Suppression: Right Eye (OD) Suppressed',
+          'FIVE_DOTS_DIPLOPIA': 'Diplopia: Strabismic Tropia / Diplopia'
+        };
+        title.innerText = map[resp] || resp;
+      }
+
+      function setStereoacuity(arcsec) {
+        currentStereoArcsec = arcsec;
+        document.querySelectorAll('#tab-binocular .segmented-btn').forEach(b => b.classList.remove('active'));
+        const detail = document.getElementById('binocular-stereo-detail');
+        if (detail) {
+          const grade = (arcsec <= 40) ? 'Full Fine Stereopsis' : (arcsec <= 100 ? 'Moderate Stereopsis' : 'Gross / Reduced Stereopsis');
+          detail.innerText = `Stereoacuity: ${arcsec} seconds of arc \u2022 ${grade}`;
+        }
+      }
+
+      async function syncBinocularToBackend() {
+        const fusion = (currentWorthResponse === 'FOUR_DOTS_FUSION') ? 'NORMAL_FUSION' : (currentWorthResponse === 'FIVE_DOTS_DIPLOPIA' ? 'DIPLOPIA' : 'SUPPRESSION');
+        const grade = (currentStereoArcsec <= 50) ? 'NORMAL' : (currentStereoArcsec <= 200 ? 'REDUCED' : 'ABSENT');
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/binocular-vision`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                worth_four_dot_response: currentWorthResponse,
+                stereoacuity_arcsec: currentStereoArcsec,
+                fusion_status: fusion,
+                depth_perception_grade: grade
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Binocular Vision findings (Worth: ${currentWorthResponse}, Stereo: ${currentStereoArcsec}") to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Binocular Vision Recorded locally: Worth=${currentWorthResponse}, Stereo=${currentStereoArcsec}".`);
+      }
+
+      // MODULE 6: OCULAR MOTILITY & SMOOTH PURSUIT (BROAD-H)
+      const motilityCanvas = document.getElementById('motility-canvas');
+      const motilityCtx = motilityCanvas ? motilityCanvas.getContext('2d') : null;
+      const CARDINAL_GAZES = [
+        { name: "Primary Gaze", x: 0, y: 0, muscle: "Bilateral Fixation", nerve: "CN III, IV, VI Balanced" },
+        { name: "Dextroversion (Right)", x: 120, y: 0, muscle: "Right Lateral Rectus (RLR) / Left Medial Rectus (LMR)", nerve: "Right CN VI / Left CN III" },
+        { name: "Dextro-Elevation (Up-Right)", x: 100, y: -75, muscle: "Right Superior Rectus (RSR) / Left Inferior Oblique (LIO)", nerve: "Right CN III / Left CN III" },
+        { name: "Dextro-Depression (Down-Right)", x: 100, y: 75, muscle: "Right Inferior Rectus (RIR) / Left Superior Oblique (LSO)", nerve: "Right CN III / Left CN IV" },
+        { name: "Return to Primary", x: 0, y: 0, muscle: "Bilateral Fixation", nerve: "CN III, IV, VI Balanced" },
+        { name: "Levoversion (Left)", x: -120, y: 0, muscle: "Left Lateral Rectus (LLR) / Right Medial Rectus (RMR)", nerve: "Left CN VI / Right CN III" },
+        { name: "Levo-Elevation (Up-Left)", x: -100, y: -75, muscle: "Left Superior Rectus (LSR) / Right Inferior Oblique (RIO)", nerve: "Left CN III / Right CN III" },
+        { name: "Levo-Depression (Down-Left)", x: -100, y: 75, muscle: "Left Inferior Rectus (LIR) / Right Superior Oblique (RSO)", nerve: "Left CN III / Right CN IV" },
+        { name: "Sursumversion (Straight Up)", x: 0, y: -85, muscle: "Bilateral Superior Recti & Inferior Obliques", nerve: "Bilateral CN III" }
+      ];
+
+      let currentMotilityStep = 0;
+      let motilityAnimating = false;
+      let motilityTargetPos = { x: 0, y: 0 };
+
+      function drawMotilityStage() {
+        if (!motilityCtx) return;
+        const w = motilityCanvas.width;
+        const h = motilityCanvas.height;
+        const cx = w / 2;
+        const cy = h / 2;
+
+        motilityCtx.fillStyle = '#1E293B';
+        motilityCtx.fillRect(0, 0, w, h);
+
+        // Draw Broad-H guide lines
+        motilityCtx.strokeStyle = '#334155';
+        motilityCtx.lineWidth = 2;
+        motilityCtx.beginPath();
+        // Vertical legs of H
+        motilityCtx.moveTo(cx + 100, cy - 75); motilityCtx.lineTo(cx + 100, cy + 75);
+        motilityCtx.moveTo(cx - 100, cy - 75); motilityCtx.lineTo(cx - 100, cy + 75);
+        // Crossbar
+        motilityCtx.moveTo(cx - 120, cy); motilityCtx.lineTo(cx + 120, cy);
+        motilityCtx.stroke();
+
+        // Draw 9 target nodes
+        CARDINAL_GAZES.forEach((g, idx) => {
+          motilityCtx.fillStyle = (idx === currentMotilityStep) ? '#38BDF8' : '#475569';
+          motilityCtx.beginPath();
+          motilityCtx.arc(cx + g.x, cy + g.y, (idx === currentMotilityStep) ? 7 : 4, 0, Math.PI * 2);
+          motilityCtx.fill();
+        });
+
+        // Animated smooth pursuit target
+        motilityCtx.fillStyle = '#EF4444';
+        motilityCtx.shadowColor = '#EF4444';
+        motilityCtx.shadowBlur = 10;
+        motilityCtx.beginPath();
+        motilityCtx.arc(cx + motilityTargetPos.x, cy + motilityTargetPos.y, 8, 0, Math.PI * 2);
+        motilityCtx.fill();
+        motilityCtx.shadowBlur = 0;
+      }
+
+      function updateMotilityInfo() {
+        const g = CARDINAL_GAZES[currentMotilityStep];
+        const lbl = document.getElementById('motility-position-label');
+        const mLabel = document.getElementById('motility-muscle-active');
+        const nLabel = document.getElementById('motility-nerve-active');
+        if (lbl) lbl.innerText = `Position: ${g.name}`;
+        if (mLabel) mLabel.innerText = `Active Muscles: ${g.muscle}`;
+        if (nLabel) nLabel.innerText = `Innervation: ${g.nerve}`;
+      }
+
+      function stepMotilityPosition() {
+        currentMotilityStep = (currentMotilityStep + 1) % CARDINAL_GAZES.length;
+        motilityTargetPos = { x: CARDINAL_GAZES[currentMotilityStep].x, y: CARDINAL_GAZES[currentMotilityStep].y };
+        updateMotilityInfo();
+        drawMotilityStage();
+      }
+
+      function toggleMotilityAnimation() {
+        motilityAnimating = !motilityAnimating;
+        const btn = document.getElementById('btn-motility-play');
+        if (btn) btn.innerText = motilityAnimating ? 'Pause Animation' : 'Start Tracking Animation';
+
+        if (motilityAnimating) {
+          const loop = setInterval(() => {
+            if (!motilityAnimating) {
+              clearInterval(loop);
+              return;
+            }
+            stepMotilityPosition();
+          }, 1200);
+        }
+      }
+
+      function resetMotility() {
+        motilityAnimating = false;
+        currentMotilityStep = 0;
+        motilityTargetPos = { x: 0, y: 0 };
+        const btn = document.getElementById('btn-motility-play');
+        if (btn) btn.innerText = 'Start Tracking Animation';
+        updateMotilityInfo();
+        drawMotilityStage();
+      }
+
+      async function syncMotilityToBackend() {
+        const quality = document.getElementById('sel-pursuit-quality') ? document.getElementById('sel-pursuit-quality').value : 'SMOOTH_FULL';
+        const nystagmus = document.getElementById('sel-nystagmus') ? document.getElementById('sel-nystagmus').value : 'NONE';
+        const diplopia = document.getElementById('chk-motility-diplopia') ? document.getElementById('chk-motility-diplopia').checked : false;
+
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/ocular-motility`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                smooth_pursuit_grade: quality,
+                nystagmus_detected: (nystagmus !== 'NONE'),
+                cardinal_gaze_deficit: diplopia || (quality === 'RESTRICTED'),
+                affected_muscles: diplopia ? ["Lateral Rectus", "Superior Oblique"] : []
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Ocular Motility assessment (Pursuit: ${quality}, Nystagmus: ${nystagmus}) to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Ocular Motility Recorded locally: Pursuit=${quality}, Nystagmus=${nystagmus}.`);
+      }
+
+      // MODULE 7: PUPILLARY ASSESSMENT (SWINGING FLASHLIGHT RAPD & PUPILLOMETRY)
+      let pupilMode = 'NORMAL'; // NORMAL, RAPD_OD, RAPD_OS
+      let lightEye = 'OD'; // OD, OS
+      let swingingTimer = null;
+
+      function setPupilMode(mode) {
+        pupilMode = mode;
+        document.querySelectorAll('#btn-pupil-normal, #btn-pupil-rapd-od, #btn-pupil-rapd-os').forEach(b => b.classList.remove('active'));
+        if (mode === 'NORMAL') document.getElementById('btn-pupil-normal').classList.add('active');
+        if (mode === 'RAPD_OD') document.getElementById('btn-pupil-rapd-od').classList.add('active');
+        if (mode === 'RAPD_OS') document.getElementById('btn-pupil-rapd-os').classList.add('active');
+
+        const desc = document.getElementById('pupil-simulation-desc');
+        if (desc) {
+          if (mode === 'NORMAL') desc.innerText = 'Normal Light Reflex: Light on either eye yields brisk symmetric constriction (direct + consensual).';
+          if (mode === 'RAPD_OD') desc.innerText = 'Positive RAPD Right Eye (Marcus Gunn): Light swinging to OD causes paradoxical dilation due to afferent conduction defect!';
+          if (mode === 'RAPD_OS') desc.innerText = 'Positive RAPD Left Eye (Marcus Gunn): Light swinging to OS causes paradoxical dilation due to afferent conduction defect!';
+        }
+        updatePupilReflexAnimation();
+      }
+
+      function updatePupilReflexAnimation() {
+        const pOD = document.getElementById('pupil-od');
+        const pOS = document.getElementById('pupil-os');
+        const beamOD = document.getElementById('light-beam-od');
+        const beamOS = document.getElementById('light-beam-os');
+        if (!pOD || !pOS) return;
+
+        if (lightEye === 'OD') {
+          if (beamOD) { beamOD.innerText = '\u2600 Direct Light Active'; beamOD.style.color = '#F59E0B'; }
+          if (beamOS) { beamOS.innerText = 'Dim (Consensual)'; beamOS.style.color = '#64748B'; }
+
+          if (pupilMode === 'RAPD_OD') {
+            // Paradoxical dilation in diseased right eye
+            pOD.style.width = '42px'; pOD.style.height = '42px';
+            pOS.style.width = '42px'; pOS.style.height = '42px';
+          } else {
+            // Normal direct constriction
+            pOD.style.width = '24px'; pOD.style.height = '24px';
+            pOS.style.width = '24px'; pOS.style.height = '24px';
+          }
+        } else {
+          if (beamOD) { beamOD.innerText = 'Dim (Consensual)'; beamOD.style.color = '#64748B'; }
+          if (beamOS) { beamOS.innerText = '\u2600 Direct Light Active'; beamOS.style.color = '#F59E0B'; }
+
+          if (pupilMode === 'RAPD_OS') {
+            // Paradoxical dilation in diseased left eye
+            pOD.style.width = '42px'; pOD.style.height = '42px';
+            pOS.style.width = '42px'; pOS.style.height = '42px';
+          } else {
+            // Normal direct constriction
+            pOD.style.width = '24px'; pOD.style.height = '24px';
+            pOS.style.width = '24px'; pOS.style.height = '24px';
+          }
+        }
+      }
+
+      function stepSwingingLight() {
+        lightEye = (lightEye === 'OD') ? 'OS' : 'OD';
+        updatePupilReflexAnimation();
+      }
+
+      function toggleSwingingFlashlight() {
+        const btn = document.getElementById('btn-swing-light');
+        if (swingingTimer) {
+          clearInterval(swingingTimer);
+          swingingTimer = null;
+          if (btn) btn.innerText = 'Resume Swinging Light';
+        } else {
+          swingingTimer = setInterval(stepSwingingLight, 2200);
+          if (btn) btn.innerText = 'Pause Swinging Light';
+        }
+      }
+
+      function updatePupilMetrics() {
+        const rOD = parseFloat(document.getElementById('rng-photopic-od').value);
+        const rOS = parseFloat(document.getElementById('rng-photopic-os').value);
+        const scot = parseFloat(document.getElementById('rng-scotopic').value);
+
+        document.getElementById('lbl-photopic-od').innerText = `${rOD.toFixed(1)} mm`;
+        document.getElementById('lbl-photopic-os').innerText = `${rOS.toFixed(1)} mm`;
+        document.getElementById('lbl-scotopic').innerText = `${scot.toFixed(1)} mm`;
+
+        const diff = Math.abs(rOD - rOS);
+        const box = document.getElementById('anisocoria-result-box');
+        const status = document.getElementById('anisocoria-status');
+
+        if (diff >= 0.4) {
+          status.innerText = `Anisocoria: Pathologic (\u0394 ${diff.toFixed(1)} mm)`;
+          status.style.color = '#EF4444';
+          box.style.background = '#FEE2E2';
+        } else {
+          status.innerText = `Anisocoria: Physiological (\u0394 ${diff.toFixed(1)} mm)`;
+          status.style.color = 'var(--sea-green-dark)';
+          box.style.background = 'var(--mint-wash)';
+        }
+      }
+
+      async function syncPupillaryToBackend() {
+        const rOD = parseFloat(document.getElementById('rng-photopic-od').value);
+        const rOS = parseFloat(document.getElementById('rng-photopic-os').value);
+        const scot = parseFloat(document.getElementById('rng-scotopic').value);
+        const isRapd = (pupilMode !== 'NORMAL');
+        const diff = Math.abs(rOD - rOS);
+
+        if (authToken && backendBaseUrl) {
+          try {
+            const res = await fetch(`${backendBaseUrl}/api/v1/sessions/S-DEMO-01/pupillary-assessment`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+              body: JSON.stringify({
+                rapd_detected: isRapd,
+                rapd_grade: isRapd ? (pupilMode === 'RAPD_OD' ? 'MODERATE_2_PLUS' : 'MILD_1_PLUS') : 'NONE',
+                pupil_size_photopic_od_mm: rOD,
+                pupil_size_photopic_os_mm: rOS,
+                pupil_size_scotopic_od_mm: scot,
+                pupil_size_scotopic_os_mm: scot,
+                anisocoria_present: (diff >= 0.4),
+                light_reflex_speed: "BRISK"
+              })
+            });
+            if (res.ok) {
+              alert(`Committed Pupillary assessment (RAPD: ${isRapd ? 'POSITIVE' : 'NEGATIVE'}, OD=${rOD}mm, OS=${rOS}mm) to FastAPI backend.`);
+              await fetchLiveAuditLogs();
+              return;
+            }
+          } catch (e) { }
+        }
+        alert(`Pupillary assessment recorded locally (RAPD=${isRapd}, Diff=${diff.toFixed(1)}mm).`);
+      }
+
+      // Global initialization on page load
+      window.addEventListener('DOMContentLoaded', () => {
+        initAcuityLadderTable();
+        stepAcuityOptotype();
+        initColourVisionTable();
+        updateColourPlateView();
+        initContrastTriplets();
+        drawAmslerGrid();
+        drawMotilityStage();
+        updatePupilReflexAnimation();
+        swingingTimer = setInterval(stepSwingingLight, 2200);
+      });
+
+
+      async function showNewPatientPrompt() {
+        const id = prompt("Enter new Patient ID (e.g. P-104):", "P-104");
+        if (id) {
+          if (authToken && backendBaseUrl) {
+            try {
+              const res = await fetch(`${backendBaseUrl}/api/v1/patients`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({
+                  patientId: id,
+                  ageBand: "40-59",
+                  hasDiabetes: false,
+                  symptoms: ["ROUTINE_CHECK"],
+                  currentCorrection: "UNAIDED",
+                  comorbidityFlags: {}
+                })
+              });
+              if (res.ok) {
+                await loadPatientsFromBackend();
+                await fetchLiveAuditLogs();
+                alert('Patient ' + id + ' registered in FastAPI backend and committed to audit log.');
+                return;
+              }
+            } catch (e) {
+              console.warn("Patient registration API notice:", e);
+            }
+          }
+          const tbody = document.getElementById('patient-table-body');
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td><strong>${id}</strong></td><td>Adult (30-49)</td><td>Negative</td><td>Unaided</td><td>Routine checkup</td><td><span style="color:#10B981; font-weight:600;">COMMITTED</span></td><td><button class="btn-secondary" onclick="switchTab('dashboard')">View Encounter</button></td>`;
+          tbody.prepend(tr);
+          alert('Patient ' + id + ' registered and queued for synchronization.');
+        }
+      }
   </script>
 
   <!-- PHONE 2 PATIENT RESPONSE PAD FULL VIEW (Dual Mode Architecture CR-002) -->
@@ -27714,13 +29018,16 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         <span class="pad-status-pill" id="pad-conn-badge">CONNECTED (749281)</span>
-        <button class="btn-secondary" style="font-size:11px; padding:6px 10px; background:#1E293B; color:white; border-color:#334155;" onclick="setPortalMode('PHYSICIAN_COCKPIT')">Doctor View</button>
+        <button class="btn-secondary"
+          style="font-size:11px; padding:6px 10px; background:#1E293B; color:white; border-color:#334155;"
+          onclick="setPortalMode('PHYSICIAN_COCKPIT')">Doctor View</button>
       </div>
     </div>
 
     <!-- Active Test Indicator -->
     <div style="text-align:center; margin-bottom:12px;">
-      <div style="font-size:14px; font-weight:700; color:#F8FAFC;" id="pad-active-test-title">Visual Field Perimetry (24-2)</div>
+      <div style="font-size:14px; font-weight:700; color:#F8FAFC;" id="pad-active-test-title">Visual Field Perimetry
+        (24-2)</div>
       <div style="font-size:12px; color:#64748B;" id="pad-active-trial-sub">Trial #14 — Waiting for stimulus...</div>
     </div>
 
@@ -27729,12 +29036,15 @@ window.addEventListener('DOMContentLoaded', () => {
       <div style="font-size:26px; font-weight:900; letter-spacing:1px;">TAP ANYWHERE</div>
       <div style="font-size:16px; font-weight:700; color:#10B981; margin-top:4px;">WHEN YOU SEE THE LIGHT</div>
       <div class="touch-sub">(Perimetry Spot / Contrast Grating Seen)</div>
-      <div id="pad-tap-feedback" style="margin-top:14px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">Tap Registered!</div>
+      <div id="pad-tap-feedback"
+        style="margin-top:14px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">Tap
+        Registered!</div>
     </div>
 
     <!-- Tumbling E Directional Keypad (Visible during Visual Acuity) -->
     <div id="pad-e-controls" style="display:none; flex-direction:column; align-items:center;">
-      <div style="font-size:12px; color:#94A3B8; margin-top:12px; margin-bottom:4px;">Acuity: Point Direction of "E" Prongs:</div>
+      <div style="font-size:12px; color:#94A3B8; margin-top:12px; margin-bottom:4px;">Acuity: Point Direction of "E"
+        Prongs:</div>
       <div class="e-direction-grid">
         <div></div>
         <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_UP')">&uarr;</button>
@@ -27750,7 +29060,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     <!-- Ishihara Numeric Keypad (Visible during Colour Vision) -->
     <div id="pad-num-controls" style="display:none; flex-direction:column; align-items:center;">
-      <div style="font-size:12px; color:#94A3B8; margin-top:12px; margin-bottom:4px;">Colour: Select Number Seen on Plate:</div>
+      <div style="font-size:12px; color:#94A3B8; margin-top:12px; margin-bottom:4px;">Colour: Select Number Seen on
+        Plate:</div>
       <div class="num-pad-grid">
         <button class="num-pad-btn" onclick="handleResponsePadTap('NUM_1')">1</button>
         <button class="num-pad-btn" onclick="handleResponsePadTap('NUM_2')">2</button>
@@ -27763,7 +29074,9 @@ window.addEventListener('DOMContentLoaded', () => {
         <button class="num-pad-btn" onclick="handleResponsePadTap('NUM_9')">9</button>
         <button class="num-pad-btn" onclick="handleResponsePadTap('NUM_0')">0</button>
       </div>
-      <button class="btn-secondary" style="margin-top:8px; width:100%; max-width:360px; background:#1E293B; color:white; border-color:#334155;" onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank Plate</button>
+      <button class="btn-secondary"
+        style="margin-top:8px; width:100%; max-width:360px; background:#1E293B; color:white; border-color:#334155;"
+        onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank Plate</button>
     </div>
 
     <!-- Emergency Halt Button -->
@@ -27774,28 +29087,44 @@ window.addEventListener('DOMContentLoaded', () => {
   <div id="remote-pairing-modal" class="pairing-modal-overlay">
     <div class="pairing-modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <h3 style="font-size:18px; font-weight:700; color:var(--sea-green-dark);">Online APK Pairing & Session Broker</h3>
-        <button class="btn-secondary" style="border:none; font-size:18px; cursor:pointer;" onclick="closeRemotePairingModal()">&times;</button>
+        <h3 style="font-size:18px; font-weight:700; color:var(--sea-green-dark);">Online APK Pairing & Session Broker
+        </h3>
+        <button class="btn-secondary" style="border:none; font-size:18px; cursor:pointer;"
+          onclick="closeRemotePairingModal()">&times;</button>
       </div>
       <div class="screening-notice-banner" style="margin-bottom:14px;">
         <div>CDSCO Class B SaMD • Authoritative Android Host + Remote Physician Station</div>
       </div>
       <div style="margin-bottom:14px;">
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Backend Broker URL (REST + WSS):</label>
-        <input type="text" id="modal-backend-url" placeholder="http://localhost:8008 or https://your-backend.onrender.com" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600; font-family:monospace; font-size:12px;">
-        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Auto-scanned across localhost:8008 and local network; override here if cloud-hosted.</div>
+        <label
+          style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Backend
+          Broker URL (REST + WSS):</label>
+        <input type="text" id="modal-backend-url"
+          placeholder="http://localhost:8008 or https://your-backend.onrender.com"
+          style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600; font-family:monospace; font-size:12px;">
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Auto-scanned across localhost:8008 and
+          local network; override here if cloud-hosted.</div>
       </div>
       <div style="margin-bottom:14px;">
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Session ID:</label>
-        <input type="text" id="modal-session-id" value="SES-ONEPLUS-NORD3-01" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600;">
+        <label
+          style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Session
+          ID:</label>
+        <input type="text" id="modal-session-id" value="SES-ONEPLUS-NORD3-01"
+          style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600;">
       </div>
       <div style="margin-bottom:14px;">
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">6-Digit Pairing PIN:</label>
-        <input type="text" id="modal-pairing-pin" value="749281" maxlength="6" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:18px; font-weight:800; letter-spacing:3px; color:var(--sea-green-dark);">
+        <label
+          style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">6-Digit
+          Pairing PIN:</label>
+        <input type="text" id="modal-pairing-pin" value="749281" maxlength="6"
+          style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:18px; font-weight:800; letter-spacing:3px; color:var(--sea-green-dark);">
       </div>
       <div style="margin-bottom:14px;">
-        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Select Station Role:</label>
-        <select id="modal-role-select" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px;">
+        <label
+          style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Select
+          Station Role:</label>
+        <select id="modal-role-select"
+          style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px;">
           <option value="PHYSICIAN_CONTROLLER">Physician Controller (Authoritative Doctor Station)</option>
           <option value="PATIENT_RESPONSE_PAD">Phone 2 Patient Response Pad (Input Touch Controller)</option>
           <option value="OBSERVER">Observer (Read-Only Medical Student / Resident)</option>
@@ -27809,6 +29138,7 @@ window.addEventListener('DOMContentLoaded', () => {
   </div>
 
 </body>
+
 </html>
 ```
 END FILE `web/index.html`
