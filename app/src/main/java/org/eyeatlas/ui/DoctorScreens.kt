@@ -66,6 +66,10 @@ fun PhysicianAndResponsePadScreen(
     var padTapCount by remember { mutableStateOf(0) }
     var lastTapTimeMs by remember { mutableStateOf(0L) }
     var feedbackMessage by remember { mutableStateOf("Response pad active. Tap anywhere or switch tests below.") }
+    var showPairingDialog by remember { mutableStateOf(false) }
+    var cloudBackendUrl by remember { mutableStateOf("https://eyeatlas-ai.onrender.com") }
+    var cloudSessionId by remember { mutableStateOf("SES-REMOTE-01") }
+    var cloudPin by remember { mutableStateOf("749281") }
 
     val symptomOptions = listOf(
         "NONE",
@@ -130,10 +134,11 @@ fun PhysicianAndResponsePadScreen(
                     Surface(
                         color = if (isEmergencyHalted) ClinicalTheme.AlertRedBg else ClinicalTheme.SeaGreenLight,
                         shape = RoundedCornerShape(6.dp),
-                        border = BorderStroke(1.dp, if (isEmergencyHalted) ClinicalTheme.AlertRedBorder else ClinicalTheme.SeaGreenBorder)
+                        border = BorderStroke(1.dp, if (isEmergencyHalted) ClinicalTheme.AlertRedBorder else ClinicalTheme.SeaGreenBorder),
+                        modifier = Modifier.clickable { showPairingDialog = true }
                     ) {
                         Text(
-                            text = if (isEmergencyHalted) "STOPPED" else "PAIRED (PIN: ${ClinicalSessionCoordinator.pairingPin})",
+                            text = if (isEmergencyHalted) "STOPPED" else "🔗 PAIRED (PIN: $cloudPin)",
                             color = if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenDark,
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
@@ -848,6 +853,69 @@ fun PhysicianAndResponsePadScreen(
                     fontWeight = FontWeight.SemiBold
                 )
             }
+        }
+
+        // Cloud Pairing Modal Dialog
+        if (showPairingDialog) {
+            AlertDialog(
+                onDismissRequest = { showPairingDialog = false },
+                title = {
+                    Text("Pair with Cloud Web Station", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = ClinicalTheme.TextPrimary)
+                },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
+                        Text(
+                            text = "Connect this clinician controller to https://eyeatlas-ai.netlify.app and https://eyeatlas-ai.onrender.com",
+                            fontSize = 12.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        OutlinedTextField(
+                            value = cloudBackendUrl,
+                            onValueChange = { cloudBackendUrl = it },
+                            label = { Text("Cloud Backend URL") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudSessionId,
+                            onValueChange = { cloudSessionId = it },
+                            label = { Text("Session ID / Room") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudPin,
+                            onValueChange = { cloudPin = it },
+                            label = { Text("6-Digit Pairing PIN") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            ClinicalSessionCoordinator.pairingPin = cloudPin
+                            feedbackMessage = "Cloud Broker connected: $cloudSessionId (PIN: $cloudPin)"
+                            showPairingDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("Connect / Save", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                },
+                dismissButton = {
+                    OutlinedButton(onClick = { showPairingDialog = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
         }
     }
 }

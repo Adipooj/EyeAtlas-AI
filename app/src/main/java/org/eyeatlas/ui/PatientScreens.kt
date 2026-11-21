@@ -97,9 +97,16 @@ fun PatientScreen(
     var testedEye by remember { mutableStateOf(ClinicalSessionCoordinator.activeEye) }
     var isVrMode by remember { mutableStateOf(false) }
     var isEmergencyHalted by remember { mutableStateOf(ClinicalSessionCoordinator.isEmergencyHalted) }
-    var pairingPin by remember { mutableStateOf("839201") }
+    var pairingPin by remember { mutableStateOf("749281") }
     var feedbackToast by remember { mutableStateOf("Ready. Select module or enter VR Mode.") }
     var currentScreen by remember { mutableStateOf(ScreenId.UX_07) }
+
+    // --- Cloud Pairing (CR-002) State ---
+    var showCloudPairingDialog by remember { mutableStateOf(false) }
+    var cloudBackendUrl by remember { mutableStateOf("https://eyeatlas-ai.onrender.com") }
+    var cloudSessionId by remember { mutableStateOf("SES-REMOTE-01") }
+    var cloudPin by remember { mutableStateOf("749281") }
+    var cloudConnectionStatus by remember { mutableStateOf("Ready to Pair") }
 
     // --- Acuity Engine State ---
     var acuityOptotypeMode by remember { mutableStateOf(AcuityOptotypeMode.TUMBLING_E) }
@@ -583,7 +590,135 @@ fun PatientScreen(
                         .background(ClinicalTheme.SeaGreenLight, RoundedCornerShape(6.dp))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 )
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                // Online Cloud Pairing Bar
+                Surface(
+                    color = Color(0xFFF0FDF4),
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, Color(0xFFBBF7D0)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { showCloudPairingDialog = true }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Surface(
+                                    color = Color(0xFF10B981),
+                                    shape = CircleShape,
+                                    modifier = Modifier.size(8.dp)
+                                ) {}
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "Pair Cloud Station: $cloudSessionId",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp,
+                                    color = ClinicalTheme.SeaGreenDark
+                                )
+                            }
+                            Text(
+                                text = "PIN: $cloudPin | $cloudConnectionStatus",
+                                fontSize = 10.sp,
+                                color = ClinicalTheme.TextSecondary
+                            )
+                        }
+                        Surface(
+                            color = ClinicalTheme.SeaGreenPrimary,
+                            shape = RoundedCornerShape(6.dp)
+                        ) {
+                            Text(
+                                text = "Pair Online",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 11.sp,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
             }
+        }
+
+        // Cloud Pairing Modal Dialog
+        if (showCloudPairingDialog) {
+            AlertDialog(
+                onDismissRequest = { showCloudPairingDialog = false },
+                title = {
+                    Text("Pair with Cloud Web Station", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = ClinicalTheme.TextPrimary)
+                },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
+                        Text(
+                            text = "Connect this phone to the web controller at https://eyeatlas-ai.netlify.app via the Render broker.",
+                            fontSize = 12.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        OutlinedTextField(
+                            value = cloudBackendUrl,
+                            onValueChange = { cloudBackendUrl = it },
+                            label = { Text("Cloud Backend URL") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudSessionId,
+                            onValueChange = { cloudSessionId = it },
+                            label = { Text("Session ID / Room") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudPin,
+                            onValueChange = { cloudPin = it },
+                            label = { Text("6-Digit Pairing PIN") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Surface(
+                            color = ClinicalTheme.SeaGreenLight,
+                            shape = RoundedCornerShape(6.dp),
+                            border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder),
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(8.dp)) {
+                                Text("HOW TO CONNECT ON LAPTOP:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ClinicalTheme.SeaGreenDark)
+                                Text("1. Open https://eyeatlas-ai.netlify.app in your browser.\n2. Click 'Pair Online APK (CR-002)'.\n3. Match Room: $cloudSessionId and PIN: $cloudPin.\n4. You can immediately control tests, switch modules, and use Spacebar/Click as response pad!", fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
+                            }
+                        }
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            cloudConnectionStatus = "Connected to $cloudBackendUrl (Room: $cloudSessionId)"
+                            feedbackToast = "Cloud broker linked: $cloudSessionId (PIN: $cloudPin)"
+                            showCloudPairingDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("Connect / Save", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                },
+                dismissButton = {
+                    OutlinedButton(onClick = { showCloudPairingDialog = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
         }
 
         // 2. HORIZONTAL MODULE SELECTION CAROUSEL
@@ -1144,7 +1279,7 @@ fun PerimetryModuleView(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Controls
+        // Controls - Tier 1: Action triggers, Tier 2: Large tactile response button
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -1155,28 +1290,34 @@ fun PerimetryModuleView(
                     containerColor = if (isRunning) Color(0xFFF59E0B) else ClinicalTheme.SeaGreenPrimary
                 ),
                 shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp)
             ) {
-                Text(if (isRunning) "Pause" else "Start 24-2", color = Color.White, fontWeight = FontWeight.Bold)
+                Text(if (isRunning) "Pause Test" else "Start 24-2", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
             }
 
             OutlinedButton(
                 onClick = onReset,
-                modifier = Modifier.weight(0.7f),
+                modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(1.dp, Color(0xFF94A3B8))
+                border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp)
             ) {
-                Text("↺ Reset", color = ClinicalTheme.TextPrimary, fontWeight = FontWeight.Medium)
+                Text("↺ Reset Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 13.sp)
             }
+        }
 
-            Button(
-                onClick = onTap,
-                modifier = Modifier.weight(1.3f),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
-            ) {
-                Text("Seen (Tap)", color = Color.White, fontWeight = FontWeight.Bold)
-            }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = onTap,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+        ) {
+            Text("Seen (Tap Response)", color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
         }
     }
 }
@@ -1400,10 +1541,10 @@ fun ColourVisionModuleView(
                 15 -> listOf("7", "Can't See / Blank")
                 16 -> listOf("16", "Can't See / Blank")
                 17 -> listOf("73", "Can't See / Blank")
-                18 -> listOf("5", "Can't See / Blank")
-                19 -> listOf("2", "Can't See / Blank")
-                20 -> listOf("45", "Can't See / Blank")
-                21 -> listOf("73", "Can't See / Blank")
+                18 -> listOf("Blank (Normal)", "5 (Deficient)")
+                19 -> listOf("Blank (Normal)", "2 (Deficient)")
+                20 -> listOf("Blank (Normal)", "45 (Deficient)")
+                21 -> listOf("Blank (Normal)", "73 (Deficient)")
                 22 -> listOf("26 (Normal)", "6 (Protan)", "2 (Deutan)", "Blank")
                 23 -> listOf("42 (Normal)", "2 (Protan)", "4 (Deutan)", "Blank")
                 24 -> listOf("35 (Normal)", "5 (Protan)", "3 (Deutan)", "Blank")

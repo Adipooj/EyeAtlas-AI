@@ -2323,7 +2323,15 @@
       const modal = document.getElementById('remote-pairing-modal');
       const urlInput = document.getElementById('modal-backend-url');
       if (urlInput) {
-        urlInput.value = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || '';
+        urlInput.value = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || 'https://eyeatlas-ai.onrender.com';
+      }
+      const sessInput = document.getElementById('modal-session-id');
+      if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
+        sessInput.value = 'SES-REMOTE-01';
+      }
+      const pinInput = document.getElementById('modal-pairing-pin');
+      if (pinInput && !pinInput.value) {
+        pinInput.value = '749281';
       }
       if (modal) modal.style.display = 'flex';
     }
@@ -2334,10 +2342,8 @@
     }
 
     function generateNewRemoteSession() {
-      const randomPin = Math.floor(100000 + Math.random() * 900000).toString();
-      const randomSession = 'SES-REMOTE-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-      document.getElementById('modal-session-id').value = randomSession;
-      document.getElementById('modal-pairing-pin').value = randomPin;
+      document.getElementById('modal-session-id').value = 'SES-REMOTE-01';
+      document.getElementById('modal-pairing-pin').value = '749281';
     }
 
     async function connectRemoteSessionFromModal() {
@@ -2908,7 +2914,9 @@
     }
 
     // Live Backend Health Probe with intelligent host resolution and timeout
-    let backendBaseUrl = 'http://localhost:8008';
+    const isLocalhost = (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '');
+    const storedBackendUrl = localStorage.getItem('eyeatlas_backend_url');
+    let backendBaseUrl = storedBackendUrl || (isLocalhost ? 'http://localhost:8008' : 'https://eyeatlas-ai.onrender.com');
     let authToken = null;
 
     async function authenticateAndSync() {
@@ -3612,150 +3620,30 @@ async function syncAcuityToBackend() {
 
 // MODULE 2: OFFICIAL ISHIHARA 24-PLATE CLINICAL BATTERY (EXTRACTED FROM USAID / CHALLENGE TB EDITION)
 const ISHIHARA_ASSETS = [
-  {
-    num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration',
-    normal: '12', rg: '12', protan: '12', deutan: '12',
-    note: 'Demonstration plate; clearly visible to both normal and all colour-deficient subjects.',
-    choices: ['12', 'None', '8', '3']
-  },
-  {
-    num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation',
-    normal: '8', rg: '3', protan: '3', deutan: '3',
-    note: 'Transformation plate: Normal sees 8; Red-Green deficient sees 3.',
-    choices: ['8', '3', 'None', '5']
-  },
-  {
-    num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation',
-    normal: '29', rg: '70', protan: '70', deutan: '70',
-    note: 'Transformation plate: Normal sees 29; Red-Green deficient sees 70.',
-    choices: ['29', '70', 'None', '20']
-  },
-  {
-    num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation',
-    normal: '5', rg: '2', protan: '2', deutan: '2',
-    note: 'Transformation plate: Normal sees 5; Red-Green deficient sees 2.',
-    choices: ['5', '2', 'None', '8']
-  },
-  {
-    num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation',
-    normal: '3', rg: '5', protan: '5', deutan: '5',
-    note: 'Transformation plate: Normal sees 3; Red-Green deficient sees 5.',
-    choices: ['3', '5', 'None', '8']
-  },
-  {
-    num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation',
-    normal: '15', rg: '17', protan: '17', deutan: '17',
-    note: 'Transformation plate: Normal sees 15; Red-Green deficient sees 17.',
-    choices: ['15', '17', 'None', '13']
-  },
-  {
-    num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation',
-    normal: '74', rg: '21', protan: '21', deutan: '21',
-    note: 'Transformation plate: Normal sees 74; Red-Green deficient sees 21.',
-    choices: ['74', '21', 'None', '71']
-  },
-  {
-    num: 8, file: 'assets/ishihara/plate_08.png', type: 'Vanishing',
-    normal: '6', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 6; Red-Green deficient cannot read.',
-    choices: ['6', 'None', '5', '8']
-  },
-  {
-    num: 9, file: 'assets/ishihara/plate_09.png', type: 'Vanishing',
-    normal: '45', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 45; Red-Green deficient cannot read.',
-    choices: ['45', 'None', '40', '15']
-  },
-  {
-    num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing',
-    normal: '5', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 5; Red-Green deficient cannot read.',
-    choices: ['5', 'None', '2', '6']
-  },
-  {
-    num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing',
-    normal: '7', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 7; Red-Green deficient cannot read.',
-    choices: ['7', 'None', '1', '4']
-  },
-  {
-    num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing',
-    normal: '16', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 16; Red-Green deficient cannot read.',
-    choices: ['16', 'None', '18', '10']
-  },
-  {
-    num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing',
-    normal: '73', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 73; Red-Green deficient cannot read.',
-    choices: ['73', 'None', '78', '23']
-  },
-  {
-    num: 14, file: 'assets/ishihara/plate_14.png', type: 'Hidden Digit',
-    normal: 'None', rg: '5', protan: '5', deutan: '5',
-    note: 'Hidden digit plate: Normal sees nothing; Red-Green deficient sees 5.',
-    choices: ['None', '5', '2', '6']
-  },
-  {
-    num: 15, file: 'assets/ishihara/plate_15.png', type: 'Hidden Digit',
-    normal: 'None', rg: '45', protan: '45', deutan: '45',
-    note: 'Hidden digit plate: Normal sees nothing; Red-Green deficient sees 45.',
-    choices: ['None', '45', '40', '15']
-  },
-  {
-    num: 16, file: 'assets/ishihara/plate_16.png', type: 'Classification',
-    normal: '26', rg: 'Partial', protan: '6', deutan: '2',
-    note: 'Diagnostic plate: Normal reads 26. Protanope reads 6. Deutanope reads 2.',
-    choices: ['26', '6', '2', 'None']
-  },
-  {
-    num: 17, file: 'assets/ishihara/plate_17.png', type: 'Classification',
-    normal: '42', rg: 'Partial', protan: '2', deutan: '4',
-    note: 'Diagnostic plate: Normal reads 42. Protanope reads 2. Deutanope reads 4.',
-    choices: ['42', '2', '4', 'None']
-  },
-  {
-    num: 18, file: 'assets/ishihara/plate_18.png', type: 'Diagnostic Pathway',
-    normal: 'Both Lines', rg: 'One Line', protan: 'Purple Line Only', deutan: 'Red Line Only',
-    note: 'Pathway plate: Normal traces both lines. Protan traces purple only. Deutan traces red only.',
-    choices: ['Both Lines', 'Purple Line Only', 'Red Line Only', 'None']
-  },
-  {
-    num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Pathway',
-    normal: 'None', rg: 'A Winding Line', protan: 'A Winding Line', deutan: 'A Winding Line',
-    note: 'Hidden pathway: Normal sees no line. Red-Green deficient traces a winding line.',
-    choices: ['None', 'A Winding Line', 'Two Lines', 'Circle']
-  },
-  {
-    num: 20, file: 'assets/ishihara/plate_20.png', type: 'Vanishing Pathway',
-    normal: 'Blue-Green Line', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing pathway: Normal traces blue-green line. Red-Green deficient cannot trace.',
-    choices: ['Blue-Green Line', 'None', 'Red Line', 'Orange Line']
-  },
-  {
-    num: 21, file: 'assets/ishihara/plate_21.png', type: 'Vanishing Pathway',
-    normal: 'Orange Line', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing pathway: Normal traces orange line. Red-Green deficient cannot trace.',
-    choices: ['Orange Line', 'None', 'Blue Line', 'Green Line']
-  },
-  {
-    num: 22, file: 'assets/ishihara/plate_22.png', type: 'Dual Pathway',
-    normal: 'Both Green Lines', rg: 'Violet / Broken', protan: 'Violet Only', deutan: 'Violet Only',
-    note: 'Dual pathway: Normal traces blue-green and yellow-green lines.',
-    choices: ['Both Green Lines', 'Violet Line Only', 'None', 'Red Line']
-  },
-  {
-    num: 23, file: 'assets/ishihara/plate_23.png', type: 'Dual Pathway',
-    normal: 'Violet & Orange Lines', rg: 'Blue-Green & Violet', protan: 'Partial', deutan: 'Partial',
-    note: 'Dual pathway: Normal traces violet and orange continuous paths.',
-    choices: ['Violet & Orange Lines', 'Blue-Green Line Only', 'None', 'One Line Only']
-  },
-  {
-    num: 24, file: 'assets/ishihara/plate_24.png', type: 'Demonstration Pathway',
-    normal: 'Orange Line', rg: 'Orange Line', protan: 'Orange Line', deutan: 'Orange Line',
-    note: 'Demonstration pathway: High-contrast path clearly visible to all subjects.',
-    choices: ['Orange Line', 'None', 'Green Line', 'Two Lines']
-  }
+  { num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration', normal: '12', rg: '12', protan: '12', deutan: '12', note: 'Demonstration plate: Everyone should see 12.', choices: ['12', 'None', '8', '3'] },
+  { num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation', normal: '8', rg: '3', protan: '3', deutan: '3', note: 'Transformation: Normal sees 8, Red-green deficiency sees 3.', choices: ['8', '3', 'None', '5'] },
+  { num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation', normal: '6', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 6, Red-green deficiency sees 5.', choices: ['6', '5', 'None', '8'] },
+  { num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation', normal: '29', rg: '70', protan: '70', deutan: '70', note: 'Transformation: Normal sees 29, Red-green deficiency sees 70.', choices: ['29', '70', 'None', '20'] },
+  { num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation', normal: '57', rg: '35', protan: '35', deutan: '35', note: 'Transformation: Normal sees 57, Red-green deficiency sees 35.', choices: ['57', '35', 'None', '75'] },
+  { num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation', normal: '5', rg: '2', protan: '2', deutan: '2', note: 'Transformation: Normal sees 5, Red-green deficiency sees 2.', choices: ['5', '2', 'None', '3'] },
+  { num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation', normal: '3', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 3, Red-green deficiency sees 5.', choices: ['3', '5', 'None', '8'] },
+  { num: 8, file: 'assets/ishihara/plate_08.png', type: 'Transformation', normal: '15', rg: '17', protan: '17', deutan: '17', note: 'Transformation: Normal sees 15, Red-green deficiency sees 17.', choices: ['15', '17', 'None', '13'] },
+  { num: 9, file: 'assets/ishihara/plate_09.png', type: 'Transformation', normal: '74', rg: '21', protan: '21', deutan: '21', note: 'Transformation: Normal sees 74, Red-green deficiency sees 21.', choices: ['74', '21', 'None', '71'] },
+  { num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing', normal: '2', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 2, Deficient sees nothing.', choices: ['2', 'None', '7', '1'] },
+  { num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing', normal: '6', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 6, Deficient sees nothing.', choices: ['6', 'None', '5', '8'] },
+  { num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing', normal: '97', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 97, Deficient sees nothing.', choices: ['97', 'None', '91', '87'] },
+  { num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing', normal: '45', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 45, Deficient sees nothing.', choices: ['45', 'None', '40', '15'] },
+  { num: 14, file: 'assets/ishihara/plate_14.png', type: 'Vanishing', normal: '5', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 5, Deficient sees nothing.', choices: ['5', 'None', '2', '6'] },
+  { num: 15, file: 'assets/ishihara/plate_15.png', type: 'Vanishing', normal: '7', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 7, Deficient sees nothing.', choices: ['7', 'None', '1', '4'] },
+  { num: 16, file: 'assets/ishihara/plate_16.png', type: 'Vanishing', normal: '16', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 16, Deficient sees nothing.', choices: ['16', 'None', '18', '10'] },
+  { num: 17, file: 'assets/ishihara/plate_17.png', type: 'Vanishing', normal: '73', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 73, Deficient sees nothing.', choices: ['73', 'None', '78', '23'] },
+  { num: 18, file: 'assets/ishihara/plate_18.png', type: 'Hidden Digit', normal: 'None', rg: '5', protan: '5', deutan: '5', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 5.', choices: ['None', '5', '2', '6'] },
+  { num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Digit', normal: 'None', rg: '2', protan: '2', deutan: '2', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 2.', choices: ['None', '2', '5', '7'] },
+  { num: 20, file: 'assets/ishihara/plate_20.png', type: 'Hidden Digit', normal: 'None', rg: '45', protan: '45', deutan: '45', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 45.', choices: ['None', '45', '40', '15'] },
+  { num: 21, file: 'assets/ishihara/plate_21.png', type: 'Hidden Digit', normal: 'None', rg: '73', protan: '73', deutan: '73', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 73.', choices: ['None', '73', '78', '23'] },
+  { num: 22, file: 'assets/ishihara/plate_22.png', type: 'Classification', normal: '26', rg: 'Partial', protan: '6', deutan: '2', note: 'Classification: Normal sees 26; Protanope sees 6; Deuteranope sees 2.', choices: ['26', '6', '2', 'None'] },
+  { num: 23, file: 'assets/ishihara/plate_23.png', type: 'Classification', normal: '42', rg: 'Partial', protan: '2', deutan: '4', note: 'Classification: Normal sees 42; Protanope sees 2; Deuteranope sees 4.', choices: ['42', '2', '4', 'None'] },
+  { num: 24, file: 'assets/ishihara/plate_24.png', type: 'Classification', normal: '35', rg: 'Partial', protan: '5', deutan: '3', note: 'Classification: Normal sees 35; Protanope sees 5; Deuteranope sees 3.', choices: ['35', '5', '3', 'None'] }
 ];
 
 // Preload genuine Ishihara plate images into browser memory
