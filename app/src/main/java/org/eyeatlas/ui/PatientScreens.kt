@@ -35,9 +35,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.eyeatlas.core.ClinicalSessionCoordinator
 import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.net.RemoteClientState
+import org.eyeatlas.net.RemoteEnvelope
+import org.eyeatlas.net.RemoteMessageType
 import org.eyeatlas.net.RemoteSessionClient
 import org.eyeatlas.sensors.Calibration
 import org.eyeatlas.sensors.ResponseAndGaze
@@ -158,6 +161,21 @@ fun PatientScreen(
     var motilityAngleY by remember { mutableStateOf(0f) }
     var motilityGazeLabel by remember { mutableStateOf("Primary Fixation (Center)") }
     var motilityResult by remember { mutableStateOf<String?>(null) }
+    val motilityTrajectory = remember {
+        listOf(
+            Triple(0f, 0f, "Primary Position (Center)"),
+            Triple(0.8f, 0f, "Dextroversion (Looking Right)"),
+            Triple(0.8f, 0.7f, "Dextroelevation (Up and Right)"),
+            Triple(0.8f, -0.7f, "Dextrodepression (Down and Right)"),
+            Triple(0f, 0f, "Return to Center"),
+            Triple(-0.8f, 0f, "Levoversion (Looking Left)"),
+            Triple(-0.8f, 0.7f, "Levoelevation (Up and Left)"),
+            Triple(-0.8f, -0.7f, "Levodepression (Down and Left)"),
+            Triple(0f, 0f, "Examination Complete")
+        )
+    }
+    var motilityStepIndex by remember { mutableStateOf(0) }
+    val coroutineScope = rememberCoroutineScope()
 
     // --- Pupillary RAPD State ---
     var isPupilRunning by remember { mutableStateOf(false) }
@@ -209,6 +227,7 @@ fun PatientScreen(
             }
             ClinicalModuleId.MOTILITY -> {
                 isMotilityRunning = false
+                motilityStepIndex = 0
                 motilityAngleX = 0f
                 motilityAngleY = 0f
                 motilityGazeLabel = "Primary Position (Center)"
@@ -282,6 +301,144 @@ fun PatientScreen(
         )
     }
 
+    // Authoritative Stimulus State Broadcaster (Synchronizes Patient VR with Remote Physician Cockpit)
+    val broadcastStimulusState: () -> Unit = {
+        if (remoteClient.getState() == RemoteClientState.AUTHENTICATED) {
+            when (selectedModule) {
+                ClinicalModuleId.PERIMETRY -> {
+                    remoteClient.publishStimulusPresented(
+                        trialIndex = activePerimetryStep,
+                        testModule = selectedModule.name,
+                        eyeLaterality = testedEye,
+                        xDeg = stimulusAngleX,
+                        yDeg = stimulusAngleY,
+                        presentationMonotonicNs = System.nanoTime()
+                    )
+                }
+                ClinicalModuleId.ACUITY -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-acuity-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "trial_index" to acuityTrialsDone,
+                                "test_module" to "ACUITY",
+                                "eye_laterality" to testedEye.name,
+                                "optotype_mode" to acuityOptotypeMode.name,
+                                "optotype_orientation" to acuityOrientation.name,
+                                "sloan_letter" to acuitySloanLetter.toString(),
+                                "logmar" to acuityLogMar,
+                                "score_text" to acuityScore
+                            )
+                        )
+                    )
+                }
+                ClinicalModuleId.COLOUR -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-colour-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "trial_index" to colourPlateIndex,
+                                "test_module" to "COLOUR",
+                                "eye_laterality" to testedEye.name,
+                                "plate_index" to (colourPlateIndex + 1),
+                                "total_plates" to 24,
+                                "diagnosis" to (colourDiagnosis ?: "")
+                            )
+                        )
+                    )
+                }
+                ClinicalModuleId.CONTRAST -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-contrast-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "trial_index" to contrastStep,
+                                "test_module" to "CONTRAST",
+                                "eye_laterality" to testedEye.name,
+                                "contrast_step" to contrastStep,
+                                "log_cs" to (contrastLogCsScore ?: 0.0)
+                            )
+                        )
+                    )
+                }
+                ClinicalModuleId.MOTILITY -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-motility-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "test_module" to "MOTILITY",
+                                "eye_laterality" to testedEye.name,
+                                "gaze_label" to motilityGazeLabel,
+                                "step_index" to motilityStepIndex,
+                                "angle_x" to motilityAngleX.toDouble(),
+                                "angle_y" to motilityAngleY.toDouble()
+                            )
+                        )
+                    )
+                }
+                ClinicalModuleId.PUPIL_RAPD -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-pupil-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "test_module" to "PUPIL_RAPD",
+                                "eye_laterality" to testedEye.name,
+                                "illuminated_eye" to (pupilIlluminatedEye?.name ?: "NONE")
+                            )
+                        )
+                    )
+                }
+                else -> {
+                    remoteClient.sendEnvelope(
+                        RemoteEnvelope(
+                            sessionId = remoteClient.sessionId,
+                            messageId = "stim-mod-${System.currentTimeMillis()}",
+                            senderId = remoteClient.localDeviceId,
+                            senderRole = "PATIENT_VR_HOST",
+                            messageType = RemoteMessageType.STIMULUS_EVENT,
+                            sequenceNumber = remoteClient.getNextSequence(),
+                            timestampNs = System.nanoTime(),
+                            payload = mapOf(
+                                "test_module" to selectedModule.name,
+                                "eye_laterality" to testedEye.name
+                            )
+                        )
+                    )
+                }
+            }
+        }
+    }
+
     // Remote Session Client Lifecycle and Incoming Event Handlers
     DisposableEffect(remoteClient) {
         remoteClient.onCommandListener = { cmd, targetModule, params ->
@@ -296,6 +453,7 @@ fun PatientScreen(
                         selectedModule = mod
                         resetCurrentModule()
                         feedbackToast = "Remote: Switched to ${mod.title}"
+                        broadcastStimulusState()
                     }
                 }
                 "SET_EYE" -> {
@@ -305,27 +463,237 @@ fun PatientScreen(
                     testedEye = eye
                     resetCurrentModule()
                     feedbackToast = "Remote: Switched tested eye to ${eye.name}"
+                    broadcastStimulusState()
                 }
                 "RESET_TEST" -> {
                     resetCurrentModule()
                     ClinicalSessionCoordinator.resetActiveTest()
                     feedbackToast = "Remote: Test Reset & Re-randomized"
+                    broadcastStimulusState()
                 }
                 "START_TEST" -> {
-                    if (selectedModule == ClinicalModuleId.PERIMETRY) {
-                        isPerimetryRunning = true
-                    } else if (selectedModule == ClinicalModuleId.MOTILITY) {
-                        isMotilityRunning = true
-                    } else if (selectedModule == ClinicalModuleId.PUPIL_RAPD) {
-                        isPupilRunning = true
+                    isEmergencyHalted = false
+                    ClinicalSessionCoordinator.isEmergencyHalted = false
+                    remoteClient.clearEmergencyHalt()
+                    when (selectedModule) {
+                        ClinicalModuleId.PERIMETRY -> {
+                            isPerimetryRunning = true
+                            if (activePerimetryStep >= perimetryOrder.size) {
+                                activePerimetryStep = 0
+                            }
+                        }
+                        ClinicalModuleId.MOTILITY -> {
+                            isMotilityRunning = true
+                        }
+                        ClinicalModuleId.PUPIL_RAPD -> {
+                            isPupilRunning = true
+                        }
+                        else -> {}
                     }
-                    feedbackToast = "Remote: Test Started"
+                    feedbackToast = "Remote: ${selectedModule.title} Started"
+                    broadcastStimulusState()
                 }
-                "STOP_TEST" -> {
+                "STOP_TEST", "PAUSE_TEST" -> {
                     isPerimetryRunning = false
                     isMotilityRunning = false
                     isPupilRunning = false
-                    feedbackToast = "Remote: Test Stopped"
+                    feedbackToast = "Remote: Test Paused"
+                }
+                "RESUME_TEST", "CLEAR_EMERGENCY" -> {
+                    isEmergencyHalted = false
+                    ClinicalSessionCoordinator.isEmergencyHalted = false
+                    remoteClient.clearEmergencyHalt()
+                    feedbackToast = "Emergency Stop Cleared. Examination Resumed."
+                    broadcastStimulusState()
+                }
+                "NEXT_QUESTION", "NEXT_STEP" -> {
+                    isEmergencyHalted = false
+                    ClinicalSessionCoordinator.isEmergencyHalted = false
+                    remoteClient.clearEmergencyHalt()
+                    when (selectedModule) {
+                        ClinicalModuleId.ACUITY -> {
+                            val res = params["result"] as? String
+                            val chosenOrientationStr = params["orientation"] as? String
+                            val chosenLetter = (params["letter"] as? String)?.firstOrNull()
+
+                            val isCorrect = when {
+                                res != null -> res.equals("CORRECT", ignoreCase = true)
+                                chosenOrientationStr != null -> chosenOrientationStr.equals(acuityOrientation.name, ignoreCase = true)
+                                chosenLetter != null -> chosenLetter.equals(acuitySloanLetter, ignoreCase = true)
+                                else -> true
+                            }
+
+                            acuityTrialsDone++
+                            if (isCorrect) {
+                                acuityConsecutiveCorrect++
+                                if (acuityConsecutiveCorrect >= 2) {
+                                    acuityLogMar = max(0.0, acuityLogMar - 0.2)
+                                    acuityConsecutiveCorrect = 0
+                                }
+                                feedbackToast = "Acuity: Correct! Stepped smaller."
+                            } else {
+                                acuityLogMar = min(1.2, acuityLogMar + 0.2)
+                                acuityConsecutiveCorrect = 0
+                                feedbackToast = "Acuity: Incorrect. Stepped larger."
+                            }
+                            acuityOrientation = OptotypeOrientation.values().random()
+                            acuitySloanLetter = listOf('C', 'D', 'E', 'F', 'L', 'O', 'P', 'T', 'Z').random()
+                            val snellenDenominator = round(6.0 * 10.0.pow(acuityLogMar)).toInt()
+                            acuityScore = "Snellen: 6/$snellenDenominator (${round(acuityLogMar * 100) / 100.0} logMAR)"
+                        }
+
+                        ClinicalModuleId.COLOUR -> {
+                            val ans = params["answer"] as? String
+                            if (!ans.isNullOrBlank()) {
+                                colourPlateAnswers.add(ans)
+                            }
+                            if (colourPlateIndex + 1 < 24) {
+                                colourPlateIndex++
+                                feedbackToast = "Ishihara Plate ${colourPlateIndex + 1} of 24"
+                            } else {
+                                val errorCount = colourPlateAnswers.filterIndexed { idx, a ->
+                                    when (idx) {
+                                        0 -> a != "12"
+                                        1 -> a != "8"
+                                        2 -> a != "6"
+                                        3 -> a != "29"
+                                        4 -> a != "57"
+                                        5 -> a != "5"
+                                        6 -> a != "3"
+                                        7 -> a != "15"
+                                        8 -> a != "74"
+                                        9 -> a != "2"
+                                        10 -> a != "6"
+                                        11 -> a != "97"
+                                        12 -> a != "45"
+                                        13 -> a != "5"
+                                        14 -> a != "7"
+                                        15 -> a != "16"
+                                        16 -> a != "73"
+                                        17, 18, 19, 20 -> a != "Blank" && a.isNotEmpty()
+                                        21 -> !a.contains("26")
+                                        22 -> !a.contains("42")
+                                        23 -> !a.contains("35")
+                                        else -> false
+                                    }
+                                }.size
+                                colourDiagnosis = if (errorCount <= 2) {
+                                    "NORMAL TRICHROMAT (<=2 errors / 24 plates)"
+                                } else if (colourPlateAnswers.getOrNull(21) == "2" || colourPlateAnswers.getOrNull(22) == "4" || colourPlateAnswers.getOrNull(23) == "3") {
+                                    "DEUTERANOPIA / DEUTERANOMALY (Green deficiency)"
+                                } else if (colourPlateAnswers.getOrNull(21) == "6" || colourPlateAnswers.getOrNull(22) == "2" || colourPlateAnswers.getOrNull(23) == "5") {
+                                    "PROTANOPIA / PROTANOMALY (Red deficiency)"
+                                } else {
+                                    "RED-GREEN DEFICIENCY DETECTED ($errorCount errors / 24 plates)"
+                                }
+                                feedbackToast = "Colour Exam Complete: $colourDiagnosis"
+                            }
+                        }
+
+                        ClinicalModuleId.CONTRAST -> {
+                            val canRead = (params["seen"] as? Boolean) ?: (params["can_read"] as? Boolean ?: true)
+                            if (canRead && contrastStep < 6) {
+                                contrastStep++
+                            }
+                            val logCsTable = listOf(0.0, 0.45, 0.90, 1.35, 1.65, 1.95, 2.25)
+                            contrastLogCsScore = logCsTable[contrastStep]
+                            feedbackToast = "Contrast Step: $contrastStep (${contrastLogCsScore} logCS)"
+                        }
+
+                        ClinicalModuleId.PERIMETRY -> {
+                            if (activePerimetryStep + 1 < perimetryOrder.size) {
+                                activePerimetryStep++
+                            } else {
+                                activePerimetryStep = 0
+                            }
+                            val pointIdx = perimetryOrder[activePerimetryStep]
+                            activePerimetryIndex = pointIdx
+                            val currentPt = perimetryPoints[pointIdx]
+                            stimulusAngleX = currentPt.first
+                            stimulusAngleY = currentPt.second
+                            stimulusStartNs = System.nanoTime()
+                            isStimulusActive = true
+                            coroutineScope.launch {
+                                delay(250L)
+                                isStimulusActive = false
+                            }
+                            feedbackToast = "Spot ${activePerimetryStep + 1}/54 at (${stimulusAngleX}°, ${stimulusAngleY}°)"
+                        }
+
+                        ClinicalModuleId.MOTILITY -> {
+                            motilityStepIndex = (motilityStepIndex + 1) % motilityTrajectory.size
+                            val step = motilityTrajectory[motilityStepIndex]
+                            motilityAngleX = step.first
+                            motilityAngleY = step.second
+                            motilityGazeLabel = step.third
+                            feedbackToast = "Motility: ${step.third}"
+                        }
+
+                        ClinicalModuleId.PUPIL_RAPD -> {
+                            val targetEye = params["eye"] as? String
+                            pupilIlluminatedEye = when (targetEye?.uppercase()) {
+                                "OD" -> EyeLaterality.OD
+                                "OS" -> EyeLaterality.OS
+                                else -> if (pupilIlluminatedEye == EyeLaterality.OD) EyeLaterality.OS else EyeLaterality.OD
+                            }
+                            feedbackToast = "Light on ${pupilIlluminatedEye?.name}"
+                        }
+
+                        ClinicalModuleId.WORTH_DOT -> {
+                            val dotAnswer = params["answer"] as? String ?: "4_DOTS"
+                            worthDotResult = dotAnswer
+                            feedbackToast = "Worth 4-Dot: $dotAnswer"
+                        }
+
+                        ClinicalModuleId.AMSLER -> {
+                            val amslerFinding = params["finding"] as? String ?: "NORMAL"
+                            amslerResult = amslerFinding
+                            feedbackToast = "Amsler Finding: $amslerFinding"
+                        }
+
+                        else -> {}
+                    }
+                    broadcastStimulusState()
+                }
+
+                "PREV_QUESTION", "PREV_STEP" -> {
+                    when (selectedModule) {
+                        ClinicalModuleId.COLOUR -> {
+                            colourPlateIndex = max(0, colourPlateIndex - 1)
+                            feedbackToast = "Ishihara Plate ${colourPlateIndex + 1} of 24"
+                        }
+                        ClinicalModuleId.CONTRAST -> {
+                            contrastStep = max(0, contrastStep - 1)
+                            val logCsTable = listOf(0.0, 0.45, 0.90, 1.35, 1.65, 1.95, 2.25)
+                            contrastLogCsScore = logCsTable[contrastStep]
+                            feedbackToast = "Contrast Step: $contrastStep (${contrastLogCsScore} logCS)"
+                        }
+                        ClinicalModuleId.MOTILITY -> {
+                            motilityStepIndex = if (motilityStepIndex > 0) motilityStepIndex - 1 else motilityTrajectory.size - 1
+                            val step = motilityTrajectory[motilityStepIndex]
+                            motilityAngleX = step.first
+                            motilityAngleY = step.second
+                            motilityGazeLabel = step.third
+                            feedbackToast = "Motility: ${step.third}"
+                        }
+                        else -> {}
+                    }
+                    broadcastStimulusState()
+                }
+
+                "RECORD_RESPONSE" -> {
+                    val respType = params["response_type"] as? String ?: "SEEN"
+                    when (respType.uppercase()) {
+                        "SEEN" -> {
+                            handleTactileResponse()
+                        }
+                        "MISSED" -> {
+                            if (selectedModule == ClinicalModuleId.PERIMETRY) {
+                                perimetryResults[activePerimetryIndex] = PointStatus.MISSED
+                                feedbackToast = "Spot ${activePerimetryIndex + 1} marked MISSED"
+                            }
+                        }
+                    }
                 }
             }
         }

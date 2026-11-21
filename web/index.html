@@ -1282,6 +1282,183 @@
             <span style="font-size:11px; color:var(--text-muted); margin-left:auto;">Binocular OU presents stimuli to
               both viewports simultaneously.</span>
           </div>
+
+          <!-- EMERGENCY HALT RESUME BANNER -->
+          <div id="emergency-halt-banner"
+            style="display:none; margin-top:14px; padding:12px 16px; background:#FEE2E2; border:2px solid #EF4444; border-radius:8px; align-items:center; justify-content:space-between; gap:12px;">
+            <div style="color:#B91C1C; font-weight:700; font-size:13px; display:flex; align-items:center; gap:8px;">
+              <span style="font-size:18px;">⚠️</span>
+              <span><strong>EMERGENCY STOP ACTIVE:</strong> Examination is paused on the patient VR headset.</span>
+            </div>
+            <button class="btn-action" onclick="clearEmergencyHalt()"
+              style="background:#059669; color:white; font-weight:800; padding:8px 16px; border:none; border-radius:6px; cursor:pointer;">
+              &#9654; Resume Examination (Clear Emergency Stop)
+            </button>
+          </div>
+
+          <!-- MASTER TEST BATTERY CONTROLLER & STEPPER (CR-002) -->
+          <div style="margin-top:16px; padding:14px; background:#F8FAFC; border:1px solid #CBD5E1; border-radius:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-weight:800; font-size:14px; color:#0F172A;">🎮 Physician Remote Test Stepper:</span>
+                <span id="cockpit-test-badge" class="status-badge" style="background:#E0F2FE; color:#0369A1; font-weight:700; font-size:11px;">Visual Field (24-2)</span>
+                <span id="cockpit-test-status" class="status-badge" style="background:#FEF3C7; color:#92400E; font-size:11px;">Ready</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button class="btn-action" onclick="sendRemoteStartTest()" style="background:#0284C7; font-size:12px; padding:6px 14px;">&#9654; Start Test in VR</button>
+                <button class="btn-secondary" onclick="sendRemotePauseTest()" style="font-size:12px; padding:6px 12px;">&#10074;&#10074; Pause</button>
+                <button class="btn-action" onclick="sendRemoteNextStep()" style="background:#059669; font-size:12px; padding:6px 16px; font-weight:800;">Next Question / Item &#8677;</button>
+              </div>
+            </div>
+
+            <!-- MODULE CONTEXTUAL CONTROLS -->
+            <div id="contextual-steppers-container">
+              <!-- Acuity Stepper -->
+              <div id="stepper-ACUITY" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Current Optotype in VR: </span>
+                    <strong id="acuity-target-desc" style="color:#0F172A; font-size:13px;">Tumbling E (Points: RIGHT)</strong>
+                    <span style="margin-left:8px; font-size:12px; color:#0284C7;">| Denominator: <strong id="acuity-score-display">6/60 (1.00 logMAR)</strong></span>
+                  </div>
+                  <div style="font-size:11px; color:var(--text-muted);">Ask patient for orientation/letter, then score:</div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn-action" onclick="sendRemoteNextStep({result: 'CORRECT'})" style="background:#059669; font-size:12px; padding:8px 16px;">&#10004; Correct (+ Step Down)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({result: 'INCORRECT'})" style="background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-size:12px; padding:8px 16px; font-weight:700;">&#10008; Incorrect (- Step Up)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep()" style="font-size:12px; padding:8px 12px;">&#8677; Next Random Optotype</button>
+                  <div style="display:flex; gap:4px; margin-left:auto;">
+                    <button class="btn-secondary" onclick="sendRemoteNextStep({orientation: 'UP'})" style="padding:4px 8px; font-size:12px;">&uarr; UP</button>
+                    <button class="btn-secondary" onclick="sendRemoteNextStep({orientation: 'RIGHT'})" style="padding:4px 8px; font-size:12px;">&rarr; RIGHT</button>
+                    <button class="btn-secondary" onclick="sendRemoteNextStep({orientation: 'DOWN'})" style="padding:4px 8px; font-size:12px;">&darr; DOWN</button>
+                    <button class="btn-secondary" onclick="sendRemoteNextStep({orientation: 'LEFT'})" style="padding:4px 8px; font-size:12px;">&larr; LEFT</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Colour Vision Ishihara Stepper -->
+              <div id="stepper-COLOUR" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Active Ishihara Test: </span>
+                    <strong id="colour-plate-label" style="color:#0F172A; font-size:14px;">Plate #1 of 24 (Demo Plate: 12)</strong>
+                    <span id="colour-diagnosis-preview" style="margin-left:8px; font-size:11px; color:#059669; font-weight:700;"></span>
+                  </div>
+                  <div style="display:flex; gap:6px;">
+                    <button class="btn-secondary" onclick="sendRemotePrevStep()" style="font-size:11px; padding:4px 10px;">&larr; Prev Plate</button>
+                    <button class="btn-action" onclick="sendRemoteNextStep()" style="background:#0284C7; font-size:11px; padding:4px 12px;">Next Plate &rarr;</button>
+                  </div>
+                </div>
+                <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Click patient's verbal answer (records &amp; automatically advances VR to next plate):</div>
+                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '12'})" style="padding:6px 12px; font-size:13px; font-weight:700;">12</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '8'})" style="padding:6px 12px; font-size:13px; font-weight:700;">8</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '6'})" style="padding:6px 12px; font-size:13px; font-weight:700;">6</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '29'})" style="padding:6px 12px; font-size:13px; font-weight:700;">29</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '57'})" style="padding:6px 12px; font-size:13px; font-weight:700;">57</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '5'})" style="padding:6px 12px; font-size:13px; font-weight:700;">5</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '3'})" style="padding:6px 12px; font-size:13px; font-weight:700;">3</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '15'})" style="padding:6px 12px; font-size:13px; font-weight:700;">15</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '74'})" style="padding:6px 12px; font-size:13px; font-weight:700;">74</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '2'})" style="padding:6px 12px; font-size:13px; font-weight:700;">2</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '97'})" style="padding:6px 12px; font-size:13px; font-weight:700;">97</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '45'})" style="padding:6px 12px; font-size:13px; font-weight:700;">45</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '7'})" style="padding:6px 12px; font-size:13px; font-weight:700;">7</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '16'})" style="padding:6px 12px; font-size:13px; font-weight:700;">16</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '73'})" style="padding:6px 12px; font-size:13px; font-weight:700;">73</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '26'})" style="padding:6px 12px; font-size:13px; font-weight:700;">26</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '42'})" style="padding:6px 12px; font-size:13px; font-weight:700;">42</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '35'})" style="padding:6px 12px; font-size:13px; font-weight:700;">35</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: 'Blank'})" style="padding:6px 12px; font-size:12px; background:#F1F5F9; color:#475569; font-weight:600;">Cannot See / Blank</button>
+                </div>
+              </div>
+
+              <!-- Perimetry Stepper -->
+              <div id="stepper-PERIMETRY" class="stepper-panel" style="display:block; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Current Stimulus Point: </span>
+                    <strong id="perimetry-point-label" style="color:#0F172A; font-size:13px;">Spot 1 of 54 (x: 9.0°, y: 3.0°)</strong>
+                  </div>
+                  <div style="font-size:11px; color:#0284C7;">Goldmann Size III (200ms Flash)</div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn-action" onclick="sendRemoteNextStep()" style="background:#0284C7; font-size:12px; padding:8px 16px;">&#8677; Flash Next Spot in VR</button>
+                  <button class="btn-action" onclick="handleResponsePadTap('PHYSICIAN_MARK_SEEN')" style="background:#059669; font-size:12px; padding:8px 16px;">&#10004; Mark Seen (Spacebar)</button>
+                  <button class="btn-secondary" onclick="sendRemoteRecordResponse('MISSED')" style="background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-size:12px; padding:8px 16px; font-weight:700;">&#10008; Mark Missed</button>
+                </div>
+              </div>
+
+              <!-- Contrast Stepper -->
+              <div id="stepper-CONTRAST" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Current Contrast: </span>
+                    <strong id="contrast-level-label" style="color:#0F172A; font-size:13px;">Step 0 (100% Contrast)</strong>
+                    <span id="contrast-score-display" style="margin-left:8px; font-size:12px; color:#0284C7;">| 0.00 logCS</span>
+                  </div>
+                  <div style="display:flex; gap:6px;">
+                    <button class="btn-secondary" onclick="sendRemotePrevStep()" style="font-size:11px; padding:4px 10px;">&larr; Higher Contrast</button>
+                  </div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn-action" onclick="sendRemoteNextStep({seen: true})" style="background:#059669; font-size:12px; padding:8px 16px;">&#10004; Patient Can Read (Next Lower Contrast) &rarr;</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({seen: false})" style="background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-size:12px; padding:8px 16px; font-weight:700;">&#10008; Cannot Read (Threshold Met)</button>
+                </div>
+              </div>
+
+              <!-- Motility Stepper -->
+              <div id="stepper-MOTILITY" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Cardinal Gaze Position: </span>
+                    <strong id="motility-gaze-label" style="color:#0F172A; font-size:13px;">Primary Position (Center)</strong>
+                  </div>
+                  <div style="display:flex; gap:6px;">
+                    <button class="btn-secondary" onclick="sendRemotePrevStep()" style="font-size:11px; padding:4px 10px;">&larr; Prev Position</button>
+                    <button class="btn-action" onclick="sendRemoteNextStep()" style="background:#0284C7; font-size:11px; padding:4px 14px;">Next Position &rarr;</button>
+                  </div>
+                </div>
+                <div style="font-size:11px; color:var(--text-muted);">Step smooth-pursuit fixation target across the 9 cardinal gazes in patient VR.</div>
+              </div>
+
+              <!-- Pupillary RAPD Stepper -->
+              <div id="stepper-PUPIL_RAPD" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="font-size:12px; color:var(--text-muted);">Swinging Flashlight: </span>
+                    <strong id="pupil-light-label" style="color:#0F172A; font-size:13px;">Light Neutral (No Light)</strong>
+                  </div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({eye: 'OD'})" style="font-size:12px; padding:8px 16px; background:#FEF9C3; border-color:#FACC15; color:#854D0E; font-weight:700;">&#9728; Flash Right Eye (OD)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({eye: 'OS'})" style="font-size:12px; padding:8px 16px; background:#FEF9C3; border-color:#FACC15; color:#854D0E; font-weight:700;">&#9728; Flash Left Eye (OS)</button>
+                  <button class="btn-action" onclick="sendRemoteNextStep()" style="background:#0284C7; font-size:12px; padding:8px 14px;">Toggle Light &rarr;</button>
+                </div>
+              </div>
+
+              <!-- Amsler Stepper -->
+              <div id="stepper-AMSLER" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Ask patient if grid lines appear straight, distorted (wavy), or missing:</div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button class="btn-action" onclick="sendRemoteNextStep({finding: 'NORMAL'})" style="background:#059669; font-size:12px; padding:8px 16px;">&#10004; Normal (Grid Straight)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({finding: 'METAMORPHOPSIA'})" style="background:#FEF3C7; color:#92400E; border-color:#FCD34D; font-size:12px; padding:8px 16px; font-weight:700;">&#9888; Metamorphopsia (Wavy Lines)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({finding: 'SCOTOMA'})" style="background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-size:12px; padding:8px 16px; font-weight:700;">&#10008; Central Scotoma (Missing Area)</button>
+                </div>
+              </div>
+
+              <!-- Worth 4-Dot Stepper -->
+              <div id="stepper-WORTH_DOT" class="stepper-panel" style="display:none; background:white; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Ask patient how many dots they see and their colours:</div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button class="btn-action" onclick="sendRemoteNextStep({answer: '4_DOTS'})" style="background:#059669; font-size:12px; padding:8px 14px;">&#10004; 4 Dots (Normal Fusion)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '2_RED'})" style="font-size:12px; padding:8px 14px; background:#FEE2E2; color:#DC2626; font-weight:700;">2 Red Dots (OS Suppression)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '3_GREEN'})" style="font-size:12px; padding:8px 14px; background:#ECFDF5; color:#065F46; font-weight:700;">3 Green Dots (OD Suppression)</button>
+                  <button class="btn-secondary" onclick="sendRemoteNextStep({answer: '5_DOTS'})" style="font-size:12px; padding:8px 14px; background:#FEF3C7; color:#92400E; font-weight:700;">5 Dots (Diplopia)</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- EMBEDDED TACTILE RESPONSE HANDSET (Laptop Keyboard Spacebar & Click Response) -->
@@ -3589,8 +3766,7 @@
 
       function sendRemoteTestSwitch(moduleKey) {
         if (remoteSessionState.isEmergencyHalted) {
-          alert('Action Blocked: Priority STOP is currently active.');
-          return;
+          clearEmergencyHalt();
         }
 
         remoteSessionState.activeStimulus.test_module = moduleKey;
@@ -3614,6 +3790,14 @@
         if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
         if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
 
+        // Switch contextual stepper panel
+        document.querySelectorAll('.stepper-panel').forEach(p => p.style.display = 'none');
+        const activePanel = document.getElementById('stepper-' + moduleKey);
+        if (activePanel) activePanel.style.display = 'block';
+
+        const badge = document.getElementById('cockpit-test-badge');
+        if (badge) badge.innerText = moduleKey;
+
         // Update active parameters in telemetry card
         const modNameEl = document.getElementById('stim-test-name');
         if (modNameEl) modNameEl.innerText = moduleKey;
@@ -3626,6 +3810,170 @@
         });
 
         addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
+      }
+
+      function clearEmergencyHalt() {
+        remoteSessionState.isEmergencyHalted = false;
+        const banner = document.getElementById('emergency-halt-banner');
+        if (banner) banner.style.display = 'none';
+
+        const connStatus = document.getElementById('remote-conn-status');
+        if (connStatus) {
+          connStatus.innerText = 'Connected: Patient VR Headset Present';
+          connStatus.style.background = '#ECFDF5';
+          connStatus.style.color = '#065F46';
+        }
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'RESUME_TEST',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: { reason: 'Physician cleared emergency stop and resumed examination' }
+        });
+        addTimelineItem('CONTROL', 'Emergency stop cleared. Examination resumed by physician.');
+      }
+
+      function sendRemoteStartTest() {
+        if (remoteSessionState.isEmergencyHalted) {
+          clearEmergencyHalt();
+        }
+        const testStatus = document.getElementById('cockpit-test-status');
+        if (testStatus) {
+          testStatus.innerText = 'Running';
+          testStatus.style.background = '#ECFDF5';
+          testStatus.style.color = '#065F46';
+        }
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'START_TEST',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: {
+            module: remoteSessionState.activeStimulus.test_module,
+            eye: remoteSessionState.activeStimulus.eye_laterality
+          }
+        });
+        addTimelineItem('CONTROL', `Started test [${remoteSessionState.activeStimulus.test_module}] on patient VR headset.`);
+      }
+
+      function sendRemotePauseTest() {
+        const testStatus = document.getElementById('cockpit-test-status');
+        if (testStatus) {
+          testStatus.innerText = 'Paused';
+          testStatus.style.background = '#FEF3C7';
+          testStatus.style.color = '#92400E';
+        }
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'PAUSE_TEST',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: { module: remoteSessionState.activeStimulus.test_module }
+        });
+        addTimelineItem('CONTROL', `Paused test [${remoteSessionState.activeStimulus.test_module}] on patient VR headset.`);
+      }
+
+      function sendRemoteNextStep(extraParams) {
+        if (remoteSessionState.isEmergencyHalted) {
+          clearEmergencyHalt();
+        }
+        const params = extraParams || {};
+        params.module = remoteSessionState.activeStimulus.test_module;
+        params.eye = remoteSessionState.activeStimulus.eye_laterality;
+
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'NEXT_STEP',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: params
+        });
+        addTimelineItem('CONTROL', `Advanced next question in [${remoteSessionState.activeStimulus.test_module}].`);
+      }
+
+      function sendRemotePrevStep(extraParams) {
+        if (remoteSessionState.isEmergencyHalted) {
+          clearEmergencyHalt();
+        }
+        const params = extraParams || {};
+        params.module = remoteSessionState.activeStimulus.test_module;
+        params.eye = remoteSessionState.activeStimulus.eye_laterality;
+
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'PREV_STEP',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: params
+        });
+        addTimelineItem('CONTROL', `Stepped previous in [${remoteSessionState.activeStimulus.test_module}].`);
+      }
+
+      function sendRemoteRecordResponse(responseType, value) {
+        sendRemoteEnvelope('CONTROL_COMMAND', {
+          command: 'RECORD_RESPONSE',
+          target_module: remoteSessionState.activeStimulus.test_module,
+          parameters: {
+            response_type: responseType,
+            value: value,
+            module: remoteSessionState.activeStimulus.test_module
+          }
+        });
+        addTimelineItem('RESPONSE', `Recorded response ${responseType} for [${remoteSessionState.activeStimulus.test_module}].`);
+      }
+
+      function updateContextualStepperUI(payload) {
+        if (!payload) return;
+        const mod = payload.test_module || remoteSessionState.activeStimulus.test_module || 'PERIMETRY';
+
+        const badge = document.getElementById('cockpit-test-badge');
+        if (badge) badge.innerText = mod;
+
+        if (mod === 'ACUITY') {
+          const descEl = document.getElementById('acuity-target-desc');
+          if (descEl) {
+            const mode = payload.optotype_mode || 'TUMBLING_E';
+            const orient = payload.optotype_orientation || 'RIGHT';
+            const letter = payload.sloan_letter || 'E';
+            if (mode === 'SLOAN') {
+              descEl.innerText = `Sloan Letter: [ ${letter} ]`;
+            } else {
+              descEl.innerText = `${mode} (Points: ${orient})`;
+            }
+          }
+          const scoreEl = document.getElementById('acuity-score-display');
+          if (scoreEl) {
+            scoreEl.innerText = payload.score_text || `${payload.logmar !== undefined ? payload.logmar.toFixed(2) + ' logMAR' : ''}`;
+          }
+        } else if (mod === 'COLOUR') {
+          const plateLabel = document.getElementById('colour-plate-label');
+          if (plateLabel) {
+            const pIdx = payload.plate_index || (payload.trial_index !== undefined ? payload.trial_index + 1 : 1);
+            plateLabel.innerText = `Plate #${pIdx} of 24`;
+          }
+          const diagPreview = document.getElementById('colour-diagnosis-preview');
+          if (diagPreview && payload.diagnosis) {
+            diagPreview.innerText = `[${payload.diagnosis}]`;
+          }
+        } else if (mod === 'PERIMETRY') {
+          const pointLabel = document.getElementById('perimetry-point-label');
+          if (pointLabel) {
+            const trialIdx = payload.trial_index !== undefined ? payload.trial_index : remoteSessionState.trialIndex;
+            const coords = payload.coordinates || { x_deg: 0, y_deg: 0 };
+            pointLabel.innerText = `Spot ${trialIdx + 1} of 54 (x: ${coords.x_deg || 0}°, y: ${coords.y_deg || 0}°)`;
+          }
+        } else if (mod === 'CONTRAST') {
+          const lvlLabel = document.getElementById('contrast-level-label');
+          if (lvlLabel) {
+            const step = payload.contrast_step !== undefined ? payload.contrast_step : (payload.trial_index || 0);
+            const pctTable = [100, 50, 25, 12.5, 6.25, 3.12, 1.56];
+            lvlLabel.innerText = `Step ${step} (${pctTable[step] || 100}% Contrast)`;
+          }
+          const scoreEl = document.getElementById('contrast-score-display');
+          if (scoreEl && payload.log_cs !== undefined) {
+            scoreEl.innerText = `| ${payload.log_cs.toFixed(2)} logCS`;
+          }
+        } else if (mod === 'MOTILITY') {
+          const gazeLabel = document.getElementById('motility-gaze-label');
+          if (gazeLabel && payload.gaze_label) {
+            gazeLabel.innerText = payload.gaze_label;
+          }
+        } else if (mod === 'PUPIL_RAPD') {
+          const lightLabel = document.getElementById('pupil-light-label');
+          if (lightLabel && payload.illuminated_eye) {
+            lightLabel.innerText = payload.illuminated_eye === 'NONE' ? 'Light Off (Neutral)' : `Flashlight on ${payload.illuminated_eye} Eye`;
+          }
+        }
       }
 
       function sendRemoteEyeSwitch(eye) {
@@ -3929,8 +4277,8 @@
             remoteSessionState.trialIndex = trialIdx;
             remoteSessionState.activeStimulus = {
               trial_index: trialIdx,
-              test_module: payload.test_module || 'PERIMETRY',
-              eye_laterality: payload.eye_laterality || 'OD',
+              test_module: payload.test_module || remoteSessionState.activeStimulus.test_module || 'PERIMETRY',
+              eye_laterality: payload.eye_laterality || remoteSessionState.activeStimulus.eye_laterality || 'OD',
               coordinates: coords,
               stimulus_properties: {
                 luminance_nits: payload.luminance_nits || 31.8,
@@ -3938,10 +4286,11 @@
               },
               presentation_monotonic_ns: payload.presentation_monotonic_ns || Date.now() * 1000000
             };
+            updateContextualStepperUI(payload);
             const trialEl = document.getElementById('stim-trial-idx');
-            if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Flash Active)`;
+            if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Presentation Active)`;
             drawTwinCanvases(remoteSessionState.activeStimulus);
-            addTimelineItem('STIMULUS', `[Trial #${trialIdx}] Stimulus presented in VR (${payload.eye_laterality || 'OD'} at ${coords.x_deg || 0}°, ${coords.y_deg || 0}°).`);
+            addTimelineItem('STIMULUS', `[${payload.test_module || 'TEST'}] Stimulus presented in VR (${payload.eye_laterality || 'OD'}).`);
             break;
 
           case 'RESPONSE_EVENT':
@@ -3963,17 +4312,29 @@
                 const modNameEl = document.getElementById('stim-test-name');
                 if (modNameEl) modNameEl.innerText = mod;
               }
+            } else if (cmd === 'RESUME_TEST' || cmd === 'CLEAR_EMERGENCY') {
+              remoteSessionState.isEmergencyHalted = false;
+              const banner = document.getElementById('emergency-halt-banner');
+              if (banner) banner.style.display = 'none';
+              if (connStatus) {
+                connStatus.innerText = 'Connected: Patient VR Headset Present';
+                connStatus.style.background = '#ECFDF5';
+                connStatus.style.color = '#065F46';
+              }
+              addTimelineItem('CONTROL', 'Emergency stop cleared by peer.');
             }
             break;
 
           case 'EMERGENCY_STOP':
             remoteSessionState.isEmergencyHalted = true;
+            const haltBanner = document.getElementById('emergency-halt-banner');
+            if (haltBanner) haltBanner.style.display = 'flex';
             if (connStatus) {
               connStatus.innerText = 'EMERGENCY HALTED';
               connStatus.style.background = '#FEE2E2';
               connStatus.style.color = '#B91C1C';
             }
-            addTimelineItem('EMERGENCY', `Patient pressed emergency stop in VR!`);
+            addTimelineItem('EMERGENCY', `Patient or peer pressed emergency stop!`);
             break;
         }
       }
@@ -4217,6 +4578,9 @@
 
       function triggerEmergencyHalt() {
         remoteSessionState.isEmergencyHalted = true;
+        const banner = document.getElementById('emergency-halt-banner');
+        if (banner) banner.style.display = 'flex';
+
         const connStatus = document.getElementById('remote-conn-status');
         if (connStatus) {
           connStatus.innerText = 'EMERGENCY HALTED';
@@ -4229,7 +4593,6 @@
           timestamp_ns: Date.now() * 1000000
         });
         addTimelineItem('EMERGENCY', 'EMERGENCY STOP TRIGGERED: Stimulus generation halted on Android APK host.');
-        alert('EMERGENCY STOP BROADCASTED: Examination immediately paused on Android VR Box and all connected stations.');
       }
 
       let streamAnimationTimer = null;
