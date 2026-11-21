@@ -3422,26 +3422,26 @@
   </div>
 
   <script>
-    //  Tab Sw itching Lo gic
+    // Tab Switching Logic
 
-    //  == === ======= ========== == = == ==== == === ======= ========== == = == === == === ======= 
-    // CR -0 0 2:  Re mo te  Physici an Portal  &  P ho ne  2  Pa tient R esponse Pa d  L og ic 
-    // ==== ========== == = == === == === ======= ========= ========== == ==== == === ======= ==
-    let c u rr entP or tal Mode = 'PHYSICIAN _A N D_ RESP ON SE';
-    l et cockpit Ta p Co unt = 0; 
-    le t activeRe mo t eW s = n ull;
-    l et perimet ry O rd er = Ar ray.fro m({ length: 5 4 }, (_, i) => i).sort(() => Math.rand om() - 0 .5); 
+    // =========================================================================
+    // CR-002: Remote Physician Portal & Phone 2 Patient Response Pad Logic
+    // =========================================================================
+    let currentPortalMode = 'PHYSICIAN_AND_RESPONSE';
+    let cockpitTapCount = 0;
+    let activeRemoteWs = null;
+    let perimetryOrder = Array.from({ length: 54 }, (_, i) => i).sort(() => Math.random() - 0.5);
 
-    l et remoteS es s io nSta te = {
-      sessionId: ' S ES -ON EP LUS- NORD3-0 1',
-      pa i ri ngP in: '7 49281',
-      rol e: 'P HY SI CIAN _CONTRO LLER',
-      is Co nn ecte d: fals e,
-      t rialIndex: 1 4,
-      i sEmerge ncyHalted: f a ls e,
-      screenS hareActive: f al se,
-      active Stimulus: {
-        tri al_inde x: 14,
+    let remoteSessionState = {
+      sessionId: '',
+      pairingPin: '',
+      role: 'PHYSICIAN_CONTROLLER',
+      isConnected: false,
+      trialIndex: 0,
+      isEmergencyHalted: false,
+      screenShareActive: false,
+      activeStimulus: {
+        trial_index: 0,
         test_module: 'PERIMETRY',
         eye_laterality: 'OD',
         coordinates: { x_deg: 9.0, y_deg: 3.0 },
@@ -3489,36 +3489,9 @@
       setPortalMode('PHYSICIAN_AND_RESPONSE');
     }
 
-    function sendRemoteTestSwitch(moduleKey) {
-      if (remoteSessionState.isEmergencyHalted) {
-        alert('Action Blocked: Priority STOP is currently active.');
-        return;
-      }
+    let remoteClientSequence = 0;
 
-      remoteSessionState.activeStimulus.test_module = moduleKey;
-
-      // Update module chip styling
-      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = 'var(--text-main)';
-        btn.style.fontWeight = '600';
-      });
-      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
-      if (activeBtn) {
-        activeBtn.style.background = 'var(--sea-green)';
-        activeBtn.style.color = 'white';
-        activeBtn.style.fontWeight = '700';
-      }
-
-      // Show/hide sub-keypads for acuity & colour
-      const eControls = document.getElementById('cockpit-e-controls');
-      const numControls = document.getElementById('cockpit-num-controls');
-      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
-      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
-
-      let remoteClientSequence = 0;
-
-      function sendRemoteEnvelope(messageType, payload) {
+    function sendRemoteEnvelope(messageType, payload) {
         if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
           return false;
         }

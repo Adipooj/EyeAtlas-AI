@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `a3ac2bd84ee1ff0ccf44f1e88bd39ca27089f9df9ce518d4340c8edcd506d4c2`
+**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `dc81802a8fff9b88a601a9f483e5158a74d4ea88e1dab307ec2dfa6bdf061898`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -134,7 +134,7 @@ scripts/snapshot.py	3094	ca6f9c4a81e12536168e34e987428f5a8299ca9a47b9780406251ea
 scripts/verify.sh	1004	72e85a05188f7fa53ccb717c0f6bde28a333234b8253328e9d2e115439a617ff
 settings.gradle.kts	330	c6d9c63da777d5c516130ec5a4f21afda05b83db0bab7c0120c16e31b972d74f
 web/assets/ishihara/manifest.json	10169	707dabf22a91d4583ee7e6493b97a48d5af94b6f515274771e366f5afb68adfd
-web/index.html	285112	60816d7693a2fd9e486ecb69d211897019b36e02b7ef39dd902f6fc91f1e819a
+web/index.html	283776	f5bb6a9b9f1f9b31699d17bb6884bccb724d2775499cf832324345ecb3f00764
 web/netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 web/package.json	709	08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1
 web/src/api/client.ts	3502	e1fee231d6ce0b3265db7bbfeae0e01b6e97b42252cad6f512f2d191d2a7348d
@@ -22937,7 +22937,7 @@ END FILE `settings.gradle.kts`
 ```
 END FILE `web/assets/ishihara/manifest.json`
 
-### FILE `web/index.html` | bytes=285112 | SHA256=`60816d7693a2fd9e486ecb69d211897019b36e02b7ef39dd902f6fc91f1e819a`
+### FILE `web/index.html` | bytes=283776 | SHA256=`f5bb6a9b9f1f9b31699d17bb6884bccb724d2775499cf832324345ecb3f00764`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -26363,26 +26363,26 @@ END FILE `web/assets/ishihara/manifest.json`
   </div>
 
   <script>
-    //  Tab Sw itching Lo gic
+    // Tab Switching Logic
 
-    //  == === ======= ========== == = == ==== == === ======= ========== == = == === == === ======= 
-    // CR -0 0 2:  Re mo te  Physici an Portal  &  P ho ne  2  Pa tient R esponse Pa d  L og ic 
-    // ==== ========== == = == === == === ======= ========= ========== == ==== == === ======= ==
-    let c u rr entP or tal Mode = 'PHYSICIAN _A N D_ RESP ON SE';
-    l et cockpit Ta p Co unt = 0; 
-    le t activeRe mo t eW s = n ull;
-    l et perimet ry O rd er = Ar ray.fro m({ length: 5 4 }, (_, i) => i).sort(() => Math.rand om() - 0 .5); 
+    // =========================================================================
+    // CR-002: Remote Physician Portal & Phone 2 Patient Response Pad Logic
+    // =========================================================================
+    let currentPortalMode = 'PHYSICIAN_AND_RESPONSE';
+    let cockpitTapCount = 0;
+    let activeRemoteWs = null;
+    let perimetryOrder = Array.from({ length: 54 }, (_, i) => i).sort(() => Math.random() - 0.5);
 
-    l et remoteS es s io nSta te = {
-      sessionId: ' S ES -ON EP LUS- NORD3-0 1',
-      pa i ri ngP in: '7 49281',
-      rol e: 'P HY SI CIAN _CONTRO LLER',
-      is Co nn ecte d: fals e,
-      t rialIndex: 1 4,
-      i sEmerge ncyHalted: f a ls e,
-      screenS hareActive: f al se,
-      active Stimulus: {
-        tri al_inde x: 14,
+    let remoteSessionState = {
+      sessionId: '',
+      pairingPin: '',
+      role: 'PHYSICIAN_CONTROLLER',
+      isConnected: false,
+      trialIndex: 0,
+      isEmergencyHalted: false,
+      screenShareActive: false,
+      activeStimulus: {
+        trial_index: 0,
         test_module: 'PERIMETRY',
         eye_laterality: 'OD',
         coordinates: { x_deg: 9.0, y_deg: 3.0 },
@@ -26430,36 +26430,9 @@ END FILE `web/assets/ishihara/manifest.json`
       setPortalMode('PHYSICIAN_AND_RESPONSE');
     }
 
-    function sendRemoteTestSwitch(moduleKey) {
-      if (remoteSessionState.isEmergencyHalted) {
-        alert('Action Blocked: Priority STOP is currently active.');
-        return;
-      }
+    let remoteClientSequence = 0;
 
-      remoteSessionState.activeStimulus.test_module = moduleKey;
-
-      // Update module chip styling
-      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = 'var(--text-main)';
-        btn.style.fontWeight = '600';
-      });
-      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
-      if (activeBtn) {
-        activeBtn.style.background = 'var(--sea-green)';
-        activeBtn.style.color = 'white';
-        activeBtn.style.fontWeight = '700';
-      }
-
-      // Show/hide sub-keypads for acuity & colour
-      const eControls = document.getElementById('cockpit-e-controls');
-      const numControls = document.getElementById('cockpit-num-controls');
-      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
-      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
-
-      let remoteClientSequence = 0;
-
-      function sendRemoteEnvelope(messageType, payload) {
+    function sendRemoteEnvelope(messageType, payload) {
         if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
           return false;
         }
