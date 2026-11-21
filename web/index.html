@@ -3490,26 +3490,102 @@
     }
 
     let remoteClientSequence = 0;
+    let restSyncInterval = null;
+    let lastSeqReceived = -1;
 
     function sendRemoteEnvelope(messageType, payload) {
-        if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
-          return false;
-        }
-        remoteClientSequence++;
-        const envelope = {
-          version: "1.0",
-          session_id: remoteSessionState.sessionId || "SES-DEFAULT",
-          message_id: `msg-${Date.now()}-${remoteClientSequence}`,
-          sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
-          sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
-          message_type: messageType,
-          sequence_number: remoteClientSequence,
-          timestamp_ns: Date.now() * 1000000,
-          payload: payload || {}
-        };
+      if (!remoteSessionState.sessionId) {
+        return false;
+      }
+      remoteClientSequence++;
+      const envelope = {
+        version: "1.0",
+        session_id: remoteSessionState.sessionId,
+        message_id: `msg-${Date.now()}-${remoteClientSequence}`,
+        sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
+        sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
+        message_type: messageType,
+        sequence_number: remoteClientSequence,
+        timestamp_ns: Date.now() * 1000000,
+        payload: payload || {}
+      };
+
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
         activeRemoteWs.send(JSON.stringify(envelope));
         return true;
       }
+
+      // Resilient REST fallback POST
+      if (remoteSessionState.token) {
+        const postUrl = `${backendBaseUrl}/api/v1/remote/${remoteSessionState.sessionId}/message?token=${encodeURIComponent(remoteSessionState.token)}`;
+        fetch(postUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(envelope)
+        }).catch(err => console.warn('REST fallback envelope delivery error:', err));
+        return true;
+      }
+      return false;
+    }
+
+    function startRestSyncLoop() {
+      if (restSyncInterval) clearInterval(restSyncInterval);
+      const poll = async () => {
+        if (!remoteSessionState.sessionId || !remoteSessionState.token) return;
+        const tStart = performance.now();
+        try {
+          const url = `${backendBaseUrl}/api/v1/remote/${remoteSessionState.sessionId}/messages?since_seq=${lastSeqReceived}&token=${encodeURIComponent(remoteSessionState.token)}`;
+          const res = await fetch(url);
+          if (res.ok) {
+            const data = await res.json();
+            const rtt = (performance.now() - tStart).toFixed(1);
+            
+            const latEl = document.getElementById('info-sync-latency');
+            if (latEl) latEl.innerText = `${rtt} ms`;
+
+            const peersEl = document.getElementById('info-peers-count');
+            if (peersEl) {
+              peersEl.innerText = data.has_patient ? '2 (Host VR + Physician)' : '1 (Physician Online)';
+            }
+
+            const connStatus = document.getElementById('remote-conn-status');
+            const padBadge = document.getElementById('pad-conn-badge');
+
+            if (data.has_patient) {
+              remoteSessionState.isConnected = true;
+              if (connStatus) {
+                connStatus.innerText = 'Connected: Patient VR Headset Present';
+                connStatus.style.background = '#ECFDF5';
+                connStatus.style.color = '#065F46';
+              }
+              if (padBadge) padBadge.innerText = 'PAIRED: PATIENT IN VR';
+            } else {
+              remoteSessionState.isConnected = false;
+              if (connStatus && (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN)) {
+                connStatus.innerText = 'Broker Linked (Waiting for Patient VR)...';
+                connStatus.style.background = '#FEF3C7';
+                connStatus.style.color = '#92400E';
+              }
+              if (padBadge) padBadge.innerText = 'WAITING FOR PATIENT';
+            }
+
+            if (Array.isArray(data.messages)) {
+              for (const msg of data.messages) {
+                if (msg.sequence_number > lastSeqReceived) {
+                  lastSeqReceived = msg.sequence_number;
+                }
+                handleIncomingRemoteEnvelope(msg);
+              }
+            }
+          }
+        } catch (e) {
+          // Keep polling resilience
+        }
+      };
+
+      poll();
+      restSyncInterval = setInterval(poll, 650);
+    }
 
       function sendRemoteTestSwitch(moduleKey) {
         if (remoteSessionState.isEmergencyHalted) {
@@ -3790,30 +3866,21 @@
           };
 
           activeRemoteWs.onclose = (evt) => {
-            remoteSessionState.isConnected = false;
-            if (connStatus) {
-              connStatus.innerText = 'Disconnected';
-              connStatus.style.background = '#F3F4F6';
-              connStatus.style.color = '#4B5563';
-            }
-            document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
-            addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
+            console.log(`WebSocket closed (Code: ${evt.code}); maintaining connection via continuous REST sync.`);
+            addTimelineItem('PEER', `WebSocket channel idle (${evt.code}). Continuous REST cloud sync active.`);
           };
 
           activeRemoteWs.onerror = (err) => {
-            console.error('Remote WebSocket error:', err);
-            remoteSessionState.isConnected = false;
-            if (connStatus) {
-              connStatus.innerText = 'WebSocket Error';
-              connStatus.style.background = '#FEE2E2';
-              connStatus.style.color = '#B91C1C';
-            }
+            console.warn('Remote WebSocket notice:', err);
           };
         } catch (e) {
           console.error('WebSocket connection attempt failed:', e);
         }
 
-        addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
+        // Always activate resilient REST sync loop
+        startRestSyncLoop();
+
+        addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}. Continuous cloud sync activated.`);
         closeRemotePairingModal();
         setPortalMode('PHYSICIAN_AND_RESPONSE');
       }
@@ -3831,6 +3898,10 @@
           case 'PEER_STATUS':
             const roles = (env.payload && env.payload.roles) || [];
             const hasPatient = roles.includes('PATIENT_VR_HOST');
+            const peersCountEl = document.getElementById('info-peers-count');
+            if (peersCountEl) {
+              peersCountEl.innerText = hasPatient ? '2 (Host VR + Physician)' : '1 (Physician Online)';
+            }
             if (hasPatient) {
               remoteSessionState.isConnected = true;
               if (connStatus) {

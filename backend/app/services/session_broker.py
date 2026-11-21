@@ -373,5 +373,11 @@ class SessionBroker:
             "active_module": room.active_module
         }
 
+    def get_messages_since(self, session_id: str, since_seq: int = -1, limit: int = 50) -> List[WebSocketMessageEnvelope]:
+        room = self.get_room(session_id)
+        if not room:
+            return []
+        return [env for env in room.replay_buffer if env.sequence_number > since_seq][:limit]
+
 # Global singleton instance
 session_broker = SessionBroker()

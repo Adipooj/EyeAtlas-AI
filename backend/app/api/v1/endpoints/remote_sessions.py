@@ -8,7 +8,7 @@ import json
 import random
 import uuid
 from typing import Any, Dict, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, WebSocket, WebSocketDisconnect, status
 from sqlalchemy.orm import Session
 from backend.app.core.config import settings
 from backend.app.core.database import get_db, SessionLocal
@@ -27,7 +27,7 @@ from backend.app.models.remote_contracts import (
     WebSocketMessageEnvelope,
     WebSocketMessageType,
 )
-from backend.app.services.session_broker import session_broker
+from backend.app.services.session_broker import session_broker, ConnectedPeer
 
 router = APIRouter(prefix="/remote", tags=["Remote Sessions"])
 
@@ -257,6 +257,107 @@ def finalize_remote_session(
         "status": "FINALIZED",
         "report_id": report_id,
         "regulatory_disclaimer": "Investigational ophthalmic screening aid under CDSCO MDR-2017 Class B SaMD. Not an autonomous diagnostic device."
+    }
+
+@router.post("/{session_id}/message")
+async def post_remote_message(
+    session_id: str,
+    envelope: WebSocketMessageEnvelope,
+    token: Optional[str] = Query(None),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+):
+    """Fallback REST messaging endpoint ensuring reliable command and event transport."""
+    effective_token = token
+    if not effective_token and authorization and authorization.startswith("Bearer "):
+        effective_token = authorization.split(" ", 1)[1]
+
+    if not effective_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token required")
+
+    try:
+        payload = decode_access_token(effective_token)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    if not payload or payload.get("session_id") != session_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session mismatch")
+
+    sender_id = payload.get("sub") or envelope.sender_id
+    role_str = payload.get("role") or (envelope.sender_role.value if hasattr(envelope.sender_role, "value") else str(envelope.sender_role))
+    try:
+        sender_role = RemoteRole(role_str)
+    except Exception:
+        sender_role = RemoteRole.OBSERVER
+
+    envelope.session_id = session_id
+    envelope.sender_id = sender_id
+    envelope.sender_role = sender_role
+
+    room = session_broker.get_or_create_room(session_id)
+    if sender_id not in room.peers:
+        room.peers[sender_id] = ConnectedPeer(client_id=sender_id, role=sender_role, websocket=None)
+    else:
+        room.peers[sender_id].last_heartbeat = datetime.datetime.utcnow().timestamp()
+
+    result = await session_broker.route_envelope(envelope, db=db)
+    return {"status": "DELIVERED", "sequence_number": envelope.sequence_number, "broker_result": result}
+
+@router.get("/{session_id}/messages")
+async def get_remote_messages(
+    session_id: str,
+    since_seq: int = Query(-1),
+    token: Optional[str] = Query(None),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+):
+    """Fallback REST polling endpoint returning new buffered envelopes and live peer presence."""
+    effective_token = token
+    if not effective_token and authorization and authorization.startswith("Bearer "):
+        effective_token = authorization.split(" ", 1)[1]
+
+    if not effective_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token required")
+
+    try:
+        payload = decode_access_token(effective_token)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    if not payload or payload.get("session_id") != session_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session mismatch")
+
+    client_id = payload.get("sub", "")
+    role_str = payload.get("role", "OBSERVER")
+    try:
+        client_role = RemoteRole(role_str)
+    except Exception:
+        client_role = RemoteRole.OBSERVER
+
+    room = session_broker.get_or_create_room(session_id)
+    if client_id and client_id not in room.peers:
+        room.peers[client_id] = ConnectedPeer(client_id=client_id, role=client_role, websocket=None)
+    elif client_id in room.peers:
+        room.peers[client_id].last_heartbeat = datetime.datetime.utcnow().timestamp()
+
+    messages = [
+        env.model_dump()
+        for env in room.replay_buffer
+        if env.sequence_number > since_seq and env.sender_id != client_id
+    ]
+
+    connected_roles = room.get_connected_roles()
+    has_patient = RemoteRole.PATIENT_VR_HOST.value in connected_roles
+    has_physician = RemoteRole.PHYSICIAN_CONTROLLER.value in connected_roles
+
+    return {
+        "session_id": session_id,
+        "messages": messages,
+        "connected_roles": connected_roles,
+        "has_patient": has_patient,
+        "has_physician": has_physician,
+        "active_module": room.active_module,
+        "server_time_ns": int(datetime.datetime.utcnow().timestamp() * 1_000_000_000)
     }
 
 @router.websocket("/ws/{session_id}")

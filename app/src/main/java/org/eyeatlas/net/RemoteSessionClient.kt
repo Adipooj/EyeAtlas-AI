@@ -260,10 +260,17 @@ class RemoteSessionClient(
         return sendEnvelope(authEnv)
     }
 
+    var activeBaseUrl: String = ""
+    var activeToken: String = ""
+    private var restSyncThread: Thread? = null
+    @Volatile private var isRestSyncActive = false
+
     /**
-     * Connects directly to the cloud WebSocket broker with query token.
+     * Connects to the cloud broker via WebSocket and starts resilient REST sync fallback.
      */
     fun connectToCloud(baseUrl: String, token: String) {
+        activeBaseUrl = baseUrl
+        activeToken = token
         state = RemoteClientState.CONNECTING
         val cleanHost = baseUrl.replace(Regex("^https?://"), "").trimEnd('/')
         val scheme = if (baseUrl.startsWith("https://")) "wss" else "ws"
@@ -277,6 +284,102 @@ class RemoteSessionClient(
         )
         this.transport = okTransport
         okTransport.connect(wsUrl, emptyMap())
+
+        // Launch continuous REST sync fallback ensuring communication even if WebSocket is filtered/blocked
+        startRestSyncFallback(baseUrl, token)
+    }
+
+    private fun startRestSyncFallback(baseUrl: String, token: String) {
+        if (isRestSyncActive) return
+        isRestSyncActive = true
+        restSyncThread = Thread {
+            val client = OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .build()
+            val cleanUrl = baseUrl.trimEnd('/')
+
+            while (isRestSyncActive && sessionId.isNotEmpty() && token.isNotEmpty()) {
+                try {
+                    val pollUrl = "$cleanUrl/api/v1/remote/$sessionId/messages?since_seq=$lastReceivedSequence&token=${java.net.URLEncoder.encode(token, "UTF-8")}"
+                    val req = Request.Builder().url(pollUrl).get().build()
+                    val resp = client.newCall(req).execute()
+                    if (resp.isSuccessful) {
+                        val bodyStr = resp.body?.string() ?: ""
+                        val json = JSONObject(bodyStr)
+                        val hasPhysician = json.optBoolean("has_physician", false)
+                        val roles = mutableListOf("PATIENT_VR_HOST")
+                        if (hasPhysician) {
+                            roles.add("PHYSICIAN_CONTROLLER")
+                        }
+                        
+                        onPeerStatusListener?.invoke(roles, if (hasPhysician) "PHYSICIAN_CONTROLLER" else null)
+                        
+                        val msgs = json.optJSONArray("messages")
+                        if (msgs != null) {
+                            for (i in 0 until msgs.length()) {
+                                val m = msgs.getJSONObject(i)
+                                val env = parseEnvelopeFromJson(m)
+                                if (env != null) {
+                                    processIncomingEnvelope(env)
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Resilient polling
+                }
+                try {
+                    Thread.sleep(700)
+                } catch (e: InterruptedException) {
+                    break
+                }
+            }
+        }.apply {
+            isDaemon = true
+            name = "EyeAtlas-RestSync"
+            start()
+        }
+    }
+
+    private fun parseEnvelopeFromJson(json: JSONObject): RemoteEnvelope? {
+        return try {
+            val sId = json.optString("session_id", "")
+            val mId = json.optString("message_id", "")
+            val sendId = json.optString("sender_id", "")
+            val sRole = json.optString("sender_role", "OBSERVER")
+            val msgTypeStr = json.optString("message_type", "CONTROL_COMMAND")
+            val msgType = try {
+                RemoteMessageType.valueOf(msgTypeStr)
+            } catch (e: Exception) {
+                RemoteMessageType.CONTROL_COMMAND
+            }
+            val seq = json.optLong("sequence_number", 0L)
+            val ts = json.optLong("timestamp_ns", System.nanoTime())
+
+            val payloadObj = json.optJSONObject("payload")
+            val payloadMap = mutableMapOf<String, Any>()
+            if (payloadObj != null) {
+                val keys = payloadObj.keys()
+                while (keys.hasNext()) {
+                    val k = keys.next()
+                    payloadMap[k] = payloadObj.get(k)
+                }
+            }
+
+            RemoteEnvelope(
+                sessionId = sId,
+                messageId = mId,
+                senderId = sendId,
+                senderRole = sRole,
+                messageType = msgType,
+                sequenceNumber = seq,
+                timestampNs = ts,
+                payload = payloadMap
+            )
+        } catch (e: Exception) {
+            null
+        }
     }
 
     data class CreatedSession(
@@ -530,6 +633,30 @@ class RemoteSessionClient(
         val currentTransport = transport
         if (currentTransport != null && currentTransport.isConnected()) {
             return currentTransport.send(envelope)
+        } else if (activeBaseUrl.isNotEmpty() && activeToken.isNotEmpty()) {
+            // High-resilience REST POST delivery
+            Thread {
+                try {
+                    val client = OkHttpClient()
+                    val json = JSONObject().apply {
+                        put("version", envelope.version)
+                        put("session_id", envelope.sessionId)
+                        put("message_id", envelope.messageId)
+                        put("sender_id", envelope.senderId)
+                        put("sender_role", envelope.senderRole)
+                        put("message_type", envelope.messageType.name)
+                        put("sequence_number", envelope.sequenceNumber)
+                        put("timestamp_ns", envelope.timestampNs)
+                        put("payload", JSONObject(envelope.payload))
+                    }
+                    val cleanUrl = activeBaseUrl.trimEnd('/')
+                    val postUrl = "$cleanUrl/api/v1/remote/$sessionId/message?token=${java.net.URLEncoder.encode(activeToken, "UTF-8")}"
+                    val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+                    val req = Request.Builder().url(postUrl).post(body).build()
+                    client.newCall(req).execute()
+                } catch (e: Exception) {}
+            }.start()
+            return true
         }
         return false
     }
@@ -633,6 +760,9 @@ class RemoteSessionClient(
     }
 
     fun disconnect() {
+        isRestSyncActive = false
+        restSyncThread?.interrupt()
+        restSyncThread = null
         state = RemoteClientState.DISCONNECTED
         transport?.disconnect()
     }

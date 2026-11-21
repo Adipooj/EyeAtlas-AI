@@ -1,5 +1,5 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `c0e56c77cd495f5ef91722c581b6b32ff72f7668eb3ef913c1663810d8ca9a8c`
+**Phase:** CR003 | **Essential files:** 147 | **Manifest SHA256:** `ea50c0c99f9dd7f96191de2958cf00b3465ab31b55da04c28d23df99612ad86f`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
@@ -24,7 +24,7 @@ app/src/main/java/org/eyeatlas/core/Protocols.kt	4089	5fe29bbfddb2c4a20c4e2d5cd4
 app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt	11224	3324b6cb212a75de935b099cce7b62f98ab2f2746548954ce38e7d380fb3b2ae
 app/src/main/java/org/eyeatlas/net/MediaProjectionService.kt	3515	c1bd25d73c6dff06eaf550f05be28e1d318c6b42dbd9c0198af7cd8bc7220d60
 app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt	9522	a3b22ddd2b5a7c4a101073c87ae7e0b44e65a70ae9e9d489ebea221249bfcb1d
-app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt	24273	5d505261811cf1f0c31ccf78ec87195325e69950e1bdc77875fc1c8cee6c54e7
+app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt	29999	0bc4ffc0d2072295f69ff60469403c37b04b42ce11edb8c0ef2c5c5c0299564b
 app/src/main/java/org/eyeatlas/net/ScreenStreamPublisher.kt	10384	41a7c41b32bedaa0e51640416f40347f1adc4078b2c4e87f60a3ba9d630d75ff
 app/src/main/java/org/eyeatlas/net/SessionSync.kt	1985	9b5b23b59a816b0f361227b52655d0284543697ffddca921313659634d334388
 app/src/main/java/org/eyeatlas/sensors/Calibration.kt	15825	33dd98ef69147544f4d4c689993640b1f3c5968b5836b1cd33cbe40ab0557796
@@ -57,7 +57,7 @@ backend/app/api/v1/endpoints/admin.py	3031	5c983f845bb87976ae3f0f8a7674760697f59
 backend/app/api/v1/endpoints/auth.py	2431	6e14556103a855e310d3157dfdf8d8dc459b1368574d38089bad13395463fb31
 backend/app/api/v1/endpoints/health.py	879	4b98907fc8e15850868a4b8950c07b7e8f4bebd349d1a78021a3e9d2d0756ccb
 backend/app/api/v1/endpoints/patients.py	5484	ab2313fcbfc193de4e405f085c24b89e5d7f814e5bc71d6b950b2efbcfa4ec1e
-backend/app/api/v1/endpoints/remote_sessions.py	14995	cce130076eb9ce7152a05b8bb3f99445be82996d8c14e1ee66f9aaba574b47ea
+backend/app/api/v1/endpoints/remote_sessions.py	19094	fcb806995310ee191527f55f573eca8e9f92adfeb6f37367749c203562528b7f
 backend/app/api/v1/endpoints/reports.py	4174	8b88283dd1dbe671ea8d2f06e1d7e759d99dabdde6b78dca1c4cfe773d3cb177
 backend/app/api/v1/endpoints/sessions.py	29733	823ed47c1af02b2f2cb4f4ad598ffb4fdb8b987bf4e0ce9bd4f3a7c59e3e10ee
 backend/app/api/v1/endpoints/sync.py	2150	3e21ba3a5eb064087f0687c10baa3214a9d54d1a3b4d1c2d3c48f1ca329881a6
@@ -73,9 +73,9 @@ backend/app/models/entities.py	11435	7965f1b26ebf5be98fb375362f0b28d12bf680eab8e
 backend/app/models/remote_contracts.py	8424	93dd493443d46fa7df50fb34b68f011c94a8daab0fa025365aa2c903fca6ba5e
 backend/app/services/__init__.py	48	99e5c3046f867070ab36d7734f1e2c264fc8f4c29c32340c34d498a3b46d040c
 backend/app/services/audit_service.py	1975	5e52097c1fefaa1af1ef864435b3e3c03d4891254263aebc8467623601364b35
-backend/app/services/session_broker.py	18216	79ff71fd9b24d5e1a978232ca614234741cc6c59da06b1117933121bb99e9d6c
+backend/app/services/session_broker.py	18518	77d037be18d1fdb5e0a6167947df92ab4c48c9486f0ab015457e10d93a4d1968
 backend/app/services/sync_service.py	14939	e2d77609741fa2fe05b5d9a4d53c877a0a23fd1d26075620292c9b87f112bbc2
-backend/requirements.txt	144	dd3dbdba59401ffdfd88434b434414d0fe8aa92e9d8f91c5ba66f27885440831
+backend/requirements.txt	173	9c6c4f3266ca61343b789a9a218efd972d336a19c9e8d5763a30abb26b9d929b
 backend/run_backend.py	2715	4b86d1fddffa9ec6a3fd046ef97cd32bfd238ccf1859fc7e4bee6899d9d35a32
 backend/tests/__init__.py	41	cbe62e0eb62a3de1dc7eb0c4ed8e175be07f12ddab7f8fc57e4efb559af76965
 backend/tests/conftest.py	3447	c64b613b709058901a648970b61bdd5051da8fb8bb07f33501e7f6da7790ae45
@@ -129,12 +129,13 @@ ml/models.yaml	1548	004c2f06b714427385a41a8c33db923cb726e0369cef31e1b0c6a9d37424
 ml/requirements.lock	83	4d55502bc9177800768698d5ba5602826f635083c19b28e719dac3a212234cac
 ml/train.py	5555	3017e8e8e379d1468e9fcc51b4e213dd7b6802ab70fe2f303deaeee8f5224a04
 netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
+requirements.txt	173	9c6c4f3266ca61343b789a9a218efd972d336a19c9e8d5763a30abb26b9d929b
 scripts/bootstrap.sh	269	33122a065aa906bb06f0ceec51ee7e4b3635aa09095d269bbd2e47851b363baf
 scripts/snapshot.py	3094	ca6f9c4a81e12536168e34e987428f5a8299ca9a47b9780406251ea77dfd23dd
 scripts/verify.sh	1004	72e85a05188f7fa53ccb717c0f6bde28a333234b8253328e9d2e115439a617ff
 settings.gradle.kts	330	c6d9c63da777d5c516130ec5a4f21afda05b83db0bab7c0120c16e31b972d74f
 web/assets/ishihara/manifest.json	10169	707dabf22a91d4583ee7e6493b97a48d5af94b6f515274771e366f5afb68adfd
-web/index.html	285956	48428baca04afb4da782bd1818b41e1aa4a107dd947df9d7e404613ab10ff366
+web/index.html	288967	9255c0a9b8e372f68666a68bda95228602c81b7d7ef7984526565cd36114e733
 web/netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 web/package.json	709	08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1
 web/src/api/client.ts	3502	e1fee231d6ce0b3265db7bbfeae0e01b6e97b42252cad6f512f2d191d2a7348d
@@ -2391,7 +2392,7 @@ class PairingAndTransport(
 ```
 END FILE `app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt` | bytes=24273 | SHA256=`5d505261811cf1f0c31ccf78ec87195325e69950e1bdc77875fc1c8cee6c54e7`
+### FILE `app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt` | bytes=29999 | SHA256=`0bc4ffc0d2072295f69ff60469403c37b04b42ce11edb8c0ef2c5c5c0299564b`
 ```kt
 package org.eyeatlas.net
 
@@ -2655,10 +2656,17 @@ class RemoteSessionClient(
         return sendEnvelope(authEnv)
     }
 
+    var activeBaseUrl: String = ""
+    var activeToken: String = ""
+    private var restSyncThread: Thread? = null
+    @Volatile private var isRestSyncActive = false
+
     /**
-     * Connects directly to the cloud WebSocket broker with query token.
+     * Connects to the cloud broker via WebSocket and starts resilient REST sync fallback.
      */
     fun connectToCloud(baseUrl: String, token: String) {
+        activeBaseUrl = baseUrl
+        activeToken = token
         state = RemoteClientState.CONNECTING
         val cleanHost = baseUrl.replace(Regex("^https?://"), "").trimEnd('/')
         val scheme = if (baseUrl.startsWith("https://")) "wss" else "ws"
@@ -2672,6 +2680,102 @@ class RemoteSessionClient(
         )
         this.transport = okTransport
         okTransport.connect(wsUrl, emptyMap())
+
+        // Launch continuous REST sync fallback ensuring communication even if WebSocket is filtered/blocked
+        startRestSyncFallback(baseUrl, token)
+    }
+
+    private fun startRestSyncFallback(baseUrl: String, token: String) {
+        if (isRestSyncActive) return
+        isRestSyncActive = true
+        restSyncThread = Thread {
+            val client = OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .build()
+            val cleanUrl = baseUrl.trimEnd('/')
+
+            while (isRestSyncActive && sessionId.isNotEmpty() && token.isNotEmpty()) {
+                try {
+                    val pollUrl = "$cleanUrl/api/v1/remote/$sessionId/messages?since_seq=$lastReceivedSequence&token=${java.net.URLEncoder.encode(token, "UTF-8")}"
+                    val req = Request.Builder().url(pollUrl).get().build()
+                    val resp = client.newCall(req).execute()
+                    if (resp.isSuccessful) {
+                        val bodyStr = resp.body?.string() ?: ""
+                        val json = JSONObject(bodyStr)
+                        val hasPhysician = json.optBoolean("has_physician", false)
+                        val roles = mutableListOf("PATIENT_VR_HOST")
+                        if (hasPhysician) {
+                            roles.add("PHYSICIAN_CONTROLLER")
+                        }
+                        
+                        onPeerStatusListener?.invoke(roles, if (hasPhysician) "PHYSICIAN_CONTROLLER" else null)
+                        
+                        val msgs = json.optJSONArray("messages")
+                        if (msgs != null) {
+                            for (i in 0 until msgs.length()) {
+                                val m = msgs.getJSONObject(i)
+                                val env = parseEnvelopeFromJson(m)
+                                if (env != null) {
+                                    processIncomingEnvelope(env)
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Resilient polling
+                }
+                try {
+                    Thread.sleep(700)
+                } catch (e: InterruptedException) {
+                    break
+                }
+            }
+        }.apply {
+            isDaemon = true
+            name = "EyeAtlas-RestSync"
+            start()
+        }
+    }
+
+    private fun parseEnvelopeFromJson(json: JSONObject): RemoteEnvelope? {
+        return try {
+            val sId = json.optString("session_id", "")
+            val mId = json.optString("message_id", "")
+            val sendId = json.optString("sender_id", "")
+            val sRole = json.optString("sender_role", "OBSERVER")
+            val msgTypeStr = json.optString("message_type", "CONTROL_COMMAND")
+            val msgType = try {
+                RemoteMessageType.valueOf(msgTypeStr)
+            } catch (e: Exception) {
+                RemoteMessageType.CONTROL_COMMAND
+            }
+            val seq = json.optLong("sequence_number", 0L)
+            val ts = json.optLong("timestamp_ns", System.nanoTime())
+
+            val payloadObj = json.optJSONObject("payload")
+            val payloadMap = mutableMapOf<String, Any>()
+            if (payloadObj != null) {
+                val keys = payloadObj.keys()
+                while (keys.hasNext()) {
+                    val k = keys.next()
+                    payloadMap[k] = payloadObj.get(k)
+                }
+            }
+
+            RemoteEnvelope(
+                sessionId = sId,
+                messageId = mId,
+                senderId = sendId,
+                senderRole = sRole,
+                messageType = msgType,
+                sequenceNumber = seq,
+                timestampNs = ts,
+                payload = payloadMap
+            )
+        } catch (e: Exception) {
+            null
+        }
     }
 
     data class CreatedSession(
@@ -2925,6 +3029,30 @@ class RemoteSessionClient(
         val currentTransport = transport
         if (currentTransport != null && currentTransport.isConnected()) {
             return currentTransport.send(envelope)
+        } else if (activeBaseUrl.isNotEmpty() && activeToken.isNotEmpty()) {
+            // High-resilience REST POST delivery
+            Thread {
+                try {
+                    val client = OkHttpClient()
+                    val json = JSONObject().apply {
+                        put("version", envelope.version)
+                        put("session_id", envelope.sessionId)
+                        put("message_id", envelope.messageId)
+                        put("sender_id", envelope.senderId)
+                        put("sender_role", envelope.senderRole)
+                        put("message_type", envelope.messageType.name)
+                        put("sequence_number", envelope.sequenceNumber)
+                        put("timestamp_ns", envelope.timestampNs)
+                        put("payload", JSONObject(envelope.payload))
+                    }
+                    val cleanUrl = activeBaseUrl.trimEnd('/')
+                    val postUrl = "$cleanUrl/api/v1/remote/$sessionId/message?token=${java.net.URLEncoder.encode(activeToken, "UTF-8")}"
+                    val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+                    val req = Request.Builder().url(postUrl).post(body).build()
+                    client.newCall(req).execute()
+                } catch (e: Exception) {}
+            }.start()
+            return true
         }
         return false
     }
@@ -3028,6 +3156,9 @@ class RemoteSessionClient(
     }
 
     fun disconnect() {
+        isRestSyncActive = false
+        restSyncThread?.interrupt()
+        restSyncThread = null
         state = RemoteClientState.DISCONNECTED
         transport?.disconnect()
     }
@@ -14073,7 +14204,7 @@ def delete_patient(
 ```
 END FILE `backend/app/api/v1/endpoints/patients.py`
 
-### FILE `backend/app/api/v1/endpoints/remote_sessions.py` | bytes=14995 | SHA256=`cce130076eb9ce7152a05b8bb3f99445be82996d8c14e1ee66f9aaba574b47ea`
+### FILE `backend/app/api/v1/endpoints/remote_sessions.py` | bytes=19094 | SHA256=`fcb806995310ee191527f55f573eca8e9f92adfeb6f37367749c203562528b7f`
 ```py
 """EyeAtlas VR - Remote Session REST & WebSocket Endpoints (CR-002).
 Handles online pairing, short-lived 6-digit PIN & QR generation,
@@ -14085,7 +14216,7 @@ import json
 import random
 import uuid
 from typing import Any, Dict, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, WebSocket, WebSocketDisconnect, status
 from sqlalchemy.orm import Session
 from backend.app.core.config import settings
 from backend.app.core.database import get_db, SessionLocal
@@ -14104,7 +14235,7 @@ from backend.app.models.remote_contracts import (
     WebSocketMessageEnvelope,
     WebSocketMessageType,
 )
-from backend.app.services.session_broker import session_broker
+from backend.app.services.session_broker import session_broker, ConnectedPeer
 
 router = APIRouter(prefix="/remote", tags=["Remote Sessions"])
 
@@ -14334,6 +14465,107 @@ def finalize_remote_session(
         "status": "FINALIZED",
         "report_id": report_id,
         "regulatory_disclaimer": "Investigational ophthalmic screening aid under CDSCO MDR-2017 Class B SaMD. Not an autonomous diagnostic device."
+    }
+
+@router.post("/{session_id}/message")
+async def post_remote_message(
+    session_id: str,
+    envelope: WebSocketMessageEnvelope,
+    token: Optional[str] = Query(None),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+):
+    """Fallback REST messaging endpoint ensuring reliable command and event transport."""
+    effective_token = token
+    if not effective_token and authorization and authorization.startswith("Bearer "):
+        effective_token = authorization.split(" ", 1)[1]
+
+    if not effective_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token required")
+
+    try:
+        payload = decode_access_token(effective_token)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    if not payload or payload.get("session_id") != session_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session mismatch")
+
+    sender_id = payload.get("sub") or envelope.sender_id
+    role_str = payload.get("role") or (envelope.sender_role.value if hasattr(envelope.sender_role, "value") else str(envelope.sender_role))
+    try:
+        sender_role = RemoteRole(role_str)
+    except Exception:
+        sender_role = RemoteRole.OBSERVER
+
+    envelope.session_id = session_id
+    envelope.sender_id = sender_id
+    envelope.sender_role = sender_role
+
+    room = session_broker.get_or_create_room(session_id)
+    if sender_id not in room.peers:
+        room.peers[sender_id] = ConnectedPeer(client_id=sender_id, role=sender_role, websocket=None)
+    else:
+        room.peers[sender_id].last_heartbeat = datetime.datetime.utcnow().timestamp()
+
+    result = await session_broker.route_envelope(envelope, db=db)
+    return {"status": "DELIVERED", "sequence_number": envelope.sequence_number, "broker_result": result}
+
+@router.get("/{session_id}/messages")
+async def get_remote_messages(
+    session_id: str,
+    since_seq: int = Query(-1),
+    token: Optional[str] = Query(None),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+):
+    """Fallback REST polling endpoint returning new buffered envelopes and live peer presence."""
+    effective_token = token
+    if not effective_token and authorization and authorization.startswith("Bearer "):
+        effective_token = authorization.split(" ", 1)[1]
+
+    if not effective_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token required")
+
+    try:
+        payload = decode_access_token(effective_token)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    if not payload or payload.get("session_id") != session_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session mismatch")
+
+    client_id = payload.get("sub", "")
+    role_str = payload.get("role", "OBSERVER")
+    try:
+        client_role = RemoteRole(role_str)
+    except Exception:
+        client_role = RemoteRole.OBSERVER
+
+    room = session_broker.get_or_create_room(session_id)
+    if client_id and client_id not in room.peers:
+        room.peers[client_id] = ConnectedPeer(client_id=client_id, role=client_role, websocket=None)
+    elif client_id in room.peers:
+        room.peers[client_id].last_heartbeat = datetime.datetime.utcnow().timestamp()
+
+    messages = [
+        env.model_dump()
+        for env in room.replay_buffer
+        if env.sequence_number > since_seq and env.sender_id != client_id
+    ]
+
+    connected_roles = room.get_connected_roles()
+    has_patient = RemoteRole.PATIENT_VR_HOST.value in connected_roles
+    has_physician = RemoteRole.PHYSICIAN_CONTROLLER.value in connected_roles
+
+    return {
+        "session_id": session_id,
+        "messages": messages,
+        "connected_roles": connected_roles,
+        "has_patient": has_patient,
+        "has_physician": has_physician,
+        "active_module": room.active_module,
+        "server_time_ns": int(datetime.datetime.utcnow().timestamp() * 1_000_000_000)
     }
 
 @router.websocket("/ws/{session_id}")
@@ -16610,7 +16842,7 @@ def query_audit_events(
 ```
 END FILE `backend/app/services/audit_service.py`
 
-### FILE `backend/app/services/session_broker.py` | bytes=18216 | SHA256=`79ff71fd9b24d5e1a978232ca614234741cc6c59da06b1117933121bb99e9d6c`
+### FILE `backend/app/services/session_broker.py` | bytes=18518 | SHA256=`77d037be18d1fdb5e0a6167947df92ab4c48c9486f0ab015457e10d93a4d1968`
 ```py
 """EyeAtlas VR - Durable WebSocket Session Broker (CR-002).
 Orchestrates online multi-role rooms, enforces single-physician authority,
@@ -16987,6 +17219,12 @@ class SessionBroker:
             "active_module": room.active_module
         }
 
+    def get_messages_since(self, session_id: str, since_seq: int = -1, limit: int = 50) -> List[WebSocketMessageEnvelope]:
+        room = self.get_room(session_id)
+        if not room:
+            return []
+        return [env for env in room.replay_buffer if env.sequence_number > since_seq][:limit]
+
 # Global singleton instance
 session_broker = SessionBroker()
 ```
@@ -17298,10 +17536,11 @@ def process_sync_batch(
 ```
 END FILE `backend/app/services/sync_service.py`
 
-### FILE `backend/requirements.txt` | bytes=144 | SHA256=`dd3dbdba59401ffdfd88434b434414d0fe8aa92e9d8f91c5ba66f27885440831`
+### FILE `backend/requirements.txt` | bytes=173 | SHA256=`9c6c4f3266ca61343b789a9a218efd972d336a19c9e8d5763a30abb26b9d929b`
 ```txt
 fastapi>=0.100.0,<1.0.0
-uvicorn>=0.23.0,<1.0.0
+uvicorn[standard]>=0.23.0,<1.0.0
+websockets>=12.0.0
 pydantic>=2.0.0,<3.0.0
 sqlalchemy>=2.0.0,<3.0.0
 cryptography>=41.0.0
@@ -22402,6 +22641,19 @@ END FILE `ml/train.py`
 ```
 END FILE `netlify.toml`
 
+### FILE `requirements.txt` | bytes=173 | SHA256=`9c6c4f3266ca61343b789a9a218efd972d336a19c9e8d5763a30abb26b9d929b`
+```txt
+fastapi>=0.100.0,<1.0.0
+uvicorn[standard]>=0.23.0,<1.0.0
+websockets>=12.0.0
+pydantic>=2.0.0,<3.0.0
+sqlalchemy>=2.0.0,<3.0.0
+cryptography>=41.0.0
+pytest>=7.4.0
+httpx>=0.24.0
+```
+END FILE `requirements.txt`
+
 ### FILE `scripts/bootstrap.sh` | bytes=269 | SHA256=`33122a065aa906bb06f0ceec51ee7e4b3635aa09095d269bbd2e47851b363baf`
 ```sh
 #!/usr/bin/env bash
@@ -22937,7 +23189,7 @@ END FILE `settings.gradle.kts`
 ```
 END FILE `web/assets/ishihara/manifest.json`
 
-### FILE `web/index.html` | bytes=285956 | SHA256=`48428baca04afb4da782bd1818b41e1aa4a107dd947df9d7e404613ab10ff366`
+### FILE `web/index.html` | bytes=288967 | SHA256=`9255c0a9b8e372f68666a68bda95228602c81b7d7ef7984526565cd36114e733`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -26431,26 +26683,102 @@ END FILE `web/assets/ishihara/manifest.json`
     }
 
     let remoteClientSequence = 0;
+    let restSyncInterval = null;
+    let lastSeqReceived = -1;
 
     function sendRemoteEnvelope(messageType, payload) {
-        if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
-          return false;
-        }
-        remoteClientSequence++;
-        const envelope = {
-          version: "1.0",
-          session_id: remoteSessionState.sessionId || "SES-DEFAULT",
-          message_id: `msg-${Date.now()}-${remoteClientSequence}`,
-          sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
-          sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
-          message_type: messageType,
-          sequence_number: remoteClientSequence,
-          timestamp_ns: Date.now() * 1000000,
-          payload: payload || {}
-        };
+      if (!remoteSessionState.sessionId) {
+        return false;
+      }
+      remoteClientSequence++;
+      const envelope = {
+        version: "1.0",
+        session_id: remoteSessionState.sessionId,
+        message_id: `msg-${Date.now()}-${remoteClientSequence}`,
+        sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
+        sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
+        message_type: messageType,
+        sequence_number: remoteClientSequence,
+        timestamp_ns: Date.now() * 1000000,
+        payload: payload || {}
+      };
+
+      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
         activeRemoteWs.send(JSON.stringify(envelope));
         return true;
       }
+
+      // Resilient REST fallback POST
+      if (remoteSessionState.token) {
+        const postUrl = `${backendBaseUrl}/api/v1/remote/${remoteSessionState.sessionId}/message?token=${encodeURIComponent(remoteSessionState.token)}`;
+        fetch(postUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(envelope)
+        }).catch(err => console.warn('REST fallback envelope delivery error:', err));
+        return true;
+      }
+      return false;
+    }
+
+    function startRestSyncLoop() {
+      if (restSyncInterval) clearInterval(restSyncInterval);
+      const poll = async () => {
+        if (!remoteSessionState.sessionId || !remoteSessionState.token) return;
+        const tStart = performance.now();
+        try {
+          const url = `${backendBaseUrl}/api/v1/remote/${remoteSessionState.sessionId}/messages?since_seq=${lastSeqReceived}&token=${encodeURIComponent(remoteSessionState.token)}`;
+          const res = await fetch(url);
+          if (res.ok) {
+            const data = await res.json();
+            const rtt = (performance.now() - tStart).toFixed(1);
+            
+            const latEl = document.getElementById('info-sync-latency');
+            if (latEl) latEl.innerText = `${rtt} ms`;
+
+            const peersEl = document.getElementById('info-peers-count');
+            if (peersEl) {
+              peersEl.innerText = data.has_patient ? '2 (Host VR + Physician)' : '1 (Physician Online)';
+            }
+
+            const connStatus = document.getElementById('remote-conn-status');
+            const padBadge = document.getElementById('pad-conn-badge');
+
+            if (data.has_patient) {
+              remoteSessionState.isConnected = true;
+              if (connStatus) {
+                connStatus.innerText = 'Connected: Patient VR Headset Present';
+                connStatus.style.background = '#ECFDF5';
+                connStatus.style.color = '#065F46';
+              }
+              if (padBadge) padBadge.innerText = 'PAIRED: PATIENT IN VR';
+            } else {
+              remoteSessionState.isConnected = false;
+              if (connStatus && (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN)) {
+                connStatus.innerText = 'Broker Linked (Waiting for Patient VR)...';
+                connStatus.style.background = '#FEF3C7';
+                connStatus.style.color = '#92400E';
+              }
+              if (padBadge) padBadge.innerText = 'WAITING FOR PATIENT';
+            }
+
+            if (Array.isArray(data.messages)) {
+              for (const msg of data.messages) {
+                if (msg.sequence_number > lastSeqReceived) {
+                  lastSeqReceived = msg.sequence_number;
+                }
+                handleIncomingRemoteEnvelope(msg);
+              }
+            }
+          }
+        } catch (e) {
+          // Keep polling resilience
+        }
+      };
+
+      poll();
+      restSyncInterval = setInterval(poll, 650);
+    }
 
       function sendRemoteTestSwitch(moduleKey) {
         if (remoteSessionState.isEmergencyHalted) {
@@ -26731,30 +27059,21 @@ END FILE `web/assets/ishihara/manifest.json`
           };
 
           activeRemoteWs.onclose = (evt) => {
-            remoteSessionState.isConnected = false;
-            if (connStatus) {
-              connStatus.innerText = 'Disconnected';
-              connStatus.style.background = '#F3F4F6';
-              connStatus.style.color = '#4B5563';
-            }
-            document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
-            addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
+            console.log(`WebSocket closed (Code: ${evt.code}); maintaining connection via continuous REST sync.`);
+            addTimelineItem('PEER', `WebSocket channel idle (${evt.code}). Continuous REST cloud sync active.`);
           };
 
           activeRemoteWs.onerror = (err) => {
-            console.error('Remote WebSocket error:', err);
-            remoteSessionState.isConnected = false;
-            if (connStatus) {
-              connStatus.innerText = 'WebSocket Error';
-              connStatus.style.background = '#FEE2E2';
-              connStatus.style.color = '#B91C1C';
-            }
+            console.warn('Remote WebSocket notice:', err);
           };
         } catch (e) {
           console.error('WebSocket connection attempt failed:', e);
         }
 
-        addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
+        // Always activate resilient REST sync loop
+        startRestSyncLoop();
+
+        addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}. Continuous cloud sync activated.`);
         closeRemotePairingModal();
         setPortalMode('PHYSICIAN_AND_RESPONSE');
       }
@@ -26772,6 +27091,10 @@ END FILE `web/assets/ishihara/manifest.json`
           case 'PEER_STATUS':
             const roles = (env.payload && env.payload.roles) || [];
             const hasPatient = roles.includes('PATIENT_VR_HOST');
+            const peersCountEl = document.getElementById('info-peers-count');
+            if (peersCountEl) {
+              peersCountEl.innerText = hasPatient ? '2 (Host VR + Physician)' : '1 (Physician Online)';
+            }
             if (hasPatient) {
               remoteSessionState.isConnected = true;
               if (connStatus) {
