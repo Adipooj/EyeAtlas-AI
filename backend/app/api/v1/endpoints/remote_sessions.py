@@ -269,41 +269,48 @@ async def remote_session_websocket(
 ):
     """Bidirectional WebSocket connection for live telemetry, twin-stimulus reconstruction,
     tactile patient response streaming, and emergency halt broadcasting.
+    Requires a valid, unexpired, session-bound JWT token issued by /create or /join.
     """
-    await websocket.accept()
-    
-    # 1. Authenticate token
-    effective_role = RemoteRole.OBSERVER
-    effective_client_id = client_id or f"client-{uuid.uuid4().hex[:6]}"
+    # 1. Require a valid, unexpired, session-bound token before admitting connection
+    if not token:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Authentication token required")
+        return
 
-    if token:
+    try:
         payload = decode_access_token(token)
-        if payload and payload.get("session_id") == session_id:
-            effective_role = RemoteRole(payload.get("role", RemoteRole.OBSERVER.value))
-            effective_client_id = payload.get("sub", effective_client_id)
-        elif role:
-            try:
-                effective_role = RemoteRole(role)
-            except ValueError:
-                pass
-    elif role:
-        try:
-            effective_role = RemoteRole(role)
-        except ValueError:
-            pass
+    except Exception:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Invalid or expired authentication token")
+        return
+
+    if not payload or payload.get("session_id") != session_id:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Session ID mismatch")
+        return
+
+    role_str = payload.get("role")
+    try:
+        effective_role = RemoteRole(role_str)
+    except (ValueError, TypeError):
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Invalid role in token")
+        return
+
+    # Derive role and client identity strictly from verified credentials
+    effective_client_id = payload.get("sub") or client_id or f"client-{uuid.uuid4().hex[:6]}"
 
     db = SessionLocal()
     try:
-        # Register connection with session broker
-        connect_res = await session_broker.connect_peer(
-            session_id=session_id,
-            client_id=effective_client_id,
-            role=effective_role,
-            websocket=websocket,
-            db=db
-        )
+        # Check session existence and validity in database
+        entity = db.query(RemoteSessionEntity).filter(RemoteSessionEntity.session_id == session_id).first()
+        if not entity:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Remote session not found")
+            return
+        if entity.status == RemoteSessionStatus.REVOKED.value:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Session has been revoked")
+            return
 
-        # Send AUTH_ACK
+        # Admit the connection only after successful verification
+        await websocket.accept()
+
+        # Send AUTH_ACK first to complete handshake
         auth_ack = WebSocketMessageEnvelope(
             session_id=session_id,
             message_id=f"auth-ack-{int(datetime.datetime.utcnow().timestamp()*1000)}",
@@ -311,15 +318,33 @@ async def remote_session_websocket(
             sender_role=RemoteRole.OBSERVER,
             message_type=WebSocketMessageType.AUTH_ACK,
             sequence_number=0,
-            payload=connect_res
+            payload={
+                "session_id": session_id,
+                "client_id": effective_client_id,
+                "role": effective_role.value,
+                "status": "AUTHENTICATED"
+            }
         )
         await websocket.send_text(auth_ack.model_dump_json())
+
+        # Register connection with session broker and broadcast PEER_STATUS
+        await session_broker.connect_peer(
+            session_id=session_id,
+            client_id=effective_client_id,
+            role=effective_role,
+            websocket=websocket,
+            db=db
+        )
 
         # Main receive loop
         while True:
             raw_text = await websocket.receive_text()
             try:
                 data = json.loads(raw_text)
+                # Enforce server-verified boundaries on the envelope
+                data["session_id"] = session_id
+                data["sender_id"] = effective_client_id
+                data["sender_role"] = effective_role.value
                 envelope = WebSocketMessageEnvelope(**data)
                 await session_broker.route_envelope(envelope, db=db)
             except Exception as parse_err:
@@ -336,7 +361,7 @@ async def remote_session_websocket(
 
     except WebSocketDisconnect:
         await session_broker.disconnect_peer(session_id, effective_client_id, db=db)
-    except Exception as exc:
+    except Exception:
         await session_broker.disconnect_peer(session_id, effective_client_id, db=db)
     finally:
         db.close()

@@ -43,7 +43,31 @@ class RemoteApkIntegrationTests {
         val client = RemoteSessionClient(sessionId = "SES-TEST-001")
         assertEquals(RemoteClientState.DISCONNECTED, client.getState())
 
-        client.startRemoteSession("/ws/remote/SES-TEST-001", "mock-patient-token")
+        val mockTransport = object : RemoteWebSocketTransport {
+            var connected = false
+            override fun connect(endpointUrl: String, headers: Map<String, String>) { connected = true }
+            override fun send(envelope: RemoteEnvelope): Boolean = true
+            override fun disconnect() { connected = false }
+            override fun isConnected(): Boolean = connected
+        }
+        client.transport = mockTransport
+
+        val sent = client.startRemoteSession("/ws/remote/SES-TEST-001", "mock-patient-token")
+        assertTrue(sent)
+        // startRemoteSession transitions to CONNECTING, NOT prematurely to AUTHENTICATED
+        assertEquals(RemoteClientState.CONNECTING, client.getState())
+
+        // Feed genuine AUTH_ACK to transition to AUTHENTICATED
+        val authAck = RemoteEnvelope(
+            sessionId = "SES-TEST-001",
+            messageId = "ack-1",
+            senderId = "SESSION_BROKER",
+            senderRole = "OBSERVER",
+            messageType = RemoteMessageType.AUTH_ACK,
+            sequenceNumber = 1L,
+            timestampNs = System.nanoTime()
+        )
+        client.processIncomingEnvelope(authAck)
         assertEquals(RemoteClientState.AUTHENTICATED, client.getState())
 
         val stimEnv = client.publishStimulusPresented(

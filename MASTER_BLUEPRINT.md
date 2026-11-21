@@ -1112,3 +1112,40 @@ Calibration must not depend exclusively on subjective patient perception when di
 - ISO 15004-2:2024 optical exposure: https://www.iso.org/cms/live/live/en/sites/isoorg/contents/data/standard/07/99/79919.html
 - India medical-device software guidance (21 July 2026): https://www.cdsco.gov.in/opencms/export/sites/CDSCO_WEB/Pdf-documents/Guidance-document-on-Medical-Device-Software-under-MDR-2017.pdf
 - Open source GMLP AI risk principles: https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles
+
+---
+
+## M3.3 CR-003 — Targeted Remote APK ↔ Render ↔ Web Pairing Architecture
+**Scope:** Authenticated cross-device remote control, live telemetry, and twin-stimulus reconstruction between Android Patient VR APK, Render backend (`https://eyeatlas-ai.onrender.com`), and Netlify Physician Web Cockpit (`https://eyeatlas-ai.netlify.app`).
+
+### 1. Dynamic Session Lifecycle
+- **Session Creation:** Patient APK initiates `POST /api/v1/remote/create` with device identity and supported inputs. Backend generates a 6-digit numeric pairing PIN, an expiration epoch (15m window), and an ephemeral `patient_vr_token` (JWT signed with server secret, containing `sub`, `session_id`, `role: PATIENT_VR_HOST`).
+- **Physician Pairing:** Physician Web Cockpit joins via `POST /api/v1/remote/join` passing `session_id` and `pairing_pin`. Backend verifies PIN correctness and freshness, enforces single authoritative physician exclusivity (demoting subsequent joins to `OBSERVER`), and returns a scoped `token` (`role: PHYSICIAN_CONTROLLER`).
+- **Elimination of Mock/Demo State:** All static hardcoded IDs (`SES-REMOTE-01`, `749281`) are abolished. Session state is derived strictly from server REST responses.
+
+### 2. Strict Token-Bound WebSocket Handshake
+- **Handshake Requirements:** Clients connect to `wss://.../api/v1/remote/ws/{session_id}?token=<jwt>`. Handshake strictly rejects requests with missing, invalid, or expired tokens, or tokens bound to mismatching session IDs with WebSocket status `1008 (POLICY_VIOLATION)`.
+- **Role Verification:** Roles (`PATIENT_VR_HOST`, `PHYSICIAN_CONTROLLER`, `OBSERVER`) are derived strictly from cryptographically verified JWT claims; untrusted query parameters or client-supplied envelope fields cannot elevate privileges.
+- **Handshake Sequence:** Server sends `AUTH_ACK` immediately upon handshake acceptance. Server then calls `session_broker.connect_peer`, which broadcasts `PEER_STATUS` (`roles: [...]`) to all active peers in the session room.
+- **Presence Verification:** Patient APK displays "Connected" only upon arrival of `PEER_STATUS` containing `PHYSICIAN_CONTROLLER`. Web Cockpit displays "Connected" only upon arrival of `PEER_STATUS` containing `PATIENT_VR_HOST`.
+
+### 3. Canonical Wire Protocol (`WebSocketMessageEnvelope`)
+Both Android (`OkHttpRemoteWebSocketTransport`) and Browser dispatch messages matching the canonical `WebSocketMessageEnvelope` schema:
+```json
+{
+  "version": "1.0",
+  "session_id": "<session_id>",
+  "message_id": "<uuid_or_monotonic_id>",
+  "sender_id": "<client_device_id>",
+  "sender_role": "PHYSICIAN_CONTROLLER | PATIENT_VR_HOST",
+  "message_type": "CONTROL_COMMAND | STIMULUS_EVENT | RESPONSE_EVENT | EMERGENCY_STOP | HEARTBEAT",
+  "sequence_number": 1,
+  "timestamp_ns": 1700000000000000000,
+  "payload": { ... }
+}
+```
+- **Control Commands:** Routed from Physician to Patient VR Host to switch test modules, swap active eye laterality, reset exams, and initiate test sequences.
+- **Stimulus Events:** Streamed from Patient VR Host to Physician Cockpit containing trial index, eye laterality, test module, and display coordinates with nanosecond presentation timestamps.
+- **Response Events:** Streamed from Physician Cockpit or physical taps with input source and reaction latencies for authoritative local scoring.
+- **Priority Emergency Stop:** Immediately pauses the exam across all connected peers and locks presentation displays.
+

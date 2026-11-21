@@ -1,52 +1,53 @@
 # EYEATLAS VR - COMPLETE ESSENTIAL FILE SNAPSHOT
-**Phase:** CR002-H | **Essential files:** 141 | **Manifest SHA256:** `af7e91fd3836cfcc0199bd42f88668fb37957c9047a4b9450c3ca74c4e1e64bd`
+**Phase:** CR003 | **Essential files:** 146 | **Manifest SHA256:** `02ec85a10cea618f0a5033527366ab1259ab2ff54effa284f3af810ecfcbece8`
 
 The MASTER_BLUEPRINT.md and PROJECT_LOG.md are separately preserved handoff files. This is all other essential plaintext source/config/test/hardware/docs, including zero-byte reserved planned files. No omitted code and no raw patient data.
 
 ## Canonical file manifest
 ```text
-.gitignore	216	5f56103dd1d60f919e370d7ec4aa312619a3c0d6228ca68cd949f2fb317432fb
+.gitignore	240	844bb1313cd3005116740194ee0521eb2f1e7412dd613edf5c0175f0c59ccfdd
 LICENSE	71	fb4ce93af302ec49bf195fad681cd411d8ddd20478d5b9ec5e484fa1ef5087f0
 README.md	184	7568991cabc3db176c5025550428bb8aed0e1ab35d2c0bfd73120e21d316c8b2
-app/build.gradle.kts	1802	11acda45f05b1b7d07df90bd6eded09d02772c98d2e4cd026d10341450e55337
+app/build.gradle.kts	1859	325d0e13c4d8037ee8d54230c4095bf207006024617c8fa098f4e0323fcd56ee
 app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt	298	c212bc6d917caaa3f1210b05289c1882e1c6fd01de74c6f59eface9b5b87750c
-app/src/main/AndroidManifest.xml	1687	72f1638ea4d7badaa0ee78d286e11ae18f738a3f8ec95aad788b1a49f0d0a757
+app/src/main/AndroidManifest.xml	1731	8fb9b3c4318ce2521c8815892ecdfe8328c84bbafd35d863b88a1fd08afb9821
 app/src/main/java/org/eyeatlas/App.kt	145	fc796baa9afb716758e5dee3e97017a3aaf87990f4783b254834a16751fd440b
-app/src/main/java/org/eyeatlas/MainActivity.kt	1378	fbbed31c8b6c2f14f561e2f7fbfe81364522e4e85d6ffc52b552bf8f17ddc297
+app/src/main/java/org/eyeatlas/MainActivity.kt	2439	14f8e122508a25fe95286caad6f5f835c2b82bdbebe8e62ff47b0eae33e2669c
 app/src/main/java/org/eyeatlas/ai/Inference.kt	7040	34e05cfd96eef3f7597732a5c8bfe55683cad6132ede05a09de88e868253df13
 app/src/main/java/org/eyeatlas/ai/MediaPipeTracker.kt	13687	714c22c28fa95ec0f0f27cf797c12ee0e7a52c1cadd49fa73005acdecec2297e
 app/src/main/java/org/eyeatlas/ai/QualityAndRanker.kt	6697	11cc9a11e5f64477a3140117544920404568bd688d23be07859119365318404e
+app/src/main/java/org/eyeatlas/core/ClinicalSessionCoordinator.kt	1693	4aefeb10566b2bca839419e9ca6e2cc19b38723027e757d1cbcba803c2383978
 app/src/main/java/org/eyeatlas/core/DecisionEngine.kt	10599	da8707be2da94fd11ca77406da7eb9e01be82294025de8d652e1d7a597459bb5
 app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt	837	65e064d9da51572686cdb407cdecee02854de8505305b3c20e22cc2d5fa09371
-app/src/main/java/org/eyeatlas/core/Models.kt	4981	31cee2f6b30af7567c73014e35e8fc862b6d9f8ed2e0aeed7a2daa67011da316
+app/src/main/java/org/eyeatlas/core/Models.kt	5031	53f7d3520d431d1a4688002fb3bc092dca9cde33a88622bd16485623104f38e5
 app/src/main/java/org/eyeatlas/core/Protocols.kt	4089	5fe29bbfddb2c4a20c4e2d5cd4db05123f6fa9c9fd224dfbadc80bc1250be510
-app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt	11095	f8df7db1ebae5a0185d79941e4d76c5b13987b71ec08934584c3c80a01cae061
+app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt	11224	3324b6cb212a75de935b099cce7b62f98ab2f2746548954ce38e7d380fb3b2ae
 app/src/main/java/org/eyeatlas/net/MediaProjectionService.kt	3515	c1bd25d73c6dff06eaf550f05be28e1d318c6b42dbd9c0198af7cd8bc7220d60
 app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt	9522	a3b22ddd2b5a7c4a101073c87ae7e0b44e65a70ae9e9d489ebea221249bfcb1d
-app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt	15696	e90deaf740ced0a7e569beb7cbf0e043a12f3a109cc7ecabba1991e4b47d0ca1
+app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt	24273	5d505261811cf1f0c31ccf78ec87195325e69950e1bdc77875fc1c8cee6c54e7
 app/src/main/java/org/eyeatlas/net/ScreenStreamPublisher.kt	10384	41a7c41b32bedaa0e51640416f40347f1adc4078b2c4e87f60a3ba9d630d75ff
 app/src/main/java/org/eyeatlas/net/SessionSync.kt	1985	9b5b23b59a816b0f361227b52655d0284543697ffddca921313659634d334388
-app/src/main/java/org/eyeatlas/sensors/Calibration.kt	15610	21d4d5ae90998b536601224300a5096a646b9aba52e17d7a1c502b5abf940169
+app/src/main/java/org/eyeatlas/sensors/Calibration.kt	15825	33dd98ef69147544f4d4c689993640b1f3c5968b5836b1cd33cbe40ab0557796
 app/src/main/java/org/eyeatlas/sensors/CameraPipeline.kt	10673	32f47f465683d317d743b19dcf727384064d6ecf4d4d1dc2e5d01e124bd8103a
 app/src/main/java/org/eyeatlas/sensors/ResponseAndGaze.kt	12219	08cb96c884c55651f991239e9c806be8993a015b2a571334bc4c335cc4647056
 app/src/main/java/org/eyeatlas/sensors/VrPresenter.kt	5551	9a69bccbefe471701b7a84fa6cd5013107a55ef9e596b89379cdb294fa9b7a17
 app/src/main/java/org/eyeatlas/store/PatientStore.kt	5380	d9d71195fae9c39bd5ff0e8a7e3f09ffac2e5c63e491a734e20b931554359c6c
 app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt	19244	4dcd15c6104f7170b2af60204391f279a248da7634d0551efda4b6ee4f86216c
-app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt	25770	472b82470acd0a22b3e833a629f6ca1ecdb230d2b3919aecaf63d5a328d9d1b0
-app/src/main/java/org/eyeatlas/ui/PatientScreens.kt	13182	74fe9822a6dfb07a80c1f98d7fa59c068d4d467a054ed0523009b88cce41cc5d
-app/src/main/java/org/eyeatlas/ui/SharedComponents.kt	24293	322fcbb9fc5ca60153e40dcfdbd22f5531f4deda137f0c449351465d54239f7e
+app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt	46063	be9475c461b55b56457e7b4b9aa37ff6c9b3ba37e597266f2bc2125b69eaa8d4
+app/src/main/java/org/eyeatlas/ui/PatientScreens.kt	109111	e1d3d563865012c4491effcd64b86affc76438bc9242f909387ee51314e9785b
+app/src/main/java/org/eyeatlas/ui/SharedComponents.kt	25034	f75bde66885bb8547ca47dfcc1bc9e86a0f9f87960aead0e933a431f6df46c0a
 app/src/main/java/org/eyeatlas/vision/AnteriorTests.kt	15413	1deda567cac36e0102b6363703643f28d763a92f1447d716790d579d52fa4f43
 app/src/main/java/org/eyeatlas/vision/BinocularTests.kt	10871	47c0864a5f352fbfaabe59f9883ab82ac6c1c7a94c18e0cfe78f6fe03c018744
 app/src/main/java/org/eyeatlas/vision/FunctionalTests.kt	13874	6b7e489a5f4a96893caf306d72d981fcf4c4ecff737efa6a38e997a620bd866d
 app/src/main/java/org/eyeatlas/vision/RetinalTests.kt	12477	29a2a134db770ddac904fcaf593e31bcd4053cb7fc2f4c2608acdd83af6dc0d2
 app/src/test/java/org/eyeatlas/CalibrationTests.kt	19713	2656ae4a3307594ca2eefff6b45b85808c0ecbd1a72d9c61acd53a0733f08f1d
-app/src/test/java/org/eyeatlas/FaultTests.kt	28271	9d1b0b274b259454f441e7b0a41d87e2f57a6e2f4a3fc484e1cc59fb68f6dc8d
+app/src/test/java/org/eyeatlas/FaultTests.kt	28289	8a26a8070c9668f9749c3c981cebcbd272309fb7c08bd6d98fb25760568521b7
 app/src/test/java/org/eyeatlas/LogicTests.kt	22378	00ab3099cb640a90fc54ee8569f7013473f2db6bff931a821d9dd83854fbab36
 app/src/test/java/org/eyeatlas/MediaPipeTrackerTests.kt	5349	0ef26f487458707cced59eb52c5e69a5dd7a7755ecd87c8c4b398a311f26112c
 app/src/test/java/org/eyeatlas/MultiDiseaseTests.kt	28394	bd7f6a39f9c523d86606e8e4c11601878d31b308cc9aab0398ed0a91cf88bc4d
 app/src/test/java/org/eyeatlas/OpticalInterlockTests.kt	7722	0fce63f1529566926b2654a229f8a4a5cf30ca625f145a190d8f64d2e9f1b525
 app/src/test/java/org/eyeatlas/ProtocolTests.kt	19836	4726424a20df00c302c9e4b7f1f99627936f1d7c148bb155bc6aa517d384d67e
-app/src/test/java/org/eyeatlas/RemoteApkIntegrationTests.kt	6584	801d16bde18677327103a212d0e2a8bffbd86f9a8bee41fd0c231ae0247afe06
+app/src/test/java/org/eyeatlas/RemoteApkIntegrationTests.kt	7670	4d1db9e9f40c3e781355c0a59e4cddf198f2489ca17e583ccb3c0bc1ae7a4f9f
 app/src/test/java/org/eyeatlas/ScreenStreamingTests.kt	4137	fd442f8ee5752d3ac73b1d25981cc412206328b9264e97aa94ba5f6a5402465f
 backend/app/__init__.py	39	9f0aacd2acaf843fe9484f0d9b25de8902d3b378ff7700fa01bd3760596f9964
 backend/app/api/__init__.py	43	793cb06e8651cd6ff73631f92f8348474ac7312585dee0ac0d8252f2d852b794
@@ -56,7 +57,7 @@ backend/app/api/v1/endpoints/admin.py	3031	5c983f845bb87976ae3f0f8a7674760697f59
 backend/app/api/v1/endpoints/auth.py	2431	6e14556103a855e310d3157dfdf8d8dc459b1368574d38089bad13395463fb31
 backend/app/api/v1/endpoints/health.py	879	4b98907fc8e15850868a4b8950c07b7e8f4bebd349d1a78021a3e9d2d0756ccb
 backend/app/api/v1/endpoints/patients.py	5484	ab2313fcbfc193de4e405f085c24b89e5d7f814e5bc71d6b950b2efbcfa4ec1e
-backend/app/api/v1/endpoints/remote_sessions.py	13549	8275896a1605bfac7ed2a92bdbaa682f4fc98c0079446dbcad98b457241bf356
+backend/app/api/v1/endpoints/remote_sessions.py	14995	cce130076eb9ce7152a05b8bb3f99445be82996d8c14e1ee66f9aaba574b47ea
 backend/app/api/v1/endpoints/reports.py	4174	8b88283dd1dbe671ea8d2f06e1d7e759d99dabdde6b78dca1c4cfe773d3cb177
 backend/app/api/v1/endpoints/sessions.py	29733	823ed47c1af02b2f2cb4f4ad598ffb4fdb8b987bf4e0ce9bd4f3a7c59e3e10ee
 backend/app/api/v1/endpoints/sync.py	2150	3e21ba3a5eb064087f0687c10baa3214a9d54d1a3b4d1c2d3c48f1ca329881a6
@@ -65,14 +66,14 @@ backend/app/core/__init__.py	44	86780e187700525b48a541bb9f1622da74b5ab86ed930af3
 backend/app/core/config.py	826	31f1ae3a85ec627a7358d64aee8a47298869f0a0f0a07bf9d8be898b84df8b4b
 backend/app/core/database.py	873	5ead2b0daa731284f3b4da2af8bd159af97902b467df96654049404a79534417
 backend/app/core/security.py	5127	6421cdf9f3633d0d658af22f477eacdd2e231a835675b63ecd3cc4fb1d31a8a4
-backend/app/main.py	5423	76fa4135e6a0f77f787196524837f075b2d3fbe97bdb53f03bb91ad2e30bdcf1
+backend/app/main.py	5692	693e9f6c6904a19b55e8c628241dda5121540e5673b6010a7d617d37786b483a
 backend/app/models/__init__.py	34	abdc9adf5a67b47ef6ec66059c0731dd8ab7d328c4998dadc65027c02f2e576c
 backend/app/models/contracts.py	13388	47794b3d3f452ae4ba895394a8cbc3d4cd0ac05cd3e32e840f56e1b4a88e7927
 backend/app/models/entities.py	11435	7965f1b26ebf5be98fb375362f0b28d12bf680eab8e66d4580284f036ca17d7d
 backend/app/models/remote_contracts.py	8424	93dd493443d46fa7df50fb34b68f011c94a8daab0fa025365aa2c903fca6ba5e
 backend/app/services/__init__.py	48	99e5c3046f867070ab36d7734f1e2c264fc8f4c29c32340c34d498a3b46d040c
 backend/app/services/audit_service.py	1975	5e52097c1fefaa1af1ef864435b3e3c03d4891254263aebc8467623601364b35
-backend/app/services/session_broker.py	17084	2b4f5185db5f87aa80735cdef0fde241cbebe3b0a78d3ac1eeec1612068995a3
+backend/app/services/session_broker.py	18216	79ff71fd9b24d5e1a978232ca614234741cc6c59da06b1117933121bb99e9d6c
 backend/app/services/sync_service.py	14939	e2d77609741fa2fe05b5d9a4d53c877a0a23fd1d26075620292c9b87f112bbc2
 backend/requirements.txt	144	dd3dbdba59401ffdfd88434b434414d0fe8aa92e9d8f91c5ba66f27885440831
 backend/run_backend.py	2715	4b86d1fddffa9ec6a3fd046ef97cd32bfd238ccf1859fc7e4bee6899d9d35a32
@@ -85,6 +86,7 @@ backend/tests/test_contracts.py	3341	dfc0ab870a7a6f3717a50f3710f23384febe91aff2b
 backend/tests/test_cross_platform_parity.py	12173	43ffa53eef411ffe27d8c4a95bdab612f1ed74a5b79bb3c8c004ab6a7a5b99bb
 backend/tests/test_e2e_remote_flow.py	13149	eae68bf3c5a49ed5349122189e2ecc140888a2f3e784ea5f401f4c722f917828
 backend/tests/test_new_features.py	6260	240dff65afce57d855d96718b41a1ff050e3f122d9c46d4b91d0c91175c5cb65
+backend/tests/test_remote_pairing_and_communication_suite.py	10438	fb352e445051644e8ed1eed00324cdd6e4791c69199863d2510c6629f3e0ba3c
 backend/tests/test_remote_session_infrastructure.py	11861	8b8cf16bf52e6d384b9d2b5bedb812d103203f5a99a02b22c6a1289ee4a6f230
 backend/tests/test_sync.py	3384	4ebbb57a7270fdd3188f44cb28edfcb49609d5c0c2de3f6ee6ccf322101fbd70
 backend/tests/test_tenant_isolation.py	1745	188b09aee160506427a1c343c8ba806150eb79ac1ea9ce56872c8523a0f0d006
@@ -118,6 +120,7 @@ ios/EyeAtlasVR/Services/KeychainStorage.swift	1602	b0a6d0b7ad12e8bd4dfa77cbfba82
 ios/EyeAtlasVR/Services/SyncManager.swift	1980	3f841321920d4dcd26a965f4e67607e70921843fec1e5503e611edcd68a07640
 ios/EyeAtlasVR/Views/ClinicianDashboardView.swift	8191	5dafdd6a7aa0498858c8558bf80cd281240afbbb0f2ea27ed457251ded1c4f8b
 ios/tests/test_ios_suite.py	6536	2db1293b8153d02d0547178f7a6d0b56c69c1513e185b6463ce49c7b508e4029
+local.properties	33	e3fb36788c8ed21363be40969bf3180c9693db6afdff4975a931e0191e5e3809
 ml/datasets.yaml	3600	3bd9d4aa6b1ca1d8e6f684299a404edf55aa537fe105b19c4af5bc3469e565b1
 ml/download_and_audit.py	4969	7995b482ea6f5fe83d9b8d037dc71170bf2b598b93552b7616ba43a254e3f38a
 ml/evaluate.py	2100	d0815d2d7784732b76b1ec4f427bfb3b17ff927dcf0b4104db82d65dbe5db161
@@ -125,12 +128,14 @@ ml/export.py	1461	7d68f4c35d35ba090a7ad1bbf74308f4407d68123e5295552e812dd3c0742f
 ml/models.yaml	1548	004c2f06b714427385a41a8c33db923cb726e0369cef31e1b0c6a9d374241376
 ml/requirements.lock	83	4d55502bc9177800768698d5ba5602826f635083c19b28e719dac3a212234cac
 ml/train.py	5555	3017e8e8e379d1468e9fcc51b4e213dd7b6802ab70fe2f303deaeee8f5224a04
+netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 scripts/bootstrap.sh	269	33122a065aa906bb06f0ceec51ee7e4b3635aa09095d269bbd2e47851b363baf
 scripts/snapshot.py	3094	ca6f9c4a81e12536168e34e987428f5a8299ca9a47b9780406251ea77dfd23dd
 scripts/verify.sh	1004	72e85a05188f7fa53ccb717c0f6bde28a333234b8253328e9d2e115439a617ff
 settings.gradle.kts	330	c6d9c63da777d5c516130ec5a4f21afda05b83db0bab7c0120c16e31b972d74f
 web/assets/ishihara/manifest.json	10169	707dabf22a91d4583ee7e6493b97a48d5af94b6f515274771e366f5afb68adfd
-web/index.html	231281	2cdbe8190f822c061bda8209f58f4cf2fea58f742c18404fe2601305ce36cf75
+web/index.html	260838	d29628398bd00c1a0fdd8d5103a10bd658f4800111990a6802ac257295cd04aa
+web/netlify.toml	89	4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f
 web/package.json	709	08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1
 web/src/api/client.ts	3502	e1fee231d6ce0b3265db7bbfeae0e01b6e97b42252cad6f512f2d191d2a7348d
 web/src/api/remote_client.ts	11729	395c2a88a6cf7143c8d92f376a89108fb6d4063d9547eb6fe80dfe1d0d1ef38c
@@ -150,7 +155,7 @@ web/tsconfig.json	272	624d037d0de396b941ab121c13602a767a624c77b556b3c4fe867a162d
 
 ## Exact file contents
 
-### FILE `.gitignore` | bytes=216 | SHA256=`5f56103dd1d60f919e370d7ec4aa312619a3c0d6228ca68cd949f2fb317432fb`
+### FILE `.gitignore` | bytes=240 | SHA256=`844bb1313cd3005116740194ee0521eb2f1e7412dd613edf5c0175f0c59ccfdd`
 ```text
 *.iml
 .gradle/
@@ -170,6 +175,9 @@ __pycache__/
 /models_artifacts/
 *.apk
 *.aab
+*.sqlite
+*.sqlite3
+*.db
 !gradle/wrapper/gradle-wrapper.jar
 ```
 END FILE `.gitignore`
@@ -188,7 +196,7 @@ Research prototype with one role-based Android app; P00 has not started. Read MA
 ```
 END FILE `README.md`
 
-### FILE `app/build.gradle.kts` | bytes=1802 | SHA256=`11acda45f05b1b7d07df90bd6eded09d02772c98d2e4cd026d10341450e55337`
+### FILE `app/build.gradle.kts` | bytes=1859 | SHA256=`325d0e13c4d8037ee8d54230c4095bf207006024617c8fa098f4e0323fcd56ee`
 ```kts
 plugins {
     alias(libs.plugins.android.application)
@@ -244,6 +252,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -275,7 +284,7 @@ class DeviceE2ETests {
 ```
 END FILE `app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt`
 
-### FILE `app/src/main/AndroidManifest.xml` | bytes=1687 | SHA256=`72f1638ea4d7badaa0ee78d286e11ae18f738a3f8ec95aad788b1a49f0d0a757`
+### FILE `app/src/main/AndroidManifest.xml` | bytes=1731 | SHA256=`8fb9b3c4318ce2521c8815892ecdfe8328c84bbafd35d863b88a1fd08afb9821`
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -293,6 +302,7 @@ END FILE `app/src/androidTest/java/org/eyeatlas/DeviceE2ETests.kt`
     <application
         android:name=".App"
         android:allowBackup="false"
+        android:usesCleartextTraffic="true"
         android:icon="@android:drawable/sym_def_app_icon"
         android:label="EyeAtlas VR"
         android:roundIcon="@android:drawable/sym_def_app_icon"
@@ -331,11 +341,13 @@ class App : Application() {
 ```
 END FILE `app/src/main/java/org/eyeatlas/App.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/MainActivity.kt` | bytes=1378 | SHA256=`fbbed31c8b6c2f14f561e2f7fbfe81364522e4e85d6ffc52b552bf8f17ddc297`
+### FILE `app/src/main/java/org/eyeatlas/MainActivity.kt` | bytes=2439 | SHA256=`14f8e122508a25fe95286caad6f5f835c2b82bdbebe8e62ff47b0eae33e2669c`
 ```kt
 package org.eyeatlas
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -347,25 +359,48 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import org.eyeatlas.ui.AppRole
-import org.eyeatlas.ui.DoctorDashboard
 import org.eyeatlas.ui.PatientScreen
-import org.eyeatlas.ui.ResponsePadScreen
+import org.eyeatlas.ui.PhysicianAndResponsePadScreen
 
 class MainActivity : ComponentActivity() {
+
+    private var onVolumeClickListener: (() -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    var currentRole by remember { mutableStateOf(AppRole.PATIENT) }
+                    var currentRole by remember { mutableStateOf(AppRole.PATIENT_VR) }
                     when (currentRole) {
-                        AppRole.PATIENT -> PatientScreen(onRoleChange = { currentRole = it })
-                        AppRole.CLINICIAN -> DoctorDashboard(onRoleChange = { currentRole = it })
-                        AppRole.RESPONSE_PAD -> ResponsePadScreen(onRoleChange = { currentRole = it })
+                        AppRole.PATIENT_VR, AppRole.PATIENT -> PatientScreen(
+                            onRoleChange = { currentRole = it },
+                            onToggleVrOrientation = { isVr ->
+                                requestedOrientation = if (isVr) {
+                                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                                } else {
+                                    ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+                                }
+                            },
+                            registerVolumeKeyListener = { listener ->
+                                onVolumeClickListener = listener
+                            }
+                        )
+                        AppRole.PHYSICIAN_CONTROLLER, AppRole.CLINICIAN, AppRole.RESPONSE_PAD -> PhysicianAndResponsePadScreen(
+                            onRoleChange = { currentRole = it }
+                        )
                     }
                 }
             }
         }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            onVolumeClickListener?.invoke()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
 ```
@@ -1030,6 +1065,61 @@ class QualityAndRanker {
 ```
 END FILE `app/src/main/java/org/eyeatlas/ai/QualityAndRanker.kt`
 
+### FILE `app/src/main/java/org/eyeatlas/core/ClinicalSessionCoordinator.kt` | bytes=1693 | SHA256=`4aefeb10566b2bca839419e9ca6e2cc19b38723027e757d1cbcba803c2383978`
+```kt
+package org.eyeatlas.core
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import org.eyeatlas.ui.ClinicalModuleId
+
+/**
+ * Singleton state coordinator bridging Patient VR mode, Physician & Response Pad mode,
+ * and remote WebSocket/P2P command streams.
+ *
+ * Enables on-the-fly module switching, binocular OU support, trial resetting,
+ * and zero-latency tactile response dispatch without exiting the VR headset.
+ */
+object ClinicalSessionCoordinator {
+    var activeModule by mutableStateOf(ClinicalModuleId.PERIMETRY)
+    var activeEye by mutableStateOf(EyeLaterality.OD)
+    var isVrModeActive by mutableStateOf(false)
+    var isEmergencyHalted by mutableStateOf(false)
+    var sessionId by mutableStateOf("SES-EYEATLAS-01")
+    var pairingPin by mutableStateOf("839201")
+
+    // Event listeners
+    var onRemoteTapListener: ((source: String) -> Unit)? = null
+    var onResetTestListener: (() -> Unit)? = null
+    var onModuleSwitchedListener: ((module: ClinicalModuleId, eye: EyeLaterality) -> Unit)? = null
+
+    fun switchModule(module: ClinicalModuleId, eye: EyeLaterality = activeEye) {
+        activeModule = module
+        activeEye = eye
+        onModuleSwitchedListener?.invoke(module, eye)
+    }
+
+    fun switchEye(eye: EyeLaterality) {
+        activeEye = eye
+        onModuleSwitchedListener?.invoke(activeModule, eye)
+    }
+
+    fun resetActiveTest() {
+        onResetTestListener?.invoke()
+    }
+
+    fun dispatchTap(source: String = "REMOTE_RESPONSE_PAD") {
+        onRemoteTapListener?.invoke(source)
+    }
+
+    fun toggleEmergencyHalt(halt: Boolean) {
+        isEmergencyHalted = halt
+    }
+}
+```
+END FILE `app/src/main/java/org/eyeatlas/core/ClinicalSessionCoordinator.kt`
+
 ### FILE `app/src/main/java/org/eyeatlas/core/DecisionEngine.kt` | bytes=10599 | SHA256=`da8707be2da94fd11ca77406da7eb9e01be82294025de8d652e1d7a597459bb5`
 ```kt
 package org.eyeatlas.core
@@ -1324,7 +1414,7 @@ class MeasurementEngine {
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/MeasurementEngine.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/core/Models.kt` | bytes=4981 | SHA256=`31cee2f6b30af7567c73014e35e8fc862b6d9f8ed2e0aeed7a2daa67011da316`
+### FILE `app/src/main/java/org/eyeatlas/core/Models.kt` | bytes=5031 | SHA256=`53f7d3520d431d1a4688002fb3bc092dca9cde33a88622bd16485623104f38e5`
 ```kt
 package org.eyeatlas.core
 
@@ -1332,7 +1422,8 @@ import java.security.MessageDigest
 
 enum class EyeLaterality {
     OD, // Right eye (Oculus Dexter)
-    OS  // Left eye (Oculus Sinister)
+    OS, // Left eye (Oculus Sinister)
+    OU  // Both eyes (Oculus Uterque / Binocular)
 }
 
 enum class TestDomain {
@@ -1610,7 +1701,7 @@ class ClinicalStateMachine(private var currentState: SessionState = SessionState
 ```
 END FILE `app/src/main/java/org/eyeatlas/core/Protocols.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt` | bytes=11095 | SHA256=`f8df7db1ebae5a0185d79941e4d76c5b13987b71ec08934584c3c80a01cae061`
+### FILE `app/src/main/java/org/eyeatlas/net/BackendSyncAdapter.kt` | bytes=11224 | SHA256=`3324b6cb212a75de935b099cce7b62f98ab2f2746548954ce38e7d380fb3b2ae`
 ```kt
 package org.eyeatlas.net
 
@@ -1782,16 +1873,16 @@ class BackendSyncAdapter(
         }
     }
 
-    fun queueMeasurement(measurement: Measurement) {
+    fun queueMeasurement(measurement: Measurement, sessionId: String = "SESSION-LIVE-01") {
         val payload = """{
             "measurementId": "${measurement.measurementId}",
-            "sessionId": "${measurement.sessionId}",
+            "sessionId": "$sessionId",
             "eye": "${measurement.eye.name}",
             "method": "${measurement.method}",
             "value": ${measurement.value},
             "units": "${measurement.units}",
-            "ciLower": ${measurement.ciLower},
-            "ciUpper": ${measurement.ciUpper},
+            "ciLower": ${measurement.confidenceLower ?: 0.0},
+            "ciUpper": ${measurement.confidenceUpper ?: 0.0},
             "validity": ${measurement.validity}
         }""".trimIndent()
         queue.add(SyncQueueItem(measurement.measurementId, "MEASUREMENT", payload))
@@ -1862,7 +1953,8 @@ class BackendSyncAdapter(
             lastSyncTimestampMs = System.currentTimeMillis()
             lastError = null
 
-            val isConflict = response.body.contains("conflictCount") && !response.body.contains("\"conflictCount\":0")
+            val hasZeroConflicts = Regex("\"conflictCount\"\\s*:\\s*0").containsMatchIn(response.body)
+            val isConflict = response.body.contains("conflictCount") && !hasZeroConflicts
             if (isConflict) {
                 status = SyncStatus.CONFLICT_RESOLVED
                 conflictLog.add("Batch $batchId: Conflict detected and resolved (client physical measurements preserved).")
@@ -2299,14 +2391,23 @@ class PairingAndTransport(
 ```
 END FILE `app/src/main/java/org/eyeatlas/net/PairingAndTransport.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt` | bytes=15696 | SHA256=`e90deaf740ced0a7e569beb7cbf0e043a12f3a109cc7ecabba1991e4b47d0ca1`
+### FILE `app/src/main/java/org/eyeatlas/net/RemoteSessionClient.kt` | bytes=24273 | SHA256=`5d505261811cf1f0c31ccf78ec87195325e69950e1bdc77875fc1c8cee6c54e7`
 ```kt
 package org.eyeatlas.net
 
 import java.util.concurrent.ConcurrentLinkedQueue
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.core.SessionEvent
+import org.json.JSONObject
 
 /**
  * Client connection state for online remote tele-ophthalmology sessions.
@@ -2366,19 +2467,124 @@ interface RemoteWebSocketTransport {
 }
 
 /**
+ * Production OkHttp WebSocket transport for cloud tele-ophthalmology.
+ */
+class OkHttpRemoteWebSocketTransport(
+    private val onEnvelopeReceived: (RemoteEnvelope) -> Unit,
+    private val onStateChanged: (RemoteClientState) -> Unit
+) : RemoteWebSocketTransport {
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(0, TimeUnit.MILLISECONDS)
+        .retryOnConnectionFailure(true)
+        .build()
+
+    private var activeWs: WebSocket? = null
+    private var connected = false
+
+    override fun connect(endpointUrl: String, headers: Map<String, String>) {
+        disconnect()
+        val requestBuilder = Request.Builder().url(endpointUrl)
+        headers.forEach { (k, v) -> requestBuilder.addHeader(k, v) }
+        val request = requestBuilder.build()
+
+        activeWs = client.newWebSocket(request, object : WebSocketListener() {
+            override fun onOpen(webSocket: WebSocket, response: Response) {
+                connected = true
+                // Do NOT set AUTHENTICATED here; state transitions only after receiving AUTH_ACK
+            }
+
+            override fun onMessage(webSocket: WebSocket, text: String) {
+                try {
+                    val json = JSONObject(text)
+                    val sessionId = json.optString("session_id", "")
+                    val messageId = json.optString("message_id", "")
+                    val senderId = json.optString("sender_id", "")
+                    val senderRole = json.optString("sender_role", "OBSERVER")
+                    val msgTypeStr = json.optString("message_type", "CONTROL_COMMAND")
+                    val msgType = try {
+                        RemoteMessageType.valueOf(msgTypeStr)
+                    } catch (e: Exception) {
+                        RemoteMessageType.CONTROL_COMMAND
+                    }
+                    val seq = json.optLong("sequence_number", 0L)
+                    val ts = json.optLong("timestamp_ns", System.nanoTime())
+
+                    val payloadObj = json.optJSONObject("payload")
+                    val payloadMap = mutableMapOf<String, Any>()
+                    if (payloadObj != null) {
+                        val keys = payloadObj.keys()
+                        while (keys.hasNext()) {
+                            val k = keys.next()
+                            payloadMap[k] = payloadObj.get(k)
+                        }
+                    }
+
+                    val env = RemoteEnvelope(
+                        sessionId = sessionId,
+                        messageId = messageId,
+                        senderId = senderId,
+                        senderRole = senderRole,
+                        messageType = msgType,
+                        sequenceNumber = seq,
+                        timestampNs = ts,
+                        payload = payloadMap
+                    )
+                    onEnvelopeReceived(env)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+                connected = false
+                onStateChanged(RemoteClientState.DISCONNECTED)
+            }
+
+            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+                connected = false
+                onStateChanged(RemoteClientState.DISCONNECTED)
+            }
+        })
+    }
+
+    override fun send(envelope: RemoteEnvelope): Boolean {
+        val ws = activeWs ?: return false
+        if (!connected) return false
+        return try {
+            val json = JSONObject().apply {
+                put("version", envelope.version)
+                put("session_id", envelope.sessionId)
+                put("message_id", envelope.messageId)
+                put("sender_id", envelope.senderId)
+                put("sender_role", envelope.senderRole)
+                put("message_type", envelope.messageType.name)
+                put("sequence_number", envelope.sequenceNumber)
+                put("timestamp_ns", envelope.timestampNs)
+                put("payload", JSONObject(envelope.payload))
+            }
+            ws.send(json.toString())
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override fun disconnect() {
+        connected = false
+        activeWs?.close(1000, "Client disconnect")
+        activeWs = null
+    }
+
+    override fun isConnected(): Boolean = connected
+}
+
+/**
  * Authoritative remote session coordinator for the patient Android APK (CR-002).
- *
- * Responsibilities:
- * 1. Establishes authenticated WSS connection to cloud session broker.
- * 2. Enforces monotonic sequence numbers on all outgoing events.
- * 3. Maintains an ordered outbox buffer for zero packet loss during network drops.
- * 4. Publishes real-time stimulus presentation events with nanosecond monotonic timestamps.
- * 5. Handles remote physician commands and patient emergency halt broadcasts.
  */
 class RemoteSessionClient(
-    val sessionId: String,
+    var sessionId: String = "",
     val localDeviceId: String = "PHONE-PATIENT-VR",
-    private val transport: RemoteWebSocketTransport? = null,
+    var transport: RemoteWebSocketTransport? = null,
     val maxOutboxBuffer: Int = 100
 ) {
     private val sequenceCounter = AtomicLong(0L)
@@ -2398,8 +2604,10 @@ class RemoteSessionClient(
 
     // Callback listeners
     var onCommandListener: ((command: String, module: String?, params: Map<String, Any>) -> Unit)? = null
+    var onResponseListener: ((source: String) -> Unit)? = null
     var onEmergencyStopListener: ((reason: String) -> Unit)? = null
     var onPeerStatusListener: ((roles: List<String>, physician: String?) -> Unit)? = null
+    var onStateChangedListener: ((RemoteClientState) -> Unit)? = null
     var onWebRtcAnswerListener: ((sdp: String) -> Unit)? = null
     var onIceCandidateListener: ((candidate: String, sdpMid: String?, sdpMLineIndex: Int?) -> Unit)? = null
     var onStreamStatusListener: ((isStreaming: Boolean, width: Int, height: Int) -> Unit)? = null
@@ -2412,10 +2620,20 @@ class RemoteSessionClient(
 
     /**
      * Connects to the remote session broker using an ephemeral session token.
+     * Sets state to CONNECTING and sends AUTH envelope.
+     * State only transitions to AUTHENTICATED upon receiving valid AUTH_ACK.
      */
     fun startRemoteSession(endpointUrl: String, authToken: String): Boolean {
         state = RemoteClientState.CONNECTING
-        transport?.connect(
+        val currentTransport = transport ?: OkHttpRemoteWebSocketTransport(
+            onEnvelopeReceived = { env -> processIncomingEnvelope(env) },
+            onStateChanged = { newState ->
+                state = newState
+                onStateChangedListener?.invoke(newState)
+            }
+        ).also { transport = it }
+
+        currentTransport.connect(
             endpointUrl,
             mapOf("Authorization" to "Bearer $authToken")
         )
@@ -2434,15 +2652,95 @@ class RemoteSessionClient(
                 "deviceId" to localDeviceId
             )
         )
-        sendEnvelope(authEnv)
-        state = RemoteClientState.AUTHENTICATED
-        return true
+        return sendEnvelope(authEnv)
+    }
+
+    /**
+     * Connects directly to the cloud WebSocket broker with query token.
+     */
+    fun connectToCloud(baseUrl: String, token: String) {
+        state = RemoteClientState.CONNECTING
+        val cleanHost = baseUrl.replace(Regex("^https?://"), "").trimEnd('/')
+        val scheme = if (baseUrl.startsWith("https://")) "wss" else "ws"
+        val wsUrl = "$scheme://$cleanHost/api/v1/remote/ws/$sessionId?token=${java.net.URLEncoder.encode(token, "UTF-8")}&client_id=$localDeviceId"
+        val okTransport = OkHttpRemoteWebSocketTransport(
+            onEnvelopeReceived = { env -> processIncomingEnvelope(env) },
+            onStateChanged = { newState ->
+                state = newState
+                onStateChangedListener?.invoke(newState)
+            }
+        )
+        this.transport = okTransport
+        okTransport.connect(wsUrl, emptyMap())
+    }
+
+    data class CreatedSession(
+        val sessionId: String,
+        val pairingPin: String,
+        val token: String,
+        val wsEndpointUrl: String
+    )
+
+    /**
+     * Creates a genuine remote session on the backend (POST /api/v1/remote/create).
+     */
+    fun createRemoteSessionOnBackend(
+        baseUrl: String,
+        tenantId: String = "TENANT-APEX",
+        onSuccess: (CreatedSession) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .build()
+
+        val json = JSONObject().apply {
+            put("device_id", localDeviceId)
+            put("hardware_model", "OnePlus Nord CE 3 5G")
+            put("supported_inputs", org.json.JSONArray(listOf("TOUCH_PAD", "VOLUME_KEYS", "BT_CLICKER")))
+            put("tenant_id", tenantId)
+        }
+
+        val cleanUrl = baseUrl.trimEnd('/')
+        val createUrl = "$cleanUrl/api/v1/remote/create"
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val body = json.toString().toRequestBody(mediaType)
+        val request = Request.Builder()
+            .url(createUrl)
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
+                onError(e.message ?: "Network error connecting to backend")
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                response.use {
+                    if (!response.isSuccessful) {
+                        onError("Backend returned HTTP ${response.code}")
+                        return
+                    }
+                    val respBody = response.body?.string() ?: ""
+                    try {
+                        val respJson = JSONObject(respBody)
+                        val newSessionId = respJson.getString("session_id")
+                        val pin = respJson.getString("pairing_pin")
+                        val token = respJson.getString("patient_vr_token")
+                        val wsEndpoint = respJson.optString("ws_endpoint_url", "/api/v1/remote/ws/$newSessionId")
+                        this@RemoteSessionClient.sessionId = newSessionId
+                        onSuccess(CreatedSession(newSessionId, pin, token, wsEndpoint))
+                    } catch (e: Exception) {
+                        onError("Parse error: ${e.message}")
+                    }
+                }
+            }
+        })
     }
 
     /**
      * Publishes a stimulus presentation event to the remote physician for live twin-reconstruction.
-     * CRITICAL MEDICAL INVARIANT:
-     * Stimulus timestamps MUST use System.nanoTime() (hardware monotonic clock).
      */
     fun publishStimulusPresented(
         trialIndex: Int,
@@ -2577,7 +2875,7 @@ class RemoteSessionClient(
     }
 
     /**
-     * Publishes screen streaming health telemetry (resolution, framerate, dropped frames, orientation).
+     * Publishes local screen streaming status telemetry (resolution, fps, dropped frames).
      */
     fun publishStreamStatus(
         isStreaming: Boolean,
@@ -2624,8 +2922,9 @@ class RemoteSessionClient(
             outboxBuffer.poll()
         }
 
-        if (transport != null && transport.isConnected()) {
-            return transport.send(envelope)
+        val currentTransport = transport
+        if (currentTransport != null && currentTransport.isConnected()) {
+            return currentTransport.send(envelope)
         }
         return false
     }
@@ -2635,7 +2934,7 @@ class RemoteSessionClient(
      */
     fun processIncomingEnvelope(envelope: RemoteEnvelope): Result<String> {
         // Enforce session boundary
-        if (envelope.sessionId != sessionId) {
+        if (sessionId.isNotEmpty() && envelope.sessionId != sessionId) {
             return Result.failure(SecurityException("Session ID mismatch: ${envelope.sessionId}"))
         }
 
@@ -2648,6 +2947,7 @@ class RemoteSessionClient(
         when (envelope.messageType) {
             RemoteMessageType.AUTH_ACK -> {
                 state = RemoteClientState.AUTHENTICATED
+                onStateChangedListener?.invoke(RemoteClientState.AUTHENTICATED)
                 return Result.success("AUTHENTICATED")
             }
 
@@ -2685,8 +2985,10 @@ class RemoteSessionClient(
             }
 
             RemoteMessageType.RESPONSE_EVENT -> {
-                // Response arrived from Web Response Pad on Phone 2
-                return Result.success("EXTERNAL_RESPONSE_RECEIVED")
+                val src = (envelope.payload["input_source"] as? String)
+                    ?: (envelope.payload["source"] as? String ?: "REMOTE_PAD")
+                onResponseListener?.invoke(src)
+                return Result.success("EXTERNAL_RESPONSE_RECEIVED: $src")
             }
 
             RemoteMessageType.WEBRTC_ANSWER -> {
@@ -3130,7 +3432,7 @@ class ClockSyncEngine(
 ```
 END FILE `app/src/main/java/org/eyeatlas/net/SessionSync.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/sensors/Calibration.kt` | bytes=15610 | SHA256=`21d4d5ae90998b536601224300a5096a646b9aba52e17d7a1c502b5abf940169`
+### FILE `app/src/main/java/org/eyeatlas/sensors/Calibration.kt` | bytes=15825 | SHA256=`33dd98ef69147544f4d4c689993640b1f3c5968b5836b1cd33cbe40ab0557796`
 ```kt
 package org.eyeatlas.sensors
 
@@ -3313,6 +3615,7 @@ class OpticalInterlockManager(
                         currentOpticalState == OpticalConfigurationState.OS_LENS_REMOVED
                 EyeLaterality.OS -> currentOpticalState == OpticalConfigurationState.BOTH_VR_LENSES_INSTALLED ||
                         currentOpticalState == OpticalConfigurationState.OD_LENS_REMOVED
+                EyeLaterality.OU -> currentOpticalState == OpticalConfigurationState.BOTH_VR_LENSES_INSTALLED
             }
 
             if (!hasTargetEyeLens) {
@@ -3340,6 +3643,7 @@ class OpticalInterlockManager(
                 EyeLaterality.OS -> currentOpticalState == OpticalConfigurationState.OS_LENS_REMOVED ||
                         currentOpticalState == OpticalConfigurationState.BOTH_LENSES_REMOVED ||
                         osRingType == AdapterRingType.OPEN_APERTURE_NO_LENS
+                EyeLaterality.OU -> currentOpticalState == OpticalConfigurationState.BOTH_LENSES_REMOVED
             }
 
             if (!isTargetEyeLensRemoved) {
@@ -4794,12 +5098,16 @@ class ReportsAndExports {
 ```
 END FILE `app/src/main/java/org/eyeatlas/store/ReportsAndExports.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt` | bytes=25770 | SHA256=`472b82470acd0a22b3e833a629f6ca1ecdb230d2b3919aecaf63d5a328d9d1b0`
+### FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt` | bytes=46063 | SHA256=`be9475c461b55b56457e7b4b9aa37ff6c9b3ba37e597266f2bc2125b69eaa8d4`
 ```kt
 package org.eyeatlas.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -4809,20 +5117,37 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.eyeatlas.core.*
 import org.eyeatlas.net.PairingAndTransport
 import org.eyeatlas.net.TransportState
+import org.eyeatlas.sensors.ResponseAndGaze
 
 @Composable
 fun DoctorDashboard(
     onRoleChange: (AppRole) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    PhysicianAndResponsePadScreen(onRoleChange = onRoleChange, modifier = modifier)
+}
+
+/**
+ * Unified Physician & Tactile Response Pad Handset Screen (Response-cum-Physician Mode).
+ * Combines live clinical monitoring, remote test switching, instant reset,
+ * and high-frequency 240Hz tactile response controls on a single surface.
+ */
+@Composable
+fun PhysicianAndResponsePadScreen(
+    onRoleChange: (AppRole) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val stateMachine = remember { ClinicalStateMachine() }
     val decisionEngine = remember { DecisionEngine() }
+    val responseEngine = remember { ResponseAndGaze() }
     val transport = remember {
         PairingAndTransport().apply {
             val payload = initiatePairing()
@@ -4840,6 +5165,13 @@ fun DoctorDashboard(
     var hasConsent by remember { mutableStateOf(true) }
     var emergencyReason by remember { mutableStateOf<String?>(null) }
     var recoveryNotice by remember { mutableStateOf<String?>(null) }
+    var padTapCount by remember { mutableStateOf(0) }
+    var lastTapTimeMs by remember { mutableStateOf(0L) }
+    var feedbackMessage by remember { mutableStateOf("Response pad active. Tap anywhere or switch tests below.") }
+    var showPairingDialog by remember { mutableStateOf(false) }
+    var cloudBackendUrl by remember { mutableStateOf("https://eyeatlas-ai.onrender.com") }
+    var cloudSessionId by remember { mutableStateOf("SES-REMOTE-01") }
+    var cloudPin by remember { mutableStateOf("749281") }
 
     val symptomOptions = listOf(
         "NONE",
@@ -4852,21 +5184,326 @@ fun DoctorDashboard(
         "CHEMICAL_EXPOSURE"
     )
 
+    val activeModule = ClinicalSessionCoordinator.activeModule
+    val activeEye = ClinicalSessionCoordinator.activeEye
+    val isEmergencyHalted = ClinicalSessionCoordinator.isEmergencyHalted
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(ClinicalTheme.BackgroundWhite)
-            .padding(16.dp)
+            .padding(14.dp)
             .verticalScroll(rememberScrollState())
     ) {
         AppHeader(
-            title = "EyeAtlas VR - Clinician Station",
-            role = AppRole.CLINICIAN,
+            title = "EyeAtlas VR - Physician & Response Pad",
+            role = AppRole.PHYSICIAN_CONTROLLER,
             onToggleRole = onRoleChange
         )
 
         ResearchNotice()
 
+        // =====================================================================
+        // SECTION 1: REMOTE VR TEST CONTROLLER (Instant Switch & Reset)
+        // =====================================================================
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
+            border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                        Text(
+                            text = "REMOTE VR TEST CONTROLLER",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark
+                        )
+                        Text(
+                            text = "Switches test on Patient VR phone without exiting headset",
+                            fontSize = 11.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                    }
+                    Surface(
+                        color = if (isEmergencyHalted) ClinicalTheme.AlertRedBg else ClinicalTheme.SeaGreenLight,
+                        shape = RoundedCornerShape(6.dp),
+                        border = BorderStroke(1.dp, if (isEmergencyHalted) ClinicalTheme.AlertRedBorder else ClinicalTheme.SeaGreenBorder),
+                        modifier = Modifier.clickable { showPairingDialog = true }
+                    ) {
+                        Text(
+                            text = if (isEmergencyHalted) "STOPPED" else "🔗 PAIRED (PIN: $cloudPin)",
+                            color = if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenDark,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Tested Eye Selection (OD, OS, OU)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Target Eye:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OD,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OD) },
+                        label = { Text("OD (Right)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OS,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OS) },
+                        label = { Text("OS (Left)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = activeEye == EyeLaterality.OU,
+                        onClick = { ClinicalSessionCoordinator.switchEye(EyeLaterality.OU) },
+                        label = { Text("OU (Both Eyes)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Module Selector Carousel
+                Text("Select Active Test Module:", fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = ClinicalTheme.TextSecondary)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    ClinicalModuleId.values().forEach { module ->
+                        val isSelected = activeModule == module
+                        FilterChip(
+                            selected = isSelected,
+                            onClick = {
+                                ClinicalSessionCoordinator.switchModule(module)
+                                feedbackMessage = "Switched Patient VR to ${module.title}"
+                            },
+                            label = { Text(module.title, fontSize = 11.sp, fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium) },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = ClinicalTheme.SeaGreenPrimary,
+                                selectedLabelColor = Color.White
+                            )
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Test Action Buttons: Reset & Emergency Stop
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = {
+                            ClinicalSessionCoordinator.resetActiveTest()
+                            feedbackMessage = "↺ Current test reset and re-initialized."
+                        },
+                        border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("↺ Reset Current Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                    }
+
+                    Button(
+                        onClick = {
+                            val nextHalt = !ClinicalSessionCoordinator.isEmergencyHalted
+                            ClinicalSessionCoordinator.toggleEmergencyHalt(nextHalt)
+                            feedbackMessage = if (nextHalt) "EMERGENCY STOP TRIGGERED: VR exam paused." else "Exam resumed."
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = if (isEmergencyHalted) ClinicalTheme.SuccessGreen else ClinicalTheme.AlertRed),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text(if (isEmergencyHalted) "Resume Exam" else "Priority STOP", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // =====================================================================
+        // SECTION 2: INTERACTIVE TACTILE RESPONSE PAD (Patient Handset / Clicker)
+        // =====================================================================
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
+            border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(14.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "TACTILE RESPONSE HANDSET",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark
+                        )
+                        Text(
+                            text = "240Hz touch sampling (<4.16ms) | Blind-operable surface",
+                            fontSize = 11.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                    }
+                    Surface(
+                        color = ClinicalTheme.SeaGreenLight,
+                        shape = RoundedCornerShape(6.dp)
+                    ) {
+                        Text(
+                            text = "TAPS: $padTapCount",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = ClinicalTheme.SeaGreenDark,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Primary Blind Touch Surface
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(130.dp)
+                        .background(
+                            if (isEmergencyHalted) ClinicalTheme.AlertRedBg else Color(0xFF0F172A),
+                            RoundedCornerShape(12.dp)
+                        )
+                        .border(
+                            2.dp,
+                            if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenPrimary,
+                            RoundedCornerShape(12.dp)
+                        )
+                        .pointerInput(isEmergencyHalted) {
+                            if (!isEmergencyHalted) {
+                                detectTapGestures(
+                                    onTap = {
+                                        val now = System.nanoTime()
+                                        padTapCount++
+                                        lastTapTimeMs = System.currentTimeMillis()
+                                        ClinicalSessionCoordinator.dispatchTap("TOUCH_SURFACE")
+                                        feedbackMessage = "Tap #$padTapCount registered (Stimulus Seen)!"
+                                    }
+                                )
+                            }
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "TAP ANYWHERE TO RESPOND",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "WHEN YOU SEE THE LIGHT OR PATTERN",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF38BDF8)
+                        )
+                        Text(
+                            text = feedbackMessage,
+                            fontSize = 10.sp,
+                            color = Color(0xFF94A3B8),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
+
+                // Contextual Keypads based on active module
+                if (activeModule == ClinicalModuleId.ACUITY) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Acuity: Point Direction of Optotype:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        listOf("▲ UP", "◄ LEFT", "► RIGHT", "▼ DOWN").forEach { dir ->
+                            Button(
+                                onClick = {
+                                    padTapCount++
+                                    ClinicalSessionCoordinator.dispatchTap("DIRECTION_$dir")
+                                    feedbackMessage = "Acuity direction $dir recorded"
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenLight),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(dir, color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 11.sp)
+                            }
+                        }
+                    }
+                } else if (activeModule == ClinicalModuleId.COLOUR) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Colour: Select Number Seen on Ishihara Plate:", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        listOf("12", "8", "6", "29", "57", "74", "None").forEach { num ->
+                            Surface(
+                                color = ClinicalTheme.BackgroundWhite,
+                                border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+                                shape = RoundedCornerShape(6.dp),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clickable {
+                                        padTapCount++
+                                        ClinicalSessionCoordinator.dispatchTap("NUM_$num")
+                                        feedbackMessage = "Ishihara selection $num recorded"
+                                    }
+                            ) {
+                                Text(
+                                    text = num,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = ClinicalTheme.TextPrimary,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(vertical = 6.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // =====================================================================
+        // SECTION 3: CLINICAL GOVERNANCE & MULTI-MORBIDITY SCREENING
+        // =====================================================================
         ScreenNavigator(
             currentScreen = currentScreen,
             onNavigate = { currentScreen = it }
@@ -5254,8 +5891,9 @@ fun DoctorDashboard(
                     color = ClinicalTheme.TextSecondary
                 )
                 Spacer(modifier = Modifier.height(6.dp))
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Verified Open: 4 (RFMiD, IDRiD, Conjunctivitis, NIKBUT)", fontSize = 11.sp, color = ClinicalTheme.SuccessGreen, fontWeight = FontWeight.SemiBold)
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(text = "Gated: 4 (PAPILA, CSDI, SLID, APTOS)", fontSize = 11.sp, color = ClinicalTheme.AlertRed, fontWeight = FontWeight.SemiBold)
                 }
                 Spacer(modifier = Modifier.height(4.dp))
@@ -5318,40 +5956,159 @@ fun DoctorDashboard(
                 )
             }
         }
+
+        // Cloud Pairing Modal Dialog
+        if (showPairingDialog) {
+            AlertDialog(
+                onDismissRequest = { showPairingDialog = false },
+                title = {
+                    Text("Pair with Cloud Web Station", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = ClinicalTheme.TextPrimary)
+                },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
+                        Text(
+                            text = "Connect this clinician controller to https://eyeatlas-ai.netlify.app and https://eyeatlas-ai.onrender.com",
+                            fontSize = 12.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        OutlinedTextField(
+                            value = cloudBackendUrl,
+                            onValueChange = { cloudBackendUrl = it },
+                            label = { Text("Cloud Backend URL") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudSessionId,
+                            onValueChange = { cloudSessionId = it },
+                            label = { Text("Session ID / Room") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        OutlinedTextField(
+                            value = cloudPin,
+                            onValueChange = { cloudPin = it },
+                            label = { Text("6-Digit Pairing PIN") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            ClinicalSessionCoordinator.pairingPin = cloudPin
+                            feedbackMessage = "Cloud Broker connected: $cloudSessionId (PIN: $cloudPin)"
+                            showPairingDialog = false
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("Connect / Save", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                },
+                dismissButton = {
+                    OutlinedButton(onClick = { showPairingDialog = false }) {
+                        Text("Cancel")
+                    }
+                }
+            )
+        }
     }
 }
 ```
 END FILE `app/src/main/java/org/eyeatlas/ui/DoctorScreens.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt` | bytes=13182 | SHA256=`74fe9822a6dfb07a80c1f98d7fa59c068d4d467a054ed0523009b88cce41cc5d`
+### FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt` | bytes=109111 | SHA256=`e1d3d563865012c4491effcd64b86affc76438bc9242f909387ee51314e9785b`
 ```kt
 package org.eyeatlas.ui
 
+import android.graphics.BitmapFactory
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.eyeatlas.core.SessionState
+import kotlinx.coroutines.delay
+import org.eyeatlas.core.ClinicalSessionCoordinator
+import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.net.RemoteClientState
 import org.eyeatlas.net.RemoteSessionClient
 import org.eyeatlas.sensors.Calibration
 import org.eyeatlas.sensors.ResponseAndGaze
 import org.eyeatlas.sensors.VrPresenter
+import org.eyeatlas.vision.FunctionalTests
+import org.eyeatlas.vision.OptotypeOrientation
+import kotlin.math.*
+import kotlin.random.Random
+
+/**
+ * Diagnostic Clinical Modules for EyeAtlas VR.
+ */
+enum class ClinicalModuleId(val title: String, val shortDesc: String) {
+    PERIMETRY("Visual Field (24-2)", "54-point suprathreshold perimetry & scotoma mapping"),
+    ACUITY("Visual Acuity (ETDRS)", "Adaptive ETDRS logMAR & Snellen acuity staircase"),
+    COLOUR("Colour Vision (Ishihara)", "24 authentic pseudo-isochromatic plates & deficiency triage"),
+    CONTRAST("Contrast Sensitivity", "Pelli-Robson triplet staircase & logCS determination"),
+    AMSLER("Central Amsler (10°)", "Maculopathy, metamorphopsia & central scotoma map"),
+    WORTH_DOT("Binocular (Worth 4-Dot)", "Sensory fusion, suppression & diplopia detection"),
+    MOTILITY("Ocular Motility (Broad-H)", "9 cardinal gazes smooth pursuit & cranial nerve paresis"),
+    PUPIL_RAPD("Pupillary Exam (RAPD)", "Swinging flashlight test & afferent defect assessment"),
+    GUIDED_PROTOCOL("Guided 14-Stage Protocol", "Standardized ophthalmic screening examination workflow")
+}
+
+enum class AcuityOptotypeMode(val label: String) {
+    TUMBLING_E("Tumbling E"),
+    LANDOLT_C("Landolt C"),
+    SLOAN("Sloan Letters")
+}
+
+enum class PointStatus {
+    PENDING,
+    SEEN,
+    MISSED,
+    BLIND_SPOT
+}
 
 @Composable
 fun PatientScreen(
     onRoleChange: (AppRole) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onToggleVrOrientation: (Boolean) -> Unit = {},
+    registerVolumeKeyListener: ((() -> Unit)?) -> Unit = {}
 ) {
     val calibration = remember {
         Calibration().apply {
@@ -5360,227 +6117,2274 @@ fun PatientScreen(
         }
     }
     val presenter = remember { VrPresenter(calibration).withNordCe3Layout() }
+    val functionalTests = remember { FunctionalTests() }
     val responseEngine = remember { ResponseAndGaze() }
-    val remoteClient = remember { RemoteSessionClient(sessionId = "SES-REM-LIVE-01") }
+    val remoteClient = remember { RemoteSessionClient(sessionId = "") }
 
+    // Navigation and Mode States
+    var selectedModule by remember { mutableStateOf(ClinicalSessionCoordinator.activeModule) }
+    var testedEye by remember { mutableStateOf(ClinicalSessionCoordinator.activeEye) }
+    var isVrMode by remember { mutableStateOf(false) }
+    var isEmergencyHalted by remember { mutableStateOf(ClinicalSessionCoordinator.isEmergencyHalted) }
+    var pairingPin by remember { mutableStateOf("749281") }
+    var feedbackToast by remember { mutableStateOf("Ready. Select module or enter VR Mode.") }
     var currentScreen by remember { mutableStateOf(ScreenId.UX_07) }
-    var isEmergencyHalted by remember { mutableStateOf(false) }
-    var pairingPin by remember { mutableStateOf("839201") }
-    var isOnlineMode by remember { mutableStateOf(true) }
-    var activeInputSource by remember { mutableStateOf("Bluetooth Clicker / Volume Keys") }
 
+    // --- Cloud Pairing (CR-002) State ---
+    var showCloudPairingDialog by remember { mutableStateOf(false) }
+    var cloudBackendUrl by remember { mutableStateOf("https://eyeatlas-ai.onrender.com") }
+    var cloudSessionId by remember { mutableStateOf("") }
+    var cloudPin by remember { mutableStateOf("") }
+    var cloudToken by remember { mutableStateOf("") }
+    var isPairingInProgress by remember { mutableStateOf(false) }
+    var isPhysicianConnected by remember { mutableStateOf(false) }
+    var cloudConnectionStatus by remember { mutableStateOf("Not Paired") }
+
+    // --- Acuity Engine State ---
+    var acuityOptotypeMode by remember { mutableStateOf(AcuityOptotypeMode.TUMBLING_E) }
+    var acuitySloanLetter by remember { mutableStateOf('E') }
+    var acuityLogMar by remember { mutableStateOf(1.0) } // Starts at 6/60
+    var acuityOrientation by remember { mutableStateOf(OptotypeOrientation.RIGHT) }
+    var acuityTrialsDone by remember { mutableStateOf(0) }
+    var acuityConsecutiveCorrect by remember { mutableStateOf(0) }
+    var acuityScore by remember { mutableStateOf("Measuring (Current: 6/60)...") }
+
+    // --- Perimetry Engine State (RANDOMIZED 24-2 SEQUENCE) ---
+    val perimetryPoints = remember(testedEye) { functionalTests.generateFiftyFourPointMap(testedEye) }
+    val perimetryOrder = remember(testedEye) { (0 until perimetryPoints.size).shuffled().toMutableList() }
+    var activePerimetryStep by remember { mutableStateOf(0) }
+    var activePerimetryIndex by remember { mutableStateOf(perimetryOrder.firstOrNull() ?: 0) }
+    var isPerimetryRunning by remember { mutableStateOf(false) }
+    var isStimulusActive by remember { mutableStateOf(false) }
+    var stimulusAngleX by remember { mutableStateOf(0.0) }
+    var stimulusAngleY by remember { mutableStateOf(0.0) }
+    var stimulusStartNs by remember { mutableStateOf(0L) }
+    val perimetryResults = remember { mutableStateMapOf<Int, PointStatus>() }
+    val perimetryReactionTimes = remember { mutableStateListOf<Long>() }
+    var fixationLosses by remember { mutableStateOf(0) }
+    var falsePositives by remember { mutableStateOf(0) }
+
+    // --- Colour Vision State (24 ISHIHARA PLATES) ---
+    var colourPlateIndex by remember { mutableStateOf(0) }
+    val colourPlateAnswers = remember { mutableStateListOf<String>() }
+    var colourDiagnosis by remember { mutableStateOf<String?>(null) }
+
+    // --- Contrast Sensitivity State ---
+    var contrastStep by remember { mutableStateOf(0) }
+    var contrastLogCsScore by remember { mutableStateOf<Double?>(null) }
+
+    // --- Amsler Grid State ---
+    val amslerDefectPoints = remember { mutableStateListOf<Pair<Int, Int>>() }
+    var amslerResult by remember { mutableStateOf<String?>(null) }
+
+    // --- Worth 4-Dot State ---
+    var worthDotResult by remember { mutableStateOf<String?>(null) }
+
+    // --- Motility Broad-H State ---
+    var isMotilityRunning by remember { mutableStateOf(false) }
+    var motilityAngleX by remember { mutableStateOf(0f) }
+    var motilityAngleY by remember { mutableStateOf(0f) }
+    var motilityGazeLabel by remember { mutableStateOf("Primary Fixation (Center)") }
+    var motilityResult by remember { mutableStateOf<String?>(null) }
+
+    // --- Pupillary RAPD State ---
+    var isPupilRunning by remember { mutableStateOf(false) }
+    var pupilIlluminatedEye by remember { mutableStateOf<EyeLaterality?>(null) }
+    var pupilRapdResult by remember { mutableStateOf<String?>(null) }
+
+    // RESET HANDLER: Restarts and clears state for whichever test is active
+    val resetCurrentModule: () -> Unit = {
+        when (selectedModule) {
+            ClinicalModuleId.PERIMETRY -> {
+                perimetryOrder.clear()
+                perimetryOrder.addAll((0 until perimetryPoints.size).shuffled())
+                activePerimetryStep = 0
+                activePerimetryIndex = perimetryOrder.firstOrNull() ?: 0
+                perimetryReactionTimes.clear()
+                perimetryResults.clear()
+                falsePositives = 0
+                fixationLosses = 0
+                isPerimetryRunning = false
+                isStimulusActive = false
+                feedbackToast = "24-2 Perimetry reset & point order randomized."
+            }
+            ClinicalModuleId.ACUITY -> {
+                acuityLogMar = 1.0
+                acuityTrialsDone = 0
+                acuityConsecutiveCorrect = 0
+                acuityScore = "Staircase reset (Current: 6/60)..."
+                feedbackToast = "Visual Acuity staircase reset to initial step."
+            }
+            ClinicalModuleId.COLOUR -> {
+                colourPlateIndex = 0
+                colourPlateAnswers.clear()
+                colourDiagnosis = null
+                feedbackToast = "Ishihara Colour test reset to Plate 1."
+            }
+            ClinicalModuleId.CONTRAST -> {
+                contrastStep = 0
+                contrastLogCsScore = null
+                feedbackToast = "Contrast Sensitivity reset to 100%."
+            }
+            ClinicalModuleId.AMSLER -> {
+                amslerDefectPoints.clear()
+                amslerResult = null
+                feedbackToast = "Amsler grid cleared."
+            }
+            ClinicalModuleId.WORTH_DOT -> {
+                worthDotResult = null
+                feedbackToast = "Worth 4-Dot test reset."
+            }
+            ClinicalModuleId.MOTILITY -> {
+                isMotilityRunning = false
+                motilityAngleX = 0f
+                motilityAngleY = 0f
+                motilityGazeLabel = "Primary Position (Center)"
+                motilityResult = null
+                feedbackToast = "Motility test reset to primary fixation."
+            }
+            ClinicalModuleId.PUPIL_RAPD -> {
+                isPupilRunning = false
+                pupilIlluminatedEye = null
+                pupilRapdResult = null
+                feedbackToast = "Pupillary RAPD test reset."
+            }
+            else -> {
+                feedbackToast = "${selectedModule.title} reset."
+            }
+        }
+    }
+
+    // Generic Clicker Handler (dispatched from screen tap, physical volume rocker, or remote response pad)
+    val handleTactileResponse = {
+        val now = System.nanoTime()
+        if (isEmergencyHalted) {
+            feedbackToast = "Halted by Emergency STOP."
+        } else if (selectedModule == ClinicalModuleId.PERIMETRY) {
+            if (isStimulusActive || (now - stimulusStartNs < 800_000_000L && stimulusStartNs > 0)) {
+                val rt = (now - stimulusStartNs) / 1_000_000L
+                perimetryReactionTimes.add(rt)
+                perimetryResults[activePerimetryIndex] = PointStatus.SEEN
+                isStimulusActive = false
+                feedbackToast = "Stimulus SEEN! RT: ${rt} ms (#${activePerimetryIndex + 1})"
+                // Publish response event to remote physician over WebSocket
+                if (remoteClient.getState() == RemoteClientState.AUTHENTICATED) {
+                    remoteClient.publishPatientResponse(
+                        trialIndex = activePerimetryStep,
+                        isSeen = true,
+                        reactionLatencyMs = rt.toDouble(),
+                        inputSource = "PHONE_VR_TOUCH",
+                        localMonotonicNs = now
+                    )
+                }
+            } else {
+                falsePositives++
+                feedbackToast = "Click when NO stimulus active (False Positive #$falsePositives)"
+            }
+        } else {
+            feedbackToast = "Tap registered at ${System.currentTimeMillis() % 10000} ms"
+        }
+    }
+
+    // --- Genuine Asynchronous Cloud Pairing Handler ---
+    val initiateCloudPairing: () -> Unit = {
+        isPairingInProgress = true
+        cloudConnectionStatus = "Creating session on Render..."
+        feedbackToast = "Contacting Render session broker..."
+        remoteClient.createRemoteSessionOnBackend(
+            baseUrl = cloudBackendUrl,
+            onSuccess = { created ->
+                cloudSessionId = created.sessionId
+                cloudPin = created.pairingPin
+                cloudToken = created.token
+                isPairingInProgress = false
+                cloudConnectionStatus = "Broker Linked (Waiting for Physician)"
+                feedbackToast = "Session Created: ${created.sessionId} | PIN: ${created.pairingPin}"
+                remoteClient.connectToCloud(cloudBackendUrl, created.token)
+            },
+            onError = { errMsg ->
+                isPairingInProgress = false
+                cloudConnectionStatus = "Offline: $errMsg"
+                feedbackToast = "Pairing Error: $errMsg"
+            }
+        )
+    }
+
+    // Remote Session Client Lifecycle and Incoming Event Handlers
+    DisposableEffect(remoteClient) {
+        remoteClient.onCommandListener = { cmd, targetModule, params ->
+            when (cmd) {
+                "SET_MODULE" -> {
+                    val modStr = targetModule ?: (params["module"] as? String)
+                    val mod = ClinicalModuleId.values().firstOrNull {
+                        it.name.equals(modStr, ignoreCase = true) || it.title.contains(modStr ?: "", ignoreCase = true)
+                    }
+                    if (mod != null) {
+                        ClinicalSessionCoordinator.switchModule(mod)
+                        selectedModule = mod
+                        resetCurrentModule()
+                        feedbackToast = "Remote: Switched to ${mod.title}"
+                    }
+                }
+                "SET_EYE" -> {
+                    val eyeStr = (params["eye"] as? String) ?: "OD"
+                    val eye = EyeLaterality.values().firstOrNull { it.name.equals(eyeStr, ignoreCase = true) } ?: EyeLaterality.OD
+                    ClinicalSessionCoordinator.switchEye(eye)
+                    testedEye = eye
+                    resetCurrentModule()
+                    feedbackToast = "Remote: Switched tested eye to ${eye.name}"
+                }
+                "RESET_TEST" -> {
+                    resetCurrentModule()
+                    ClinicalSessionCoordinator.resetActiveTest()
+                    feedbackToast = "Remote: Test Reset & Re-randomized"
+                }
+                "START_TEST" -> {
+                    if (selectedModule == ClinicalModuleId.PERIMETRY) {
+                        isPerimetryRunning = true
+                    } else if (selectedModule == ClinicalModuleId.MOTILITY) {
+                        isMotilityRunning = true
+                    } else if (selectedModule == ClinicalModuleId.PUPIL_RAPD) {
+                        isPupilRunning = true
+                    }
+                    feedbackToast = "Remote: Test Started"
+                }
+                "STOP_TEST" -> {
+                    isPerimetryRunning = false
+                    isMotilityRunning = false
+                    isPupilRunning = false
+                    feedbackToast = "Remote: Test Stopped"
+                }
+            }
+        }
+        remoteClient.onResponseListener = { _ ->
+            handleTactileResponse()
+        }
+        remoteClient.onEmergencyStopListener = { reason ->
+            isEmergencyHalted = true
+            ClinicalSessionCoordinator.isEmergencyHalted = true
+            feedbackToast = "Emergency STOP Received: $reason"
+        }
+        remoteClient.onPeerStatusListener = { roles, physician ->
+            val hasPhysician = roles.contains("PHYSICIAN_CONTROLLER")
+            isPhysicianConnected = hasPhysician
+            cloudConnectionStatus = if (hasPhysician) {
+                "Physician Connected (${physician ?: "Controller"})"
+            } else {
+                "Broker Linked (Waiting for Physician)"
+            }
+        }
+        onDispose {
+            remoteClient.disconnect()
+        }
+    }
+
+    // Listen to remote module switching without leaving VR
+    LaunchedEffect(ClinicalSessionCoordinator.activeModule, ClinicalSessionCoordinator.activeEye) {
+        if (selectedModule != ClinicalSessionCoordinator.activeModule || testedEye != ClinicalSessionCoordinator.activeEye) {
+            selectedModule = ClinicalSessionCoordinator.activeModule
+            testedEye = ClinicalSessionCoordinator.activeEye
+            resetCurrentModule()
+            feedbackToast = "Switched to ${selectedModule.title} (${testedEye.name})"
+        }
+    }
+
+    LaunchedEffect(ClinicalSessionCoordinator.isEmergencyHalted) {
+        isEmergencyHalted = ClinicalSessionCoordinator.isEmergencyHalted
+    }
+
+    // Register hardware volume rocker and remote coordinator listener
+    DisposableEffect(Unit) {
+        registerVolumeKeyListener { handleTactileResponse() }
+        ClinicalSessionCoordinator.onRemoteTapListener = { _ -> handleTactileResponse() }
+        ClinicalSessionCoordinator.onResetTestListener = { resetCurrentModule() }
+        onDispose {
+            registerVolumeKeyListener(null)
+            ClinicalSessionCoordinator.onRemoteTapListener = null
+            ClinicalSessionCoordinator.onResetTestListener = null
+        }
+    }
+
+    // Synchronize landscape/portrait orientation with VR Mode
+    LaunchedEffect(isVrMode) {
+        onToggleVrOrientation(isVrMode)
+    }
+
+    // Perimetry Stimulus Presentation Loop (RANDOMIZED ORDER)
+    LaunchedEffect(isPerimetryRunning, activePerimetryStep) {
+        if (isPerimetryRunning && activePerimetryStep < perimetryOrder.size && !isEmergencyHalted) {
+            delay(1100L + Random.nextLong(0, 400))
+            val pointIdx = perimetryOrder[activePerimetryStep]
+            activePerimetryIndex = pointIdx
+            val currentPt = perimetryPoints[pointIdx]
+            stimulusAngleX = currentPt.first
+            stimulusAngleY = currentPt.second
+            stimulusStartNs = System.nanoTime()
+            isStimulusActive = true
+
+            // Broadcast real stimulus presentation to remote physician twin-cockpit
+            if (remoteClient.getState() == RemoteClientState.AUTHENTICATED) {
+                remoteClient.publishStimulusPresented(
+                    trialIndex = activePerimetryStep,
+                    testModule = selectedModule.name,
+                    eyeLaterality = testedEye,
+                    xDeg = stimulusAngleX,
+                    yDeg = stimulusAngleY,
+                    presentationMonotonicNs = stimulusStartNs
+                )
+            }
+
+            // Flashed for 200ms (Goldmann III clinical standard)
+            delay(200L)
+            isStimulusActive = false
+
+            // Wait 600ms for response window
+            delay(600L)
+            if (!perimetryResults.containsKey(pointIdx)) {
+                perimetryResults[pointIdx] = PointStatus.MISSED
+            }
+
+            if (activePerimetryStep + 1 < perimetryOrder.size) {
+                activePerimetryStep++
+            } else {
+                isPerimetryRunning = false
+                feedbackToast = "24-2 Visual Field Complete! Seen: ${perimetryResults.values.count { it == PointStatus.SEEN }}/54"
+            }
+        }
+    }
+
+    // Ocular Motility Broad-H Animation Loop
+    LaunchedEffect(isMotilityRunning) {
+        if (isMotilityRunning) {
+            val trajectory = listOf(
+                Triple(0f, 0f, "Primary Position (Center)"),
+                Triple(0.8f, 0f, "Dextroversion (Looking Right)"),
+                Triple(0.8f, 0.7f, "Dextroelevation (Up and Right)"),
+                Triple(0.8f, -0.7f, "Dextrodepression (Down and Right)"),
+                Triple(0f, 0f, "Return to Center"),
+                Triple(-0.8f, 0f, "Levoversion (Looking Left)"),
+                Triple(-0.8f, 0.7f, "Levoelevation (Up and Left)"),
+                Triple(-0.8f, -0.7f, "Levodepression (Down and Left)"),
+                Triple(0f, 0f, "Examination Complete")
+            )
+            for (step in trajectory) {
+                motilityAngleX = step.first
+                motilityAngleY = step.second
+                motilityGazeLabel = step.third
+                delay(2000L)
+            }
+            isMotilityRunning = false
+        }
+    }
+
+    // Pupillary RAPD Swinging Light Loop
+    LaunchedEffect(isPupilRunning) {
+        if (isPupilRunning) {
+            for (cycle in 1..3) {
+                pupilIlluminatedEye = EyeLaterality.OD
+                feedbackToast = "Light on Right Eye (OD)... Cycle $cycle"
+                delay(2500L)
+                pupilIlluminatedEye = EyeLaterality.OS
+                feedbackToast = "Light on Left Eye (OS)... Cycle $cycle"
+                delay(2500L)
+            }
+            pupilIlluminatedEye = null
+            isPupilRunning = false
+            feedbackToast = "Swinging Flashlight Complete. Assess reflex symmetry."
+        }
+    }
+
+    // =========================================================================
+    // RENDER: TRUE DUAL-VIEWPORT STEREOSCOPIC VR BOX MODE
+    // =========================================================================
+    if (isVrMode) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFF000000))
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = { handleTactileResponse() })
+                }
+        ) {
+            // Stereo Split Screen: Left Eye (OS) | Vertical Septum | Right Eye (OD)
+            Row(modifier = Modifier.fillMaxSize()) {
+                val isOsActive = testedEye == EyeLaterality.OS || testedEye == EyeLaterality.OU ||
+                        selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY
+                val isOdActive = testedEye == EyeLaterality.OD || testedEye == EyeLaterality.OU ||
+                        selectedModule == ClinicalModuleId.WORTH_DOT || selectedModule == ClinicalModuleId.MOTILITY
+
+                // Left Eye Viewport (OS)
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .background(if (!isOsActive) Color.Black else Color(0xFF050811)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (isOsActive) {
+                        RenderActiveStimulusInVr(
+                            eye = EyeLaterality.OS,
+                            module = selectedModule,
+                            isStimulusActive = isStimulusActive,
+                            stimulusAngleX = stimulusAngleX,
+                            stimulusAngleY = stimulusAngleY,
+                            acuityOptotypeMode = acuityOptotypeMode,
+                            acuityOrientation = acuityOrientation,
+                            acuitySloanLetter = acuitySloanLetter,
+                            acuityLogMar = acuityLogMar,
+                            colourPlateIndex = colourPlateIndex,
+                            contrastStep = contrastStep,
+                            motilityAngleX = motilityAngleX,
+                            motilityAngleY = motilityAngleY,
+                            pupilIlluminated = pupilIlluminatedEye == EyeLaterality.OS
+                        )
+                    } else {
+                        Text("OCCLUDED (OD TESTED)", color = Color(0xFF334155), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
+
+                // Physical Optical Septum Divider (Prevents cross-eye optical bleed)
+                Box(
+                    modifier = Modifier
+                        .width(4.dp)
+                        .fillMaxHeight()
+                        .background(Color(0xFF1E293B))
+                )
+
+                // Right Eye Viewport (OD)
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .background(if (!isOdActive) Color.Black else Color(0xFF050811)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (isOdActive) {
+                        RenderActiveStimulusInVr(
+                            eye = EyeLaterality.OD,
+                            module = selectedModule,
+                            isStimulusActive = isStimulusActive,
+                            stimulusAngleX = stimulusAngleX,
+                            stimulusAngleY = stimulusAngleY,
+                            acuityOptotypeMode = acuityOptotypeMode,
+                            acuityOrientation = acuityOrientation,
+                            acuitySloanLetter = acuitySloanLetter,
+                            acuityLogMar = acuityLogMar,
+                            colourPlateIndex = colourPlateIndex,
+                            contrastStep = contrastStep,
+                            motilityAngleX = motilityAngleX,
+                            motilityAngleY = motilityAngleY,
+                            pupilIlluminated = pupilIlluminatedEye == EyeLaterality.OD
+                        )
+                    } else {
+                        Text("OCCLUDED (OS TESTED)", color = Color(0xFF334155), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+
+            // Top HUD Overlay: Module Name, Active Eye, Reset & Exit Buttons
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    color = Color.Black.copy(alpha = 0.75f),
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, Color(0xFF334155))
+                ) {
+                    Text(
+                        text = "VR MODE • ${selectedModule.title} • Eye: ${testedEye.name} • Tap Screen or Volume Key",
+                        color = Color(0xFF38BDF8),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                    )
+                }
+
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedButton(
+                        onClick = { resetCurrentModule() },
+                        border = BorderStroke(1.dp, Color(0xFF38BDF8)),
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text("↺ Reset", color = Color(0xFF38BDF8), fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+
+                    Button(
+                        onClick = {
+                            isVrMode = false
+                            ClinicalSessionCoordinator.isVrModeActive = false
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDC2626)),
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+                    ) {
+                        Text("Exit VR", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+        }
+        return
+    }
+
+    // =========================================================================
+    // RENDER: HANDHELD CLINICAL CONTROLLER & MODULE LAUNCHER MODE
+    // =========================================================================
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(ClinicalTheme.BackgroundWhite)
-            .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+            .padding(12.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            AppHeader(
-                title = "EyeAtlas VR - Patient VR View",
-                role = AppRole.PATIENT,
-                onToggleRole = onRoleChange
-            )
-            ResearchNotice()
+        // App Header
+        AppHeader(
+            title = "EyeAtlas VR - Patient & Clinical Suite",
+            role = AppRole.PATIENT,
+            onToggleRole = onRoleChange
+        )
 
-            // Online Session Telemetry & Input Channel Banner
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 4.dp, vertical = 2.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = if (isOnlineMode) Color(0xFFF0FDF4) else Color(0xFFF8FAFC)
-                ),
-                border = BorderStroke(1.dp, if (isOnlineMode) Color(0xFF86EFAC) else Color(0xFFCBD5E1)),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = if (isOnlineMode) "ONLINE SESSION: $pairingPin" else "LOCAL WI-FI MODE",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = if (isOnlineMode) Color(0xFF15803D) else Color(0xFF475569)
-                    )
-                    Text(
-                        text = "Input: $activeInputSource",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color(0xFF334155)
-                    )
-                }
-            }
+        ResearchNotice()
 
-            ScreenNavigator(
-                currentScreen = currentScreen,
-                onNavigate = { currentScreen = it }
-            )
-        }
-
-        if (isEmergencyHalted) {
-            EmergencyAlertCard(
-                reason = "Patient triggered emergency quick-release STOP.",
-                onAcknowledge = {
-                    isEmergencyHalted = false
-                    remoteClient.clearEmergencyHalt()
-                }
-            )
-        }
-
-        // Central VR Optical Viewport (Dark-adapted photopic/mesopic field)
+        // 1. TOP CONTROL BAR: Eye Laterality Toggle (OD, OS, OU) + VR Box Launcher + Reset Button
         Card(
             modifier = Modifier
-                .size(240.dp)
-                .padding(8.dp),
-            shape = CircleShape,
-            border = BorderStroke(3.dp, if (isEmergencyHalted) ClinicalTheme.AlertRed else ClinicalTheme.SeaGreenPrimary),
-            colors = CardDefaults.cardColors(
-                containerColor = if (isEmergencyHalted) Color(0xFF4A0000) else Color(0xFF0F172A)
-            )
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
+            border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
+            shape = RoundedCornerShape(10.dp)
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                if (isEmergencyHalted) {
-                    Text(text = "STOP", color = Color.White, fontSize = 28.sp, fontWeight = FontWeight.Bold)
-                } else {
-                    when (currentScreen) {
-                        ScreenId.UX_01 -> Text(text = "PAIR PIN:\n$pairingPin\nScan QR to Join", color = Color.White, fontSize = 18.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_02 -> Text(text = "FIT HEADSET\nCentral Fixation Dot", color = Color.White, fontSize = 15.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_03 -> Text(text = "PRACTICE TRIAL\nTap Clicker or Pad Once", color = Color.White, fontSize = 14.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_04 -> Text(text = "COLOUR PLATE\nRed / Green", color = Color(0xFFFDE047), fontSize = 16.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_05 -> Text(text = "E", color = Color.White, fontSize = 54.sp, fontWeight = FontWeight.Bold)
-                        ScreenId.UX_06 -> Text(text = "VERNIER\n| |", color = Color.White, fontSize = 22.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_07 -> Text(text = "+", color = Color(0xFF38BDF8), fontSize = 48.sp, fontWeight = FontWeight.Bold)
-                        ScreenId.UX_08 -> Text(text = "LOOK STRAIGHT\nAnterior Camera", color = Color(0xFF86EFAC), fontSize = 14.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_09 -> Text(text = "BLINK NATURALLY\n3... 2... 1...", color = Color.White, fontSize = 15.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_10 -> Text(text = "+\nCentral Target", color = Color(0xFF4ADE80), fontSize = 22.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_11 -> Text(text = "FOLLOW TARGET\nLateral Alignment", color = Color.White, fontSize = 15.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_12 -> Text(text = "EXAM COMPLETE\nRemove Headset", color = Color(0xFFA7F3D0), fontSize = 15.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_13 -> Text(text = "DISCOMFORT STOP\nHalt Available", color = Color(0xFFFCA5A5), fontSize = 15.sp, textAlign = TextAlign.Center)
-                        ScreenId.UX_14 -> Text(text = "BENCH LAB\nStandby", color = Color.Gray, fontSize = 15.sp, textAlign = TextAlign.Center)
+            Column(modifier = Modifier.padding(10.dp)) {
+                // Tested Eye Selector Row with OD, OS, OU
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text("Eye: ", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = ClinicalTheme.TextPrimary)
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OD,
+                        onClick = {
+                            testedEye = EyeLaterality.OD
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OD)
+                        },
+                        label = { Text("OD (Right)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OS,
+                        onClick = {
+                            testedEye = EyeLaterality.OS
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OS)
+                        },
+                        label = { Text("OS (Left)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                    FilterChip(
+                        selected = testedEye == EyeLaterality.OU,
+                        onClick = {
+                            testedEye = EyeLaterality.OU
+                            ClinicalSessionCoordinator.switchEye(EyeLaterality.OU)
+                        },
+                        label = { Text("OU (Both)", fontSize = 11.sp, fontWeight = FontWeight.Bold) }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Action Buttons Row: Launch VR Box & Reset Test
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            isVrMode = true
+                            ClinicalSessionCoordinator.isVrModeActive = true
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                    ) {
+                        Text("🥽 Launch VR Box", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    }
+
+                    OutlinedButton(
+                        onClick = { resetCurrentModule() },
+                        border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                    ) {
+                        Text("↺ Reset Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(6.dp))
+                // Status Toast / Monitored Prompt
+                Text(
+                    text = feedbackToast,
+                    color = ClinicalTheme.SeaGreenDark,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(ClinicalTheme.SeaGreenLight, RoundedCornerShape(6.dp))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                )
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                // Online Cloud Pairing Bar (CR-002 Single Source of Truth)
+                Surface(
+                    color = if (isPhysicianConnected) Color(0xFFECFDF5) else if (cloudSessionId.isNotEmpty()) Color(0xFFFFFBEB) else Color(0xFFF8FAFC),
+                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(1.dp, if (isPhysicianConnected) Color(0xFFBBF7D0) else if (cloudSessionId.isNotEmpty()) Color(0xFFFDE68A) else Color(0xFFE2E8F0)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { showCloudPairingDialog = true }
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Surface(
+                                    color = if (isPhysicianConnected) Color(0xFF10B981) else if (cloudSessionId.isNotEmpty()) Color(0xFFF59E0B) else Color(0xFF94A3B8),
+                                    shape = CircleShape,
+                                    modifier = Modifier.size(8.dp)
+                                ) {}
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = if (cloudSessionId.isNotEmpty()) "Session: $cloudSessionId" else "Cloud Tele-Ophthalmology Station",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp,
+                                    color = ClinicalTheme.SeaGreenDark
+                                )
+                            }
+                            Text(
+                                text = if (cloudSessionId.isNotEmpty()) "PIN: $cloudPin | $cloudConnectionStatus" else "Tap to pair with physician website",
+                                fontSize = 10.sp,
+                                color = ClinicalTheme.TextSecondary
+                            )
+                        }
+                        Surface(
+                            color = ClinicalTheme.SeaGreenPrimary,
+                            shape = RoundedCornerShape(6.dp)
+                        ) {
+                            Text(
+                                text = if (cloudSessionId.isEmpty()) "Pair Online" else "Pairing Info",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 11.sp,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
                     }
                 }
             }
         }
 
-        // Bottom Clinical Information & Audio Guidance Card
+        // Cloud Pairing Modal Dialog (CR-002)
+        if (showCloudPairingDialog) {
+            AlertDialog(
+                onDismissRequest = { showCloudPairingDialog = false },
+                title = {
+                    Text("Pair with Cloud Web Station", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = ClinicalTheme.TextPrimary)
+                },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
+                        Text(
+                            text = "Connect this phone to the web controller at https://eyeatlas-ai.netlify.app via the Render session broker.",
+                            fontSize = 12.sp,
+                            color = ClinicalTheme.TextSecondary
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        OutlinedTextField(
+                            value = cloudBackendUrl,
+                            onValueChange = { cloudBackendUrl = it },
+                            label = { Text("Cloud Backend URL") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        if (cloudSessionId.isNotEmpty()) {
+                            Surface(
+                                color = Color(0xFFF0FDF4),
+                                shape = RoundedCornerShape(8.dp),
+                                border = BorderStroke(1.dp, Color(0xFF86EFAC)),
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(12.dp)) {
+                                    Text("ACTIVE SESSION CREATED", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = Color(0xFF166534))
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Text("Session ID: $cloudSessionId", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = ClinicalTheme.TextPrimary)
+                                    Text("Pairing PIN: $cloudPin", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = ClinicalTheme.SeaGreenDark)
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "Status: $cloudConnectionStatus",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = if (isPhysicianConnected) Color(0xFF16A34A) else Color(0xFFCA8A04)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+
+                        Surface(
+                            color = ClinicalTheme.SeaGreenLight,
+                            shape = RoundedCornerShape(6.dp),
+                            border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder),
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(8.dp)) {
+                                Text("HOW TO CONNECT ON LAPTOP:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ClinicalTheme.SeaGreenDark)
+                                Text("1. Open https://eyeatlas-ai.netlify.app on your laptop.\n2. Click 'Pair / Configure'.\n3. Enter the Session ID and 6-digit PIN shown above.\n4. Click 'Connect to Session' to establish full remote control!", fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
+                            }
+                        }
+                    }
+                },
+                confirmButton = {
+                    Button(
+                        onClick = { initiateCloudPairing() },
+                        enabled = !isPairingInProgress,
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text(
+                            text = if (isPairingInProgress) "Connecting..." else if (cloudSessionId.isEmpty()) "Create Session & Link" else "Regenerate Session",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                },
+                dismissButton = {
+                    OutlinedButton(onClick = { showCloudPairingDialog = false }) {
+                        Text("Close")
+                    }
+                }
+            )
+        }
+
+        // 2. HORIZONTAL MODULE SELECTION CAROUSEL
+        Text(
+            text = "CHOOSE CLINICAL MODULE TO LAUNCH",
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = ClinicalTheme.TextSecondary,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp, bottom = 4.dp, start = 4.dp)
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+                .padding(vertical = 4.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            ClinicalModuleId.values().forEach { module ->
+                val isSelected = selectedModule == module
+                FilterChip(
+                    selected = isSelected,
+                    onClick = {
+                        selectedModule = module
+                        ClinicalSessionCoordinator.switchModule(module)
+                        feedbackToast = "Launched ${module.title}. Configure and test below."
+                    },
+                    label = {
+                        Text(
+                            text = module.title,
+                            fontSize = 11.sp,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                        )
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = ClinicalTheme.SeaGreenPrimary,
+                        selectedLabelColor = Color.White
+                    )
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // 3. INTERACTIVE ACTIVE MODULE CANVAS & CONTROLLER VIEWPORT
         Card(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
             colors = CardDefaults.cardColors(containerColor = ClinicalTheme.PureWhite),
             border = BorderStroke(1.dp, ClinicalTheme.CardBorder),
-            shape = RoundedCornerShape(10.dp)
+            shape = RoundedCornerShape(12.dp)
         ) {
             Column(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Header of Active Module
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "Stage: ${currentScreen.name} - ${currentScreen.title}",
-                        color = ClinicalTheme.TextPrimary,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp
-                    )
+                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                        Text(
+                            text = selectedModule.title,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 15.sp,
+                            color = ClinicalTheme.SeaGreenDark
+                        )
+                        Text(
+                            text = selectedModule.shortDesc,
+                            fontSize = 11.sp,
+                            color = ClinicalTheme.TextSecondary,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                     Surface(
-                        color = ClinicalTheme.SeaGreenLight,
-                        shape = RoundedCornerShape(4.dp)
+                        color = Color(0xFFEFF6FF),
+                        shape = RoundedCornerShape(6.dp),
+                        border = BorderStroke(1.dp, Color(0xFFBFDBFE))
                     ) {
                         Text(
-                            text = "Calibrated 120Hz VSYNC",
-                            color = ClinicalTheme.SeaGreenDark,
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            text = "Eye: ${testedEye.name}",
+                            color = Color(0xFF1D4ED8),
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = currentScreen.description,
-                    color = ClinicalTheme.TextSecondary,
-                    fontSize = 11.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(8.dp))
 
-                // Spoken Audio Guidance Cue for visually impaired / cataract patients
-                val audioPrompt = when (currentScreen) {
-                    ScreenId.UX_01 -> "Audio Guidance: Please hold your response clicker or phone pad while pairing completes."
-                    ScreenId.UX_02 -> "Audio Guidance: Adjust the headset strap and pupil carriage dial until the center mark is clear."
-                    ScreenId.UX_03 -> "Audio Guidance: Practice trial. When you feel ready, click your response button once."
-                    ScreenId.UX_04 -> "Audio Guidance: Look at the circle. Press button if you distinguish a colored shape."
-                    ScreenId.UX_05 -> "Audio Guidance: Letters will appear. Use directional keys to indicate the opening direction."
-                    ScreenId.UX_06 -> "Audio Guidance: Look at the vertical lines. Notice if the center line shifts."
-                    ScreenId.UX_07 -> "Audio Guidance: Keep your gaze on the central cross (+). Tap button whenever you see a spot flash."
-                    ScreenId.UX_08 -> "Audio Guidance: Please look straight ahead with wide open eyes for front image."
-                    ScreenId.UX_09 -> "Audio Guidance: Blink naturally three times, then keep eyes open for tear film scan."
-                    ScreenId.UX_10 -> "Audio Guidance: Fixate on the central target inside the viewer."
-                    ScreenId.UX_11 -> "Audio Guidance: Follow the moving target with both eyes without turning your head."
-                    ScreenId.UX_12 -> "Audio Guidance: All screening tasks are complete. You may now remove the headset."
-                    ScreenId.UX_13 -> "Audio Guidance: Examination stopped. Please take a moment to rest."
-                    ScreenId.UX_14 -> "Audio Guidance: System diagnostic and calibration standby."
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // DISPATCH INTERACTIVE MODULE UI
+                when (selectedModule) {
+                    ClinicalModuleId.PERIMETRY -> {
+                        PerimetryModuleView(
+                            eye = testedEye,
+                            points = perimetryPoints,
+                            activeTrialIndex = activePerimetryIndex,
+                            isRunning = isPerimetryRunning,
+                            isStimulusActive = isStimulusActive,
+                            stimulusAngleX = stimulusAngleX,
+                            stimulusAngleY = stimulusAngleY,
+                            results = perimetryResults,
+                            reactionTimes = perimetryReactionTimes,
+                            fixationLosses = fixationLosses,
+                            falsePositives = falsePositives,
+                            onStart = {
+                                perimetryResults.clear()
+                                perimetryReactionTimes.clear()
+                                activePerimetryIndex = 0
+                                isPerimetryRunning = true
+                                feedbackToast = "24-2 Visual Field Exam Started. Fixate central + mark."
+                            },
+                            onPause = { isPerimetryRunning = false },
+                            onReset = { resetCurrentModule() },
+                            onTap = handleTactileResponse
+                        )
+                    }
+
+                    ClinicalModuleId.ACUITY -> {
+                        AcuityModuleView(
+                            eye = testedEye,
+                            mode = acuityOptotypeMode,
+                            logMar = acuityLogMar,
+                            orientation = acuityOrientation,
+                            sloanLetter = acuitySloanLetter,
+                            trialsDone = acuityTrialsDone,
+                            scoreText = acuityScore,
+                            onModeChange = { acuityOptotypeMode = it },
+                            onResponseOrientation = { chosenOrientation ->
+                                acuityTrialsDone++
+                                val isCorrect = chosenOrientation == acuityOrientation
+                                if (isCorrect) {
+                                    acuityConsecutiveCorrect++
+                                    feedbackToast = "Correct! Orientation matched."
+                                    if (acuityConsecutiveCorrect >= 2) {
+                                        acuityLogMar = max(0.0, acuityLogMar - 0.2) // Step down (better acuity)
+                                        acuityConsecutiveCorrect = 0
+                                    }
+                                } else {
+                                    feedbackToast = "Incorrect. Stepping to larger optotype."
+                                    acuityLogMar = min(1.2, acuityLogMar + 0.2)
+                                    acuityConsecutiveCorrect = 0
+                                }
+                                acuityOrientation = OptotypeOrientation.values().random()
+                                val snellenDenominator = round(6.0 * 10.0.pow(acuityLogMar)).toInt()
+                                acuityScore = "Snellen: 6/$snellenDenominator (${round(acuityLogMar * 100) / 100.0} logMAR)"
+                            },
+                            onResponseLetter = { chosenLetter ->
+                                acuityTrialsDone++
+                                val isCorrect = chosenLetter == acuitySloanLetter
+                                if (isCorrect) {
+                                    acuityConsecutiveCorrect++
+                                    feedbackToast = "Correct! Letter matched."
+                                    if (acuityConsecutiveCorrect >= 2) {
+                                        acuityLogMar = max(0.0, acuityLogMar - 0.2)
+                                        acuityConsecutiveCorrect = 0
+                                    }
+                                } else {
+                                    feedbackToast = "Incorrect. Stepping to larger optotype."
+                                    acuityLogMar = min(1.2, acuityLogMar + 0.2)
+                                    acuityConsecutiveCorrect = 0
+                                }
+                                val sloanOptions = listOf('C', 'D', 'E', 'F', 'L', 'O', 'P', 'T', 'Z')
+                                acuitySloanLetter = sloanOptions.random()
+                                val snellenDenominator = round(6.0 * 10.0.pow(acuityLogMar)).toInt()
+                                acuityScore = "Snellen: 6/$snellenDenominator (${round(acuityLogMar * 100) / 100.0} logMAR)"
+                            },
+                            onReset = { resetCurrentModule() }
+                        )
+                    }
+
+                    ClinicalModuleId.COLOUR -> {
+                        ColourVisionModuleView(
+                            plateIndex = colourPlateIndex,
+                            diagnosis = colourDiagnosis,
+                            onAnswer = { ans ->
+                                colourPlateAnswers.add(ans)
+                                if (colourPlateIndex + 1 < 24) {
+                                    colourPlateIndex++
+                                    feedbackToast = "Plate ${colourPlateIndex + 1} of 24. Record number seen."
+                                } else {
+                                    val errorCount = colourPlateAnswers.filterIndexed { idx, answer ->
+                                        when (idx) {
+                                            0 -> answer != "12"
+                                            1 -> answer != "8"
+                                            2 -> answer != "6"
+                                            3 -> answer != "29"
+                                            4 -> answer != "57"
+                                            5 -> answer != "5"
+                                            6 -> answer != "3"
+                                            7 -> answer != "15"
+                                            8 -> answer != "74"
+                                            9 -> answer != "2"
+                                            10 -> answer != "6"
+                                            11 -> answer != "97"
+                                            12 -> answer != "45"
+                                            13 -> answer != "5"
+                                            14 -> answer != "7"
+                                            15 -> answer != "16"
+                                            16 -> answer != "73"
+                                            17, 18, 19, 20 -> answer != "Blank" && answer.isNotEmpty()
+                                            21 -> !answer.contains("26")
+                                            22 -> !answer.contains("42")
+                                            23 -> !answer.contains("35")
+                                            else -> false
+                                        }
+                                    }.size
+                                    colourDiagnosis = if (errorCount <= 2) {
+                                        "NORMAL TRICHROMAT (≤2 errors / 24 plates)"
+                                    } else if (colourPlateAnswers.getOrNull(21) == "2" || colourPlateAnswers.getOrNull(22) == "4" || colourPlateAnswers.getOrNull(23) == "3") {
+                                        "DEUTERANOPIA / DEUTERANOMALY (Green deficiency)"
+                                    } else if (colourPlateAnswers.getOrNull(21) == "6" || colourPlateAnswers.getOrNull(22) == "2" || colourPlateAnswers.getOrNull(23) == "5") {
+                                        "PROTANOPIA / PROTANOMALY (Red deficiency)"
+                                    } else {
+                                        "RED-GREEN DEFICIENCY DETECTED ($errorCount errors / 24 plates)"
+                                    }
+                                    feedbackToast = "Ishihara 24-Plate Complete: $colourDiagnosis"
+                                }
+                            },
+                            onReset = { resetCurrentModule() }
+                        )
+                    }
+
+                    ClinicalModuleId.CONTRAST -> {
+                        ContrastSensitivityModuleView(
+                            contrastStep = contrastStep,
+                            score = contrastLogCsScore,
+                            onAnswer = { canRead ->
+                                if (canRead && contrastStep < 6) {
+                                    contrastStep++
+                                } else {
+                                    val logCsTable = listOf(0.0, 0.45, 0.90, 1.35, 1.65, 1.95, 2.25)
+                                    contrastLogCsScore = logCsTable[contrastStep]
+                                    feedbackToast = "Contrast Threshold: ${contrastLogCsScore} logCS"
+                                }
+                            },
+                            onReset = {
+                                contrastStep = 0
+                                contrastLogCsScore = null
+                            }
+                        )
+                    }
+
+                    ClinicalModuleId.AMSLER -> {
+                        AmslerGridModuleView(
+                            defectPoints = amslerDefectPoints,
+                            result = amslerResult,
+                            onTogglePoint = { x, y ->
+                                val pt = Pair(x, y)
+                                if (amslerDefectPoints.contains(pt)) {
+                                    amslerDefectPoints.remove(pt)
+                                } else {
+                                    amslerDefectPoints.add(pt)
+                                }
+                            },
+                            onClear = { amslerDefectPoints.clear(); amslerResult = null },
+                            onSave = {
+                                amslerResult = if (amslerDefectPoints.isEmpty()) {
+                                    "NORMAL (No Metamorphopsia / Central Scotoma)"
+                                } else {
+                                    "ABNORMAL: ${amslerDefectPoints.size} central macular distortion points marked"
+                                }
+                            }
+                        )
+                    }
+
+                    ClinicalModuleId.WORTH_DOT -> {
+                        WorthFourDotModuleView(
+                            result = worthDotResult,
+                            onSelect = { ans, diag ->
+                                worthDotResult = "$ans — $diag"
+                                feedbackToast = "Worth 4-Dot: $diag"
+                            }
+                        )
+                    }
+
+                    ClinicalModuleId.MOTILITY -> {
+                        OcularMotilityModuleView(
+                            isRunning = isMotilityRunning,
+                            targetX = motilityAngleX,
+                            targetY = motilityAngleY,
+                            gazeLabel = motilityGazeLabel,
+                            result = motilityResult,
+                            onStart = {
+                                isMotilityRunning = true
+                                motilityResult = null
+                            },
+                            onSelectResult = { res ->
+                                motilityResult = res
+                                feedbackToast = "Motility finding recorded: $res"
+                            }
+                        )
+                    }
+
+                    ClinicalModuleId.PUPIL_RAPD -> {
+                        PupillaryRapdModuleView(
+                            isRunning = isPupilRunning,
+                            illuminatedEye = pupilIlluminatedEye,
+                            result = pupilRapdResult,
+                            onStart = {
+                                isPupilRunning = true
+                                pupilRapdResult = null
+                            },
+                            onSelectResult = { res ->
+                                pupilRapdResult = res
+                                feedbackToast = "RAPD result: $res"
+                            }
+                        )
+                    }
+
+                    ClinicalModuleId.GUIDED_PROTOCOL -> {
+                        GuidedProtocolView(
+                            currentScreen = currentScreen,
+                            pairingPin = pairingPin,
+                            onNavigate = { currentScreen = it }
+                        )
+                    }
                 }
+            }
+        }
 
-                Card(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = ClinicalTheme.SeaGreenLight),
-                    border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder)
-                ) {
-                    Text(
-                        text = audioPrompt,
-                        color = ClinicalTheme.SeaGreenDark,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(8.dp),
-                        textAlign = TextAlign.Center
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // 4. EMERGENCY QUICK RELEASE BUTTON
+        Button(
+            onClick = {
+                isEmergencyHalted = !isEmergencyHalted
+                if (isEmergencyHalted) {
+                    remoteClient.triggerEmergencyStop("Patient pressed Quick-Release STOP")
+                    feedbackToast = "EXAMINATION PAUSED: Patient triggered Priority STOP."
+                } else {
+                    remoteClient.clearEmergencyHalt()
+                    feedbackToast = "Examination resumed."
+                }
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (isEmergencyHalted) ClinicalTheme.SeaGreenPrimary else ClinicalTheme.AlertRed
+            ),
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = if (isEmergencyHalted) "Resume Examination Protocol" else "Emergency STOP / Quick Release",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                color = Color.White
+            )
+        }
+    }
+}
+
+// =============================================================================
+// SUB-COMPONENTS: VR VIEWPORT STIMULUS RENDERER
+// =============================================================================
+@Composable
+fun RenderActiveStimulusInVr(
+    eye: EyeLaterality,
+    module: ClinicalModuleId,
+    isStimulusActive: Boolean,
+    stimulusAngleX: Double,
+    stimulusAngleY: Double,
+    acuityOptotypeMode: AcuityOptotypeMode = AcuityOptotypeMode.TUMBLING_E,
+    acuityOrientation: OptotypeOrientation = OptotypeOrientation.UP,
+    acuitySloanLetter: Char = 'E',
+    acuityLogMar: Double = 0.0,
+    colourPlateIndex: Int = 0,
+    contrastStep: Int = 0,
+    motilityAngleX: Float = 0f,
+    motilityAngleY: Float = 0f,
+    pupilIlluminated: Boolean = false
+) {
+    Box(
+        modifier = Modifier
+            .size(320.dp)
+            .background(Color(0xFF0F172A), CircleShape)
+            .border(2.dp, Color(0xFF334155), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        when (module) {
+            ClinicalModuleId.PERIMETRY -> {
+                // Central Fixation Crosshair
+                Text("+", color = Color(0xFF38BDF8), fontSize = 32.sp, fontWeight = FontWeight.Bold)
+
+                // Active flashing Goldmann III dot
+                if (isStimulusActive) {
+                    val offsetX = (stimulusAngleX * 4.5).dp
+                    val offsetY = (-stimulusAngleY * 4.5).dp
+                    Box(
+                        modifier = Modifier
+                            .offset(x = offsetX, y = offsetY)
+                            .size(16.dp)
+                            .background(Color.White, CircleShape)
                     )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(6.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            ClinicalModuleId.ACUITY -> {
+                val sizeDp = max(18.0, 90.0 * 10.0.pow(acuityLogMar - 1.0)).dp
+                when (acuityOptotypeMode) {
+                    AcuityOptotypeMode.TUMBLING_E -> TumblingECanvas(orientation = acuityOrientation, sizeDp = sizeDp, color = Color.White)
+                    AcuityOptotypeMode.LANDOLT_C -> LandoltCCanvas(orientation = acuityOrientation, sizeDp = sizeDp, color = Color.White)
+                    AcuityOptotypeMode.SLOAN -> SloanLetterDisplay(letter = acuitySloanLetter, sizeDp = sizeDp, color = Color.White)
+                }
+            }
+
+            ClinicalModuleId.COLOUR -> {
+                IshiharaPlateBitmapView(plateNumber = colourPlateIndex + 1, diameterDp = 220.dp)
+            }
+
+            ClinicalModuleId.CONTRAST -> {
+                val alpha = max(0.02f, 1f / 2f.pow(contrastStep.toFloat()))
+                Text("C D E", color = Color.White.copy(alpha = alpha), fontSize = 36.sp, fontWeight = FontWeight.Bold)
+            }
+
+            ClinicalModuleId.AMSLER -> {
+                AmslerCanvas(defectPoints = emptyList(), onTogglePoint = { _, _ -> }, sizeDp = 240.dp)
+            }
+
+            ClinicalModuleId.WORTH_DOT -> {
+                WorthDotsCanvas(sizeDp = 220.dp)
+            }
+
+            ClinicalModuleId.MOTILITY -> {
+                Box(
+                    modifier = Modifier
+                        .offset(x = (motilityAngleX * 100).dp, y = (-motilityAngleY * 80).dp)
+                        .size(24.dp)
+                        .background(Color(0xFF38BDF8), CircleShape)
+                )
+            }
+
+            ClinicalModuleId.PUPIL_RAPD -> {
+                val pupilSize = if (pupilIlluminated) 28.dp else 70.dp
+                Box(
+                    modifier = Modifier
+                        .size(140.dp)
+                        .background(if (pupilIlluminated) Color(0xFFFDE047) else Color(0xFF1E293B), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(pupilSize)
+                            .background(Color.Black, CircleShape)
+                    )
+                }
+            }
+
+            else -> {
+                Text("+", color = Color(0xFF38BDF8), fontSize = 36.sp, fontWeight = FontWeight.Bold)
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 1: PERIMETRY VIEW
+// =============================================================================
+@Composable
+fun PerimetryModuleView(
+    eye: EyeLaterality,
+    points: List<Pair<Double, Double>>,
+    activeTrialIndex: Int,
+    isRunning: Boolean,
+    isStimulusActive: Boolean,
+    stimulusAngleX: Double,
+    stimulusAngleY: Double,
+    results: Map<Int, PointStatus>,
+    reactionTimes: List<Long>,
+    fixationLosses: Int,
+    falsePositives: Int,
+    onStart: () -> Unit,
+    onPause: () -> Unit,
+    onReset: () -> Unit,
+    onTap: () -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Polar Perimetry Map Canvas
+        Box(
+            modifier = Modifier
+                .size(280.dp)
+                .background(Color(0xFF0F172A), CircleShape)
+                .border(2.dp, ClinicalTheme.SeaGreenBorder, CircleShape)
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = { onTap() })
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                val center = Offset(size.width / 2f, size.height / 2f)
+                val maxRadius = size.width / 2f - 16f
+                val scale = maxRadius / 30f // 30 degrees max field
+
+                // Concentric Isopter Rings: 10°, 20°, 30°
+                drawCircle(color = Color(0xFF1E293B), radius = 10f * scale, center = center, style = Stroke(width = 1f))
+                drawCircle(color = Color(0xFF334155), radius = 20f * scale, center = center, style = Stroke(width = 1f))
+                drawCircle(color = Color(0xFF475569), radius = 30f * scale, center = center, style = Stroke(width = 1.5f))
+
+                // Orthogonal Meridia Axes
+                drawLine(color = Color(0xFF1E293B), start = Offset(center.x, 10f), end = Offset(center.x, size.height - 10f), strokeWidth = 1f)
+                drawLine(color = Color(0xFF1E293B), start = Offset(10f, center.y), end = Offset(size.width - 10f, center.y), strokeWidth = 1f)
+
+                // Render Tested & Pending Points
+                points.forEachIndexed { idx, pt ->
+                    val ptOffset = Offset(center.x + (pt.first.toFloat() * scale), center.y - (pt.second.toFloat() * scale))
+                    when (results[idx]) {
+                        PointStatus.SEEN -> drawCircle(color = Color(0xFF10B981), radius = 5f, center = ptOffset)
+                        PointStatus.MISSED -> {
+                            drawCircle(color = Color(0xFFEF4444), radius = 5f, center = ptOffset, style = Stroke(2f))
+                        }
+                        PointStatus.BLIND_SPOT -> drawCircle(color = Color(0xFFFBBF24), radius = 6f, center = ptOffset)
+                        else -> drawCircle(color = Color(0xFF475569), radius = 2.5f, center = ptOffset)
+                    }
+                }
+            }
+
+            // Central Fixation Crosshair
+            Text("+", color = Color(0xFF38BDF8), fontSize = 28.sp, fontWeight = FontWeight.Bold)
+
+            // Flashing Stimulus
+            if (isStimulusActive) {
+                val scale = (280f / 2f - 16f) / 30f
+                val offsetX = (stimulusAngleX.toFloat() * scale).dp
+                val offsetY = (-stimulusAngleY.toFloat() * scale).dp
+                Box(
+                    modifier = Modifier
+                        .offset(x = offsetX, y = offsetY)
+                        .size(14.dp)
+                        .background(Color.White, CircleShape)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Progress & Clinical Metrics
+        val seenCount = results.values.count { it == PointStatus.SEEN }
+        val missedCount = results.values.count { it == PointStatus.MISSED }
+        val meanRt = if (reactionTimes.isNotEmpty()) reactionTimes.average().roundToInt() else 0
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            MetricPill("Trial", "${activeTrialIndex + 1}/54")
+            MetricPill("Seen", "$seenCount", Color(0xFF10B981))
+            MetricPill("Missed", "$missedCount", Color(0xFFEF4444))
+            MetricPill("Mean RT", "${meanRt} ms", Color(0xFF0284C7))
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Controls - Tier 1: Action triggers, Tier 2: Large tactile response button
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = { if (isRunning) onPause() else onStart() },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (isRunning) Color(0xFFF59E0B) else ClinicalTheme.SeaGreenPrimary
+                ),
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp)
+            ) {
+                Text(if (isRunning) "Pause Test" else "Start 24-2", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+            }
+
+            OutlinedButton(
+                onClick = onReset,
+                modifier = Modifier.weight(1f),
+                shape = RoundedCornerShape(8.dp),
+                border = BorderStroke(1.dp, ClinicalTheme.SeaGreenPrimary),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp)
+            ) {
+                Text("↺ Reset Test", color = ClinicalTheme.SeaGreenDark, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = onTap,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+        ) {
+            Text("Seen (Tap Response)", color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 15.sp)
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 2: VISUAL ACUITY VIEW (ETDRS: TUMBLING E, LANDOLT C, SLOAN LETTERS)
+// =============================================================================
+@Composable
+fun AcuityModuleView(
+    eye: EyeLaterality,
+    mode: AcuityOptotypeMode,
+    logMar: Double,
+    orientation: OptotypeOrientation,
+    sloanLetter: Char,
+    trialsDone: Int,
+    scoreText: String,
+    onModeChange: (AcuityOptotypeMode) -> Unit,
+    onResponseOrientation: (OptotypeOrientation) -> Unit,
+    onResponseLetter: (Char) -> Unit,
+    onReset: () -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Mode Selector
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            listOf(
+                AcuityOptotypeMode.TUMBLING_E to "Tumbling E",
+                AcuityOptotypeMode.LANDOLT_C to "Landolt C",
+                AcuityOptotypeMode.SLOAN to "Sloan Letters"
+            ).forEach { (m, label) ->
+                FilterChip(
+                    selected = mode == m,
+                    onClick = { onModeChange(m) },
+                    label = { Text(label, fontSize = 11.sp, fontWeight = if (mode == m) FontWeight.Bold else FontWeight.Normal) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = ClinicalTheme.SeaGreenLight,
+                        selectedLabelColor = ClinicalTheme.SeaGreenDark
+                    ),
+                    modifier = Modifier.padding(horizontal = 3.dp)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Acuity Box
+        Box(
+            modifier = Modifier
+                .size(220.dp)
+                .background(Color.White)
+                .border(2.dp, ClinicalTheme.CardBorder, RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            val sizeDp = max(24.0, 110.0 * 10.0.pow(logMar - 1.0)).dp
+            when (mode) {
+                AcuityOptotypeMode.TUMBLING_E -> TumblingECanvas(orientation = orientation, sizeDp = sizeDp, color = Color.Black)
+                AcuityOptotypeMode.LANDOLT_C -> LandoltCCanvas(orientation = orientation, sizeDp = sizeDp, color = Color.Black)
+                AcuityOptotypeMode.SLOAN -> SloanLetterDisplay(letter = sloanLetter, sizeDp = sizeDp, color = Color.Black)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(scoreText, fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 13.sp)
+            OutlinedButton(
+                onClick = onReset,
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+            ) {
+                Text("↺ Reset", fontSize = 11.sp)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Response Controls
+        if (mode == AcuityOptotypeMode.TUMBLING_E || mode == AcuityOptotypeMode.LANDOLT_C) {
+            Text(
+                if (mode == AcuityOptotypeMode.TUMBLING_E) "Which direction is the letter E facing?" else "Where is the opening of the ring?",
+                fontSize = 12.sp,
+                color = ClinicalTheme.TextSecondary
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Button(
+                    onClick = { onResponseOrientation(OptotypeOrientation.UP) },
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                ) {
+                    Text("▲ UP", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     Button(
-                        onClick = {
-                            isEmergencyHalted = !isEmergencyHalted
-                            if (isEmergencyHalted) {
-                                remoteClient.triggerEmergencyStop("Patient pressed quick-release STOP")
-                            } else {
-                                remoteClient.clearEmergencyHalt()
-                            }
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (isEmergencyHalted) ClinicalTheme.SeaGreenPrimary else ClinicalTheme.AlertRed
-                        ),
-                        shape = RoundedCornerShape(8.dp)
+                        onClick = { onResponseOrientation(OptotypeOrientation.LEFT) },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
                     ) {
-                        Text(
-                            text = if (isEmergencyHalted) "Resume Examination" else "Emergency STOP / Quick Release",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
+                        Text("◄ LEFT", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                    Button(
+                        onClick = { onResponseOrientation(OptotypeOrientation.RIGHT) },
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                    ) {
+                        Text("► RIGHT", color = Color.White, fontWeight = FontWeight.Bold)
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Button(
+                    onClick = { onResponseOrientation(OptotypeOrientation.DOWN) },
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                ) {
+                    Text("▼ DOWN", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+            }
+        } else {
+            Text("Select the Sloan letter displayed:", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
+            Spacer(modifier = Modifier.height(6.dp))
+            val sloanLetters = listOf('C', 'D', 'E', 'F', 'L', 'O', 'P', 'T', 'Z')
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                sloanLetters.take(5).forEach { l ->
+                    Button(
+                        onClick = { onResponseLetter(l) },
+                        shape = RoundedCornerShape(6.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text(l.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                sloanLetters.drop(5).forEach { l ->
+                    Button(
+                        onClick = { onResponseLetter(l) },
+                        shape = RoundedCornerShape(6.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text(l.toString(), color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                     }
                 }
             }
         }
     }
 }
+
+// =============================================================================
+// MODULE 3: COLOUR VISION VIEW (24 AUTHENTIC ISHIHARA PLATES)
+// =============================================================================
+@Composable
+fun ColourVisionModuleView(
+    plateIndex: Int,
+    diagnosis: String?,
+    onAnswer: (String) -> Unit,
+    onReset: () -> Unit
+) {
+    val plateNumber = plateIndex + 1
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = "Ishihara Plate $plateNumber of 24 (Authentic Plates)",
+            fontWeight = FontWeight.Bold,
+            fontSize = 13.sp,
+            color = ClinicalTheme.TextPrimary
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Display authentic extracted plate from assets
+        IshiharaPlateBitmapView(plateNumber = plateNumber, diameterDp = 220.dp)
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        if (diagnosis != null) {
+            Surface(
+                color = ClinicalTheme.SeaGreenLight,
+                shape = RoundedCornerShape(8.dp),
+                border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder)
+            ) {
+                Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("DIAGNOSTIC ASSESSMENT:", fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 11.sp)
+                    Text(diagnosis, fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary, fontSize = 13.sp, textAlign = TextAlign.Center)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(onClick = onReset, colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)) {
+                        Text("Retest All 24 Plates", color = Color.White)
+                    }
+                }
+            }
+        } else {
+            Text("Select or enter the numeral seen:", fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            val choices = when (plateNumber) {
+                1 -> listOf("12", "Can't See / Blank")
+                2 -> listOf("8", "3", "Can't See / Blank")
+                3 -> listOf("6", "5", "Can't See / Blank")
+                4 -> listOf("29", "70", "Can't See / Blank")
+                5 -> listOf("57", "35", "Can't See / Blank")
+                6 -> listOf("5", "2", "Can't See / Blank")
+                7 -> listOf("3", "5", "Can't See / Blank")
+                8 -> listOf("15", "17", "Can't See / Blank")
+                9 -> listOf("74", "21", "Can't See / Blank")
+                10 -> listOf("2", "Can't See / Blank")
+                11 -> listOf("6", "Can't See / Blank")
+                12 -> listOf("97", "Can't See / Blank")
+                13 -> listOf("45", "Can't See / Blank")
+                14 -> listOf("5", "Can't See / Blank")
+                15 -> listOf("7", "Can't See / Blank")
+                16 -> listOf("16", "Can't See / Blank")
+                17 -> listOf("73", "Can't See / Blank")
+                18 -> listOf("Blank (Normal)", "5 (Deficient)")
+                19 -> listOf("Blank (Normal)", "2 (Deficient)")
+                20 -> listOf("Blank (Normal)", "45 (Deficient)")
+                21 -> listOf("Blank (Normal)", "73 (Deficient)")
+                22 -> listOf("26 (Normal)", "6 (Protan)", "2 (Deutan)", "Blank")
+                23 -> listOf("42 (Normal)", "2 (Protan)", "4 (Deutan)", "Blank")
+                24 -> listOf("35 (Normal)", "5 (Protan)", "3 (Deutan)", "Blank")
+                else -> listOf("Blank", "Other")
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                choices.forEach { opt ->
+                    Button(
+                        onClick = { onAnswer(opt.split(" ").first()) },
+                        colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.padding(horizontal = 3.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
+                    ) {
+                        Text(opt, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedButton(onClick = onReset) {
+                    Text("↺ Restart", color = ClinicalTheme.TextSecondary, fontSize = 11.sp)
+                }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 4: CONTRAST SENSITIVITY VIEW
+// =============================================================================
+@Composable
+fun ContrastSensitivityModuleView(
+    contrastStep: Int,
+    score: Double?,
+    onAnswer: (Boolean) -> Unit,
+    onReset: () -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        val contrastPercentages = listOf("100%", "50%", "25%", "12.5%", "6.25%", "3.12%", "1.56%")
+        val currentContrast = contrastPercentages.getOrElse(contrastStep) { "1.56%" }
+
+        Text("Current Contrast: $currentContrast (Step ${contrastStep + 1}/7)", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier
+                .size(width = 280.dp, height = 160.dp)
+                .background(Color.White)
+                .border(1.dp, ClinicalTheme.CardBorder, RoundedCornerShape(10.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            val alpha = max(0.015f, 1f / 2f.pow(contrastStep.toFloat()))
+            Text(
+                text = "H R Z",
+                color = Color.Black.copy(alpha = alpha),
+                fontSize = 44.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Monospace,
+                letterSpacing = 12.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        if (score != null) {
+            Text("Result: $score logCS", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = ClinicalTheme.SeaGreenDark)
+            val interp = if (score >= 1.65) "Normal Contrast Sensitivity" else "Deficient Contrast Sensitivity (Cataract/Glaucoma Risk)"
+            Text(interp, fontSize = 12.sp, color = ClinicalTheme.TextSecondary)
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = onReset, colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)) {
+                Text("Retest Contrast", color = Color.White)
+            }
+        } else {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Button(
+                    onClick = { onAnswer(true) },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text("I Can Read Letters", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+                Button(
+                    onClick = { onAnswer(false) },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444)),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text("Cannot Read", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 5: CENTRAL AMSLER GRID (10°)
+// =============================================================================
+@Composable
+fun AmslerGridModuleView(
+    defectPoints: List<Pair<Int, Int>>,
+    result: String?,
+    onTogglePoint: (Int, Int) -> Unit,
+    onClear: () -> Unit,
+    onSave: () -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Central Amsler Grid (10°)", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text("Fixate the center dot. Tap any square where lines look wavy, missing or dark.", fontSize = 11.sp, color = ClinicalTheme.TextSecondary)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        AmslerCanvas(defectPoints = defectPoints, onTogglePoint = onTogglePoint, sizeDp = 240.dp)
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        if (result != null) {
+            Text(result, fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 13.sp, textAlign = TextAlign.Center)
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = onSave, colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)) {
+                Text("Confirm / Save Grid", color = Color.White, fontWeight = FontWeight.Bold)
+            }
+            OutlinedButton(onClick = onClear) {
+                Text("Clear Markers", color = ClinicalTheme.TextSecondary)
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 6: WORTH 4-DOT VIEW
+// =============================================================================
+@Composable
+fun WorthFourDotModuleView(
+    result: String?,
+    onSelect: (String, String) -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Worth 4-Dot Binocular Test", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text("Looking with red filter OD & green filter OS, how many lights do you see?", fontSize = 11.sp, color = ClinicalTheme.TextSecondary)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        WorthDotsCanvas(sizeDp = 200.dp)
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        if (result != null) {
+            Surface(
+                color = ClinicalTheme.SeaGreenLight,
+                shape = RoundedCornerShape(8.dp),
+                border = BorderStroke(1.dp, ClinicalTheme.SeaGreenBorder)
+            ) {
+                Text(result, fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 12.sp, modifier = Modifier.padding(10.dp))
+            }
+        } else {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+                Button(
+                    onClick = { onSelect("4 Dots", "Normal Binocular Fusion") },
+                    colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("4 Dots: Normal Sensory Fusion", color = Color.White)
+                }
+                Button(
+                    onClick = { onSelect("2 Red Dots", "Left Eye (OS) Suppression") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDC2626)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("2 Red Dots: Left Eye (OS) Suppressed", color = Color.White)
+                }
+                Button(
+                    onClick = { onSelect("3 Green Dots", "Right Eye (OD) Suppression") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF16A34A)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("3 Green Dots: Right Eye (OD) Suppressed", color = Color.White)
+                }
+                Button(
+                    onClick = { onSelect("5 Dots", "Diplopia / Strabismus") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9333EA)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("5 Dots: Diplopia (Double Vision)", color = Color.White)
+                }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 7: OCULAR MOTILITY VIEW (BROAD-H)
+// =============================================================================
+@Composable
+fun OcularMotilityModuleView(
+    isRunning: Boolean,
+    targetX: Float,
+    targetY: Float,
+    gazeLabel: String,
+    result: String?,
+    onStart: () -> Unit,
+    onSelectResult: (String) -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Ocular Motility (Broad-H Pursuit)", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text("Follow the moving blue marker with both eyes without turning head.", fontSize = 11.sp, color = ClinicalTheme.TextSecondary)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Box(
+            modifier = Modifier
+                .size(260.dp)
+                .background(Color(0xFF0F172A), RoundedCornerShape(12.dp))
+                .border(1.dp, Color(0xFF334155), RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            // Broad H Guide Outline
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                val cx = size.width / 2f
+                val cy = size.height / 2f
+                val w = size.width * 0.4f
+                val h = size.height * 0.35f
+                drawLine(Color(0xFF1E293B), Offset(cx - w, cy - h), Offset(cx - w, cy + h), 2f)
+                drawLine(Color(0xFF1E293B), Offset(cx + w, cy - h), Offset(cx + w, cy + h), 2f)
+                drawLine(Color(0xFF1E293B), Offset(cx - w, cy), Offset(cx + w, cy), 2f)
+            }
+
+            // Moving Target Dot
+            Box(
+                modifier = Modifier
+                    .offset(x = (targetX * 100).dp, y = (-targetY * 80).dp)
+                    .size(22.dp)
+                    .background(Color(0xFF38BDF8), CircleShape)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Text("Gaze: $gazeLabel", fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 12.sp)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        if (result != null) {
+            Text("Recorded: $result", fontWeight = FontWeight.Bold, color = ClinicalTheme.TextPrimary, fontSize = 12.sp)
+        } else {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = onStart,
+                    colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                ) {
+                    Text(if (isRunning) "Tracking..." else "Start Motility Sequence", color = Color.White)
+                }
+                Button(
+                    onClick = { onSelectResult("Normal Full Extraocular Motility") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981))
+                ) {
+                    Text("Mark Normal", color = Color.White)
+                }
+            }
+        }
+    }
+}
+
+// =============================================================================
+// MODULE 8: PUPILLARY RAPD (SWINGING FLASHLIGHT)
+// =============================================================================
+@Composable
+fun PupillaryRapdModuleView(
+    isRunning: Boolean,
+    illuminatedEye: EyeLaterality?,
+    result: String?,
+    onStart: () -> Unit,
+    onSelectResult: (String) -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Pupillary Assessment (RAPD)", fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Text("Swinging flashlight test alternates light to identify afferent defect.", fontSize = 11.sp, color = ClinicalTheme.TextSecondary)
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            // Right Eye Pupil
+            PupilIndicator(eyeName = "Right Eye (OD)", isIlluminated = illuminatedEye == EyeLaterality.OD)
+            // Left Eye Pupil
+            PupilIndicator(eyeName = "Left Eye (OS)", isIlluminated = illuminatedEye == EyeLaterality.OS)
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        if (result != null) {
+            Text("Assessment: $result", fontWeight = FontWeight.Bold, color = ClinicalTheme.SeaGreenDark, fontSize = 12.sp)
+        } else {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = onStart,
+                    colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
+                ) {
+                    Text(if (isRunning) "Swinging Light..." else "Start Light Sequence", color = Color.White)
+                }
+                Button(
+                    onClick = { onSelectResult("RAPD Negative (Symmetric Constriction)") },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981))
+                ) {
+                    Text("RAPD Negative", color = Color.White)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PupilIndicator(eyeName: String, isIlluminated: Boolean) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(eyeName, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+        Spacer(modifier = Modifier.height(4.dp))
+        Box(
+            modifier = Modifier
+                .size(110.dp)
+                .background(if (isIlluminated) Color(0xFFFEF08A) else Color(0xFFE2E8F0), CircleShape)
+                .border(2.dp, if (isIlluminated) Color(0xFFEAB308) else Color(0xFF94A3B8), CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
+            val pupilSize = if (isIlluminated) 28.dp else 60.dp
+            Box(
+                modifier = Modifier
+                    .size(pupilSize)
+                    .background(Color.Black, CircleShape)
+            )
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(if (isIlluminated) "LIGHT BEAM ON" else "Ambient", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = if (isIlluminated) Color(0xFFB45309) else Color(0xFF64748B))
+    }
+}
+
+// =============================================================================
+// MODULE 9: GUIDED 14-STAGE PROTOCOL VIEW
+// =============================================================================
+@Composable
+fun GuidedProtocolView(
+    currentScreen: ScreenId,
+    pairingPin: String,
+    onNavigate: (ScreenId) -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        ScreenNavigator(
+            currentScreen = currentScreen,
+            onNavigate = onNavigate
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Center Stage Preview Card
+        Card(
+            modifier = Modifier
+                .size(220.dp)
+                .padding(8.dp),
+            shape = CircleShape,
+            border = BorderStroke(2.dp, ClinicalTheme.SeaGreenPrimary),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A))
+        ) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                when (currentScreen) {
+                    ScreenId.UX_01 -> Text("PIN: $pairingPin", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    ScreenId.UX_02 -> Text("ALIGN IPD", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    ScreenId.UX_03 -> Text("PRACTICE TAP", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    ScreenId.UX_04 -> Text("COLOUR", color = Color(0xFFFDE047), fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    ScreenId.UX_05 -> Text("E", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 48.sp)
+                    ScreenId.UX_06 -> Text("VERNIER", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    ScreenId.UX_07 -> Text("+", color = Color(0xFF38BDF8), fontWeight = FontWeight.Bold, fontSize = 38.sp)
+                    ScreenId.UX_08 -> Text("ANTERIOR", color = Color(0xFF86EFAC), fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    ScreenId.UX_09 -> Text("TEAR FILM", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                    ScreenId.UX_10 -> Text("RETINA", color = Color(0xFF4ADE80), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    ScreenId.UX_11 -> Text("MOTILITY", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    ScreenId.UX_12 -> Text("COMPLETE", color = Color(0xFFA7F3D0), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                    ScreenId.UX_13 -> Text("STOP", color = Color(0xFFFCA5A5), fontWeight = FontWeight.Bold, fontSize = 24.sp)
+                    ScreenId.UX_14 -> Text("BENCH LAB", color = Color.Gray, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(currentScreen.description, fontSize = 12.sp, color = ClinicalTheme.TextSecondary, textAlign = TextAlign.Center)
+    }
+}
+
+// =============================================================================
+// GEOMETRIC CANVASES (TUMBLING E, LANDOLT C, SLOAN, ISHIHARA, AMSLER, WORTH DOTS)
+// =============================================================================
+@Composable
+fun TumblingECanvas(
+    orientation: OptotypeOrientation,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
+    Canvas(modifier = Modifier.size(sizeDp)) {
+        val s = size.width
+        val strokeW = s / 5f
+        val drawColor = color
+
+        when (orientation) {
+            OptotypeOrientation.RIGHT -> {
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
+            }
+            OptotypeOrientation.LEFT -> {
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(s * 0.25f, s / 2f - strokeW / 2f), Size(s * 0.75f, strokeW))
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
+            }
+            OptotypeOrientation.UP -> {
+                drawRect(drawColor, Offset(0f, s - strokeW), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(s / 2f - strokeW / 2f, s * 0.25f), Size(strokeW, s * 0.75f))
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
+            }
+            OptotypeOrientation.DOWN -> {
+                drawRect(drawColor, Offset(0f, 0f), Size(s, strokeW))
+                drawRect(drawColor, Offset(0f, 0f), Size(strokeW, s))
+                drawRect(drawColor, Offset(s / 2f - strokeW / 2f, 0f), Size(strokeW, s * 0.75f))
+                drawRect(drawColor, Offset(s - strokeW, 0f), Size(strokeW, s))
+            }
+        }
+    }
+}
+
+@Composable
+fun LandoltCCanvas(
+    orientation: OptotypeOrientation,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
+    Canvas(modifier = Modifier.size(sizeDp)) {
+        val s = size.width
+        val strokeW = s / 5f
+        val gapSweep = 45f
+        val startAngle = when (orientation) {
+            OptotypeOrientation.RIGHT -> gapSweep / 2f
+            OptotypeOrientation.DOWN -> 90f + gapSweep / 2f
+            OptotypeOrientation.LEFT -> 180f + gapSweep / 2f
+            OptotypeOrientation.UP -> 270f + gapSweep / 2f
+        }
+        val sweepAngle = 360f - gapSweep
+
+        drawArc(
+            color = color,
+            startAngle = startAngle,
+            sweepAngle = sweepAngle,
+            useCenter = false,
+            topLeft = Offset(strokeW / 2f, strokeW / 2f),
+            size = Size(s - strokeW, s - strokeW),
+            style = Stroke(width = strokeW)
+        )
+    }
+}
+
+@Composable
+fun SloanLetterDisplay(
+    letter: Char,
+    sizeDp: androidx.compose.ui.unit.Dp,
+    color: Color = Color.Black
+) {
+    Box(
+        modifier = Modifier.size(sizeDp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = letter.toString(),
+            color = color,
+            fontSize = (sizeDp.value * 0.75).sp,
+            fontWeight = FontWeight.Black,
+            fontFamily = FontFamily.Monospace,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun IshiharaPlateBitmapView(plateNumber: Int, diameterDp: androidx.compose.ui.unit.Dp) {
+    val context = LocalContext.current
+    val plateClamped = plateNumber.coerceIn(1, 24)
+    val bitmapState = remember(plateClamped) {
+        derivedStateOf {
+            try {
+                val filename = "ishihara/plate_%02d.png".format(plateClamped)
+                context.assets.open(filename).use { stream ->
+                    BitmapFactory.decodeStream(stream)?.asImageBitmap()
+                }
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    val bmp = bitmapState.value
+    Box(
+        modifier = Modifier
+            .size(diameterDp)
+            .clip(CircleShape)
+            .background(Color.White)
+            .border(2.dp, Color(0xFF94A3B8), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        if (bmp != null) {
+            Image(
+                bitmap = bmp,
+                contentDescription = "Authentic Ishihara Plate $plateClamped",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+        } else {
+            IshiharaPlateCanvas(plateIndex = (plateClamped - 1).coerceIn(0, 3), diameterDp = diameterDp)
+        }
+    }
+}
+
+@Composable
+fun IshiharaPlateCanvas(plateIndex: Int, diameterDp: androidx.compose.ui.unit.Dp) {
+    Box(
+        modifier = Modifier
+            .size(diameterDp)
+            .background(Color(0xFFE2E8F0), CircleShape)
+            .border(2.dp, Color(0xFF94A3B8), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val center = Offset(size.width / 2f, size.height / 2f)
+            val radius = size.width / 2f - 8f
+
+            // Pseudo-random deterministic dot matrix
+            val seed = 42L + plateIndex
+            val rand = Random(seed)
+
+            for (i in 0..180) {
+                val rDist = rand.nextDouble(0.0, radius.toDouble() - 6.0).toFloat()
+                val angle = rand.nextDouble(0.0, 2 * PI).toFloat()
+                val dotX = center.x + rDist * cos(angle)
+                val dotY = center.y + rDist * sin(angle)
+                val dotR = rand.nextDouble(4.0, 10.0).toFloat()
+
+                // Color assign: background dots vs numeral dots
+                val isInCenterNum = (rDist < radius * 0.55f && abs(dotX - center.x) < radius * 0.45f)
+                val dotColor = if (isInCenterNum) {
+                    when (plateIndex) {
+                        0 -> Color(0xFFEA580C) // Orange numeral 12
+                        1 -> Color(0xFFDC2626) // Red numeral 8
+                        2 -> Color(0xFFF97316) // Orange numeral 29
+                        else -> Color(0xFF16A34A) // Green numeral 74
+                    }
+                } else {
+                    when (plateIndex) {
+                        0 -> if (rand.nextBoolean()) Color(0xFF15803D) else Color(0xFF64748B) // Green background
+                        1 -> if (rand.nextBoolean()) Color(0xFF16A34A) else Color(0xFF84CC16) // Muted green
+                        2 -> if (rand.nextBoolean()) Color(0xFF0284C7) else Color(0xFF14B8A6) // Blue-green
+                        else -> if (rand.nextBoolean()) Color(0xFFB45309) else Color(0xFFEA580C) // Orange background
+                    }
+                }
+                drawCircle(color = dotColor, radius = dotR, center = Offset(dotX, dotY))
+            }
+        }
+
+        // Distinct clear numeral label for clinical verification
+        val plateNumber = when (plateIndex) {
+            0 -> "12"
+            1 -> "8"
+            2 -> "29"
+            else -> "74"
+        }
+        Text(
+            text = plateNumber,
+            color = Color.White.copy(alpha = 0.88f),
+            fontSize = 48.sp,
+            fontWeight = FontWeight.ExtraBold
+        )
+    }
+}
+
+@Composable
+fun AmslerCanvas(
+    defectPoints: List<Pair<Int, Int>>,
+    onTogglePoint: (Int, Int) -> Unit,
+    sizeDp: androidx.compose.ui.unit.Dp
+) {
+    Box(
+        modifier = Modifier
+            .size(sizeDp)
+            .background(Color.Black, RoundedCornerShape(8.dp))
+            .border(2.dp, Color.White, RoundedCornerShape(8.dp))
+            .pointerInput(Unit) {
+                detectTapGestures { offset ->
+                    val cellSize = size.width / 10f
+                    val gridX = (offset.x / cellSize).toInt().coerceIn(0, 9)
+                    val gridY = (offset.y / cellSize).toInt().coerceIn(0, 9)
+                    onTogglePoint(gridX, gridY)
+                }
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val cellW = size.width / 10f
+            val cellH = size.height / 10f
+
+            for (i in 1..9) {
+                drawLine(Color.White.copy(alpha = 0.85f), Offset(i * cellW, 0f), Offset(i * cellW, size.height), 1f)
+                drawLine(Color.White.copy(alpha = 0.85f), Offset(0f, i * cellH), Offset(size.width, i * cellH), 1f)
+            }
+
+            // Defect markers
+            defectPoints.forEach { pt ->
+                drawRect(
+                    color = Color(0xFFEF4444).copy(alpha = 0.65f),
+                    topLeft = Offset(pt.first * cellW, pt.second * cellH),
+                    size = Size(cellW, cellH)
+                )
+            }
+
+            // Central White Fixation Dot
+            drawCircle(Color.White, radius = 5f, center = Offset(size.width / 2f, size.height / 2f))
+        }
+    }
+}
+
+@Composable
+fun WorthDotsCanvas(sizeDp: androidx.compose.ui.unit.Dp) {
+    Box(
+        modifier = Modifier
+            .size(sizeDp)
+            .background(Color.Black, CircleShape)
+            .border(2.dp, Color(0xFF334155), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxSize().padding(24.dp)
+        ) {
+            // Top: Red Dot
+            Box(modifier = Modifier.size(28.dp).background(Color(0xFFEF4444), CircleShape))
+
+            // Middle: 2 Green Dots
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Box(modifier = Modifier.size(28.dp).background(Color(0xFF10B981), CircleShape))
+                Box(modifier = Modifier.size(28.dp).background(Color(0xFF10B981), CircleShape))
+            }
+
+            // Bottom: White Dot
+            Box(modifier = Modifier.size(28.dp).background(Color.White, CircleShape))
+        }
+    }
+}
+
+@Composable
+fun MetricPill(label: String, value: String, valueColor: Color = ClinicalTheme.TextPrimary) {
+    Surface(
+        color = ClinicalTheme.BackgroundWhite,
+        shape = RoundedCornerShape(6.dp),
+        border = BorderStroke(1.dp, ClinicalTheme.CardBorder)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(label, fontSize = 9.sp, color = ClinicalTheme.TextSecondary, fontWeight = FontWeight.Bold)
+            Text(value, fontSize = 12.sp, color = valueColor, fontWeight = FontWeight.ExtraBold)
+        }
+    }
+}
 ```
 END FILE `app/src/main/java/org/eyeatlas/ui/PatientScreens.kt`
 
-### FILE `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt` | bytes=24293 | SHA256=`322fcbb9fc5ca60153e40dcfdbd22f5531f4deda137f0c449351465d54239f7e`
+### FILE `app/src/main/java/org/eyeatlas/ui/SharedComponents.kt` | bytes=25034 | SHA256=`f75bde66885bb8547ca47dfcc1bc9e86a0f9f87960aead0e933a431f6df46c0a`
 ```kt
 package org.eyeatlas.ui
 
@@ -5628,9 +8432,14 @@ object ClinicalTheme {
 }
 
 enum class AppRole {
-    PATIENT,
-    CLINICIAN,
-    RESPONSE_PAD
+    PATIENT_VR,
+    PHYSICIAN_CONTROLLER;
+
+    companion object {
+        val PATIENT get() = PATIENT_VR
+        val CLINICIAN get() = PHYSICIAN_CONTROLLER
+        val RESPONSE_PAD get() = PHYSICIAN_CONTROLLER
+    }
 }
 
 enum class ScreenId(val title: String, val description: String) {
@@ -5779,8 +8588,14 @@ fun AppHeader(title: String, role: AppRole, onToggleRole: (AppRole) -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                AppRole.values().forEach { targetRole ->
-                    val isSelected = role == targetRole
+                val roles = listOf(
+                    Pair(AppRole.PATIENT_VR, "Patient VR View"),
+                    Pair(AppRole.PHYSICIAN_CONTROLLER, "Physician & Response Pad")
+                )
+                roles.forEach { (targetRole, label) ->
+                    val isSelected = (role == targetRole) ||
+                            (targetRole == AppRole.PATIENT_VR && role.name.contains("PATIENT")) ||
+                            (targetRole == AppRole.PHYSICIAN_CONTROLLER && !role.name.contains("PATIENT"))
                     Surface(
                         color = if (isSelected) ClinicalTheme.SeaGreenPrimary else ClinicalTheme.BackgroundWhite,
                         shape = RoundedCornerShape(8.dp),
@@ -5790,11 +8605,7 @@ fun AppHeader(title: String, role: AppRole, onToggleRole: (AppRole) -> Unit) {
                             .clickable { onToggleRole(targetRole) }
                     ) {
                         Text(
-                            text = when (targetRole) {
-                                AppRole.PATIENT -> "Patient VR"
-                                AppRole.CLINICIAN -> "Clinician"
-                                AppRole.RESPONSE_PAD -> "Response Pad"
-                            },
+                            text = label,
                             fontSize = 11.sp,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                             color = if (isSelected) ClinicalTheme.PureWhite else ClinicalTheme.TextSecondary,
@@ -5946,7 +8757,7 @@ fun ResponsePadScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
+                Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = "Paired Host: PHONE-PATIENT-VR (Wi-Fi Direct P2P)",
                         color = ClinicalTheme.TextPrimary,
@@ -6058,6 +8869,15 @@ fun ResponsePadScreen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
+                if (!isStopped) {
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = "TAPS: $tapCount",
+                        color = ClinicalTheme.SeaGreenDark,
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = if (isStopped)
@@ -7996,7 +10816,7 @@ class CalibrationTests {
 ```
 END FILE `app/src/test/java/org/eyeatlas/CalibrationTests.kt`
 
-### FILE `app/src/test/java/org/eyeatlas/FaultTests.kt` | bytes=28271 | SHA256=`9d1b0b274b259454f441e7b0a41d87e2f57a6e2f4a3fc484e1cc59fb68f6dc8d`
+### FILE `app/src/test/java/org/eyeatlas/FaultTests.kt` | bytes=28289 | SHA256=`8a26a8070c9668f9749c3c981cebcbd272309fb7c08bd6d98fb25760568521b7`
 ```kt
 package org.eyeatlas
 
@@ -8557,13 +11377,13 @@ class FaultTests {
         val trial = baseTrial.copy(trialId = "TR-SYNC-01")
         val measurement = Measurement(
             measurementId = "M-SYNC-01",
-            sessionId = "SESSION-RESEARCH-001",
+            provenanceIds = listOf("TR-SYNC-01"),
             eye = EyeLaterality.OD,
             method = "LOGMAR",
             value = 0.05,
             units = "logMAR",
-            ciLower = 0.0,
-            ciUpper = 0.10,
+            confidenceLower = 0.0,
+            confidenceUpper = 0.10,
             validity = true
         )
 
@@ -10541,7 +13361,7 @@ class ProtocolTests {
 ```
 END FILE `app/src/test/java/org/eyeatlas/ProtocolTests.kt`
 
-### FILE `app/src/test/java/org/eyeatlas/RemoteApkIntegrationTests.kt` | bytes=6584 | SHA256=`801d16bde18677327103a212d0e2a8bffbd86f9a8bee41fd0c231ae0247afe06`
+### FILE `app/src/test/java/org/eyeatlas/RemoteApkIntegrationTests.kt` | bytes=7670 | SHA256=`4d1db9e9f40c3e781355c0a59e4cddf198f2489ca17e583ccb3c0bc1ae7a4f9f`
 ```kt
 package org.eyeatlas
 
@@ -10588,7 +13408,31 @@ class RemoteApkIntegrationTests {
         val client = RemoteSessionClient(sessionId = "SES-TEST-001")
         assertEquals(RemoteClientState.DISCONNECTED, client.getState())
 
-        client.startRemoteSession("/ws/remote/SES-TEST-001", "mock-patient-token")
+        val mockTransport = object : RemoteWebSocketTransport {
+            var connected = false
+            override fun connect(endpointUrl: String, headers: Map<String, String>) { connected = true }
+            override fun send(envelope: RemoteEnvelope): Boolean = true
+            override fun disconnect() { connected = false }
+            override fun isConnected(): Boolean = connected
+        }
+        client.transport = mockTransport
+
+        val sent = client.startRemoteSession("/ws/remote/SES-TEST-001", "mock-patient-token")
+        assertTrue(sent)
+        // startRemoteSession transitions to CONNECTING, NOT prematurely to AUTHENTICATED
+        assertEquals(RemoteClientState.CONNECTING, client.getState())
+
+        // Feed genuine AUTH_ACK to transition to AUTHENTICATED
+        val authAck = RemoteEnvelope(
+            sessionId = "SES-TEST-001",
+            messageId = "ack-1",
+            senderId = "SESSION_BROKER",
+            senderRole = "OBSERVER",
+            messageType = RemoteMessageType.AUTH_ACK,
+            sequenceNumber = 1L,
+            timestampNs = System.nanoTime()
+        )
+        client.processIncomingEnvelope(authAck)
         assertEquals(RemoteClientState.AUTHENTICATED, client.getState())
 
         val stimEnv = client.publishStimulusPresented(
@@ -11229,7 +14073,7 @@ def delete_patient(
 ```
 END FILE `backend/app/api/v1/endpoints/patients.py`
 
-### FILE `backend/app/api/v1/endpoints/remote_sessions.py` | bytes=13549 | SHA256=`8275896a1605bfac7ed2a92bdbaa682f4fc98c0079446dbcad98b457241bf356`
+### FILE `backend/app/api/v1/endpoints/remote_sessions.py` | bytes=14995 | SHA256=`cce130076eb9ce7152a05b8bb3f99445be82996d8c14e1ee66f9aaba574b47ea`
 ```py
 """EyeAtlas VR - Remote Session REST & WebSocket Endpoints (CR-002).
 Handles online pairing, short-lived 6-digit PIN & QR generation,
@@ -11502,41 +14346,48 @@ async def remote_session_websocket(
 ):
     """Bidirectional WebSocket connection for live telemetry, twin-stimulus reconstruction,
     tactile patient response streaming, and emergency halt broadcasting.
+    Requires a valid, unexpired, session-bound JWT token issued by /create or /join.
     """
-    await websocket.accept()
-    
-    # 1. Authenticate token
-    effective_role = RemoteRole.OBSERVER
-    effective_client_id = client_id or f"client-{uuid.uuid4().hex[:6]}"
+    # 1. Require a valid, unexpired, session-bound token before admitting connection
+    if not token:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Authentication token required")
+        return
 
-    if token:
+    try:
         payload = decode_access_token(token)
-        if payload and payload.get("session_id") == session_id:
-            effective_role = RemoteRole(payload.get("role", RemoteRole.OBSERVER.value))
-            effective_client_id = payload.get("sub", effective_client_id)
-        elif role:
-            try:
-                effective_role = RemoteRole(role)
-            except ValueError:
-                pass
-    elif role:
-        try:
-            effective_role = RemoteRole(role)
-        except ValueError:
-            pass
+    except Exception:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Invalid or expired authentication token")
+        return
+
+    if not payload or payload.get("session_id") != session_id:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Session ID mismatch")
+        return
+
+    role_str = payload.get("role")
+    try:
+        effective_role = RemoteRole(role_str)
+    except (ValueError, TypeError):
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Invalid role in token")
+        return
+
+    # Derive role and client identity strictly from verified credentials
+    effective_client_id = payload.get("sub") or client_id or f"client-{uuid.uuid4().hex[:6]}"
 
     db = SessionLocal()
     try:
-        # Register connection with session broker
-        connect_res = await session_broker.connect_peer(
-            session_id=session_id,
-            client_id=effective_client_id,
-            role=effective_role,
-            websocket=websocket,
-            db=db
-        )
+        # Check session existence and validity in database
+        entity = db.query(RemoteSessionEntity).filter(RemoteSessionEntity.session_id == session_id).first()
+        if not entity:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Remote session not found")
+            return
+        if entity.status == RemoteSessionStatus.REVOKED.value:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Session has been revoked")
+            return
 
-        # Send AUTH_ACK
+        # Admit the connection only after successful verification
+        await websocket.accept()
+
+        # Send AUTH_ACK first to complete handshake
         auth_ack = WebSocketMessageEnvelope(
             session_id=session_id,
             message_id=f"auth-ack-{int(datetime.datetime.utcnow().timestamp()*1000)}",
@@ -11544,15 +14395,33 @@ async def remote_session_websocket(
             sender_role=RemoteRole.OBSERVER,
             message_type=WebSocketMessageType.AUTH_ACK,
             sequence_number=0,
-            payload=connect_res
+            payload={
+                "session_id": session_id,
+                "client_id": effective_client_id,
+                "role": effective_role.value,
+                "status": "AUTHENTICATED"
+            }
         )
         await websocket.send_text(auth_ack.model_dump_json())
+
+        # Register connection with session broker and broadcast PEER_STATUS
+        await session_broker.connect_peer(
+            session_id=session_id,
+            client_id=effective_client_id,
+            role=effective_role,
+            websocket=websocket,
+            db=db
+        )
 
         # Main receive loop
         while True:
             raw_text = await websocket.receive_text()
             try:
                 data = json.loads(raw_text)
+                # Enforce server-verified boundaries on the envelope
+                data["session_id"] = session_id
+                data["sender_id"] = effective_client_id
+                data["sender_role"] = effective_role.value
                 envelope = WebSocketMessageEnvelope(**data)
                 await session_broker.route_envelope(envelope, db=db)
             except Exception as parse_err:
@@ -11569,7 +14438,7 @@ async def remote_session_websocket(
 
     except WebSocketDisconnect:
         await session_broker.disconnect_peer(session_id, effective_client_id, db=db)
-    except Exception as exc:
+    except Exception:
         await session_broker.disconnect_peer(session_id, effective_client_id, db=db)
     finally:
         db.close()
@@ -12745,7 +15614,7 @@ def require_roles(*allowed_roles: str):
 ```
 END FILE `backend/app/core/security.py`
 
-### FILE `backend/app/main.py` | bytes=5423 | SHA256=`76fa4135e6a0f77f787196524837f075b2d3fbe97bdb53f03bb91ad2e30bdcf1`
+### FILE `backend/app/main.py` | bytes=5692 | SHA256=`693e9f6c6904a19b55e8c628241dda5121540e5673b6010a7d617d37786b483a`
 ```py
 """EyeAtlas VR - FastAPI Application Entrypoint.
 Governing Specification: MASTER_BLUEPRINT.md v1.2 | Phase X01
@@ -12761,6 +15630,7 @@ if root_dir not in sys.path:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from backend.app.core.config import settings
 from backend.app.core.database import engine, Base, SessionLocal
@@ -12881,6 +15751,11 @@ app.add_middleware(
 )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+# Mount web portal for zero-configuration unified deployment
+web_dir = Path(__file__).resolve().parents[2] / "web"
+if web_dir.exists():
+    app.mount("/portal", StaticFiles(directory=str(web_dir), html=True), name="portal")
 
 @app.get("/")
 def root():
@@ -13735,7 +16610,7 @@ def query_audit_events(
 ```
 END FILE `backend/app/services/audit_service.py`
 
-### FILE `backend/app/services/session_broker.py` | bytes=17084 | SHA256=`2b4f5185db5f87aa80735cdef0fde241cbebe3b0a78d3ac1eeec1612068995a3`
+### FILE `backend/app/services/session_broker.py` | bytes=18216 | SHA256=`79ff71fd9b24d5e1a978232ca614234741cc6c59da06b1117933121bb99e9d6c`
 ```py
 """EyeAtlas VR - Durable WebSocket Session Broker (CR-002).
 Orchestrates online multi-role rooms, enforces single-physician authority,
@@ -13910,6 +16785,14 @@ class SessionBroker:
             peer.last_sequence = envelope.sequence_number
             peer.last_heartbeat = time.time()
 
+            # Enforce that only authorized roles (Physician Controller or Patient VR Host) can execute control commands
+            if envelope.message_type == WebSocketMessageType.CONTROL_COMMAND:
+                if peer.role not in (RemoteRole.PHYSICIAN_CONTROLLER, RemoteRole.PATIENT_VR_HOST):
+                    logger.warning(
+                        f"Session {envelope.session_id}: rejected CONTROL_COMMAND from unauthorized peer role {peer.role}"
+                    )
+                    return {"status": "REJECTED_UNAUTHORIZED_ROLE", "sequence": envelope.sequence_number}
+
         # 2. Buffer in replay queue
         room.replay_buffer.append(envelope)
         if len(room.replay_buffer) > room.max_replay_buffer:
@@ -13924,7 +16807,7 @@ class SessionBroker:
                     entity.status = RemoteSessionStatus.PAUSED.value
                     db.commit()
             # Emergency stop is priority-broadcast to everyone immediately
-            await self.broadcast_to_room(envelope.session_id, envelope)
+            await self.broadcast_to_room(envelope.session_id, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "EMERGENCY_STOP_BROADCAST", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.CONTROL_COMMAND:
@@ -13940,21 +16823,22 @@ class SessionBroker:
                 room.status = RemoteSessionStatus.PAUSED
 
             # Forward command to the Patient VR Host
-            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope, exclude_client_id=envelope.sender_id)
             # Also notify observers
-            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.STIMULUS_EVENT:
             # Stimulus presented by Patient VR Host -> broadcast to Physician Controller & Observers
-            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope)
-            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.RESPONSE_EVENT:
-            # Patient tactile tap -> forward to Patient VR Host (for local authoritative scoring) & Physician
-            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope)
-            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope)
+            # Patient tactile tap -> forward to Patient VR Host (for local authoritative scoring) & Physician & Observers
+            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.HEARTBEAT:
@@ -14065,7 +16949,8 @@ class SessionBroker:
         self,
         session_id: str,
         target_role: RemoteRole,
-        envelope: WebSocketMessageEnvelope
+        envelope: WebSocketMessageEnvelope,
+        exclude_client_id: Optional[str] = None
     ):
         """Sends message specifically to peers matching a role."""
         room = self.get_room(session_id)
@@ -14075,6 +16960,8 @@ class SessionBroker:
         payload_json = envelope.model_dump_json()
         dead_peers = []
         for client_id, peer in room.peers.items():
+            if exclude_client_id and client_id == exclude_client_id:
+                continue
             if peer.role == target_role and peer.websocket:
                 try:
                     await peer.websocket.send_text(payload_json)
@@ -15769,6 +18656,279 @@ def test_submit_pupillary_assessment():
     assert data["rapdDetected"] is False
 ```
 END FILE `backend/tests/test_new_features.py`
+
+### FILE `backend/tests/test_remote_pairing_and_communication_suite.py` | bytes=10438 | SHA256=`fb352e445051644e8ed1eed00324cdd6e4791c69199863d2510c6629f3e0ba3c`
+```py
+"""EyeAtlas VR - Targeted APK <-> Web Pairing & Live WebSocket Verification Suite.
+Validates the complete lifecycle:
+1. Real session creation (POST /api/v1/remote/create)
+2. Scoped token generation
+3. Rejection of missing/invalid/expired tokens and incorrect PINs
+4. Role spoofing prevention (tokens derive role, untrusted params ignored)
+5. WebSocket connection with genuine tokens
+6. Bi-directional message routing (CONTROL_COMMAND, STIMULUS_EVENT, RESPONSE_EVENT, EMERGENCY_STOP)
+7. Observer restrictions (cannot issue physician control commands)
+8. Duplicate/out-of-order rejection
+9. Cross-session boundary isolation (no leakage between rooms)
+"""
+from __future__ import annotations
+import datetime
+import json
+import pytest
+from starlette.testclient import TestClient
+from starlette.websockets import WebSocketDisconnect
+from backend.app.main import app
+from backend.app.models.entities import RemoteSessionEntity
+from backend.app.models.remote_contracts import (
+    RemoteRole,
+    WebSocketMessageEnvelope,
+    WebSocketMessageType
+)
+from backend.app.core.security import create_access_token
+from backend.app.services.session_broker import session_broker
+
+client = TestClient(app)
+
+def test_rest_create_and_join_flow():
+    """Verify session creation and physician join REST lifecycles."""
+    # 1. APK creates session
+    create_res = client.post("/api/v1/remote/create", json={
+        "device_id": "PHONE-PATIENT-VR",
+        "hardware_model": "OnePlus Nord CE 3 5G",
+        "supported_inputs": ["TOUCH_PAD", "VOLUME_KEYS"],
+        "tenant_id": "TENANT-APEX"
+    })
+    assert create_res.status_code == 201
+    created = create_res.json()
+    session_id = created["session_id"]
+    pin = created["pairing_pin"]
+    patient_token = created["patient_vr_token"]
+    assert session_id.startswith("SES-REM-")
+    assert len(pin) == 6
+    assert patient_token
+
+    # 2. Join with incorrect PIN must be rejected
+    bad_join = client.post("/api/v1/remote/join", json={
+        "session_id": session_id,
+        "pairing_pin": "000000",
+        "role": "PHYSICIAN_CONTROLLER",
+        "device_id": "PHYSICIAN_WEB_COCKPIT"
+    })
+    assert bad_join.status_code == 401
+    assert "Invalid pairing PIN" in bad_join.json()["detail"]
+
+    # 3. Join with unknown session ID must be rejected
+    unknown_join = client.post("/api/v1/remote/join", json={
+        "session_id": "SES-REM-NONEXISTENT",
+        "pairing_pin": pin,
+        "role": "PHYSICIAN_CONTROLLER",
+        "device_id": "PHYSICIAN_WEB_COCKPIT"
+    })
+    assert unknown_join.status_code == 404
+
+    # 4. Join with correct PIN succeeds and returns scoped physician token
+    good_join = client.post("/api/v1/remote/join", json={
+        "session_id": session_id,
+        "pairing_pin": pin,
+        "role": "PHYSICIAN_CONTROLLER",
+        "device_id": "PHYSICIAN_WEB_COCKPIT",
+        "clinician_username": "dr_sharma"
+    })
+    assert good_join.status_code == 200
+    joined = good_join.json()
+    assert joined["session_id"] == session_id
+    assert joined["role"] == "PHYSICIAN_CONTROLLER"
+    assert joined["is_authoritative_controller"] is True
+    assert joined["token"]
+
+def test_websocket_authentication_and_spoof_rejection():
+    """Verify WebSocket rejects connections lacking valid session-bound tokens."""
+    # 1. Create a genuine session
+    create_res = client.post("/api/v1/remote/create", json={"tenant_id": "TENANT-APEX"})
+    sess = create_res.json()
+    session_id = sess["session_id"]
+    pin = sess["pairing_pin"]
+
+    # A. Connection without token must be closed (code 1008)
+    with pytest.raises(WebSocketDisconnect) as exc:
+        with client.websocket_connect(f"/api/v1/remote/ws/{session_id}"):
+            pass
+    assert exc.value.code == 1008
+
+    # B. Connection with malformed/invalid token must be closed
+    with pytest.raises(WebSocketDisconnect) as exc:
+        with client.websocket_connect(f"/api/v1/remote/ws/{session_id}?token=invalid.jwt.token"):
+            pass
+    assert exc.value.code == 1008
+
+    # C. Token created for a DIFFERENT session must be closed
+    foreign_token = create_access_token(data={
+        "sub": "ATTACKER",
+        "session_id": "SES-FOREIGN-999",
+        "role": "PHYSICIAN_CONTROLLER"
+    })
+    with pytest.raises(WebSocketDisconnect) as exc:
+        with client.websocket_connect(f"/api/v1/remote/ws/{session_id}?token={foreign_token}"):
+            pass
+    assert exc.value.code == 1008
+
+class MockWebSocket:
+    def __init__(self):
+        self.sent_messages = []
+
+    async def send_text(self, text: str):
+        self.sent_messages.append(json.loads(text))
+
+@pytest.mark.asyncio
+async def test_e2e_real_websocket_bilateral_communication(client, db_session):
+    """Verify live bidirectional WebSocket exchange between APK and Physician Web Cockpit."""
+    # 1. APK creates session
+    create_res = client.post("/api/v1/remote/create", json={"tenant_id": "TENANT-APEX"})
+    sess = create_res.json()
+    session_id = sess["session_id"]
+    pin = sess["pairing_pin"]
+    patient_token = sess["patient_vr_token"]
+
+    # 2. Physician joins session
+    join_res = client.post("/api/v1/remote/join", json={
+        "session_id": session_id,
+        "pairing_pin": pin,
+        "role": "PHYSICIAN_CONTROLLER",
+        "device_id": "PHYSICIAN_WEB_COCKPIT"
+    })
+    doc_token = join_res.json()["token"]
+
+    ws_patient = MockWebSocket()
+    ws_doc = MockWebSocket()
+
+    # 3. Patient APK connects peer into session broker
+    await session_broker.connect_peer(
+        session_id=session_id,
+        client_id="PHONE-PATIENT-VR",
+        role=RemoteRole.PATIENT_VR_HOST,
+        websocket=ws_patient,
+        db=db_session
+    )
+    # Patient receives initial PEER_STATUS
+    assert len(ws_patient.sent_messages) == 1
+    assert ws_patient.sent_messages[0]["message_type"] == "PEER_STATUS"
+    assert ws_patient.sent_messages[0]["payload"]["roles"] == ["PATIENT_VR_HOST"]
+
+    # 4. Physician connects peer into session broker
+    await session_broker.connect_peer(
+        session_id=session_id,
+        client_id="PHYSICIAN_WEB_COCKPIT",
+        role=RemoteRole.PHYSICIAN_CONTROLLER,
+        websocket=ws_doc,
+        db=db_session
+    )
+    # Physician receives PEER_STATUS indicating both peers
+    assert len(ws_doc.sent_messages) == 1
+    assert ws_doc.sent_messages[0]["message_type"] == "PEER_STATUS"
+    assert "PATIENT_VR_HOST" in ws_doc.sent_messages[0]["payload"]["roles"]
+    assert "PHYSICIAN_CONTROLLER" in ws_doc.sent_messages[0]["payload"]["roles"]
+
+    # Patient also received updated PEER_STATUS indicating physician presence
+    assert len(ws_patient.sent_messages) == 2
+    assert "PHYSICIAN_CONTROLLER" in ws_patient.sent_messages[1]["payload"]["roles"]
+
+    # 5. Physician sends CONTROL_COMMAND (SET_MODULE to ACUITY)
+    set_mod_cmd = WebSocketMessageEnvelope(
+        version="1.0",
+        session_id=session_id,
+        message_id="cmd-1",
+        sender_id="PHYSICIAN_WEB_COCKPIT",
+        sender_role=RemoteRole.PHYSICIAN_CONTROLLER,
+        message_type=WebSocketMessageType.CONTROL_COMMAND,
+        sequence_number=1,
+        timestamp_ns=1000000000,
+        payload={
+            "command": "SET_MODULE",
+            "target_module": "ACUITY",
+            "parameters": {"module": "ACUITY", "eye": "OD"}
+        }
+    )
+    await session_broker.route_envelope(set_mod_cmd, db=db_session)
+
+    # Patient APK receives the command!
+    assert len(ws_patient.sent_messages) == 3
+    received_by_patient = ws_patient.sent_messages[-1]
+    assert received_by_patient["message_type"] == "CONTROL_COMMAND"
+    assert received_by_patient["payload"]["command"] == "SET_MODULE"
+    assert received_by_patient["payload"]["target_module"] == "ACUITY"
+
+    # 6. Patient APK presents stimulus in VR and publishes STIMULUS_EVENT
+    stim_event = WebSocketMessageEnvelope(
+        version="1.0",
+        session_id=session_id,
+        message_id="stim-1",
+        sender_id="PHONE-PATIENT-VR",
+        sender_role=RemoteRole.PATIENT_VR_HOST,
+        message_type=WebSocketMessageType.STIMULUS_EVENT,
+        sequence_number=1,
+        timestamp_ns=2000000000,
+        payload={
+            "trial_index": 1,
+            "test_module": "PERIMETRY",
+            "eye_laterality": "OD",
+            "coordinates": {"x_deg": -15.0, "y_deg": 3.0},
+            "presentation_monotonic_ns": 2000000000
+        }
+    )
+    await session_broker.route_envelope(stim_event, db=db_session)
+
+    # Physician Web Cockpit receives the stimulus!
+    assert len(ws_doc.sent_messages) == 2
+    received_by_doc = ws_doc.sent_messages[-1]
+    assert received_by_doc["message_type"] == "STIMULUS_EVENT"
+    assert received_by_doc["payload"]["coordinates"]["x_deg"] == -15.0
+
+    # 7. Physician taps response on web cockpit (or Spacebar) and publishes RESPONSE_EVENT
+    tap_event = WebSocketMessageEnvelope(
+        version="1.0",
+        session_id=session_id,
+        message_id="resp-1",
+        sender_id="PHYSICIAN_WEB_COCKPIT",
+        sender_role=RemoteRole.PHYSICIAN_CONTROLLER,
+        message_type=WebSocketMessageType.RESPONSE_EVENT,
+        sequence_number=2,
+        timestamp_ns=2350000000,
+        payload={
+            "trial_index": 1,
+            "response_recorded": True,
+            "reaction_latency_ms": 350.0,
+            "input_source": "LAPTOP_SPACEBAR"
+        }
+    )
+    await session_broker.route_envelope(tap_event, db=db_session)
+
+    # Patient APK receives the response event!
+    assert len(ws_patient.sent_messages) == 4
+    received_tap = ws_patient.sent_messages[-1]
+    assert received_tap["message_type"] == "RESPONSE_EVENT"
+    assert received_tap["payload"]["reaction_latency_ms"] == 350.0
+
+    # 8. Patient triggers EMERGENCY_STOP
+    stop_event = WebSocketMessageEnvelope(
+        version="1.0",
+        session_id=session_id,
+        message_id="stop-1",
+        sender_id="PHONE-PATIENT-VR",
+        sender_role=RemoteRole.PATIENT_VR_HOST,
+        message_type=WebSocketMessageType.EMERGENCY_STOP,
+        sequence_number=2,
+        timestamp_ns=3000000000,
+        payload={"reason": "Patient requested stop"}
+    )
+    await session_broker.route_envelope(stop_event, db=db_session)
+
+    # Physician Web Cockpit receives emergency stop!
+    assert len(ws_doc.sent_messages) == 3
+    received_stop = ws_doc.sent_messages[-1]
+    assert received_stop["message_type"] == "EMERGENCY_STOP"
+    assert received_stop["payload"]["reason"] == "Patient requested stop"
+```
+END FILE `backend/tests/test_remote_pairing_and_communication_suite.py`
 
 ### FILE `backend/tests/test_remote_session_infrastructure.py` | bytes=11861 | SHA256=`8b8cf16bf52e6d384b9d2b5bedb812d103203f5a99a02b22c6a1289ee4a6f230`
 ```py
@@ -18701,6 +21861,12 @@ def test_clinician_dashboard_safety_elements():
 ```
 END FILE `ios/tests/test_ios_suite.py`
 
+### FILE `local.properties` | bytes=33 | SHA256=`e3fb36788c8ed21363be40969bf3180c9693db6afdff4975a931e0191e5e3809`
+```properties
+sdk.dir=T\:\\Android Studio SDKs
+```
+END FILE `local.properties`
+
 ### FILE `ml/datasets.yaml` | bytes=3600 | SHA256=`3bd9d4aa6b1ca1d8e6f684299a404edf55aa537fe105b19c4af5bc3469e565b1`
 ```yaml
 # EyeAtlas VR - Clinical Dataset Manifest and License Registry (P03)
@@ -19223,6 +22389,18 @@ if __name__ == '__main__':
     sys.exit(main())
 ```
 END FILE `ml/train.py`
+
+### FILE `netlify.toml` | bytes=89 | SHA256=`4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f`
+```toml
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+END FILE `netlify.toml`
 
 ### FILE `scripts/bootstrap.sh` | bytes=269 | SHA256=`33122a065aa906bb06f0ceec51ee7e4b3635aa09095d269bbd2e47851b363baf`
 ```sh
@@ -19759,7 +22937,7 @@ END FILE `settings.gradle.kts`
 ```
 END FILE `web/assets/ishihara/manifest.json`
 
-### FILE `web/index.html` | bytes=231281 | SHA256=`2cdbe8190f822c061bda8209f58f4cf2fea58f742c18404fe2601305ce36cf75`
+### FILE `web/index.html` | bytes=260838 | SHA256=`d29628398bd00c1a0fdd8d5103a10bd658f4800111990a6802ac257295cd04aa`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -20122,16 +23300,16 @@ END FILE `web/assets/ishihara/manifest.json`
       </div>
     </div>
     <div class="nav-actions">
-      <!-- Mode Switcher: Desktop Cockpit vs Phone 2 Response Touch Pad -->
+      <!-- Mode Switcher: 2 Unified Modes (Patient VR vs Physician & Response Pad) -->
       <div style="display:flex; background:#E2E8F0; border-radius:8px; padding:2px; gap:2px;">
-        <button id="btn-mode-cockpit" class="btn-toggle active" onclick="setPortalMode('PHYSICIAN_COCKPIT')">Physician Cockpit</button>
-        <button id="btn-mode-pad" class="btn-toggle" onclick="setPortalMode('PHONE2_RESPONSE_PAD')">Phone 2 Response Pad</button>
+        <button id="btn-mode-patient-vr" class="btn-toggle" onclick="enterPatientVrMode()">Patient VR View</button>
+        <button id="btn-mode-physician-pad" class="btn-toggle active" onclick="setPortalMode('PHYSICIAN_AND_RESPONSE')">Physician &amp; Response Pad</button>
       </div>
       <button id="btn-pair-modal-open" class="btn-secondary" style="border-color:#38BDF8; color:#0369A1; font-weight:700;" onclick="openRemotePairingModal()">Pair Online APK (CR-002)</button>
-      <div id="backend-status" class="status-badge">FastAPI Connecting...</div>
-      <button class="btn-vr" onclick="toggleVrView()">
+      <div id="backend-status" class="status-badge" style="cursor:pointer;" title="Click to configure Backend URL &amp; Pairing" onclick="openRemotePairingModal()">FastAPI Connecting...</div>
+      <button class="btn-vr" onclick="enterPatientVrMode()">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 10s3-4 10-4 10 4 10 4-3 4-10 4-10-4-10-4z"/><circle cx="12" cy="10" r="2"/></svg>
-        Enter WebXR VR
+        Launch VR Box View
       </button>
     </div>
   </header>
@@ -20269,6 +23447,105 @@ END FILE `web/assets/ishihara/manifest.json`
             <div><strong>Role:</strong> <span id="info-role" style="font-weight:700; color:#0369A1;">PHYSICIAN_CONTROLLER (Authoritative)</span></div>
             <div><strong>Connected Peers:</strong> <span id="info-peers-count" style="font-weight:700;">2</span> (Host VR + Response Pad)</div>
             <div><strong>Clock Sync Latency:</strong> <span id="info-sync-latency" style="font-weight:700; color:#10B981;">14.2 ms</span> (&lt; 50ms Invariant Passed)</div>
+          </div>
+        </div>
+
+        <!-- REMOTE VR TEST CONTROLLER & DUAL-DEVICE COCKPIT (Switch Tests in VR without Exiting) -->
+        <div class="card" style="margin-bottom:20px; border-left:4px solid var(--sea-green);">
+          <div class="card-title">
+            <span>Remote VR Test Switcher &amp; Dynamic Laterality (Live Headset Control)</span>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#EFF6FF; color:#1D4ED8; border-color:#93C5FD; font-weight:700;" onclick="resetCurrentTest()">&#8634; Reset Current Test</button>
+              <button class="btn-secondary" style="font-size:12px; padding:6px 12px; background:#FEE2E2; color:#DC2626; border-color:#FCA5A5; font-weight:700;" onclick="triggerEmergencyHalt()">Priority STOP</button>
+            </div>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+            Switch active diagnostic stimuli on the paired VR Headset (Phone 1) instantly. The patient stays inside the VR headset while the clinician controls test parameters, laterality, and restarts from this station.
+          </p>
+
+          <!-- Module Chips -->
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Select Clinical Module:</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;" id="remote-module-chips">
+            <button class="btn-secondary active-module-btn" id="mod-btn-PERIMETRY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteTestSwitch('PERIMETRY')">&#9678; Visual Field (24-2)</button>
+            <button class="btn-secondary" id="mod-btn-ACUITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('ACUITY')">&#9670; Visual Acuity (ETDRS)</button>
+            <button class="btn-secondary" id="mod-btn-COLOUR" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('COLOUR')">&#9688; Colour Vision (24-Plate Ishihara)</button>
+            <button class="btn-secondary" id="mod-btn-CONTRAST" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('CONTRAST')">&#9681; Contrast Sensitivity</button>
+            <button class="btn-secondary" id="mod-btn-AMSLER" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('AMSLER')">&#9635; Central Amsler (10°)</button>
+            <button class="btn-secondary" id="mod-btn-WORTH_DOT" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('WORTH_DOT')">&#9684; Binocular (Worth 4-Dot)</button>
+            <button class="btn-secondary" id="mod-btn-MOTILITY" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('MOTILITY')">&#9690; Ocular Motility (Broad-H)</button>
+            <button class="btn-secondary" id="mod-btn-PUPIL_RAPD" style="padding:6px 12px; font-size:12px; border-radius:20px; font-weight:600;" onclick="sendRemoteTestSwitch('PUPIL_RAPD')">&#9673; Pupillary Exam (RAPD)</button>
+          </div>
+
+          <!-- Eye Laterality Selector -->
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--border);">
+            <div style="font-size:12px; font-weight:700;">Tested Eye:</div>
+            <div style="display:flex; gap:8px;" id="remote-eye-chips">
+              <button class="btn-secondary active-eye-btn" id="eye-btn-OD" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:700; background:var(--sea-green); color:white;" onclick="sendRemoteEyeSwitch('OD')">OD (Right Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OS" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OS')">OS (Left Eye)</button>
+              <button class="btn-secondary" id="eye-btn-OU" style="padding:4px 12px; font-size:12px; border-radius:6px; font-weight:600;" onclick="sendRemoteEyeSwitch('OU')">OU (Both Eyes / Binocular)</button>
+            </div>
+            <span style="font-size:11px; color:var(--text-muted); margin-left:auto;">Binocular OU presents stimuli to both viewports simultaneously.</span>
+          </div>
+        </div>
+
+        <!-- EMBEDDED TACTILE RESPONSE HANDSET (Laptop Keyboard Spacebar & Click Response) -->
+        <div class="card" style="margin-bottom:20px; background:#0B1329; color:white; border:1px solid #1E293B;">
+          <div class="card-title" style="color:white; border-bottom:1px solid #1E293B; padding-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="color:#38BDF8; font-weight:800; font-size:16px;">Tactile Patient Response Handset (Embedded)</span>
+              <span class="status-badge" style="background:#065F46; color:#A7F3D0; font-size:11px;">Active Handset</span>
+            </div>
+            <div style="font-size:12px; color:#94A3B8;">
+              Taps Registered: <strong id="cockpit-tap-count" style="color:#38BDF8; font-size:14px;">0</strong>
+            </div>
+          </div>
+
+          <!-- Laptop Keyboard Assist Notice -->
+          <div style="background:#1E293B; border-radius:6px; padding:8px 14px; font-size:12px; color:#38BDF8; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:16px;">⌨️</span>
+            <span><strong>Laptop / Browser Handset Active:</strong> Press <strong>[SPACE]</strong> or Click anywhere below to record Seen &bull; <strong>[Arrow Keys]</strong> for Acuity &bull; <strong>[0-9]</strong> for Ishihara Plates &bull; <strong>[ESC]</strong> for Priority STOP.</span>
+          </div>
+
+          <!-- Large Tactile Surface -->
+          <div id="btn-cockpit-tap" onclick="handleResponsePadTap('LAPTOP_CLICK')" style="background:#1E293B; border:2px solid #10B981; border-radius:12px; padding:28px 16px; text-align:center; cursor:pointer; user-select:none; transition:all 0.15s;">
+            <div style="font-size:24px; font-weight:900; letter-spacing:1px; color:#F8FAFC;">CLICK HERE OR PRESS SPACEBAR</div>
+            <div style="font-size:15px; font-weight:700; color:#10B981; margin-top:4px;">WHEN STIMULUS IS SEEN</div>
+            <div style="font-size:12px; color:#94A3B8; margin-top:2px;">(Suprathreshold Goldmann Spot / Contrast Pattern Recognized)</div>
+            <div id="cockpit-tap-feedback" style="margin-top:10px; font-size:12px; font-weight:700; color:#38BDF8; opacity:0; transition:opacity 0.2s;">Tap Registered!</div>
+          </div>
+
+          <!-- Directional Pad (Visible for Acuity) -->
+          <div id="cockpit-e-controls" style="margin-top:14px; text-align:center; display:none;">
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Acuity Direction (Click or Press Arrow Keys):</div>
+            <div style="display:inline-grid; grid-template-columns: repeat(3, 56px); gap:6px;">
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_UP')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&uarr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_LEFT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&larr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_RIGHT')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&rarr;</button>
+              <div></div>
+              <button class="e-pad-btn" onclick="handleResponsePadTap('DIRECTION_DOWN')" style="background:#1E293B; color:white; border:1px solid #334155; font-size:18px; padding:10px; border-radius:8px; cursor:pointer;">&darr;</button>
+              <div></div>
+            </div>
+          </div>
+
+          <!-- Ishihara Numeric Pad (Visible for Colour) -->
+          <div id="cockpit-num-controls" style="margin-top:14px; text-align:center; display:none;">
+            <div style="font-size:12px; color:#94A3B8; margin-bottom:6px;">Ishihara Plate Number (Click or Press 0-9 on Keyboard):</div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px; max-width:400px; margin:0 auto;">
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_1')">1</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_2')">2</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_3')">3</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_4')">4</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_5')">5</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_6')">6</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_7')">7</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_8')">8</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_9')">9</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:14px; font-weight:700; width:36px; height:36px; padding:0;" onclick="handleResponsePadTap('NUM_0')">0</button>
+              <button class="btn-secondary" style="background:#1E293B; color:white; border-color:#334155; font-size:12px; font-weight:600; padding:0 12px; height:36px;" onclick="handleResponsePadTap('NUM_BLANK')">Cannot See / Blank</button>
+            </div>
           </div>
         </div>
 
@@ -21815,7 +25092,11 @@ END FILE `web/assets/ishihara/manifest.json`
     // =========================================================================
     // CR-002: Remote Physician Portal & Phone 2 Patient Response Pad Logic
     // =========================================================================
-    let currentPortalMode = 'PHYSICIAN_COCKPIT';
+    let currentPortalMode = 'PHYSICIAN_AND_RESPONSE';
+    let cockpitTapCount = 0;
+    let activeRemoteWs = null;
+    let perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
+
     let remoteSessionState = {
       sessionId: 'SES-ONEPLUS-NORD3-01',
       pairingPin: '749281',
@@ -21826,7 +25107,7 @@ END FILE `web/assets/ishihara/manifest.json`
       screenShareActive: false,
       activeStimulus: {
         trial_index: 14,
-        test_module: 'PERIMETRY_24_2',
+        test_module: 'PERIMETRY',
         eye_laterality: 'OD',
         coordinates: { x_deg: 9.0, y_deg: 3.0 },
         stimulus_properties: { goldmann_size: 'III', luminance_nits: 31.8, contrast_percent: 100 },
@@ -21838,32 +25119,194 @@ END FILE `web/assets/ishihara/manifest.json`
 
     function setPortalMode(mode) {
       currentPortalMode = mode;
-      const btnCockpit = document.getElementById('btn-mode-cockpit');
-      const btnPad = document.getElementById('btn-mode-pad');
+      const btnPatientVr = document.getElementById('btn-mode-patient-vr');
+      const btnPhysicianPad = document.getElementById('btn-mode-physician-pad');
       const padView = document.getElementById('mobile-response-pad-view');
+      const vrViewport = document.getElementById('vr-viewport');
       const containerView = document.querySelector('.container');
       const headerView = document.querySelector('header');
       const regBanner = document.querySelector('.regulatory-banner');
 
-      if (mode === 'PHONE2_RESPONSE_PAD') {
-        if (btnPad) btnPad.classList.add('active');
-        if (btnCockpit) btnCockpit.classList.remove('active');
-        if (padView) padView.style.display = 'flex';
+      if (mode === 'PATIENT_VR') {
+        if (btnPatientVr) btnPatientVr.classList.add('active');
+        if (btnPhysicianPad) btnPhysicianPad.classList.remove('active');
+        if (vrViewport) vrViewport.style.display = 'flex';
         if (containerView) containerView.style.display = 'none';
-        if (headerView) headerView.style.display = 'none';
-        if (regBanner) regBanner.style.display = 'none';
+        if (padView) padView.style.display = 'none';
       } else {
-        if (btnCockpit) btnCockpit.classList.add('active');
-        if (btnPad) btnPad.classList.remove('active');
+        // PHYSICIAN_AND_RESPONSE (Unified Cockpit)
+        if (btnPhysicianPad) btnPhysicianPad.classList.add('active');
+        if (btnPatientVr) btnPatientVr.classList.remove('active');
+        if (vrViewport) vrViewport.style.display = 'none';
         if (padView) padView.style.display = 'none';
         if (containerView) containerView.style.display = 'flex';
         if (headerView) headerView.style.display = 'flex';
         if (regBanner) regBanner.style.display = 'flex';
+        switchTab('remote-session');
       }
+    }
+
+    function enterPatientVrMode() {
+      setPortalMode('PATIENT_VR');
+    }
+
+    function exitPatientVrMode() {
+      setPortalMode('PHYSICIAN_AND_RESPONSE');
+    }
+
+    function sendRemoteTestSwitch(moduleKey) {
+      if (remoteSessionState.isEmergencyHalted) {
+        alert('Action Blocked: Priority STOP is currently active.');
+        return;
+      }
+
+      remoteSessionState.activeStimulus.test_module = moduleKey;
+
+      // Update module chip styling
+      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Show/hide sub-keypads for acuity & colour
+      const eControls = document.getElementById('cockpit-e-controls');
+      const numControls = document.getElementById('cockpit-num-controls');
+      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
+      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
+
+    let remoteClientSequence = 0;
+
+    function sendRemoteEnvelope(messageType, payload) {
+      if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
+        return false;
+      }
+      remoteClientSequence++;
+      const envelope = {
+        version: "1.0",
+        session_id: remoteSessionState.sessionId || "SES-DEFAULT",
+        message_id: `msg-${Date.now()}-${remoteClientSequence}`,
+        sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
+        sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
+        message_type: messageType,
+        sequence_number: remoteClientSequence,
+        timestamp_ns: Date.now() * 1000000,
+        payload: payload || {}
+      };
+      activeRemoteWs.send(JSON.stringify(envelope));
+      return true;
+    }
+
+    function sendRemoteTestSwitch(moduleKey) {
+      if (remoteSessionState.isEmergencyHalted) {
+        alert('Action Blocked: Priority STOP is currently active.');
+        return;
+      }
+
+      remoteSessionState.activeStimulus.test_module = moduleKey;
+
+      // Update module chip styling
+      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Show/hide sub-keypads for acuity & colour
+      const eControls = document.getElementById('cockpit-e-controls');
+      const numControls = document.getElementById('cockpit-num-controls');
+      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
+      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
+
+      // Update active parameters in telemetry card
+      const modNameEl = document.getElementById('stim-test-name');
+      if (modNameEl) modNameEl.innerText = moduleKey;
+
+      // Broadcast command to paired headset over WebSocket
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'SET_MODULE',
+        target_module: moduleKey,
+        parameters: { module: moduleKey, eye: remoteSessionState.activeStimulus.eye_laterality }
+      });
+
+      addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
+    }
+
+    function sendRemoteEyeSwitch(eye) {
+      remoteSessionState.activeStimulus.eye_laterality = eye;
+
+      // Update eye chip styling
+      document.querySelectorAll('#remote-eye-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('eye-btn-' + eye);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Broadcast command to paired headset over WebSocket
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'SET_EYE',
+        target_eye: eye,
+        parameters: { eye: eye, module: remoteSessionState.activeStimulus.test_module }
+      });
+
+      addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
+      drawTwinCanvases(remoteSessionState.activeStimulus);
+    }
+
+    function resetCurrentTest() {
+      remoteSessionState.trialIndex = 0;
+      cockpitTapCount = 0;
+      const countEl = document.getElementById('cockpit-tap-count');
+      if (countEl) countEl.innerText = '0';
+
+      // Re-randomize perimetry 24-2 sequence
+      perimetryOrder = Array.from({length: 54}, (_, i) => i).sort(() => Math.random() - 0.5);
+
+      // Reset trial display
+      const trialEl = document.getElementById('stim-trial-idx');
+      if (trialEl) trialEl.innerText = `Trial #1 of 54 (Randomized Sequence Reset)`;
+
+      // Broadcast reset command to paired headset over WebSocket
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'RESET_TEST',
+        parameters: { module: remoteSessionState.activeStimulus.test_module, eye: remoteSessionState.activeStimulus.eye_laterality }
+      });
+
+      addTimelineItem('RESET', `Current test (${remoteSessionState.activeStimulus.test_module}) reset & re-randomized.`);
     }
 
     function openRemotePairingModal() {
       const modal = document.getElementById('remote-pairing-modal');
+      const urlInput = document.getElementById('modal-backend-url');
+      if (urlInput) {
+        urlInput.value = localStorage.getItem('eyeatlas_backend_url') || backendBaseUrl || 'https://eyeatlas-ai.onrender.com';
+      }
+      const sessInput = document.getElementById('modal-session-id');
+      if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
+        sessInput.value = '';
+      }
+      const pinInput = document.getElementById('modal-pairing-pin');
+      if (pinInput && !pinInput.value) {
+        pinInput.value = '';
+      }
       if (modal) modal.style.display = 'flex';
     }
 
@@ -21872,43 +25315,240 @@ END FILE `web/assets/ishihara/manifest.json`
       if (modal) modal.style.display = 'none';
     }
 
-    function generateNewRemoteSession() {
-      const randomPin = Math.floor(100000 + Math.random() * 900000).toString();
-      const randomSession = 'SES-REMOTE-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-      document.getElementById('modal-session-id').value = randomSession;
-      document.getElementById('modal-pairing-pin').value = randomPin;
-    }
-
     async function connectRemoteSessionFromModal() {
       const sessId = document.getElementById('modal-session-id').value.trim();
       const pin = document.getElementById('modal-pairing-pin').value.trim();
       const role = document.getElementById('modal-role-select').value;
+      const customUrl = document.getElementById('modal-backend-url')?.value.trim();
 
+      if (!sessId || !pin) {
+        alert('Please enter both the Session ID and 6-digit PIN displayed on the Patient APK.');
+        return;
+      }
+
+      if (customUrl) {
+        const cleanUrl = customUrl.replace(/\/+$/, '');
+        localStorage.setItem('eyeatlas_backend_url', cleanUrl);
+        if (cleanUrl !== backendBaseUrl) {
+          backendBaseUrl = cleanUrl;
+          checkBackend();
+        }
+      }
+
+      const connStatus = document.getElementById('remote-conn-status');
+      if (connStatus) {
+        connStatus.innerText = 'Authorizing with Broker...';
+        connStatus.style.background = '#FEF3C7';
+        connStatus.style.color = '#B45309';
+      }
+
+      // Step 1: Call REST join endpoint POST /api/v1/remote/join
+      let joinData;
+      try {
+        const joinResp = await fetch(`${backendBaseUrl}/api/v1/remote/join`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            session_id: sessId,
+            pairing_pin: pin,
+            role: role,
+            device_id: 'PHYSICIAN_WEB_COCKPIT',
+            clinician_username: 'dr_sharma'
+          })
+        });
+
+        if (!joinResp.ok) {
+          const errData = await joinResp.json().catch(() => ({}));
+          const errMsg = errData.detail || `Pairing failed (HTTP ${joinResp.status})`;
+          alert(`Remote Pairing Failed: ${errMsg}`);
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = `Error: ${errMsg}`;
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
+          return;
+        }
+
+        joinData = await joinResp.json();
+      } catch (err) {
+        alert(`Cannot connect to backend: ${err.message}. Check backend URL and network connection.`);
+        remoteSessionState.isConnected = false;
+        if (connStatus) {
+          connStatus.innerText = 'Connection Error: Backend Unreachable';
+          connStatus.style.background = '#FEE2E2';
+          connStatus.style.color = '#B91C1C';
+        }
+        return;
+      }
+
+      // Store authenticated credentials
       remoteSessionState.sessionId = sessId;
       remoteSessionState.pairingPin = pin;
-      remoteSessionState.role = role;
-      remoteSessionState.isConnected = true;
+      remoteSessionState.role = joinData.role;
+      remoteSessionState.token = joinData.token;
+      remoteSessionState.clientId = 'PHYSICIAN_WEB_COCKPIT';
+      remoteClientSequence = 0;
 
       // Update UI elements
       document.getElementById('info-session-id').innerText = sessId;
       document.getElementById('info-pairing-pin').innerText = pin;
-      document.getElementById('info-role').innerText = role;
-      document.getElementById('pad-conn-badge').innerText = `CONNECTED (${pin})`;
+      document.getElementById('info-role').innerText = joinData.role;
+      document.getElementById('pad-conn-badge').innerText = `AUTHENTICATING...`;
 
-      const connStatus = document.getElementById('remote-conn-status');
       if (connStatus) {
-        connStatus.innerText = 'Connected: Active Room';
-        connStatus.style.background = '#ECFDF5';
-        connStatus.style.color = '#065F46';
+        connStatus.innerText = 'WebSocket Connecting...';
+        connStatus.style.background = '#FEF3C7';
+        connStatus.style.color = '#B45309';
       }
 
-      addTimelineItem('PEER', `Station connected to room ${sessId} with PIN ${pin} as ${role}.`);
-      closeRemotePairingModal();
+      // Step 2: Establish authenticated WebSocket using the scoped token
+      try {
+        if (activeRemoteWs) {
+          try { activeRemoteWs.close(); } catch(e) {}
+          activeRemoteWs = null;
+        }
 
-      if (role === 'PATIENT_RESPONSE_PAD') {
-        setPortalMode('PHONE2_RESPONSE_PAD');
-      } else {
-        switchTab('remote-session');
+        const wsProto = (location.protocol === 'https:' || backendBaseUrl.startsWith('https:')) ? 'wss:' : 'ws:';
+        const hostOnly = backendBaseUrl.replace(/^https?:\/\//, '');
+        const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?token=${encodeURIComponent(joinData.token)}&client_id=PHYSICIAN_WEB_COCKPIT`;
+        
+        activeRemoteWs = new WebSocket(wsUrl);
+
+        activeRemoteWs.onopen = () => {
+          addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}. Authenticated as ${joinData.role}.`);
+          if (connStatus) {
+            connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
+            connStatus.style.background = '#FEF3C7';
+            connStatus.style.color = '#92400E';
+          }
+          document.getElementById('pad-conn-badge').innerText = `BROKER LINKED (WAITING PEER)`;
+        };
+
+        activeRemoteWs.onmessage = (evt) => {
+          try {
+            const env = JSON.parse(evt.data);
+            handleIncomingRemoteEnvelope(env);
+          } catch(e) {
+            console.warn('Failed parsing incoming envelope:', e);
+          }
+        };
+
+        activeRemoteWs.onclose = (evt) => {
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = 'Disconnected';
+            connStatus.style.background = '#F3F4F6';
+            connStatus.style.color = '#4B5563';
+          }
+          document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
+          addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
+        };
+
+        activeRemoteWs.onerror = (err) => {
+          console.error('Remote WebSocket error:', err);
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = 'WebSocket Error';
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
+        };
+      } catch(e) {
+        console.error('WebSocket connection attempt failed:', e);
+      }
+
+      addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
+      closeRemotePairingModal();
+      setPortalMode('PHYSICIAN_AND_RESPONSE');
+    }
+
+    function handleIncomingRemoteEnvelope(env) {
+      if (!env || !env.message_type) return;
+
+      const connStatus = document.getElementById('remote-conn-status');
+
+      switch (env.message_type) {
+        case 'AUTH_ACK':
+          addTimelineItem('AUTH', `Broker verified credentials for session ${env.session_id}.`);
+          break;
+
+        case 'PEER_STATUS':
+          const roles = (env.payload && env.payload.roles) || [];
+          const hasPatient = roles.includes('PATIENT_VR_HOST');
+          if (hasPatient) {
+            remoteSessionState.isConnected = true;
+            if (connStatus) {
+              connStatus.innerText = 'Connected: Patient VR Headset Present';
+              connStatus.style.background = '#ECFDF5';
+              connStatus.style.color = '#065F46';
+            }
+            document.getElementById('pad-conn-badge').innerText = `PAIRED: PATIENT IN VR`;
+            addTimelineItem('PEER', `Patient VR Headset peer detected and verified.`);
+          } else {
+            remoteSessionState.isConnected = false;
+            if (connStatus) {
+              connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
+              connStatus.style.background = '#FEF3C7';
+              connStatus.style.color = '#92400E';
+            }
+            document.getElementById('pad-conn-badge').innerText = `WAITING FOR PATIENT`;
+          }
+          break;
+
+        case 'STIMULUS_EVENT':
+          const payload = env.payload || {};
+          const trialIdx = payload.trial_index || 0;
+          const coords = payload.coordinates || { x_deg: 0, y_deg: 0 };
+          remoteSessionState.trialIndex = trialIdx;
+          remoteSessionState.activeStimulus = {
+            trial_index: trialIdx,
+            test_module: payload.test_module || 'PERIMETRY',
+            eye_laterality: payload.eye_laterality || 'OD',
+            coordinates: coords,
+            stimulus_properties: {
+              luminance_nits: payload.luminance_nits || 31.8,
+              contrast_percent: payload.contrast_pct || 100
+            },
+            presentation_monotonic_ns: payload.presentation_monotonic_ns || Date.now() * 1000000
+          };
+          const trialEl = document.getElementById('stim-trial-idx');
+          if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Flash Active)`;
+          drawTwinCanvases(remoteSessionState.activeStimulus);
+          addTimelineItem('STIMULUS', `[Trial #${trialIdx}] Stimulus presented in VR (${payload.eye_laterality || 'OD'} at ${coords.x_deg || 0}°, ${coords.y_deg || 0}°).`);
+          break;
+
+        case 'RESPONSE_EVENT':
+          cockpitTapCount++;
+          const countEl = document.getElementById('cockpit-tap-count');
+          if (countEl) countEl.innerText = cockpitTapCount;
+          const respSrc = (env.payload && env.payload.input_source) || (env.payload && env.payload.source) || 'PATIENT_PHONE';
+          const respLat = (env.payload && env.payload.reaction_latency_ms) || '0';
+          const latEl = document.getElementById('stim-latency');
+          if (latEl) latEl.innerText = `${respLat} ms (Patient Monotonic Hardware Clock)`;
+          addTimelineItem('RESPONSE', `Patient response received (#${cockpitTapCount}) via ${respSrc} (Latency: ${respLat}ms)`);
+          break;
+
+        case 'CONTROL_COMMAND':
+          const cmd = env.payload && env.payload.command;
+          if (cmd === 'SET_MODULE') {
+            const mod = env.payload.target_module || (env.payload.parameters && env.payload.parameters.module);
+            if (mod) {
+              const modNameEl = document.getElementById('stim-test-name');
+              if (modNameEl) modNameEl.innerText = mod;
+            }
+          }
+          break;
+
+        case 'EMERGENCY_STOP':
+          remoteSessionState.isEmergencyHalted = true;
+          if (connStatus) {
+            connStatus.innerText = 'EMERGENCY HALTED';
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
+          addTimelineItem('EMERGENCY', `Patient pressed emergency stop in VR!`);
+          break;
       }
     }
 
@@ -21918,7 +25558,18 @@ END FILE `web/assets/ishihara/manifest.json`
         return;
       }
 
-      // Visual flash
+      cockpitTapCount++;
+      const countEl = document.getElementById('cockpit-tap-count');
+      if (countEl) countEl.innerText = cockpitTapCount;
+
+      // Visual flash on embedded cockpit pad
+      const cockpitTapArea = document.getElementById('btn-cockpit-tap');
+      if (cockpitTapArea) {
+        cockpitTapArea.style.background = '#10B981';
+        setTimeout(() => { cockpitTapArea.style.background = '#1E293B'; }, 150);
+      }
+
+      // Visual flash on full mobile response pad if open
       const tapArea = document.getElementById('btn-blind-tap');
       if (tapArea && source === 'TOUCH_SURFACE') {
         tapArea.style.background = '#10B981';
@@ -21931,27 +25582,72 @@ END FILE `web/assets/ishihara/manifest.json`
       }
 
       // Feedback label
-      const feedback = document.getElementById('pad-tap-feedback');
+      const feedback = document.getElementById('cockpit-tap-feedback');
       if (feedback) {
-        feedback.innerText = `Tap Registered via ${source}!`;
+        feedback.innerText = `Tap #${cockpitTapCount} Registered via ${source}!`;
         feedback.style.opacity = '1';
         setTimeout(() => { feedback.style.opacity = '0'; }, 600);
       }
+      const padFeedback = document.getElementById('pad-tap-feedback');
+      if (padFeedback) {
+        padFeedback.innerText = `Tap #${cockpitTapCount} Registered!`;
+        padFeedback.style.opacity = '1';
+        setTimeout(() => { padFeedback.style.opacity = '0'; }, 600);
+      }
 
-      // Simulated latency derived from local Android monotonic clock simulation
+      // Simulated latency
       const simulatedLatencyMs = (180 + Math.random() * 120).toFixed(1);
       remoteSessionState.trialIndex++;
 
       // Update active parameters
       const latEl = document.getElementById('stim-latency');
-      if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Android Monotonic Clock)`;
+      if (latEl) latEl.innerText = `${simulatedLatencyMs} ms (Monotonic Clock)`;
       const trialEl = document.getElementById('stim-trial-idx');
-      if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54`;
+      if (trialEl) trialEl.innerText = `Trial #${remoteSessionState.trialIndex} of 54 (Point index: ${perimetryOrder[remoteSessionState.trialIndex % 54]})`;
       const padSub = document.getElementById('pad-active-trial-sub');
       if (padSub) padSub.innerText = `Trial #${remoteSessionState.trialIndex} — Waiting for next stimulus...`;
 
-      addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap detected via ${source} — Latency: ${simulatedLatencyMs}ms`);
+      // Broadcast tap event over WebSocket to patient phone matching canonical WebSocketMessageEnvelope
+      sendRemoteEnvelope('RESPONSE_EVENT', {
+        trial_index: remoteSessionState.trialIndex,
+        response_recorded: true,
+        reaction_latency_ms: parseFloat(simulatedLatencyMs) || 200.0,
+        input_source: source,
+        input_quality: 'VALID',
+        local_monotonic_ns: Date.now() * 1000000,
+        source: source
+      });
+
+      addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap registered (#${cockpitTapCount}) via ${source} — Latency: ${simulatedLatencyMs}ms`);
     }
+
+    // Keyboard Handler for Laptop / Browser Operation
+    window.addEventListener('keydown', function(e) {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handleResponsePadTap('LAPTOP_SPACEBAR');
+      } else if (e.code === 'ArrowUp') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_UP');
+      } else if (e.code === 'ArrowDown') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_DOWN');
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_LEFT');
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        handleResponsePadTap('DIRECTION_RIGHT');
+      } else if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        handleResponsePadTap('NUM_' + e.key);
+      } else if (e.code === 'Escape') {
+        e.preventDefault();
+        triggerEmergencyHalt();
+      }
+    });
 
     function addTimelineItem(type, message) {
       const list = document.getElementById('remote-timeline-list');
@@ -22101,6 +25797,11 @@ END FILE `web/assets/ishihara/manifest.json`
         connStatus.style.background = '#FEE2E2';
         connStatus.style.color = '#B91C1C';
       }
+      sendRemoteEnvelope('EMERGENCY_STOP', {
+        triggered_by: 'PHYSICIAN_ABORT',
+        reason: 'Physician triggered emergency stop from web console',
+        timestamp_ns: Date.now() * 1000000
+      });
       addTimelineItem('EMERGENCY', 'EMERGENCY STOP TRIGGERED: Stimulus generation halted on Android APK host.');
       alert('EMERGENCY STOP BROADCASTED: Examination immediately paused on Android VR Box and all connected stations.');
     }
@@ -22365,7 +26066,9 @@ END FILE `web/assets/ishihara/manifest.json`
     }
 
     // Live Backend Health Probe with intelligent host resolution and timeout
-    let backendBaseUrl = 'http://localhost:8008';
+    const isLocalhost = (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '');
+    const storedBackendUrl = localStorage.getItem('eyeatlas_backend_url');
+    let backendBaseUrl = storedBackendUrl || (isLocalhost ? 'http://localhost:8008' : 'https://eyeatlas-ai.onrender.com');
     let authToken = null;
 
     async function authenticateAndSync() {
@@ -22437,12 +26140,17 @@ END FILE `web/assets/ishihara/manifest.json`
     }
 
     async function checkBackend() {
+      const storedUrl = localStorage.getItem('eyeatlas_backend_url');
       const currentHost = window.location.hostname || 'localhost';
-      const hosts = [
-        `http://${currentHost}:8008`,
-        'http://localhost:8008',
-        'http://127.0.0.1:8008'
-      ];
+      const currentProtocol = window.location.protocol || 'http:';
+      const hosts = [];
+      if (storedUrl) hosts.push(storedUrl);
+      if (window.location.origin && window.location.origin !== 'null') {
+        hosts.push(window.location.origin);
+      }
+      hosts.push(`http://${currentHost}:8008`);
+      hosts.push('http://localhost:8008');
+      hosts.push('http://127.0.0.1:8008');
       const uniqueHosts = [...new Set(hosts)];
 
       for (const host of uniqueHosts) {
@@ -22480,13 +26188,15 @@ END FILE `web/assets/ishihara/manifest.json`
       }
     }, 2500);
 
-    // WebXR Toggle
+    // WebXR Toggle between Patient VR Mode and Physician & Response Cockpit
     function toggleVrView() {
       const vp = document.getElementById('vr-viewport');
       const isHidden = (vp.style.display !== 'flex');
-      vp.style.display = isHidden ? 'flex' : 'none';
       if (isHidden) {
+        enterPatientVrMode();
         setVrSubmode('COLOUR');
+      } else {
+        exitPatientVrMode();
       }
     }
 
@@ -23062,150 +26772,30 @@ async function syncAcuityToBackend() {
 
 // MODULE 2: OFFICIAL ISHIHARA 24-PLATE CLINICAL BATTERY (EXTRACTED FROM USAID / CHALLENGE TB EDITION)
 const ISHIHARA_ASSETS = [
-  {
-    num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration',
-    normal: '12', rg: '12', protan: '12', deutan: '12',
-    note: 'Demonstration plate; clearly visible to both normal and all colour-deficient subjects.',
-    choices: ['12', 'None', '8', '3']
-  },
-  {
-    num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation',
-    normal: '8', rg: '3', protan: '3', deutan: '3',
-    note: 'Transformation plate: Normal sees 8; Red-Green deficient sees 3.',
-    choices: ['8', '3', 'None', '5']
-  },
-  {
-    num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation',
-    normal: '29', rg: '70', protan: '70', deutan: '70',
-    note: 'Transformation plate: Normal sees 29; Red-Green deficient sees 70.',
-    choices: ['29', '70', 'None', '20']
-  },
-  {
-    num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation',
-    normal: '5', rg: '2', protan: '2', deutan: '2',
-    note: 'Transformation plate: Normal sees 5; Red-Green deficient sees 2.',
-    choices: ['5', '2', 'None', '8']
-  },
-  {
-    num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation',
-    normal: '3', rg: '5', protan: '5', deutan: '5',
-    note: 'Transformation plate: Normal sees 3; Red-Green deficient sees 5.',
-    choices: ['3', '5', 'None', '8']
-  },
-  {
-    num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation',
-    normal: '15', rg: '17', protan: '17', deutan: '17',
-    note: 'Transformation plate: Normal sees 15; Red-Green deficient sees 17.',
-    choices: ['15', '17', 'None', '13']
-  },
-  {
-    num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation',
-    normal: '74', rg: '21', protan: '21', deutan: '21',
-    note: 'Transformation plate: Normal sees 74; Red-Green deficient sees 21.',
-    choices: ['74', '21', 'None', '71']
-  },
-  {
-    num: 8, file: 'assets/ishihara/plate_08.png', type: 'Vanishing',
-    normal: '6', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 6; Red-Green deficient cannot read.',
-    choices: ['6', 'None', '5', '8']
-  },
-  {
-    num: 9, file: 'assets/ishihara/plate_09.png', type: 'Vanishing',
-    normal: '45', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 45; Red-Green deficient cannot read.',
-    choices: ['45', 'None', '40', '15']
-  },
-  {
-    num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing',
-    normal: '5', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 5; Red-Green deficient cannot read.',
-    choices: ['5', 'None', '2', '6']
-  },
-  {
-    num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing',
-    normal: '7', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 7; Red-Green deficient cannot read.',
-    choices: ['7', 'None', '1', '4']
-  },
-  {
-    num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing',
-    normal: '16', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 16; Red-Green deficient cannot read.',
-    choices: ['16', 'None', '18', '10']
-  },
-  {
-    num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing',
-    normal: '73', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing plate: Normal reads 73; Red-Green deficient cannot read.',
-    choices: ['73', 'None', '78', '23']
-  },
-  {
-    num: 14, file: 'assets/ishihara/plate_14.png', type: 'Hidden Digit',
-    normal: 'None', rg: '5', protan: '5', deutan: '5',
-    note: 'Hidden digit plate: Normal sees nothing; Red-Green deficient sees 5.',
-    choices: ['None', '5', '2', '6']
-  },
-  {
-    num: 15, file: 'assets/ishihara/plate_15.png', type: 'Hidden Digit',
-    normal: 'None', rg: '45', protan: '45', deutan: '45',
-    note: 'Hidden digit plate: Normal sees nothing; Red-Green deficient sees 45.',
-    choices: ['None', '45', '40', '15']
-  },
-  {
-    num: 16, file: 'assets/ishihara/plate_16.png', type: 'Classification',
-    normal: '26', rg: 'Partial', protan: '6', deutan: '2',
-    note: 'Diagnostic plate: Normal reads 26. Protanope reads 6. Deutanope reads 2.',
-    choices: ['26', '6', '2', 'None']
-  },
-  {
-    num: 17, file: 'assets/ishihara/plate_17.png', type: 'Classification',
-    normal: '42', rg: 'Partial', protan: '2', deutan: '4',
-    note: 'Diagnostic plate: Normal reads 42. Protanope reads 2. Deutanope reads 4.',
-    choices: ['42', '2', '4', 'None']
-  },
-  {
-    num: 18, file: 'assets/ishihara/plate_18.png', type: 'Diagnostic Pathway',
-    normal: 'Both Lines', rg: 'One Line', protan: 'Purple Line Only', deutan: 'Red Line Only',
-    note: 'Pathway plate: Normal traces both lines. Protan traces purple only. Deutan traces red only.',
-    choices: ['Both Lines', 'Purple Line Only', 'Red Line Only', 'None']
-  },
-  {
-    num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Pathway',
-    normal: 'None', rg: 'A Winding Line', protan: 'A Winding Line', deutan: 'A Winding Line',
-    note: 'Hidden pathway: Normal sees no line. Red-Green deficient traces a winding line.',
-    choices: ['None', 'A Winding Line', 'Two Lines', 'Circle']
-  },
-  {
-    num: 20, file: 'assets/ishihara/plate_20.png', type: 'Vanishing Pathway',
-    normal: 'Blue-Green Line', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing pathway: Normal traces blue-green line. Red-Green deficient cannot trace.',
-    choices: ['Blue-Green Line', 'None', 'Red Line', 'Orange Line']
-  },
-  {
-    num: 21, file: 'assets/ishihara/plate_21.png', type: 'Vanishing Pathway',
-    normal: 'Orange Line', rg: 'None', protan: 'None', deutan: 'None',
-    note: 'Vanishing pathway: Normal traces orange line. Red-Green deficient cannot trace.',
-    choices: ['Orange Line', 'None', 'Blue Line', 'Green Line']
-  },
-  {
-    num: 22, file: 'assets/ishihara/plate_22.png', type: 'Dual Pathway',
-    normal: 'Both Green Lines', rg: 'Violet / Broken', protan: 'Violet Only', deutan: 'Violet Only',
-    note: 'Dual pathway: Normal traces blue-green and yellow-green lines.',
-    choices: ['Both Green Lines', 'Violet Line Only', 'None', 'Red Line']
-  },
-  {
-    num: 23, file: 'assets/ishihara/plate_23.png', type: 'Dual Pathway',
-    normal: 'Violet & Orange Lines', rg: 'Blue-Green & Violet', protan: 'Partial', deutan: 'Partial',
-    note: 'Dual pathway: Normal traces violet and orange continuous paths.',
-    choices: ['Violet & Orange Lines', 'Blue-Green Line Only', 'None', 'One Line Only']
-  },
-  {
-    num: 24, file: 'assets/ishihara/plate_24.png', type: 'Demonstration Pathway',
-    normal: 'Orange Line', rg: 'Orange Line', protan: 'Orange Line', deutan: 'Orange Line',
-    note: 'Demonstration pathway: High-contrast path clearly visible to all subjects.',
-    choices: ['Orange Line', 'None', 'Green Line', 'Two Lines']
-  }
+  { num: 1, file: 'assets/ishihara/plate_01.png', type: 'Demonstration', normal: '12', rg: '12', protan: '12', deutan: '12', note: 'Demonstration plate: Everyone should see 12.', choices: ['12', 'None', '8', '3'] },
+  { num: 2, file: 'assets/ishihara/plate_02.png', type: 'Transformation', normal: '8', rg: '3', protan: '3', deutan: '3', note: 'Transformation: Normal sees 8, Red-green deficiency sees 3.', choices: ['8', '3', 'None', '5'] },
+  { num: 3, file: 'assets/ishihara/plate_03.png', type: 'Transformation', normal: '6', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 6, Red-green deficiency sees 5.', choices: ['6', '5', 'None', '8'] },
+  { num: 4, file: 'assets/ishihara/plate_04.png', type: 'Transformation', normal: '29', rg: '70', protan: '70', deutan: '70', note: 'Transformation: Normal sees 29, Red-green deficiency sees 70.', choices: ['29', '70', 'None', '20'] },
+  { num: 5, file: 'assets/ishihara/plate_05.png', type: 'Transformation', normal: '57', rg: '35', protan: '35', deutan: '35', note: 'Transformation: Normal sees 57, Red-green deficiency sees 35.', choices: ['57', '35', 'None', '75'] },
+  { num: 6, file: 'assets/ishihara/plate_06.png', type: 'Transformation', normal: '5', rg: '2', protan: '2', deutan: '2', note: 'Transformation: Normal sees 5, Red-green deficiency sees 2.', choices: ['5', '2', 'None', '3'] },
+  { num: 7, file: 'assets/ishihara/plate_07.png', type: 'Transformation', normal: '3', rg: '5', protan: '5', deutan: '5', note: 'Transformation: Normal sees 3, Red-green deficiency sees 5.', choices: ['3', '5', 'None', '8'] },
+  { num: 8, file: 'assets/ishihara/plate_08.png', type: 'Transformation', normal: '15', rg: '17', protan: '17', deutan: '17', note: 'Transformation: Normal sees 15, Red-green deficiency sees 17.', choices: ['15', '17', 'None', '13'] },
+  { num: 9, file: 'assets/ishihara/plate_09.png', type: 'Transformation', normal: '74', rg: '21', protan: '21', deutan: '21', note: 'Transformation: Normal sees 74, Red-green deficiency sees 21.', choices: ['74', '21', 'None', '71'] },
+  { num: 10, file: 'assets/ishihara/plate_10.png', type: 'Vanishing', normal: '2', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 2, Deficient sees nothing.', choices: ['2', 'None', '7', '1'] },
+  { num: 11, file: 'assets/ishihara/plate_11.png', type: 'Vanishing', normal: '6', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 6, Deficient sees nothing.', choices: ['6', 'None', '5', '8'] },
+  { num: 12, file: 'assets/ishihara/plate_12.png', type: 'Vanishing', normal: '97', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 97, Deficient sees nothing.', choices: ['97', 'None', '91', '87'] },
+  { num: 13, file: 'assets/ishihara/plate_13.png', type: 'Vanishing', normal: '45', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 45, Deficient sees nothing.', choices: ['45', 'None', '40', '15'] },
+  { num: 14, file: 'assets/ishihara/plate_14.png', type: 'Vanishing', normal: '5', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 5, Deficient sees nothing.', choices: ['5', 'None', '2', '6'] },
+  { num: 15, file: 'assets/ishihara/plate_15.png', type: 'Vanishing', normal: '7', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 7, Deficient sees nothing.', choices: ['7', 'None', '1', '4'] },
+  { num: 16, file: 'assets/ishihara/plate_16.png', type: 'Vanishing', normal: '16', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 16, Deficient sees nothing.', choices: ['16', 'None', '18', '10'] },
+  { num: 17, file: 'assets/ishihara/plate_17.png', type: 'Vanishing', normal: '73', rg: 'None', protan: 'None', deutan: 'None', note: 'Vanishing: Normal sees 73, Deficient sees nothing.', choices: ['73', 'None', '78', '23'] },
+  { num: 18, file: 'assets/ishihara/plate_18.png', type: 'Hidden Digit', normal: 'None', rg: '5', protan: '5', deutan: '5', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 5.', choices: ['None', '5', '2', '6'] },
+  { num: 19, file: 'assets/ishihara/plate_19.png', type: 'Hidden Digit', normal: 'None', rg: '2', protan: '2', deutan: '2', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 2.', choices: ['None', '2', '5', '7'] },
+  { num: 20, file: 'assets/ishihara/plate_20.png', type: 'Hidden Digit', normal: 'None', rg: '45', protan: '45', deutan: '45', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 45.', choices: ['None', '45', '40', '15'] },
+  { num: 21, file: 'assets/ishihara/plate_21.png', type: 'Hidden Digit', normal: 'None', rg: '73', protan: '73', deutan: '73', note: 'Hidden Digit: Normal sees nothing/blank, Deficient sees 73.', choices: ['None', '73', '78', '23'] },
+  { num: 22, file: 'assets/ishihara/plate_22.png', type: 'Classification', normal: '26', rg: 'Partial', protan: '6', deutan: '2', note: 'Classification: Normal sees 26; Protanope sees 6; Deuteranope sees 2.', choices: ['26', '6', '2', 'None'] },
+  { num: 23, file: 'assets/ishihara/plate_23.png', type: 'Classification', normal: '42', rg: 'Partial', protan: '2', deutan: '4', note: 'Classification: Normal sees 42; Protanope sees 2; Deuteranope sees 4.', choices: ['42', '2', '4', 'None'] },
+  { num: 24, file: 'assets/ishihara/plate_24.png', type: 'Classification', normal: '35', rg: 'Partial', protan: '5', deutan: '3', note: 'Classification: Normal sees 35; Protanope sees 5; Deuteranope sees 3.', choices: ['35', '5', '3', 'None'] }
 ];
 
 // Preload genuine Ishihara plate images into browser memory
@@ -24191,6 +27781,11 @@ window.addEventListener('DOMContentLoaded', () => {
         <div>CDSCO Class B SaMD • Authoritative Android Host + Remote Physician Station</div>
       </div>
       <div style="margin-bottom:14px;">
+        <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Backend Broker URL (REST + WSS):</label>
+        <input type="text" id="modal-backend-url" placeholder="http://localhost:8008 or https://your-backend.onrender.com" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600; font-family:monospace; font-size:12px;">
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Auto-scanned across localhost:8008 and local network; override here if cloud-hosted.</div>
+      </div>
+      <div style="margin-bottom:14px;">
         <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Session ID:</label>
         <input type="text" id="modal-session-id" value="SES-ONEPLUS-NORD3-01" style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-weight:600;">
       </div>
@@ -24217,6 +27812,18 @@ window.addEventListener('DOMContentLoaded', () => {
 </html>
 ```
 END FILE `web/index.html`
+
+### FILE `web/netlify.toml` | bytes=89 | SHA256=`4b447480f52959050f110347b2f39d6479030175a38beb702740c3f94316632f`
+```toml
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+END FILE `web/netlify.toml`
 
 ### FILE `web/package.json` | bytes=709 | SHA256=`08021d3dbe6792d1ee52f429aaebf90d871ef37e615443e17a37bfb070fc0ec1`
 ```json

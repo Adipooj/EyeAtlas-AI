@@ -1,9 +1,18 @@
 package org.eyeatlas.net
 
 import java.util.concurrent.ConcurrentLinkedQueue
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.core.SessionEvent
+import org.json.JSONObject
 
 /**
  * Client connection state for online remote tele-ophthalmology sessions.
@@ -63,19 +72,124 @@ interface RemoteWebSocketTransport {
 }
 
 /**
+ * Production OkHttp WebSocket transport for cloud tele-ophthalmology.
+ */
+class OkHttpRemoteWebSocketTransport(
+    private val onEnvelopeReceived: (RemoteEnvelope) -> Unit,
+    private val onStateChanged: (RemoteClientState) -> Unit
+) : RemoteWebSocketTransport {
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(0, TimeUnit.MILLISECONDS)
+        .retryOnConnectionFailure(true)
+        .build()
+
+    private var activeWs: WebSocket? = null
+    private var connected = false
+
+    override fun connect(endpointUrl: String, headers: Map<String, String>) {
+        disconnect()
+        val requestBuilder = Request.Builder().url(endpointUrl)
+        headers.forEach { (k, v) -> requestBuilder.addHeader(k, v) }
+        val request = requestBuilder.build()
+
+        activeWs = client.newWebSocket(request, object : WebSocketListener() {
+            override fun onOpen(webSocket: WebSocket, response: Response) {
+                connected = true
+                // Do NOT set AUTHENTICATED here; state transitions only after receiving AUTH_ACK
+            }
+
+            override fun onMessage(webSocket: WebSocket, text: String) {
+                try {
+                    val json = JSONObject(text)
+                    val sessionId = json.optString("session_id", "")
+                    val messageId = json.optString("message_id", "")
+                    val senderId = json.optString("sender_id", "")
+                    val senderRole = json.optString("sender_role", "OBSERVER")
+                    val msgTypeStr = json.optString("message_type", "CONTROL_COMMAND")
+                    val msgType = try {
+                        RemoteMessageType.valueOf(msgTypeStr)
+                    } catch (e: Exception) {
+                        RemoteMessageType.CONTROL_COMMAND
+                    }
+                    val seq = json.optLong("sequence_number", 0L)
+                    val ts = json.optLong("timestamp_ns", System.nanoTime())
+
+                    val payloadObj = json.optJSONObject("payload")
+                    val payloadMap = mutableMapOf<String, Any>()
+                    if (payloadObj != null) {
+                        val keys = payloadObj.keys()
+                        while (keys.hasNext()) {
+                            val k = keys.next()
+                            payloadMap[k] = payloadObj.get(k)
+                        }
+                    }
+
+                    val env = RemoteEnvelope(
+                        sessionId = sessionId,
+                        messageId = messageId,
+                        senderId = senderId,
+                        senderRole = senderRole,
+                        messageType = msgType,
+                        sequenceNumber = seq,
+                        timestampNs = ts,
+                        payload = payloadMap
+                    )
+                    onEnvelopeReceived(env)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+                connected = false
+                onStateChanged(RemoteClientState.DISCONNECTED)
+            }
+
+            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+                connected = false
+                onStateChanged(RemoteClientState.DISCONNECTED)
+            }
+        })
+    }
+
+    override fun send(envelope: RemoteEnvelope): Boolean {
+        val ws = activeWs ?: return false
+        if (!connected) return false
+        return try {
+            val json = JSONObject().apply {
+                put("version", envelope.version)
+                put("session_id", envelope.sessionId)
+                put("message_id", envelope.messageId)
+                put("sender_id", envelope.senderId)
+                put("sender_role", envelope.senderRole)
+                put("message_type", envelope.messageType.name)
+                put("sequence_number", envelope.sequenceNumber)
+                put("timestamp_ns", envelope.timestampNs)
+                put("payload", JSONObject(envelope.payload))
+            }
+            ws.send(json.toString())
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override fun disconnect() {
+        connected = false
+        activeWs?.close(1000, "Client disconnect")
+        activeWs = null
+    }
+
+    override fun isConnected(): Boolean = connected
+}
+
+/**
  * Authoritative remote session coordinator for the patient Android APK (CR-002).
- *
- * Responsibilities:
- * 1. Establishes authenticated WSS connection to cloud session broker.
- * 2. Enforces monotonic sequence numbers on all outgoing events.
- * 3. Maintains an ordered outbox buffer for zero packet loss during network drops.
- * 4. Publishes real-time stimulus presentation events with nanosecond monotonic timestamps.
- * 5. Handles remote physician commands and patient emergency halt broadcasts.
  */
 class RemoteSessionClient(
-    val sessionId: String,
+    var sessionId: String = "",
     val localDeviceId: String = "PHONE-PATIENT-VR",
-    private val transport: RemoteWebSocketTransport? = null,
+    var transport: RemoteWebSocketTransport? = null,
     val maxOutboxBuffer: Int = 100
 ) {
     private val sequenceCounter = AtomicLong(0L)
@@ -95,8 +209,10 @@ class RemoteSessionClient(
 
     // Callback listeners
     var onCommandListener: ((command: String, module: String?, params: Map<String, Any>) -> Unit)? = null
+    var onResponseListener: ((source: String) -> Unit)? = null
     var onEmergencyStopListener: ((reason: String) -> Unit)? = null
     var onPeerStatusListener: ((roles: List<String>, physician: String?) -> Unit)? = null
+    var onStateChangedListener: ((RemoteClientState) -> Unit)? = null
     var onWebRtcAnswerListener: ((sdp: String) -> Unit)? = null
     var onIceCandidateListener: ((candidate: String, sdpMid: String?, sdpMLineIndex: Int?) -> Unit)? = null
     var onStreamStatusListener: ((isStreaming: Boolean, width: Int, height: Int) -> Unit)? = null
@@ -109,10 +225,20 @@ class RemoteSessionClient(
 
     /**
      * Connects to the remote session broker using an ephemeral session token.
+     * Sets state to CONNECTING and sends AUTH envelope.
+     * State only transitions to AUTHENTICATED upon receiving valid AUTH_ACK.
      */
     fun startRemoteSession(endpointUrl: String, authToken: String): Boolean {
         state = RemoteClientState.CONNECTING
-        transport?.connect(
+        val currentTransport = transport ?: OkHttpRemoteWebSocketTransport(
+            onEnvelopeReceived = { env -> processIncomingEnvelope(env) },
+            onStateChanged = { newState ->
+                state = newState
+                onStateChangedListener?.invoke(newState)
+            }
+        ).also { transport = it }
+
+        currentTransport.connect(
             endpointUrl,
             mapOf("Authorization" to "Bearer $authToken")
         )
@@ -131,15 +257,95 @@ class RemoteSessionClient(
                 "deviceId" to localDeviceId
             )
         )
-        sendEnvelope(authEnv)
-        state = RemoteClientState.AUTHENTICATED
-        return true
+        return sendEnvelope(authEnv)
+    }
+
+    /**
+     * Connects directly to the cloud WebSocket broker with query token.
+     */
+    fun connectToCloud(baseUrl: String, token: String) {
+        state = RemoteClientState.CONNECTING
+        val cleanHost = baseUrl.replace(Regex("^https?://"), "").trimEnd('/')
+        val scheme = if (baseUrl.startsWith("https://")) "wss" else "ws"
+        val wsUrl = "$scheme://$cleanHost/api/v1/remote/ws/$sessionId?token=${java.net.URLEncoder.encode(token, "UTF-8")}&client_id=$localDeviceId"
+        val okTransport = OkHttpRemoteWebSocketTransport(
+            onEnvelopeReceived = { env -> processIncomingEnvelope(env) },
+            onStateChanged = { newState ->
+                state = newState
+                onStateChangedListener?.invoke(newState)
+            }
+        )
+        this.transport = okTransport
+        okTransport.connect(wsUrl, emptyMap())
+    }
+
+    data class CreatedSession(
+        val sessionId: String,
+        val pairingPin: String,
+        val token: String,
+        val wsEndpointUrl: String
+    )
+
+    /**
+     * Creates a genuine remote session on the backend (POST /api/v1/remote/create).
+     */
+    fun createRemoteSessionOnBackend(
+        baseUrl: String,
+        tenantId: String = "TENANT-APEX",
+        onSuccess: (CreatedSession) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .build()
+
+        val json = JSONObject().apply {
+            put("device_id", localDeviceId)
+            put("hardware_model", "OnePlus Nord CE 3 5G")
+            put("supported_inputs", org.json.JSONArray(listOf("TOUCH_PAD", "VOLUME_KEYS", "BT_CLICKER")))
+            put("tenant_id", tenantId)
+        }
+
+        val cleanUrl = baseUrl.trimEnd('/')
+        val createUrl = "$cleanUrl/api/v1/remote/create"
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val body = json.toString().toRequestBody(mediaType)
+        val request = Request.Builder()
+            .url(createUrl)
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : okhttp3.Callback {
+            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
+                onError(e.message ?: "Network error connecting to backend")
+            }
+
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                response.use {
+                    if (!response.isSuccessful) {
+                        onError("Backend returned HTTP ${response.code}")
+                        return
+                    }
+                    val respBody = response.body?.string() ?: ""
+                    try {
+                        val respJson = JSONObject(respBody)
+                        val newSessionId = respJson.getString("session_id")
+                        val pin = respJson.getString("pairing_pin")
+                        val token = respJson.getString("patient_vr_token")
+                        val wsEndpoint = respJson.optString("ws_endpoint_url", "/api/v1/remote/ws/$newSessionId")
+                        this@RemoteSessionClient.sessionId = newSessionId
+                        onSuccess(CreatedSession(newSessionId, pin, token, wsEndpoint))
+                    } catch (e: Exception) {
+                        onError("Parse error: ${e.message}")
+                    }
+                }
+            }
+        })
     }
 
     /**
      * Publishes a stimulus presentation event to the remote physician for live twin-reconstruction.
-     * CRITICAL MEDICAL INVARIANT:
-     * Stimulus timestamps MUST use System.nanoTime() (hardware monotonic clock).
      */
     fun publishStimulusPresented(
         trialIndex: Int,
@@ -274,7 +480,7 @@ class RemoteSessionClient(
     }
 
     /**
-     * Publishes screen streaming health telemetry (resolution, framerate, dropped frames, orientation).
+     * Publishes local screen streaming status telemetry (resolution, fps, dropped frames).
      */
     fun publishStreamStatus(
         isStreaming: Boolean,
@@ -321,8 +527,9 @@ class RemoteSessionClient(
             outboxBuffer.poll()
         }
 
-        if (transport != null && transport.isConnected()) {
-            return transport.send(envelope)
+        val currentTransport = transport
+        if (currentTransport != null && currentTransport.isConnected()) {
+            return currentTransport.send(envelope)
         }
         return false
     }
@@ -332,7 +539,7 @@ class RemoteSessionClient(
      */
     fun processIncomingEnvelope(envelope: RemoteEnvelope): Result<String> {
         // Enforce session boundary
-        if (envelope.sessionId != sessionId) {
+        if (sessionId.isNotEmpty() && envelope.sessionId != sessionId) {
             return Result.failure(SecurityException("Session ID mismatch: ${envelope.sessionId}"))
         }
 
@@ -345,6 +552,7 @@ class RemoteSessionClient(
         when (envelope.messageType) {
             RemoteMessageType.AUTH_ACK -> {
                 state = RemoteClientState.AUTHENTICATED
+                onStateChangedListener?.invoke(RemoteClientState.AUTHENTICATED)
                 return Result.success("AUTHENTICATED")
             }
 
@@ -382,8 +590,10 @@ class RemoteSessionClient(
             }
 
             RemoteMessageType.RESPONSE_EVENT -> {
-                // Response arrived from Web Response Pad on Phone 2
-                return Result.success("EXTERNAL_RESPONSE_RECEIVED")
+                val src = (envelope.payload["input_source"] as? String)
+                    ?: (envelope.payload["source"] as? String ?: "REMOTE_PAD")
+                onResponseListener?.invoke(src)
+                return Result.success("EXTERNAL_RESPONSE_RECEIVED: $src")
             }
 
             RemoteMessageType.WEBRTC_ANSWER -> {

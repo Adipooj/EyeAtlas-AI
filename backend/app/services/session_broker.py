@@ -171,6 +171,14 @@ class SessionBroker:
             peer.last_sequence = envelope.sequence_number
             peer.last_heartbeat = time.time()
 
+            # Enforce that only authorized roles (Physician Controller or Patient VR Host) can execute control commands
+            if envelope.message_type == WebSocketMessageType.CONTROL_COMMAND:
+                if peer.role not in (RemoteRole.PHYSICIAN_CONTROLLER, RemoteRole.PATIENT_VR_HOST):
+                    logger.warning(
+                        f"Session {envelope.session_id}: rejected CONTROL_COMMAND from unauthorized peer role {peer.role}"
+                    )
+                    return {"status": "REJECTED_UNAUTHORIZED_ROLE", "sequence": envelope.sequence_number}
+
         # 2. Buffer in replay queue
         room.replay_buffer.append(envelope)
         if len(room.replay_buffer) > room.max_replay_buffer:
@@ -185,7 +193,7 @@ class SessionBroker:
                     entity.status = RemoteSessionStatus.PAUSED.value
                     db.commit()
             # Emergency stop is priority-broadcast to everyone immediately
-            await self.broadcast_to_room(envelope.session_id, envelope)
+            await self.broadcast_to_room(envelope.session_id, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "EMERGENCY_STOP_BROADCAST", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.CONTROL_COMMAND:
@@ -201,21 +209,22 @@ class SessionBroker:
                 room.status = RemoteSessionStatus.PAUSED
 
             # Forward command to the Patient VR Host
-            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope, exclude_client_id=envelope.sender_id)
             # Also notify observers
-            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.STIMULUS_EVENT:
             # Stimulus presented by Patient VR Host -> broadcast to Physician Controller & Observers
-            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope)
-            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope)
+            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.RESPONSE_EVENT:
-            # Patient tactile tap -> forward to Patient VR Host (for local authoritative scoring) & Physician
-            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope)
-            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope)
+            # Patient tactile tap -> forward to Patient VR Host (for local authoritative scoring) & Physician & Observers
+            await self.send_to_role(envelope.session_id, RemoteRole.PATIENT_VR_HOST, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.PHYSICIAN_CONTROLLER, envelope, exclude_client_id=envelope.sender_id)
+            await self.send_to_role(envelope.session_id, RemoteRole.OBSERVER, envelope, exclude_client_id=envelope.sender_id)
             return {"status": "ROUTED", "sequence": envelope.sequence_number}
 
         elif envelope.message_type == WebSocketMessageType.HEARTBEAT:
@@ -326,7 +335,8 @@ class SessionBroker:
         self,
         session_id: str,
         target_role: RemoteRole,
-        envelope: WebSocketMessageEnvelope
+        envelope: WebSocketMessageEnvelope,
+        exclude_client_id: Optional[str] = None
     ):
         """Sends message specifically to peers matching a role."""
         room = self.get_room(session_id)
@@ -336,6 +346,8 @@ class SessionBroker:
         payload_json = envelope.model_dump_json()
         dead_peers = []
         for client_id, peer in room.peers.items():
+            if exclude_client_id and client_id == exclude_client_id:
+                continue
             if peer.role == target_role and peer.websocket:
                 try:
                     await peer.websocket.send_text(payload_json)

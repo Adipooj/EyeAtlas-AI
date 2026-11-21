@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.eyeatlas.core.ClinicalSessionCoordinator
 import org.eyeatlas.core.EyeLaterality
+import org.eyeatlas.net.RemoteClientState
 import org.eyeatlas.net.RemoteSessionClient
 import org.eyeatlas.sensors.Calibration
 import org.eyeatlas.sensors.ResponseAndGaze
@@ -90,7 +91,7 @@ fun PatientScreen(
     val presenter = remember { VrPresenter(calibration).withNordCe3Layout() }
     val functionalTests = remember { FunctionalTests() }
     val responseEngine = remember { ResponseAndGaze() }
-    val remoteClient = remember { RemoteSessionClient(sessionId = "SES-REM-LIVE-01") }
+    val remoteClient = remember { RemoteSessionClient(sessionId = "") }
 
     // Navigation and Mode States
     var selectedModule by remember { mutableStateOf(ClinicalSessionCoordinator.activeModule) }
@@ -104,9 +105,12 @@ fun PatientScreen(
     // --- Cloud Pairing (CR-002) State ---
     var showCloudPairingDialog by remember { mutableStateOf(false) }
     var cloudBackendUrl by remember { mutableStateOf("https://eyeatlas-ai.onrender.com") }
-    var cloudSessionId by remember { mutableStateOf("SES-REMOTE-01") }
-    var cloudPin by remember { mutableStateOf("749281") }
-    var cloudConnectionStatus by remember { mutableStateOf("Ready to Pair") }
+    var cloudSessionId by remember { mutableStateOf("") }
+    var cloudPin by remember { mutableStateOf("") }
+    var cloudToken by remember { mutableStateOf("") }
+    var isPairingInProgress by remember { mutableStateOf(false) }
+    var isPhysicianConnected by remember { mutableStateOf(false) }
+    var cloudConnectionStatus by remember { mutableStateOf("Not Paired") }
 
     // --- Acuity Engine State ---
     var acuityOptotypeMode by remember { mutableStateOf(AcuityOptotypeMode.TUMBLING_E) }
@@ -235,12 +239,115 @@ fun PatientScreen(
                 perimetryResults[activePerimetryIndex] = PointStatus.SEEN
                 isStimulusActive = false
                 feedbackToast = "Stimulus SEEN! RT: ${rt} ms (#${activePerimetryIndex + 1})"
+                // Publish response event to remote physician over WebSocket
+                if (remoteClient.getState() == RemoteClientState.AUTHENTICATED) {
+                    remoteClient.publishPatientResponse(
+                        trialIndex = activePerimetryStep,
+                        isSeen = true,
+                        reactionLatencyMs = rt.toDouble(),
+                        inputSource = "PHONE_VR_TOUCH",
+                        localMonotonicNs = now
+                    )
+                }
             } else {
                 falsePositives++
                 feedbackToast = "Click when NO stimulus active (False Positive #$falsePositives)"
             }
         } else {
             feedbackToast = "Tap registered at ${System.currentTimeMillis() % 10000} ms"
+        }
+    }
+
+    // --- Genuine Asynchronous Cloud Pairing Handler ---
+    val initiateCloudPairing: () -> Unit = {
+        isPairingInProgress = true
+        cloudConnectionStatus = "Creating session on Render..."
+        feedbackToast = "Contacting Render session broker..."
+        remoteClient.createRemoteSessionOnBackend(
+            baseUrl = cloudBackendUrl,
+            onSuccess = { created ->
+                cloudSessionId = created.sessionId
+                cloudPin = created.pairingPin
+                cloudToken = created.token
+                isPairingInProgress = false
+                cloudConnectionStatus = "Broker Linked (Waiting for Physician)"
+                feedbackToast = "Session Created: ${created.sessionId} | PIN: ${created.pairingPin}"
+                remoteClient.connectToCloud(cloudBackendUrl, created.token)
+            },
+            onError = { errMsg ->
+                isPairingInProgress = false
+                cloudConnectionStatus = "Offline: $errMsg"
+                feedbackToast = "Pairing Error: $errMsg"
+            }
+        )
+    }
+
+    // Remote Session Client Lifecycle and Incoming Event Handlers
+    DisposableEffect(remoteClient) {
+        remoteClient.onCommandListener = { cmd, targetModule, params ->
+            when (cmd) {
+                "SET_MODULE" -> {
+                    val modStr = targetModule ?: (params["module"] as? String)
+                    val mod = ClinicalModuleId.values().firstOrNull {
+                        it.name.equals(modStr, ignoreCase = true) || it.title.contains(modStr ?: "", ignoreCase = true)
+                    }
+                    if (mod != null) {
+                        ClinicalSessionCoordinator.switchModule(mod)
+                        selectedModule = mod
+                        resetCurrentModule()
+                        feedbackToast = "Remote: Switched to ${mod.title}"
+                    }
+                }
+                "SET_EYE" -> {
+                    val eyeStr = (params["eye"] as? String) ?: "OD"
+                    val eye = EyeLaterality.values().firstOrNull { it.name.equals(eyeStr, ignoreCase = true) } ?: EyeLaterality.OD
+                    ClinicalSessionCoordinator.switchEye(eye)
+                    testedEye = eye
+                    resetCurrentModule()
+                    feedbackToast = "Remote: Switched tested eye to ${eye.name}"
+                }
+                "RESET_TEST" -> {
+                    resetCurrentModule()
+                    ClinicalSessionCoordinator.resetActiveTest()
+                    feedbackToast = "Remote: Test Reset & Re-randomized"
+                }
+                "START_TEST" -> {
+                    if (selectedModule == ClinicalModuleId.PERIMETRY) {
+                        isPerimetryRunning = true
+                    } else if (selectedModule == ClinicalModuleId.MOTILITY) {
+                        isMotilityRunning = true
+                    } else if (selectedModule == ClinicalModuleId.PUPIL_RAPD) {
+                        isPupilRunning = true
+                    }
+                    feedbackToast = "Remote: Test Started"
+                }
+                "STOP_TEST" -> {
+                    isPerimetryRunning = false
+                    isMotilityRunning = false
+                    isPupilRunning = false
+                    feedbackToast = "Remote: Test Stopped"
+                }
+            }
+        }
+        remoteClient.onResponseListener = { _ ->
+            handleTactileResponse()
+        }
+        remoteClient.onEmergencyStopListener = { reason ->
+            isEmergencyHalted = true
+            ClinicalSessionCoordinator.isEmergencyHalted = true
+            feedbackToast = "Emergency STOP Received: $reason"
+        }
+        remoteClient.onPeerStatusListener = { roles, physician ->
+            val hasPhysician = roles.contains("PHYSICIAN_CONTROLLER")
+            isPhysicianConnected = hasPhysician
+            cloudConnectionStatus = if (hasPhysician) {
+                "Physician Connected (${physician ?: "Controller"})"
+            } else {
+                "Broker Linked (Waiting for Physician)"
+            }
+        }
+        onDispose {
+            remoteClient.disconnect()
         }
     }
 
@@ -286,6 +393,18 @@ fun PatientScreen(
             stimulusAngleY = currentPt.second
             stimulusStartNs = System.nanoTime()
             isStimulusActive = true
+
+            // Broadcast real stimulus presentation to remote physician twin-cockpit
+            if (remoteClient.getState() == RemoteClientState.AUTHENTICATED) {
+                remoteClient.publishStimulusPresented(
+                    trialIndex = activePerimetryStep,
+                    testModule = selectedModule.name,
+                    eyeLaterality = testedEye,
+                    xDeg = stimulusAngleX,
+                    yDeg = stimulusAngleY,
+                    presentationMonotonicNs = stimulusStartNs
+                )
+            }
 
             // Flashed for 200ms (Goldmann III clinical standard)
             delay(200L)
@@ -593,11 +712,11 @@ fun PatientScreen(
 
                 Spacer(modifier = Modifier.height(6.dp))
 
-                // Online Cloud Pairing Bar
+                // Online Cloud Pairing Bar (CR-002 Single Source of Truth)
                 Surface(
-                    color = Color(0xFFF0FDF4),
+                    color = if (isPhysicianConnected) Color(0xFFECFDF5) else if (cloudSessionId.isNotEmpty()) Color(0xFFFFFBEB) else Color(0xFFF8FAFC),
                     shape = RoundedCornerShape(8.dp),
-                    border = BorderStroke(1.dp, Color(0xFFBBF7D0)),
+                    border = BorderStroke(1.dp, if (isPhysicianConnected) Color(0xFFBBF7D0) else if (cloudSessionId.isNotEmpty()) Color(0xFFFDE68A) else Color(0xFFE2E8F0)),
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { showCloudPairingDialog = true }
@@ -610,20 +729,20 @@ fun PatientScreen(
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Surface(
-                                    color = Color(0xFF10B981),
+                                    color = if (isPhysicianConnected) Color(0xFF10B981) else if (cloudSessionId.isNotEmpty()) Color(0xFFF59E0B) else Color(0xFF94A3B8),
                                     shape = CircleShape,
                                     modifier = Modifier.size(8.dp)
                                 ) {}
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "Pair Cloud Station: $cloudSessionId",
+                                    text = if (cloudSessionId.isNotEmpty()) "Session: $cloudSessionId" else "Cloud Tele-Ophthalmology Station",
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 12.sp,
                                     color = ClinicalTheme.SeaGreenDark
                                 )
                             }
                             Text(
-                                text = "PIN: $cloudPin | $cloudConnectionStatus",
+                                text = if (cloudSessionId.isNotEmpty()) "PIN: $cloudPin | $cloudConnectionStatus" else "Tap to pair with physician website",
                                 fontSize = 10.sp,
                                 color = ClinicalTheme.TextSecondary
                             )
@@ -633,7 +752,7 @@ fun PatientScreen(
                             shape = RoundedCornerShape(6.dp)
                         ) {
                             Text(
-                                text = "Pair Online",
+                                text = if (cloudSessionId.isEmpty()) "Pair Online" else "Pairing Info",
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 11.sp,
@@ -645,7 +764,7 @@ fun PatientScreen(
             }
         }
 
-        // Cloud Pairing Modal Dialog
+        // Cloud Pairing Modal Dialog (CR-002)
         if (showCloudPairingDialog) {
             AlertDialog(
                 onDismissRequest = { showCloudPairingDialog = false },
@@ -655,7 +774,7 @@ fun PatientScreen(
                 text = {
                     Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
                         Text(
-                            text = "Connect this phone to the web controller at https://eyeatlas-ai.netlify.app via the Render broker.",
+                            text = "Connect this phone to the web controller at https://eyeatlas-ai.netlify.app via the Render session broker.",
                             fontSize = 12.sp,
                             color = ClinicalTheme.TextSecondary
                         )
@@ -668,25 +787,31 @@ fun PatientScreen(
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true
                         )
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        OutlinedTextField(
-                            value = cloudSessionId,
-                            onValueChange = { cloudSessionId = it },
-                            label = { Text("Session ID / Room") },
-                            modifier = Modifier.fillMaxWidth(),
-                            singleLine = true
-                        )
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        OutlinedTextField(
-                            value = cloudPin,
-                            onValueChange = { cloudPin = it },
-                            label = { Text("6-Digit Pairing PIN") },
-                            modifier = Modifier.fillMaxWidth(),
-                            singleLine = true
-                        )
                         Spacer(modifier = Modifier.height(10.dp))
+
+                        if (cloudSessionId.isNotEmpty()) {
+                            Surface(
+                                color = Color(0xFFF0FDF4),
+                                shape = RoundedCornerShape(8.dp),
+                                border = BorderStroke(1.dp, Color(0xFF86EFAC)),
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                            ) {
+                                Column(modifier = Modifier.padding(12.dp)) {
+                                    Text("ACTIVE SESSION CREATED", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = Color(0xFF166534))
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Text("Session ID: $cloudSessionId", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = ClinicalTheme.TextPrimary)
+                                    Text("Pairing PIN: $cloudPin", fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, color = ClinicalTheme.SeaGreenDark)
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "Status: $cloudConnectionStatus",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        color = if (isPhysicianConnected) Color(0xFF16A34A) else Color(0xFFCA8A04)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
 
                         Surface(
                             color = ClinicalTheme.SeaGreenLight,
@@ -696,26 +821,27 @@ fun PatientScreen(
                         ) {
                             Column(modifier = Modifier.padding(8.dp)) {
                                 Text("HOW TO CONNECT ON LAPTOP:", fontWeight = FontWeight.Bold, fontSize = 11.sp, color = ClinicalTheme.SeaGreenDark)
-                                Text("1. Open https://eyeatlas-ai.netlify.app in your browser.\n2. Click 'Pair Online APK (CR-002)'.\n3. Match Room: $cloudSessionId and PIN: $cloudPin.\n4. You can immediately control tests, switch modules, and use Spacebar/Click as response pad!", fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
+                                Text("1. Open https://eyeatlas-ai.netlify.app on your laptop.\n2. Click 'Pair / Configure'.\n3. Enter the Session ID and 6-digit PIN shown above.\n4. Click 'Connect to Session' to establish full remote control!", fontSize = 11.sp, color = ClinicalTheme.TextPrimary)
                             }
                         }
                     }
                 },
                 confirmButton = {
                     Button(
-                        onClick = {
-                            cloudConnectionStatus = "Connected to $cloudBackendUrl (Room: $cloudSessionId)"
-                            feedbackToast = "Cloud broker linked: $cloudSessionId (PIN: $cloudPin)"
-                            showCloudPairingDialog = false
-                        },
+                        onClick = { initiateCloudPairing() },
+                        enabled = !isPairingInProgress,
                         colors = ButtonDefaults.buttonColors(containerColor = ClinicalTheme.SeaGreenPrimary)
                     ) {
-                        Text("Connect / Save", color = Color.White, fontWeight = FontWeight.Bold)
+                        Text(
+                            text = if (isPairingInProgress) "Connecting..." else if (cloudSessionId.isEmpty()) "Create Session & Link" else "Regenerate Session",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 },
                 dismissButton = {
                     OutlinedButton(onClick = { showCloudPairingDialog = false }) {
-                        Text("Cancel")
+                        Text("Close")
                     }
                 }
             )

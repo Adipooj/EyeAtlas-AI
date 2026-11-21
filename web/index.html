@@ -2240,21 +2240,65 @@
       if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
       if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
 
+    let remoteClientSequence = 0;
+
+    function sendRemoteEnvelope(messageType, payload) {
+      if (!activeRemoteWs || activeRemoteWs.readyState !== WebSocket.OPEN) {
+        return false;
+      }
+      remoteClientSequence++;
+      const envelope = {
+        version: "1.0",
+        session_id: remoteSessionState.sessionId || "SES-DEFAULT",
+        message_id: `msg-${Date.now()}-${remoteClientSequence}`,
+        sender_id: remoteSessionState.clientId || "PHYSICIAN_WEB_COCKPIT",
+        sender_role: remoteSessionState.role || "PHYSICIAN_CONTROLLER",
+        message_type: messageType,
+        sequence_number: remoteClientSequence,
+        timestamp_ns: Date.now() * 1000000,
+        payload: payload || {}
+      };
+      activeRemoteWs.send(JSON.stringify(envelope));
+      return true;
+    }
+
+    function sendRemoteTestSwitch(moduleKey) {
+      if (remoteSessionState.isEmergencyHalted) {
+        alert('Action Blocked: Priority STOP is currently active.');
+        return;
+      }
+
+      remoteSessionState.activeStimulus.test_module = moduleKey;
+
+      // Update module chip styling
+      document.querySelectorAll('#remote-module-chips button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--text-main)';
+        btn.style.fontWeight = '600';
+      });
+      const activeBtn = document.getElementById('mod-btn-' + moduleKey);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--sea-green)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.fontWeight = '700';
+      }
+
+      // Show/hide sub-keypads for acuity & colour
+      const eControls = document.getElementById('cockpit-e-controls');
+      const numControls = document.getElementById('cockpit-num-controls');
+      if (eControls) eControls.style.display = (moduleKey === 'ACUITY') ? 'block' : 'none';
+      if (numControls) numControls.style.display = (moduleKey === 'COLOUR') ? 'block' : 'none';
+
       // Update active parameters in telemetry card
       const modNameEl = document.getElementById('stim-test-name');
       if (modNameEl) modNameEl.innerText = moduleKey;
 
       // Broadcast command to paired headset over WebSocket
-      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
-        activeRemoteWs.send(JSON.stringify({
-          type: 'CONTROL_COMMAND',
-          command: 'SET_MODULE',
-          module: moduleKey,
-          eye: remoteSessionState.activeStimulus.eye_laterality,
-          sender: 'PHYSICIAN_CONTROLLER',
-          timestamp: Date.now()
-        }));
-      }
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'SET_MODULE',
+        target_module: moduleKey,
+        parameters: { module: moduleKey, eye: remoteSessionState.activeStimulus.eye_laterality }
+      });
 
       addTimelineItem('CONTROL', `Switched active test on patient VR headset to ${moduleKey} (${remoteSessionState.activeStimulus.eye_laterality}). Patient stays in VR.`);
     }
@@ -2276,16 +2320,11 @@
       }
 
       // Broadcast command to paired headset over WebSocket
-      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
-        activeRemoteWs.send(JSON.stringify({
-          type: 'CONTROL_COMMAND',
-          command: 'SET_EYE',
-          eye: eye,
-          module: remoteSessionState.activeStimulus.test_module,
-          sender: 'PHYSICIAN_CONTROLLER',
-          timestamp: Date.now()
-        }));
-      }
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'SET_EYE',
+        target_eye: eye,
+        parameters: { eye: eye, module: remoteSessionState.activeStimulus.test_module }
+      });
 
       addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
       drawTwinCanvases(remoteSessionState.activeStimulus);
@@ -2305,16 +2344,10 @@
       if (trialEl) trialEl.innerText = `Trial #1 of 54 (Randomized Sequence Reset)`;
 
       // Broadcast reset command to paired headset over WebSocket
-      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
-        activeRemoteWs.send(JSON.stringify({
-          type: 'CONTROL_COMMAND',
-          command: 'RESET_TEST',
-          module: remoteSessionState.activeStimulus.test_module,
-          eye: remoteSessionState.activeStimulus.eye_laterality,
-          sender: 'PHYSICIAN_CONTROLLER',
-          timestamp: Date.now()
-        }));
-      }
+      sendRemoteEnvelope('CONTROL_COMMAND', {
+        command: 'RESET_TEST',
+        parameters: { module: remoteSessionState.activeStimulus.test_module, eye: remoteSessionState.activeStimulus.eye_laterality }
+      });
 
       addTimelineItem('RESET', `Current test (${remoteSessionState.activeStimulus.test_module}) reset & re-randomized.`);
     }
@@ -2327,11 +2360,11 @@
       }
       const sessInput = document.getElementById('modal-session-id');
       if (sessInput && (!sessInput.value || sessInput.value.startsWith('SES-REMOTE-') && sessInput.value.length > 15)) {
-        sessInput.value = 'SES-REMOTE-01';
+        sessInput.value = '';
       }
       const pinInput = document.getElementById('modal-pairing-pin');
       if (pinInput && !pinInput.value) {
-        pinInput.value = '749281';
+        pinInput.value = '';
       }
       if (modal) modal.style.display = 'flex';
     }
@@ -2341,16 +2374,16 @@
       if (modal) modal.style.display = 'none';
     }
 
-    function generateNewRemoteSession() {
-      document.getElementById('modal-session-id').value = 'SES-REMOTE-01';
-      document.getElementById('modal-pairing-pin').value = '749281';
-    }
-
     async function connectRemoteSessionFromModal() {
       const sessId = document.getElementById('modal-session-id').value.trim();
       const pin = document.getElementById('modal-pairing-pin').value.trim();
       const role = document.getElementById('modal-role-select').value;
       const customUrl = document.getElementById('modal-backend-url')?.value.trim();
+
+      if (!sessId || !pin) {
+        alert('Please enter both the Session ID and 6-digit PIN displayed on the Patient APK.');
+        return;
+      }
 
       if (customUrl) {
         const cleanUrl = customUrl.replace(/\/+$/, '');
@@ -2361,49 +2394,221 @@
         }
       }
 
+      const connStatus = document.getElementById('remote-conn-status');
+      if (connStatus) {
+        connStatus.innerText = 'Authorizing with Broker...';
+        connStatus.style.background = '#FEF3C7';
+        connStatus.style.color = '#B45309';
+      }
+
+      // Step 1: Call REST join endpoint POST /api/v1/remote/join
+      let joinData;
+      try {
+        const joinResp = await fetch(`${backendBaseUrl}/api/v1/remote/join`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            session_id: sessId,
+            pairing_pin: pin,
+            role: role,
+            device_id: 'PHYSICIAN_WEB_COCKPIT',
+            clinician_username: 'dr_sharma'
+          })
+        });
+
+        if (!joinResp.ok) {
+          const errData = await joinResp.json().catch(() => ({}));
+          const errMsg = errData.detail || `Pairing failed (HTTP ${joinResp.status})`;
+          alert(`Remote Pairing Failed: ${errMsg}`);
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = `Error: ${errMsg}`;
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
+          return;
+        }
+
+        joinData = await joinResp.json();
+      } catch (err) {
+        alert(`Cannot connect to backend: ${err.message}. Check backend URL and network connection.`);
+        remoteSessionState.isConnected = false;
+        if (connStatus) {
+          connStatus.innerText = 'Connection Error: Backend Unreachable';
+          connStatus.style.background = '#FEE2E2';
+          connStatus.style.color = '#B91C1C';
+        }
+        return;
+      }
+
+      // Store authenticated credentials
       remoteSessionState.sessionId = sessId;
       remoteSessionState.pairingPin = pin;
-      remoteSessionState.role = role;
-      remoteSessionState.isConnected = true;
+      remoteSessionState.role = joinData.role;
+      remoteSessionState.token = joinData.token;
+      remoteSessionState.clientId = 'PHYSICIAN_WEB_COCKPIT';
+      remoteClientSequence = 0;
 
       // Update UI elements
       document.getElementById('info-session-id').innerText = sessId;
       document.getElementById('info-pairing-pin').innerText = pin;
-      document.getElementById('info-role').innerText = role;
-      document.getElementById('pad-conn-badge').innerText = `CONNECTED (${pin})`;
+      document.getElementById('info-role').innerText = joinData.role;
+      document.getElementById('pad-conn-badge').innerText = `AUTHENTICATING...`;
 
-      const connStatus = document.getElementById('remote-conn-status');
       if (connStatus) {
-        connStatus.innerText = 'Connected: Active Room';
-        connStatus.style.background = '#ECFDF5';
-        connStatus.style.color = '#065F46';
+        connStatus.innerText = 'WebSocket Connecting...';
+        connStatus.style.background = '#FEF3C7';
+        connStatus.style.color = '#B45309';
       }
 
-      // Try connecting WebSocket if backend is available
+      // Step 2: Establish authenticated WebSocket using the scoped token
       try {
+        if (activeRemoteWs) {
+          try { activeRemoteWs.close(); } catch(e) {}
+          activeRemoteWs = null;
+        }
+
         const wsProto = (location.protocol === 'https:' || backendBaseUrl.startsWith('https:')) ? 'wss:' : 'ws:';
         const hostOnly = backendBaseUrl.replace(/^https?:\/\//, '');
-        const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?pin=${pin}&role=${role}`;
+        const wsUrl = `${wsProto}//${hostOnly}/api/v1/remote/ws/${sessId}?token=${encodeURIComponent(joinData.token)}&client_id=PHYSICIAN_WEB_COCKPIT`;
+        
         activeRemoteWs = new WebSocket(wsUrl);
+
         activeRemoteWs.onopen = () => {
-          addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}.`);
+          addTimelineItem('PEER', `WebSocket channel established with Broker room ${sessId}. Authenticated as ${joinData.role}.`);
+          if (connStatus) {
+            connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
+            connStatus.style.background = '#FEF3C7';
+            connStatus.style.color = '#92400E';
+          }
+          document.getElementById('pad-conn-badge').innerText = `BROKER LINKED (WAITING PEER)`;
         };
+
         activeRemoteWs.onmessage = (evt) => {
           try {
-            const data = JSON.parse(evt.data);
-            if (data.type === 'STIMULUS_PRESENTATION') {
-              remoteSessionState.activeStimulus = data.payload || data;
-              drawTwinCanvases(remoteSessionState.activeStimulus);
-            }
-          } catch(e) {}
+            const env = JSON.parse(evt.data);
+            handleIncomingRemoteEnvelope(env);
+          } catch(e) {
+            console.warn('Failed parsing incoming envelope:', e);
+          }
+        };
+
+        activeRemoteWs.onclose = (evt) => {
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = 'Disconnected';
+            connStatus.style.background = '#F3F4F6';
+            connStatus.style.color = '#4B5563';
+          }
+          document.getElementById('pad-conn-badge').innerText = 'OFFLINE';
+          addTimelineItem('PEER', `WebSocket closed for session ${sessId} (Code: ${evt.code}).`);
+        };
+
+        activeRemoteWs.onerror = (err) => {
+          console.error('Remote WebSocket error:', err);
+          remoteSessionState.isConnected = false;
+          if (connStatus) {
+            connStatus.innerText = 'WebSocket Error';
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
         };
       } catch(e) {
-        console.warn('WebSocket connection attempt:', e);
+        console.error('WebSocket connection attempt failed:', e);
       }
 
-      addTimelineItem('PEER', `Station connected to room ${sessId} with PIN ${pin} as ${role}.`);
+      addTimelineItem('PEER', `Station joined session ${sessId} as ${joinData.role}.`);
       closeRemotePairingModal();
       setPortalMode('PHYSICIAN_AND_RESPONSE');
+    }
+
+    function handleIncomingRemoteEnvelope(env) {
+      if (!env || !env.message_type) return;
+
+      const connStatus = document.getElementById('remote-conn-status');
+
+      switch (env.message_type) {
+        case 'AUTH_ACK':
+          addTimelineItem('AUTH', `Broker verified credentials for session ${env.session_id}.`);
+          break;
+
+        case 'PEER_STATUS':
+          const roles = (env.payload && env.payload.roles) || [];
+          const hasPatient = roles.includes('PATIENT_VR_HOST');
+          if (hasPatient) {
+            remoteSessionState.isConnected = true;
+            if (connStatus) {
+              connStatus.innerText = 'Connected: Patient VR Headset Present';
+              connStatus.style.background = '#ECFDF5';
+              connStatus.style.color = '#065F46';
+            }
+            document.getElementById('pad-conn-badge').innerText = `PAIRED: PATIENT IN VR`;
+            addTimelineItem('PEER', `Patient VR Headset peer detected and verified.`);
+          } else {
+            remoteSessionState.isConnected = false;
+            if (connStatus) {
+              connStatus.innerText = 'Connected: Waiting for Patient VR Headset...';
+              connStatus.style.background = '#FEF3C7';
+              connStatus.style.color = '#92400E';
+            }
+            document.getElementById('pad-conn-badge').innerText = `WAITING FOR PATIENT`;
+          }
+          break;
+
+        case 'STIMULUS_EVENT':
+          const payload = env.payload || {};
+          const trialIdx = payload.trial_index || 0;
+          const coords = payload.coordinates || { x_deg: 0, y_deg: 0 };
+          remoteSessionState.trialIndex = trialIdx;
+          remoteSessionState.activeStimulus = {
+            trial_index: trialIdx,
+            test_module: payload.test_module || 'PERIMETRY',
+            eye_laterality: payload.eye_laterality || 'OD',
+            coordinates: coords,
+            stimulus_properties: {
+              luminance_nits: payload.luminance_nits || 31.8,
+              contrast_percent: payload.contrast_pct || 100
+            },
+            presentation_monotonic_ns: payload.presentation_monotonic_ns || Date.now() * 1000000
+          };
+          const trialEl = document.getElementById('stim-trial-idx');
+          if (trialEl) trialEl.innerText = `Trial #${trialIdx} of 54 (VR Flash Active)`;
+          drawTwinCanvases(remoteSessionState.activeStimulus);
+          addTimelineItem('STIMULUS', `[Trial #${trialIdx}] Stimulus presented in VR (${payload.eye_laterality || 'OD'} at ${coords.x_deg || 0}°, ${coords.y_deg || 0}°).`);
+          break;
+
+        case 'RESPONSE_EVENT':
+          cockpitTapCount++;
+          const countEl = document.getElementById('cockpit-tap-count');
+          if (countEl) countEl.innerText = cockpitTapCount;
+          const respSrc = (env.payload && env.payload.input_source) || (env.payload && env.payload.source) || 'PATIENT_PHONE';
+          const respLat = (env.payload && env.payload.reaction_latency_ms) || '0';
+          const latEl = document.getElementById('stim-latency');
+          if (latEl) latEl.innerText = `${respLat} ms (Patient Monotonic Hardware Clock)`;
+          addTimelineItem('RESPONSE', `Patient response received (#${cockpitTapCount}) via ${respSrc} (Latency: ${respLat}ms)`);
+          break;
+
+        case 'CONTROL_COMMAND':
+          const cmd = env.payload && env.payload.command;
+          if (cmd === 'SET_MODULE') {
+            const mod = env.payload.target_module || (env.payload.parameters && env.payload.parameters.module);
+            if (mod) {
+              const modNameEl = document.getElementById('stim-test-name');
+              if (modNameEl) modNameEl.innerText = mod;
+            }
+          }
+          break;
+
+        case 'EMERGENCY_STOP':
+          remoteSessionState.isEmergencyHalted = true;
+          if (connStatus) {
+            connStatus.innerText = 'EMERGENCY HALTED';
+            connStatus.style.background = '#FEE2E2';
+            connStatus.style.color = '#B91C1C';
+          }
+          addTimelineItem('EMERGENCY', `Patient pressed emergency stop in VR!`);
+          break;
+      }
     }
 
     function handleResponsePadTap(source) {
@@ -2461,15 +2666,16 @@
       const padSub = document.getElementById('pad-active-trial-sub');
       if (padSub) padSub.innerText = `Trial #${remoteSessionState.trialIndex} — Waiting for next stimulus...`;
 
-      // Broadcast tap event over WebSocket to patient phone
-      if (activeRemoteWs && activeRemoteWs.readyState === WebSocket.OPEN) {
-        activeRemoteWs.send(JSON.stringify({
-          type: 'RESPONSE_EVENT',
-          response_type: 'TAP',
-          source: source,
-          timestamp: Date.now()
-        }));
-      }
+      // Broadcast tap event over WebSocket to patient phone matching canonical WebSocketMessageEnvelope
+      sendRemoteEnvelope('RESPONSE_EVENT', {
+        trial_index: remoteSessionState.trialIndex,
+        response_recorded: true,
+        reaction_latency_ms: parseFloat(simulatedLatencyMs) || 200.0,
+        input_source: source,
+        input_quality: 'VALID',
+        local_monotonic_ns: Date.now() * 1000000,
+        source: source
+      });
 
       addTimelineItem('RESPONSE', `[Trial #${remoteSessionState.trialIndex - 1}] Patient tap registered (#${cockpitTapCount}) via ${source} — Latency: ${simulatedLatencyMs}ms`);
     }
@@ -2650,6 +2856,11 @@
         connStatus.style.background = '#FEE2E2';
         connStatus.style.color = '#B91C1C';
       }
+      sendRemoteEnvelope('EMERGENCY_STOP', {
+        triggered_by: 'PHYSICIAN_ABORT',
+        reason: 'Physician triggered emergency stop from web console',
+        timestamp_ns: Date.now() * 1000000
+      });
       addTimelineItem('EMERGENCY', 'EMERGENCY STOP TRIGGERED: Stimulus generation halted on Android APK host.');
       alert('EMERGENCY STOP BROADCASTED: Examination immediately paused on Android VR Box and all connected stations.');
     }
