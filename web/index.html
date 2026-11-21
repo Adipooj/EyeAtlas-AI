@@ -1639,6 +1639,7 @@
             <div class="card-title">Active Stimulus Parameters & Fixation Stability</div>
             <div style="font-size:13px; line-height:1.7;">
               <p><strong>Active Test Module:</strong> <span id="stim-test-name">PERIMETRY_24_2</span></p>
+              <p><strong>Tested Eye:</strong> <span id="stim-tested-eye" style="color:#0284C7; font-weight:700;">OD (Right Eye)</span></p>
               <p><strong>Trial Index:</strong> <span id="stim-trial-idx">Trial #14 of 54</span></p>
               <p><strong>Stimulus Coordinates:</strong> <span id="stim-coords">(x = 9.0°, y = 3.0°)</span></p>
               <p><strong>Goldmann Target Size:</strong> <span id="stim-size">Size III (0.43° = 26 arcmin)</span></p>
@@ -3919,6 +3920,29 @@
         const badge = document.getElementById('cockpit-test-badge');
         if (badge) badge.innerText = mod;
 
+        if (payload.eye_laterality) {
+          const eye = payload.eye_laterality;
+          remoteSessionState.activeStimulus.eye_laterality = eye;
+          const allEyeBtns = ['eye-btn-OD', 'eye-btn-OS', 'eye-btn-OU'];
+          allEyeBtns.forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+              btn.style.background = 'white';
+              btn.style.color = '#334155';
+              btn.style.fontWeight = '600';
+            }
+          });
+          const activeBtn = document.getElementById('eye-btn-' + eye);
+          if (activeBtn) {
+            activeBtn.style.background = 'var(--sea-green)';
+            activeBtn.style.color = 'white';
+            activeBtn.style.fontWeight = '700';
+          }
+          const eyeDesc = eye === 'OU' ? 'OU (Both Eyes / Binocular / Bidirectional)' : (eye === 'OS' ? 'OS (Left Eye)' : 'OD (Right Eye)');
+          const eyeEl = document.getElementById('stim-tested-eye');
+          if (eyeEl) eyeEl.innerText = eyeDesc;
+        }
+
         if (mod === 'ACUITY') {
           const descEl = document.getElementById('acuity-target-desc');
           if (descEl) {
@@ -3977,6 +4001,10 @@
       }
 
       function sendRemoteEyeSwitch(eye) {
+        if (remoteSessionState.isEmergencyHalted) {
+          clearEmergencyHalt();
+        }
+
         remoteSessionState.activeStimulus.eye_laterality = eye;
 
         // Update eye chip styling
@@ -3992,14 +4020,19 @@
           activeBtn.style.fontWeight = '700';
         }
 
-        // Broadcast command to paired headset over WebSocket
+        const eyeDesc = eye === 'OU' ? 'OU (Both Eyes / Binocular / Bidirectional)' : (eye === 'OS' ? 'OS (Left Eye)' : 'OD (Right Eye)');
+        const eyeEl = document.getElementById('stim-tested-eye');
+        if (eyeEl) eyeEl.innerText = eyeDesc;
+
+        // Broadcast command to paired headset over WebSocket and REST fallback
         sendRemoteEnvelope('CONTROL_COMMAND', {
           command: 'SET_EYE',
           target_eye: eye,
-          parameters: { eye: eye, module: remoteSessionState.activeStimulus.test_module }
+          eye: eye,
+          parameters: { eye: eye, target_eye: eye, module: remoteSessionState.activeStimulus.test_module }
         });
 
-        addTimelineItem('CONTROL', `Tested eye updated to ${eye} on patient headset.`);
+        addTimelineItem('CONTROL', `Tested eye updated to ${eyeDesc} on patient headset.`);
         drawTwinCanvases(remoteSessionState.activeStimulus);
       }
 

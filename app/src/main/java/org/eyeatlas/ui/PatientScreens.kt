@@ -451,14 +451,32 @@ fun PatientScreen(
                     if (mod != null) {
                         ClinicalSessionCoordinator.switchModule(mod)
                         selectedModule = mod
+                        val eyeStr = (params["eye"] as? String) ?: (params["target_eye"] as? String)
+                        if (eyeStr != null) {
+                            val eye = when (eyeStr.trim().uppercase()) {
+                                "OS", "LEFT", "LEFT_EYE" -> EyeLaterality.OS
+                                "OU", "BOTH", "BINOCULAR", "BIDIRECTIONAL" -> EyeLaterality.OU
+                                else -> EyeLaterality.OD
+                            }
+                            ClinicalSessionCoordinator.switchEye(eye)
+                            testedEye = eye
+                        }
                         resetCurrentModule()
                         feedbackToast = "Remote: Switched to ${mod.title}"
                         broadcastStimulusState()
                     }
                 }
                 "SET_EYE" -> {
-                    val eyeStr = (params["eye"] as? String) ?: "OD"
-                    val eye = EyeLaterality.values().firstOrNull { it.name.equals(eyeStr, ignoreCase = true) } ?: EyeLaterality.OD
+                    val eyeStr = (params["eye"] as? String)
+                        ?: (params["target_eye"] as? String)
+                        ?: (params["laterality"] as? String)
+                        ?: targetModule
+                        ?: "OD"
+                    val eye = when (eyeStr.trim().uppercase()) {
+                        "OS", "LEFT", "LEFT_EYE", "SINISTER" -> EyeLaterality.OS
+                        "OU", "BOTH", "BOTH_EYES", "BINOCULAR", "BIDIRECTIONAL", "UTERQUE" -> EyeLaterality.OU
+                        else -> EyeLaterality.OD
+                    }
                     ClinicalSessionCoordinator.switchEye(eye)
                     testedEye = eye
                     resetCurrentModule()

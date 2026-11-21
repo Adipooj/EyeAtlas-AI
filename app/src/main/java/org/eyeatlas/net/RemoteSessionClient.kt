@@ -12,6 +12,7 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import org.eyeatlas.core.EyeLaterality
 import org.eyeatlas.core.SessionEvent
+import org.json.JSONArray
 import org.json.JSONObject
 
 /**
@@ -116,14 +117,7 @@ class OkHttpRemoteWebSocketTransport(
                     val ts = json.optLong("timestamp_ns", System.nanoTime())
 
                     val payloadObj = json.optJSONObject("payload")
-                    val payloadMap = mutableMapOf<String, Any>()
-                    if (payloadObj != null) {
-                        val keys = payloadObj.keys()
-                        while (keys.hasNext()) {
-                            val k = keys.next()
-                            payloadMap[k] = payloadObj.get(k)
-                        }
-                    }
+                    val payloadMap = if (payloadObj != null) jsonToMap(payloadObj).toMutableMap() else mutableMapOf<String, Any>()
 
                     val env = RemoteEnvelope(
                         sessionId = sessionId,
@@ -181,6 +175,40 @@ class OkHttpRemoteWebSocketTransport(
     }
 
     override fun isConnected(): Boolean = connected
+}
+
+internal fun jsonToMap(json: JSONObject): Map<String, Any> {
+    val map = mutableMapOf<String, Any>()
+    val keys = json.keys()
+    while (keys.hasNext()) {
+        val key = keys.next()
+        var value = json.get(key)
+        if (value is JSONObject) {
+            value = jsonToMap(value)
+        } else if (value is JSONArray) {
+            value = jsonArrayToList(value)
+        }
+        if (value !== JSONObject.NULL) {
+            map[key] = value
+        }
+    }
+    return map
+}
+
+internal fun jsonArrayToList(array: JSONArray): List<Any> {
+    val list = mutableListOf<Any>()
+    for (i in 0 until array.length()) {
+        var value = array.get(i)
+        if (value is JSONObject) {
+            value = jsonToMap(value)
+        } else if (value is JSONArray) {
+            value = jsonArrayToList(value)
+        }
+        if (value !== JSONObject.NULL) {
+            list.add(value)
+        }
+    }
+    return list
 }
 
 /**
@@ -358,14 +386,7 @@ class RemoteSessionClient(
             val ts = json.optLong("timestamp_ns", System.nanoTime())
 
             val payloadObj = json.optJSONObject("payload")
-            val payloadMap = mutableMapOf<String, Any>()
-            if (payloadObj != null) {
-                val keys = payloadObj.keys()
-                while (keys.hasNext()) {
-                    val k = keys.next()
-                    payloadMap[k] = payloadObj.get(k)
-                }
-            }
+            val payloadMap = if (payloadObj != null) jsonToMap(payloadObj).toMutableMap() else mutableMapOf<String, Any>()
 
             RemoteEnvelope(
                 sessionId = sId,
@@ -695,10 +716,30 @@ class RemoteSessionClient(
 
             RemoteMessageType.CONTROL_COMMAND -> {
                 val cmd = envelope.payload["command"] as? String ?: "UNKNOWN"
-                val module = envelope.payload["target_module"] as? String
-                @Suppress("UNCHECKED_CAST")
-                val params = envelope.payload["parameters"] as? Map<String, Any> ?: emptyMap()
-                onCommandListener?.invoke(cmd, module, params)
+                val module = (envelope.payload["target_module"] as? String)
+                    ?: (envelope.payload["module"] as? String)
+                val targetEye = (envelope.payload["target_eye"] as? String)
+                    ?: (envelope.payload["eye"] as? String)
+
+                val paramsMap = mutableMapOf<String, Any>()
+                // Copy top-level payload entries
+                for ((k, v) in envelope.payload) {
+                    if (k != "parameters") {
+                        paramsMap[k] = v
+                    }
+                }
+                if (targetEye != null) {
+                    paramsMap["eye"] = targetEye
+                    paramsMap["target_eye"] = targetEye
+                }
+                val rawParams = envelope.payload["parameters"]
+                if (rawParams is Map<*, *>) {
+                    @Suppress("UNCHECKED_CAST")
+                    paramsMap.putAll(rawParams as Map<String, Any>)
+                } else if (rawParams is JSONObject) {
+                    paramsMap.putAll(jsonToMap(rawParams))
+                }
+                onCommandListener?.invoke(cmd, module, paramsMap)
                 return Result.success("COMMAND_ACKNOWLEDGED: $cmd")
             }
 
